@@ -14,6 +14,17 @@
  *= require_self
  */
 
+body {
+  background: url('http://static.tumblr.com/b50bfec43d784434618fb949b70df17d/uzazc5e/iKdnco0pp/tumblr_static_eqen2wer3i8040ssksoww04ko.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: white;
+}
+
 .row {
   -moz-column-width: 18em;
   -webkit-column-width: 18em;
@@ -30,4 +41,39 @@
 .well {
   position:relative;
   display: block;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-color: black;
+  border-width: 1px;
+  -moz-box-shadow:    inset 0 0 2px black;
+  -webkit-box-shadow: inset 0 0 2px black;
+  box-shadow:         inset 0 0 2px black;
+}
+
+.well h4 {
+  text-align: center;
+}
+
+.well a {
+  color: white;
+  text-decoration:none;
+}
+
+.well p {
+  font-size: 0.9em;
+  margin: 0px;
+}
+
+.image_well {
+  padding: 0px;
+  overflow: hidden;
+}
+.image_well img {
+  width: 100%;
+}
+
+.icon {
+  display: block;
+  margin: 5px auto;
+  max-height: 20px;
 }

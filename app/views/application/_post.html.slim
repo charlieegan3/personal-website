@@ -1,4 +1,6 @@
 .item
   .well
-    strong ="#{post.title}"
-    p ="#{strip_tags(post.text.split(" ").take(15).join(" "))}...".html_safe
+    img.icon src=('http://assets.tumblr.com/images/favicons/favicon.ico')
+    a href=(post.url)
+      h4 ="#{post.title}"
+    p ="#{strip_tags(post.text.split(" ").take(20).join(" "))}...".html_safe
