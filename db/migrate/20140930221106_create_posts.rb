@@ -1,6 +1,6 @@
-class CreateTumblrs < ActiveRecord::Migration
+class CreatePosts < ActiveRecord::Migration
   def change
-    create_table :tumblrs do |t|
+    create_table :posts do |t|
       t.string :url
       t.datetime :created_at
       t.string :text

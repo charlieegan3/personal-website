@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140930221106) do
 
-  create_table "activities", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "instagrams", force: true do |t|
     t.string   "url"
     t.string   "image_url"
@@ -29,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140930221106) do
     t.datetime "updated_at"
   end
 
-  create_table "tumblrs", force: true do |t|
+  create_table "posts", force: true do |t|
     t.string   "url"
     t.datetime "created_at"
     t.string   "text"
