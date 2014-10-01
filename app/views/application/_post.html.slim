@@ -1,2 +1,4 @@
-strong ="#{post.title}"
-p ="#{strip_tags(post.text.split(" ").take(15).join(" "))}...".html_safe
+.item
+  .well
+    strong ="#{post.title}"
+    p ="#{strip_tags(post.text.split(" ").take(15).join(" "))}...".html_safe

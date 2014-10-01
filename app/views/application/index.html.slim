@@ -1,4 +1,6 @@
--@activities.each do |activity|
-  = render partial: 'post', locals: {post: activity} if activity.class == Post
-  = render partial: 'image', locals: {image: activity} if activity.class == Image
-  = render partial: 'tweet', locals: {tweet: activity} if activity.class == Tweet
+.row
+  -@activities.each do |row|
+    -row.each do |activity|
+      = render partial: 'post', locals: {post: activity} if activity.class == Post
+      = render partial: 'image', locals: {image: activity} if activity.class == Image
+      = render partial: 'tweet', locals: {tweet: activity} if activity.class == Tweet

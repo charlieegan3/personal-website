@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   def index
     @activities = [Image.all,Post.all,Tweet.all].flatten.
       sort_by { |e| e.created_at }.
-      reverse
+      reverse.shuffle.in_groups_of(3, false)
   end
 end
