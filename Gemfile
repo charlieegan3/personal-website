@@ -10,6 +10,10 @@ gem 'turbolinks'
 
 gem 'slim'
 
+gem 'twitter'
+gem 'tumblr_client'
+gem 'instagram'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
@@ -20,4 +24,5 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
 end
