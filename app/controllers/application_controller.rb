@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
-
+    @activities = [Image.all,Post.all,Tweet.all].flatten.
+      sort_by { |e| e.created_at }.
+      reverse
   end
 end
