@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930221106) do
+ActiveRecord::Schema.define(version: 20141001082750) do
 
-  create_table "instagrams", force: true do |t|
+  create_table "images", force: true do |t|
     t.string   "url"
     t.string   "image_url"
     t.string   "large_image_url"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140930221106) do
     t.datetime "created_at"
     t.string   "text"
     t.string   "title"
+    t.string   "tags"
   end
 
   create_table "tweets", force: true do |t|

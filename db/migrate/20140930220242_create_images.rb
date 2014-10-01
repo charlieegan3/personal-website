@@ -1,6 +1,6 @@
-class CreateInstagrams < ActiveRecord::Migration
+class CreateImages < ActiveRecord::Migration
   def change
-    create_table :instagrams do |t|
+    create_table :images do |t|
       t.string :url
       t.string :image_url
       t.string :large_image_url
