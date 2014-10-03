@@ -1,8 +1,11 @@
-div.welcome
-  img.img-thumbnail alt="profile picture" src="https://pbs.twimg.com/profile_images/491321215911342080/PKUxNP_R_400x400.jpeg"
-  h1 charlieegan3
+div.container
+  div.profile
+    img.img-thumbnail alt="profile picture" src="https://pbs.twimg.com/profile_images/491321215911342080/PKUxNP_R_400x400.jpeg"
+    h1 charlieegan3
 
-  div.bio
+
+div.block
+  div.box
     p
       | I study Computer Science student at
       a href="http://www.abdn.ac.uk/"  Aberdeen University
@@ -32,11 +35,62 @@ div.welcome
       |  tends to be less damaging. I now also run as part of the Aberdeen University Athletics Club.
     p I'm an Apple fan that owned an Android - until iPhone 6 - and an Xbox fan who just bought a PS4.
 
+div.block
+  div.box.small
+    p
+      | Other charlieegan3s:
+      span
+        a href="https://www.twitter.com/charlieegan3" target="_top"  Twitter
+        | &nbsp;&#9679;
+      span
+        a href="https://www.github.com/charlieegan3" target="_top"  GitHub
+        | &nbsp;&#9679;
+      span
+        a href="http://charlieegan3.tumblr.com" target="_top"  Tumblr
+        | &nbsp;&#9679;
+      span
+        a href="http://www.stackoverflow.com/users/1510063/charlie-egan" target="_top"  stackoverflow
+        | &nbsp;&#9679;
+      span
+        a href="https://gist.github.com/charlieegan3" target="_top"  Gists
+        | &nbsp;&#9679;
+      span
+        a href="http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706" target="_top"  Parkrun
+        | &nbsp;&#9679;
+      span
+        a href="http://forums.macrumors.com/member.php?u=669532" target="_top"  MacRumors
+        | &nbsp;&#9679;
+      span
+        a href="https://plus.google.com/109570843592237973068/posts" target="_top"  Google+
+        | &nbsp;&#9679;
+      span
+        a href="http://www.instagram.com/charlieegan3" target="_top"  Instagram
+        | &nbsp;&#9679;
+      span
+        a href="https://www.foursquare.com/charlieegan3" target="_top"  foursquare
+        | &nbsp;&#9679;
+      span
+        a href="http://www.flickr.com/photos/92984649@N06/" target="_top"  flickr
+        | &nbsp;&#9679;
+      span
+        a href="http://browser.primatelabs.com/user/charlieegan3/geekbench2" target="_top"  Geekbench
+        | &nbsp;&#9679;
+      span
+        a href="http://www.steamcommunity.com/id/charlieegan3" target="_top"  Steam
+        | &nbsp;&#9679;
+      span
+        a href="http://mypsn.eu.playstation.com/psn/profile/TartanTurtle.png" target="_top"  PSN
+        | &nbsp;&#9679;
+      span
+        a href="http://uk.linkedin.com/in/charlieegan3" target="_top"  LinkedIn
 
 
 
-.row
-  -@activities.each do |activity|
-    = render partial: 'post', locals: {post: activity} if activity.class == Post
-    = render partial: 'image', locals: {image: activity} if activity.class == Image
-    = render partial: 'tweet', locals: {tweet: activity} if activity.class == Tweet
+
+
+div.container
+  .row
+    -@activities.each do |activity|
+      = render partial: 'post', locals: {post: activity} if activity.class == Post
+      = render partial: 'image', locals: {image: activity} if activity.class == Image
+      = render partial: 'tweet', locals: {tweet: activity} if activity.class == Tweet
