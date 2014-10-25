@@ -14,6 +14,8 @@ gem 'twitter'
 gem 'tumblr_client'
 gem 'instagram'
 
+gem 'useragent'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
