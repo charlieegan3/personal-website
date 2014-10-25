@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001082750) do
+ActiveRecord::Schema.define(version: 20141025112730) do
 
   create_table "images", force: true do |t|
     t.string   "url"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20141001082750) do
     t.string   "tags"
     t.integer  "likes"
     t.string   "filter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "impressions", force: true do |t|
+    t.string   "browser"
+    t.string   "version"
+    t.string   "platform"
+    t.string   "referrer"
+    t.string   "path"
+    t.string   "language"
+    t.string   "host"
+    t.string   "query"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
