@@ -1,0 +1,25 @@
+div.container
+  table.table style=("background-color: rgba(0,0,0,0.8)")
+    tbody
+      thead
+        tr
+          td Browser
+          td Version
+          td Platform
+          td Referrer
+          td Path
+          td Language
+          td Host
+          td Query
+          td
+      -@impressions.each do |impression|
+        tr
+          td =impression.browser
+          td =impression.version
+          td =impression.platform
+          td =impression.referrer
+          td =impression.path
+          td =impression.language
+          td =impression.host
+          td =impression.query
+          td =distance_of_time_in_words(impression.created_at, Time.new)

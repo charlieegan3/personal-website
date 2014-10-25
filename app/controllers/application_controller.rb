@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
 
     @activities = [Image.all.last(3).reverse,Post.all,Tweet.all].flatten.shuffle.sort_by { |e| e.created_at }.reverse.take(15)
   end
+
+  def impressions
+    @impressions = Impression.all.reverse
+  end
 end
