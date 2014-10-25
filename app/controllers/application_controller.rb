@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
-    @activities = [Image.all.last(5).reverse,Post.all,Tweet.all].flatten.shuffle.sort_by { |e| e.created_at }.reverse.take(15)
+    @activities = [Image.all.last(3).reverse,Post.all,Tweet.all].flatten.shuffle.sort_by { |e| e.created_at }.reverse.take(15)
   end
 end
