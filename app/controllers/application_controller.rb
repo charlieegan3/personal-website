@@ -4,6 +4,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
+    user_agent = UserAgent.parse(request.env['HTTP_USER_AGENT'])
+
+    Impression.create(
+      browser: user_agent.browser.to_s,
+      version: user_agent.version.to_s,
+      platform: user_agent.platform.to_s,
+      referrer: request.referrer,
+      path: request.env['REQUEST_PATH'],
+      language: request.env['HTTP_ACCEPT_LANG'],
+      host: request.env['REMOTE_HOST'],
+      query: request.env['QUERY_STRING']
+    )
+
     @activities = [Image.all.last(3).reverse,Post.all,Tweet.all].flatten.shuffle.sort_by { |e| e.created_at }.reverse.take(15)
   end
 end
