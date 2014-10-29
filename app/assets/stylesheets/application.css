@@ -111,6 +111,17 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+p.resume {
+  text-align: center;
+  margin-top: -10px;
+}
+
+img.resume {
+  margin: 0 auto;
+  display: block;
+  max-height: 50px;
+}
+
 @media screen and (max-width: 532px) {
   .well {
     margin: 10px 20px;
