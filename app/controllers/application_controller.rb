@@ -15,9 +15,10 @@ class ApplicationController < ActionController::Base
       language: request.env['HTTP_ACCEPT_LANG'],
       host: request.env['REMOTE_HOST'],
       query: request.env['QUERY_STRING']
-    )
+    ) if user_agent.browser.to_s != 'Typhoeus'
 
-    @activities = [Image.all.last(3).reverse,Post.all,Tweet.all].flatten.shuffle.sort_by { |e| e.created_at }.reverse.take(15)
+    @activities = [Tweet.all.take(30), Post.all.take(2), Image.all.take(2)].flatten.sort_by { |e| e.created_at }.reverse.take(30)
+
   end
 
   def impressions
