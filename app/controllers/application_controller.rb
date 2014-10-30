@@ -17,8 +17,7 @@ class ApplicationController < ActionController::Base
       query: request.env['QUERY_STRING']
     ) if user_agent.browser.to_s != 'Typhoeus'
 
-    @activities = [Tweet.all.last(10), Post.all.last(2), Image.all.last(2)].flatten.sort_by { |e| e.created_at }.reverse
-
+    @activities = [Tweet.last(15), Post.last(2), Image.last(2)].flatten.sort_by { |e| e.created_at }.reverse
   end
 
   def impressions
