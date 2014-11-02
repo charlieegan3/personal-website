@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   def impressions
-    @impressions = Impression.all.reverse
+    @impressions = Impression.all.order(created_at: :desc)
   end
 end
