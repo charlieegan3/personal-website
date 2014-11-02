@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       referrer: request.referrer,
       path: request.env['REQUEST_PATH'],
       language: request.env['HTTP_ACCEPT_LANG'],
-      host: request.env['REMOTE_HOST'],
+      host: request.remote_ip,
       query: request.env['QUERY_STRING']
     ) if user_agent.browser.to_s != 'Typhoeus'
 
