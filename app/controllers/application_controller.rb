@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   def impressions
-    @impressions = Impression.all.order(created_at: :desc)
+    @impressions = Impression.all.order(created_at: :desc).to_a.uniq {|impression| impression.host }
   end
 end
