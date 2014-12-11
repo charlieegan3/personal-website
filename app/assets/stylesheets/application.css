@@ -70,10 +70,10 @@ body {
 
 .image_well {
   padding: 0px;
-  overflow: hidden;
 }
 .image_well img {
   width: 100%;
+  border-radius: 3px;
 }
 
 .icon {
