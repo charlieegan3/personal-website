@@ -8,20 +8,14 @@ div.container
           td Platform
           td Referrer
           td Path
-          td Language
-          td locale
           td Host
-          td Query
           td
       -@impressions.each do |impression|
         tr
           td =impression.browser
           td =impression.version
           td =impression.platform
-          td =impression.referrer
+          td =impression.referrer[0..70] if impression.referrer
           td =impression.path
-          td =impression.language
-          td =Timeout::timeout(5) { Net::HTTP.get_response(URI.parse('http://api.hostip.info/country.php?ip=' + impression.host )).body } rescue "ERROR"
           td =link_to impression.host, "http://who.is/whois-ip/ip-address/#{impression.host}"
-          td =impression.query
           td =distance_of_time_in_words(impression.created_at, Time.new)

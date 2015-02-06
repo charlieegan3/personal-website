@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
       platform: user_agent.platform.to_s,
       referrer: request.referrer,
       path: request.env['REQUEST_PATH'],
-      language: request.env['HTTP_ACCEPT_LANG'],
       host: request.remote_ip,
       query: request.env['QUERY_STRING']
     ) if user_agent.browser.to_s != 'Typhoeus'

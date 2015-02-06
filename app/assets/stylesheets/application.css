@@ -127,3 +127,7 @@ img.resume {
     margin: 10px 20px;
   }
 }
+
+.table {
+  max-width: 100%;
+}
