@@ -17,3 +17,49 @@
 body {
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+a {
+  color: black;
+  color: Grey;
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  width: 90%;
+  display: inline-block;
+}
+
+.profile {
+  width: 10%;
+  float: right;
+  padding-top: 15px;
+  display: inline-block;
+}
+
+.profile img {
+  width: 100%;
+}
+
+.actions {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.action {
+  width: 50%;
+  display: inline-block;
+}
+
+.action img {
+  width: 50px;
+  opacity: 0.5;
+  display: block;
+  margin: 5px auto;
+}
