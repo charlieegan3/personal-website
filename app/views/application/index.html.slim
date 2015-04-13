@@ -6,8 +6,8 @@
       img alt="profile picture" src="avatar.jpg"
   div
     p
-      | I'm a third year Computer Science student at&nbsp;
-      a href="http://www.abdn.ac.uk/" Aberdeen University
+      | I'm a third year computer science student at the&nbsp;
+      a href="http://www.abdn.ac.uk/" University of Aberdeen
       |  in the U.K.
     p
       | I enjoy programming - Rails is a lot of fun. I recently completed a summer internship with&nbsp;
@@ -63,8 +63,7 @@
       li
         a href="http://www.steamcommunity.com/id/charlieegan3" target="_top" Steam
 
-div
-  -@activities.each do |activity|
-    =render partial: 'post', locals: {post: activity} if activity.class == Post
-    =render partial: 'image', locals: {image: activity} if activity.class == Image
-    =render partial: 'tweet', locals: {tweet: activity} if activity.class == Tweet
+div.images
+  -@images.each do |image|
+    =link_to image.url do
+      =image_tag(image.image_url)

@@ -20,7 +20,7 @@ body {
 
 a {
   color: black;
-  color: Grey;
+  color: DarkOrange;
   text-decoration: none;
 }
 
@@ -33,12 +33,14 @@ a {
 .title {
   width: 90%;
   display: inline-block;
+  font-family: 'Offside';
+  font-size: 1.7em;
 }
 
 .profile {
   width: 10%;
   float: right;
-  padding-top: 15px;
+  padding-top: 35px;
   display: inline-block;
 }
 
@@ -62,4 +64,33 @@ a {
   opacity: 0.5;
   display: block;
   margin: 5px auto;
+}
+
+.images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  width: 5%;
+}
+
+.images img {
+  width: 50px;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .container {
+    margin-left: 50px;
+    width: 85%;
+    padding: 5px;
+  }
+
+  .title {
+    font-size: 1.1em;
+  }
+
+  .profile {
+    display: none;
+  }
 }

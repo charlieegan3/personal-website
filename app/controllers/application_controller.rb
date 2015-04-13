@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       query: request.env['QUERY_STRING']
     ) if user_agent.browser.to_s != 'Typhoeus'
 
-    @activities = [Tweet.last(30), Post.last(3), Image.last(3)].flatten.sort_by { |e| e.created_at }.shuffle
+    @images = Image.last(20)
   end
 
   def impressions
