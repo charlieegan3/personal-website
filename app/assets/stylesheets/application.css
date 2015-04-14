@@ -118,6 +118,11 @@ h2 {
   border-radius: 3px;
 }
 
+.linkedin {
+  text-align: center;
+  font-size: 0.7em;
+}
+
 .tweet {
   margin: 5px 0px;
 }
