@@ -25,7 +25,6 @@ a {
 }
 
 .container {
-  width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -37,6 +36,24 @@ a {
   font-size: 1.7em;
 }
 
+h2 {
+  font-size: 1.1em;
+  font-family: 'Offside';
+  margin-top: 30px;
+}
+
+.image-row {
+  text-align: center;
+}
+
+.image-row img {
+  width: 70px;
+  margin: 2px;
+  border-radius: 3px;
+  border: 1px solid DarkOrange;
+  display: inline;
+}
+
 .profile {
   width: 10%;
   float: right;
@@ -46,6 +63,8 @@ a {
 
 .profile img {
   width: 100%;
+  border-radius: 3px;
+  border: 1px solid DarkOrange;
 }
 
 .actions {
@@ -64,28 +83,69 @@ a {
   opacity: 0.5;
   display: block;
   margin: 5px auto;
+  -o-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -khtml-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 
-.images {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  width: 5%;
+.action img:hover {
+  opacity: 1;
 }
 
-.images img {
-  width: 50px;
-  display: block;
+.link-row {
+  margin-top: 5px;
+}
+
+.link-row a {
+  width: 33%;
+  text-align: center;
+  padding: 10px 0px;
+  display: inline-block;
+  -o-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -khtml-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.link-row a:hover {
+  color: white;
+  background-color: DarkOrange;
+  border-radius: 3px;
+}
+
+.tweet {
+  margin: 5px 0px;
+}
+
+.tweet a {
+  color: #55acee;
+}
+
+.tweet, .post {
+  font-size: 0.95em;
+}
+
+.tweet span, .post span {
+  margin-left: 5px;
+  font-size: 0.8em;
+  color: black;
+}
+
+.post {
+  color: Grey;
+}
+
+.post a {
+  margin-right: 5px;
+  color: #35465c;
 }
 
 @media (max-width: 700px) {
-  .container {
-    margin-left: 50px;
-    width: 85%;
-    padding: 5px;
-  }
-
   .title {
     font-size: 1.1em;
   }

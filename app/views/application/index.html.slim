@@ -3,7 +3,13 @@
     .title
       h1 charlieegan3
     .profile
-      img alt="profile picture" src="avatar.jpg"
+      =image_tag('/avatar.jpg')
+
+  div.image-row
+    -@images[0,3].each do |image|
+      =link_to image.url do
+        =image_tag(image.image_url)
+
   div
     p
       | I'm a third year computer science student at the&nbsp;
@@ -13,10 +19,6 @@
       | I enjoy programming - Rails is a lot of fun. I recently completed a summer internship with&nbsp;
       a href="https://www.unboxedconsulting.com/blog/summer-unboxin-had-me-a-blast" Unboxed Consulting
       | , a Rails consultancy in London.
-    p
-      | I don't often blog but it's&nbsp;
-      a href="relative_link" target="_top" here
-      |  all the same. I ought to get back into posting more often.
     p
       | I enjoy a good film, listen to&nbsp;
       a href="http://www.last.fm/user/charlieegan3" target="_top" music
@@ -32,7 +34,7 @@
       a href="http://www.lochnessmarathon.com" target="_top" further
       | &nbsp;the weekly&nbsp;
       a href="http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706" target="_top" Parkrun
-      |  tends to be less damaging!
+      |  tends to be less painful!
 
   .actions
     .action
@@ -43,27 +45,42 @@
         img.resume src=('/email.png')
 
   div
-    ul
-      li
-        a href="https://www.twitter.com/charlieegan3" target="_top" Twitter
-      li
-        a href="https://www.github.com/charlieegan3" target="_top" GitHub
-      li
-        a href="http://www.stackoverflow.com/users/1510063/charlie-egan" target="_top" stackoverflow
-      li
-        a href="https://gist.github.com/charlieegan3" target="_top" Gists
-      li
-        a href="http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706" target="_top" Parkrun
-      li
-        a href="http://forums.macrumors.com/member.php?u=669532" target="_top" MacRumors
-      li
-        a href="http://www.instagram.com/charlieegan3" target="_top" Instagram
-      li
-        a href="http://browser.primatelabs.com/user/charlieegan3/geekbench2" target="_top" Geekbench
-      li
-        a href="http://www.steamcommunity.com/id/charlieegan3" target="_top" Steam
+    .link-row
+      a href="https://www.twitter.com/charlieegan3" target="_top" Twitter
+      a href="https://www.github.com/charlieegan3" target="_top" GitHub
+      a href="http://www.stackoverflow.com/users/1510063/charlie-egan" target="_top" stackoverflow
+    .link-row
+      a href="https://gist.github.com/charlieegan3" target="_top" Gists
+      a href="http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706" target="_top" Parkrun
+      a href="http://forums.macrumors.com/member.php?u=669532" target="_top" MacRumors
+    .link-row
+      a href="http://www.instagram.com/charlieegan3" target="_top" Instagram
+      a href="http://browser.primatelabs.com/user/charlieegan3/geekbench2" target="_top" Geekbench
+      a href="http://www.steamcommunity.com/id/charlieegan3" target="_top" Steam
 
-div.images
-  -@images.each do |image|
-    =link_to image.url do
-      =image_tag(image.image_url)
+
+  div
+    h2 Tweets
+    -@tweets.each do |tweet|
+      p.tweet
+        =link_to tweet.url do
+          =tweet.text.html_safe
+        span =distance_of_time_in_words(tweet.created_at, Time.zone.now) + ' ago'
+
+  div.image-row
+    -@images[3,3].each do |image|
+      =link_to image.url do
+        =image_tag(image.image_url)
+
+  div
+    h2 Blog Posts
+    -@posts.each do |post|
+      p.post
+        strong =link_to post.url do
+          =post.title
+        ="#{strip_tags(post.text).split('.').first}...".html_safe
+        span =distance_of_time_in_words(post.created_at, Time.zone.now) + ' ago'
+  div.image-row
+    -@images[6,3].each do |image|
+      =link_to image.url do
+        =image_tag(image.image_url)

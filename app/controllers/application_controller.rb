@@ -16,7 +16,9 @@ class ApplicationController < ActionController::Base
       query: request.env['QUERY_STRING']
     ) if user_agent.browser.to_s != 'Typhoeus'
 
-    @images = Image.last(20)
+    @images = Image.last(9)
+    @tweets = Tweet.last(3)
+    @posts = Post.last(3)
   end
 
   def impressions
