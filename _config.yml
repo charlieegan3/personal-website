@@ -4,7 +4,7 @@ email: me@charlieegan3.com
 description: >
   Personal site and blog of Charlie Egan
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://www.charlieegan3.com" # the base hostname & protocol for your site
 twitter_username: charlieegan3
 github_username:  charlieegan3
 
