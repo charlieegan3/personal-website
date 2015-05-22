@@ -1,6 +1,6 @@
 ---
 layout: post
-title: I shipped a side project
+title: Building and 'shipping' my side project
 ---
 
 I started lurking on Hacker News and Product Hunt at the beginning of the year. The motivation for building [serializer](http://www.serializer.io) came from an approaching assignment deadline, rather than cutting out news I thought I'd make following it more manageable. For me this meant a sequential feed - I didn't like having to scan the entire ranked list for new items.
@@ -12,7 +12,7 @@ I decided on a name pretty quick and bought serializer.io the next day. Students
 ![Version 1](/assets/v1.jpg)
 *Version 1*
 
-**March 11th:** I read this [blog post](http://www.slashie.org/articles/shipping-side-projects/) it was probably shared on Hacker News. (edit: it was [shared on Hacker News](https://news.ycombinator.com/item?id=9184448)).
+**March 11th:** I read this [blog post](http://www.slashie.org/articles/shipping-side-projects/) (about 'shipping' side projects) it was probably shared on Hacker News. (edit: it was [shared on Hacker News](https://news.ycombinator.com/item?id=9184448)).
 
 I set to adding some extra features. Read-to-Here marker, 'loginless' syncing, pick and choose custom feeds and tweet counts came about pretty quickly.
 
@@ -33,7 +33,7 @@ I took a break for a while after that, only making very minor changes over the e
 **May 18th:** serializer did better than I ever expected and finished the day in the top 10 with around 100 votes at the time. Since I hadn't done any promotion before I saw a vast increase in traffic, I was impressed that the droplet held up.
 
 ![trend](/assets/trend.jpg)
-*This week's trend, can you spot the Product Hunt boost?*
+*This weeks trend, can you spot the Product Hunt boost?*
 
 This in turn led to some really great feedback from Product Hunters on Twitter and via the feedback form. In response to this I've made the following changes over the last few days:
 
