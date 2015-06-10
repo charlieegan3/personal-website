@@ -82,7 +82,7 @@ p:first-child {
   padding: 10px;
 }
 
-.container a:not(.post h2 a) {
+.container a:not(h2) {
   @include transition(0.2s);
 
   padding: 0px 6px 2px 6px;
@@ -93,7 +93,7 @@ p:first-child {
   border-radius: 3px;
 }
 
-.container a:hover:not(.post h2 a) {
+.container a:hover:not(h2) {
   background-color: rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.05);
 }
@@ -122,4 +122,8 @@ p:first-child {
 .date {
   padding: 0px;
   text-align: right;
+}
+
+img {
+  max-width: 100%;
 }
