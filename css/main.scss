@@ -85,12 +85,18 @@ p:first-child {
 .container a {
   @include transition(0.2s);
 
-  padding: 0px 6px 2px 6px;
+  padding: 1px 6px 3px 6px;
   margin: 0px -3px;
   text-decoration: none;
   background-color: rgba(0,0,0,0.05);
   border: 1px solid rgba(0,0,0,0.01);
   border-radius: 3px;
+}
+
+@media (max-device-width : 700px) {
+  .container a {
+    padding: 5px 6px 3px 6px;
+  }
 }
 
 .container a:hover {
@@ -108,7 +114,7 @@ p:first-child {
   white-space: normal;
   font-size: 1em;
   text-decoration: none;
-  padding: 0px 6px 4px 6px;
+  padding: 2px 6px 5px 6px;
   background-color: rgba(0,0,0,0);
   border: 1px solid rgba(0,0,0,0);
   border-radius: 3px;
