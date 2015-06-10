@@ -1,12 +1,11 @@
 # Site settings
 title: '@charlieegan3'
 email: me@charlieegan3.com
-description: >
-  Personal site and blog of Charlie Egan
+description: 'Personal website and blog'
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://www.charlieegan3.com" # the base hostname & protocol for your site
-twitter_username: charlieegan3
-github_username:  charlieegan3
+twitter_username: 'charlieegan3'
+github_username: 'charlieegan3'
 
 # Build settings
 markdown: kramdown
