@@ -1,3 +1,99 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
+# main.scss
 ---
+
+@mixin transition($time) {
+  -webkit-transition: all $time linear;
+   -khtml-transition: all $time linear;
+     -moz-transition: all $time linear;
+      -ms-transition: all $time linear;
+       -o-transition: all $time linear;
+          transition: all $time linear;
+}
+
+body, p, a {
+  margin: 0;
+  color: white;
+  font-family: monospace;
+  font-size: 17px;
+}
+
+body {
+  background-color: black;
+}
+
+a {
+  white-space: pre;
+}
+
+h1 {
+  margin: 0px;
+  padding: 20px 0px;
+}
+
+p {
+  line-height: 1.8em;
+  padding-bottom: 10px;
+}
+
+p:first-child {
+  padding-top: 10px;
+}
+
+.block {
+  @include transition(0.3s);
+}
+
+#block1 {
+  background-color: #6496D8;
+}
+
+#block1:hover {
+  background-color: #6091D1;
+}
+
+#block2 {
+  background-color: #87C477;
+}
+
+#block2:hover {
+  background-color: #81BC73;
+}
+
+#block3 {
+  background-color: #E9CA6C;
+}
+
+#block3:hover {
+  background-color: #E0C267;
+}
+
+#block4 {
+  background-color: #DD6B74;
+}
+
+#block4:hover {
+  background-color: #D66670;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 10px;
+}
+
+.container a {
+  @include transition(0.2s);
+
+  padding: 0px 6px 2px 6px;
+  margin: 0px -3px;
+  text-decoration: none;
+  background-color: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.01);
+  border-radius: 3px;
+}
+
+.container a:hover {
+  background-color: rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.05);
+}
