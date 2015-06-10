@@ -3,14 +3,22 @@ layout: default
 ---
 
 <div>
-  <ul>
-    {% for post in site.posts %}
-      <li>
-        <span>{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h2>
-          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="block block0">
+    <div class="container">
+      <h1>@charlieegan3's blog</h1>
+    </div>
+  </div>
+  {% for post in site.posts %}
+    {% assign block = forloop.index + 1 | modulo: 4 %}
+    <div class="block{{ block }}">
+      <div class="container">
+        <div class="post">
+          <p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>
+          <h2>
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h2>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </div>

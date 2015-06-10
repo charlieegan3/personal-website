@@ -44,35 +44,35 @@ p:first-child {
   @include transition(0.3s);
 }
 
-#block1 {
+.block0 {
   background-color: #6496D8;
 }
 
-#block1:hover {
+.block0:hover {
   background-color: #6091D1;
 }
 
-#block2 {
+.block1 {
   background-color: #87C477;
 }
 
-#block2:hover {
+.block1:hover {
   background-color: #81BC73;
 }
 
-#block3 {
+.block2 {
   background-color: #E9CA6C;
 }
 
-#block3:hover {
+.block2:hover {
   background-color: #E0C267;
 }
 
-#block4 {
+.block3 {
   background-color: #DD6B74;
 }
 
-#block4:hover {
+.block3:hover {
   background-color: #D66670;
 }
 
@@ -82,7 +82,7 @@ p:first-child {
   padding: 10px;
 }
 
-.container a {
+.container a:not(.post h2 a) {
   @include transition(0.2s);
 
   padding: 0px 6px 2px 6px;
@@ -93,7 +93,33 @@ p:first-child {
   border-radius: 3px;
 }
 
-.container a:hover {
+.container a:hover:not(.post h2 a) {
   background-color: rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.05);
+}
+
+// blog
+.post h2 {
+  margin: 5px 0px;
+  // text-align: right;
+}
+
+.post h2 a {
+  @include transition(0.2s);
+  font-size: 1em;
+  text-decoration: none;
+  padding: 0px 6px 4px 6px;
+  background-color: rgba(0,0,0,0);
+  border: 1px solid rgba(0,0,0,0);
+  border-radius: 3px;
+}
+
+.post h2 a:hover {
+  background-color: rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.date {
+  padding: 0px;
+  text-align: right;
 }
