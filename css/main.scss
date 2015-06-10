@@ -82,7 +82,7 @@ p:first-child {
   padding: 10px;
 }
 
-.container a:not(h2) {
+.container a {
   @include transition(0.2s);
 
   padding: 0px 6px 2px 6px;
@@ -93,19 +93,19 @@ p:first-child {
   border-radius: 3px;
 }
 
-.container a:hover:not(h2) {
+.container a:hover {
   background-color: rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.05);
 }
 
 // blog
 .post h2 {
-  margin: 5px 0px;
-  // text-align: right;
+  margin: 35px 0px 80px 0px;
 }
 
 .post h2 a {
   @include transition(0.2s);
+  white-space: normal;
   font-size: 1em;
   text-decoration: none;
   padding: 0px 6px 4px 6px;
