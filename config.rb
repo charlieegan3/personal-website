@@ -109,7 +109,7 @@ configure :build do
   # activate :relative_assets
 
   # Or use a different image path
-  set :http_prefix, "/new/"
+  # set :http_prefix, "/new/"
 end
 
 activate :deploy do |deploy|
