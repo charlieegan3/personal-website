@@ -4,4 +4,4 @@ date: 2007-08-15
 type: learning
 size: 10
 ---
-I started learning event driven programming at school with Visual Basic and Visual Studio. In my final year I built a programming to analyse and scorekeep badminton games, I've since lost the source.
+I started learning event driven programming at school with Visual Basic and Visual Studio. In my final year I built a programming to analyze and score keep badminton games, I've since lost the source.

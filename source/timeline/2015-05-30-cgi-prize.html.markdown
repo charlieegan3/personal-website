@@ -4,4 +4,4 @@ date: 2015-05-30
 type: award
 size: 7
 ---
-I recieved a prize for the highest marks in level 3 computing science.
+I received a prize for the highest marks in level 3 computing science.
