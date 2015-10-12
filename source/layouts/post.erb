@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" style="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1'>
+    <title>charlieegan3</title>
+    <%= stylesheet_link_tag 'reset' %>
+    <%= stylesheet_link_tag 'bootstrap' %>
+    <%= stylesheet_link_tag 'style' %>
+    <%= stylesheet_link_tag 'timeline' %>
+    <%= stylesheet_link_tag 'entry' %>
+    <%= stylesheet_link_tag 'icons' %>
+    <%= stylesheet_link_tag 'social' %>
+    <%= stylesheet_link_tag 'image-row' %>
+    <%= stylesheet_link_tag 'post' %>
+  </head>
+  <body>
+    <div id="main" role="main">
+      <%= partial('partials/header') %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="post">
+              <h1><%= current_page.data.title %></h1>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

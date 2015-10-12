@@ -1,0 +1,9 @@
+---
+title: Podcasts
+date: 2015-01-01
+type: learning
+size: 12
+---
+I started listening to podcasts - looking back I ought to have started much sooner. Currently I listen to everything 5by5 RoR, Programming Throwdown and Stack Exchange - I'm also a Changelog Member. They've been a great help with longer runs.
+
+Podcasts coupled with serializer have lead to an ever growing number of cool things to check out. This 'problem' now lives in its own special Trello board.

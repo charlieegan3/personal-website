@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300);
+
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+header, footer {
+  background-color: white;
+}
+
+footer {
+  box-shadow: 0px -10px 10px white;
+}
+
+footer p {
+  margin: 0px;
+  padding: 5px;
+}
+
+.container.header {
+  background-color: white;
+  box-shadow: 0px 10px 10px white;
+  margin-bottom: 15px;
+}

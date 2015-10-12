@@ -1,0 +1,20 @@
+=partial('partials/header')
+.container
+  .row
+    .col-md-12
+      p Some articles that discuss a good topic or make a point about something more eloquently than I might.
+
+  -page_articles(blog_name = 'articles').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
+    .row
+      .col-md-12
+        h1 =year
+        ul
+          -articles.each do |article|
+            li
+              =link_to article.title, article.metadata[:page]['url'], target: "_blank"
+              |&nbsp;
+              .glyphicon.glyphicon-new-window
+
+  -10.times do
+    br
+=partial('partials/footer')

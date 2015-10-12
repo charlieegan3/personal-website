@@ -1,0 +1,22 @@
+.line {
+  position: fixed;
+  left: 50%;
+  height: 100%;
+  background-color: DarkGrey;
+  width: 1px;
+  z-index: -1;
+}
+
+.year-label {
+  margin-top: 5px;
+}
+
+.year-label span {
+  font-size: 1.1em;
+  font-weight: 300;
+  background-color: white;
+  color: Grey;
+  border-radius: 2px;
+  border: 1px solid DarkGrey;
+  padding: 3px 5px;
+}

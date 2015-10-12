@@ -1,0 +1,9 @@
+---
+title: Codebar
+date: 2015-07-07
+type: teaching
+size: 11
+---
+There's nothing more valuable than learning what you don't know. Codebar is a great way to get out of your comfort zone. While in London this year I was able to attend a good number of the events. I opted to predominantly coach for individual Rails projects - this is *much* more interesting than tutorials, it's also a lot more challenging.
+
+I wrote a blog post about some things I've learned from tutoring at uni and codebar [here](/blog/2015/08/25/codebar.html).

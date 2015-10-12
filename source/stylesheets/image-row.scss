@@ -1,0 +1,12 @@
+.image-row {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .image-row {
+    display: block;
+    img {
+      width: 100%;
+    }
+  }
+}

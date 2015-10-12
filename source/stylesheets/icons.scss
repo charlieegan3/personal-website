@@ -1,0 +1,31 @@
+.glyphicon {
+  margin-top: 1px;
+  font-size: 0.9em;
+}
+
+.index0 {
+  .glyphicon {
+    float: right;
+    margin-left: 8px;
+  }
+}
+
+.index1 {
+  .glyphicon {
+    float: left;
+    margin-right: 8px;
+  }
+}
+
+.glyphicon-education { color: SeaGreen; }
+.glyphicon-briefcase { color: CornflowerBlue; }
+.glyphicon-console { color: Coral; }
+.glyphicon-star { color: Gold; }
+.glyphicon-apple { color: YellowGreen; }
+.glyphicon-blackboard { color: PaleVioletRed; }
+.glyphicon-hourglass { color: RebeccaPurple; }
+.glyphicon-stats { color: SkyBlue; }
+.glyphicon-calendar { color: Tomato; }
+.glyphicon-globe { color: LimeGreen; }
+
+.glyphicon-new-window { color: LightGrey; }

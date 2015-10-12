@@ -1,0 +1,11 @@
+.social-icon {
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin: 2px;
+  width: 25px;
+  height: 25px;
+
+  &:hover {
+    border-color: LightGrey;
+  }
+}

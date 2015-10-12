@@ -1,0 +1,7 @@
+---
+title: Student Software Engineering Project
+date: 2014-11-30
+type: project
+size: 10
+---
+I was the team leader for a group of eight students working on an Aspect-based Sentiment Analysis tool for movie reviews. The project's source is available on [GitHub](https://github.com/charlieegan3/rescore).

@@ -1,0 +1,33 @@
+.container
+  .line
+=partial('partials/header')
+.container
+  .row
+    .col-md-6.col-md-offset-3
+      .entry
+        .entry-body
+          p.text-center Currently studying in the first semester of my final year. With no upcoming events my current running goal is to 'just get out'. On the side I'm trying to learn Go - using kattis as a playground to bash in a new syntax and prep for this year's UKIEPC.
+  .row
+    .col-md-4.col-md-offset-4
+      .entry
+        .entry-body =partial('partials/profiles')
+
+  -page_articles(blog_name = 'timeline').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
+    .row
+      .col-md-2.col-md-offset-5.text-center
+        p.year-label
+          span.year-label =year
+    .row
+      -if articles.size > 1
+        -[even_values(articles), odd_values(articles)].each_with_index do |group, i|
+          .col-md-6
+            -group.each do |article|
+              .row
+                -size = article.metadata[:page]['size'] || 12
+                div class=(i == 0 && size < 12 ? "col-md-#{size.to_i} col-md-offset-#{12 - size.to_i}" : "col-md-#{size.to_i}")
+                  =partial("partials/" + article.metadata[:page]['type'], locals: { article: article, index: i })
+      -else
+        .col-md-6.col-md-offset-3
+          =partial("partials/" + articles.first.metadata[:page]['type'], locals: { article: articles.first, index: 1 })
+
+=partial('partials/footer')
