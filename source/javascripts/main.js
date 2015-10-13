@@ -14,3 +14,5 @@ $(document).ready(function() {
     displayVisibleEntries();
   });
 });
+
+setTimeout(displayVisibleEntries(), 500)
