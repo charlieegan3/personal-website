@@ -2,7 +2,7 @@
 title: Argument Workbench
 date: 2015-05-05
 type: work
-size: 10
+size: 11
 ---
 I worked with a fellow student on an semantic search extension to an annotation tool. We built an [indexer and Django web app](https://github.com/IllegalCactus/argument-workbench) to enable the annotated text to be queried for argumentation features.
 
