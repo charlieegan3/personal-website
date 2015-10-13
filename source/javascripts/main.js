@@ -1,21 +1,20 @@
-// http://jsfiddle.net/tcloninger/e5qad/
 function displayVisibleEntries() {
   var windowBottom = $(window).scrollTop() + $(window).height();
+  var displayed = false;
   $('.entry').each( function(i){
     if(windowBottom > $(this).offset().top){
+      displayed = true;
       $(this).animate({'opacity':'1', 'margin': '7px 0px'}, 400);
     }
   });
+  return displayed;
 }
 
 $(document).ready(function() {
-  displayVisibleEntries();
+  while(true) {
+    if (displayVisibleEntries() === true) { break; }
+  }
   $(window).scroll(function(){
     displayVisibleEntries();
   });
-});
-
-var DOMReady = function(a,b,c){b=document,c='addEventListener';b[c]?b[c]('DOMContentLoaded',a):window.attachEvent('onload',a)}
-DOMReady(function () {
-  displayVisibleEntries();
 });
