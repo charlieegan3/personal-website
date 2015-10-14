@@ -12,7 +12,8 @@
       .entry
         .entry-body =partial('partials/profiles')
 
-  -page_articles(blog_name = 'timeline').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
+  -page_articles(blog_name = 'timeline').group_by { |a| a.date.strftime('%Y') }.to_a.each_with_index do |year_articles, index|
+    -year, articles = year_articles
     .row
       .col-md-2.col-md-offset-5.text-center
         p.year-label
@@ -22,7 +23,7 @@
         -[even_values(articles), odd_values(articles)].each_with_index do |group, i|
           .col-md-6
             -group.each do |article|
-              .row
+              .row class=(index > 0 ? 'later' : '')
                 -size = article.metadata[:page]['size'] || 12
                 div class=(i == 0 && size < 12 ? "col-md-#{size.to_i} col-md-offset-#{12 - size.to_i}" : "col-md-#{size.to_i}")
                   =partial("partials/" + article.metadata[:page]['type'], locals: { article: article, index: i })
