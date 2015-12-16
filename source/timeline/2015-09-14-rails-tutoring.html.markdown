@@ -4,4 +4,4 @@ date: 2015-09-14
 type: teaching
 size: 8
 ---
-I currently teach a weekly class for the level 2 Advanced Web Application Development course. The course covers Rails and students build a range of basic web apps over the course of the term. I am paid as the demonstrator for the class.
+This term I taught a weekly class on the Level 2 Advanced Web Application Development course. The course covers Ruby on Rails and students build a range of basic web applications over the course of the term. I was paid as the TA for the class.
