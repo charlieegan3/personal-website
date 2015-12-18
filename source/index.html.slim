@@ -2,19 +2,9 @@
   .line
 =partial('partials/header')
 .container
-  .row
-    .col-md-6.col-md-offset-3
-      .entry
-        .entry-body
-          =partial('partials/status')
-  .row
-    .col-md-6.col-md-offset-3
-      .col-md-10.col-md-offset-1
-        .col-xs-12
-          .entry
-            .entry-body
-              =partial('partials/profiles')
-              p.text-center =link_to "me@charlieegan3.com", "mailto:me@charlieegan3.com"
+  .row.live-block
+    =partial('partials/live_row')
+    p.text-center Timeline
 
   -page_articles(blog_name = 'timeline').group_by { |a| a.date.strftime('%Y') }.to_a.each_with_index do |year_articles, index|
     -year, articles = year_articles

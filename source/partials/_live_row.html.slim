@@ -1,0 +1,65 @@
+.col-md-8.live
+  .row
+    .col-md-12
+      .entry
+        .entry-body
+          =partial('partials/status')
+          =partial('partials/profiles')
+  .row
+    .col-md-6.live
+      .entry.twitter
+        .entry-body
+          =link_to 'https://twitter.com/charlieegan3/status/675347023600746496' do
+            p.tweet I'm in a car that has wheels
+          p.meta
+            =link_to 'http://twitter.com/charlieegan3', target: "_blank"  do
+              =image_tag 'twitter.jpg', class: 'social-icon small'
+            | Inverness, Scotland, 6 days ago
+      .entry.strava
+        .entry-body
+          =link_to 'https://www.strava.com/activities/452080730' do
+            .row
+              .col-xs-4
+                p.distance-block
+                  span.distance 6.1
+                  span km
+              .col-xs-8
+                p.name Morning Run
+                p.time 20:12
+          p.meta
+            =link_to 'https://www.strava.com/athletes/charlieegan3' do
+              =image_tag 'strava.jpg', class: 'social-icon small'
+            | Muir of Ord, 1 day ago
+    .col-md-6.live
+      .entry.github
+        .entry-body
+          =link_to 'https://github.com/charlieegan3/json-charlieegan3/commit/d9bf3cf96506b7cb47f86e498fe7a70c51bc35cd' do
+            p.commit > Fixed all the things that are in the thing
+          p.meta
+            =link_to 'http://github.com/charlieegan3', target: "_blank" do
+              =image_tag 'gh.jpg', class: 'social-icon small'
+            | 6 days ago
+      .entry.lastfm
+        .entry-body
+          =link_to 'http://www.last.fm/music/Michael+Price/_/In+Pursuit+of+Immortality' do
+            .row
+              .col-xs-3
+                =image_tag 'http://img2-ak.lst.fm/i/u/174s/1d4226679f7c4b289a362cbc0b531d1b.png'
+              .col-xs-9
+                p.track Some some other words thing ft. Bod and thing (Original Mix)
+                p.artist Odjnwnwaen
+          p.meta
+            =link_to 'http://www.last.fm/user/charlieegan3', target: "_blank"  do
+              =image_tag 'lastfm.jpg', class: 'social-icon small'
+            | just now
+
+.col-md-4.live
+  .entry.instagram
+    .entry-body
+      =link_to 'https://www.instagram.com/p/_aPT2tG2YW/' do
+        =image_tag 'https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/s640x640/sh0.08/e35/12394097_438519072999997_49653572_n.jpg'
+      p.meta
+        =link_to 'http://instagram.com/charlieegan3', target: "_blank"  do
+          =image_tag 'insta.jpg', class: 'social-icon small'
+        | Orrin River, 11 hours ago
+
