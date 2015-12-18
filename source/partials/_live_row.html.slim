@@ -23,6 +23,28 @@
             =link_to 'http://twitter.com/charlieegan3', target: "_blank"  do
               =image_tag 'twitter.jpg', class: 'social-icon small'
             span#twitter-meta
+      .entry.lastfm
+        .entry-body
+          =link_to '#', id: 'lastfm-link' do
+            .row
+              .col-xs-3
+                =image_tag '#', id: 'lastfm-image'
+              .col-xs-9
+                p.track#lastfm-track
+                p.artist#lastfm-artist
+          p.meta
+            =link_to 'http://www.last.fm/user/charlieegan3', target: "_blank"  do
+              =image_tag 'lastfm.jpg', class: 'social-icon small'
+            span#lastfm-meta
+    .col-md-6.live
+      .entry.github
+        .entry-body
+          =link_to '#', id: 'github-link' do
+            p.commit#github-message
+          p.meta
+            =link_to 'http://github.com/charlieegan3', target: "_blank" do
+              =image_tag 'gh.jpg', class: 'social-icon small'
+            span#github-meta
       .entry.strava
         .entry-body
           =link_to '#', id: 'strava-link' do
@@ -38,28 +60,6 @@
             =link_to 'https://www.strava.com/athletes/charlieegan3' do
               =image_tag 'strava.jpg', class: 'social-icon small'
             span#strava-meta
-    .col-md-6.live
-      .entry.github
-        .entry-body
-          =link_to '#', id: 'github-link' do
-            p.commit#github-message
-          p.meta
-            =link_to 'http://github.com/charlieegan3', target: "_blank" do
-              =image_tag 'gh.jpg', class: 'social-icon small'
-            span#github-meta
-      .entry.lastfm
-        .entry-body
-          =link_to '#', id: 'lastfm-link' do
-            .row
-              .col-xs-3
-                =image_tag '#', id: 'lastfm-image'
-              .col-xs-9
-                p.track#lastfm-track
-                p.artist#lastfm-artist
-          p.meta
-            =link_to 'http://www.last.fm/user/charlieegan3', target: "_blank"  do
-              =image_tag 'lastfm.jpg', class: 'social-icon small'
-            span#lastfm-meta
 
 .col-md-4.live
   .entry.instagram
