@@ -52,5 +52,6 @@ $(document).ready(function() {
   displayVisibleEntries('.later');
   $(window).scroll(function(){
     displayVisibleEntries('.later');
+    displayVisibleEntries('.live');
   });
 });
