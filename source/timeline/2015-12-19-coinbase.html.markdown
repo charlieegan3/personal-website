@@ -1,0 +1,7 @@
+---
+title: coinbase & Pushover
+date: 2015-12-19 22:00 UTC
+type: project
+size: 10
+---
+I'd been meaning to learn a little more about cryptocurrencies for some time. I decided that the only way I'd be sure to take the time to learn the basics was to buy some Bitcoin. I've been tracking it since - I'll likely hit the big time any day now. I built [this simple task](https://github.com/charlieegan3/coinbase-balance-notification) to keep me posted on the value of my wallet.
