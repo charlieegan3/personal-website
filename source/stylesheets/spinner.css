@@ -2,40 +2,51 @@
 
 .spinner {
   margin: 100px auto;
-  width: 50px;
+  width: 200px;
   height: 40px;
   text-align: center;
   font-size: 10px;
 }
 
 .spinner > div {
-  background-color: LightGrey;
   height: 100%;
-  width: 6px;
+  width: 30px;
   display: inline-block;
 
-  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  -webkit-animation: sk-stretchdelay 0.6s infinite ease-in-out;
+  animation: sk-stretchdelay 0.6s infinite ease-in-out;
+}
+
+.spinner .rect1 {
+  background-color: CornflowerBlue;
 }
 
 .spinner .rect2 {
-  -webkit-animation-delay: -1.1s;
-  animation-delay: -1.1s;
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+  background-color: SeaGreen;
+  margin-left: 2px;
 }
 
 .spinner .rect3 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+  background-color: Tomato;
+  margin-left: 2px;
 }
 
 .spinner .rect4 {
-  -webkit-animation-delay: -0.9s;
-  animation-delay: -0.9s;
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+  background-color: Orange;
+  margin-left: 2px;
 }
 
 .spinner .rect5 {
-  -webkit-animation-delay: -0.8s;
-  animation-delay: -0.8s;
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+  background-color: Gold;
+  margin-left: 2px;
 }
 
 @-webkit-keyframes sk-stretchdelay {
