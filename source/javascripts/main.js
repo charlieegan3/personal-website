@@ -21,12 +21,21 @@ function setLiveContent(data) {
   $('#twitter-link').attr("href", data.tweet.link);
   $('#twitter-content').text(data.tweet.text);
   $('#twitter-meta').text(data.tweet.location + " - " + data.tweet.created_ago);
+  if (data.tweet.location != null) {
+    $('#twitter-meta').text(data.tweet.location + " - " + data.tweet.created_ago);
+  } else {
+    $('#twitter-meta').text(data.tweet.created_ago);
+  }
 
   $("#strava-link").attr("href", data.activity.link);
   $("#strava-distance").text(data.activity.distance);
   $("#strava-name").text(data.activity.name);
   $("#strava-duration").text(data.activity.moving_time);
-  $("#strava-meta").text(data.activity.location + " - " + data.activity.created_ago);
+  if (data.activity.location != null) {
+    $("#strava-meta").text(data.activity.location + " - " + data.activity.created_ago);
+  } else {
+    $("#strava-meta").text(data.activity.created_ago);
+  }
 
   $("#github-link").attr("href", data.commit.link);
   $("#github-message").text("> " + data.commit.message);
@@ -44,7 +53,11 @@ function setLiveContent(data) {
 
   $("#instagram-link").attr("href", data.image.link);
   $("#instagram-image").attr("src", data.image.images.standard_resolution);
-  $("#instagram-meta").text(data.image.location + " - " + data.image.created_ago);
+  if (data.image.location != null) {
+    $("#instagram-meta").text(data.image.location + " - " + data.image.created_ago);
+  } else {
+    $("#instagram-meta").text(data.image.created_ago);
+  }
 }
 
 $(document).ready(function() {
