@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300|VT323|Reenie+Beanie);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,300,300italic,700,700italic|VT323|Reenie+Beanie);
 
 html * {
   -webkit-font-smoothing: antialiased;
@@ -30,6 +30,14 @@ footer {
 footer p {
   margin: 0px;
   padding: 5px;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-style: bold;
 }
 
 .container.header {
