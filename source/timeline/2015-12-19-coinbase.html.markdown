@@ -1,5 +1,5 @@
 ---
-title: coinbase & Pushover
+title: Coinbase & Pushover
 date: 2015-12-19 22:00 UTC
 type: project
 size: 10
