@@ -38,14 +38,16 @@
   }
 
   &.index0 {
-    .entry-header {
-      text-align: right;
-      border-top-right-radius: 3px;
-      border-left: none;
-    }
+    @media (min-width: 990px) {
+      .entry-header {
+        text-align: right;
+        border-top-right-radius: 3px;
+        border-left: none;
+      }
 
-    .entry-body {
-      text-align: right;
+      .entry-body {
+        text-align: right;
+      }
     }
   }
 
@@ -53,6 +55,18 @@
     .entry-header {
       border-top-left-radius: 3px;
       border-right: none;
+    }
+  }
+
+  @media (max-width: 990px) {
+    &.index0, &.index1 {
+      .entry-header {
+        border: 1px solid #eee;
+        border-bottom: none;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        margin-bottom: -1px;
+      }
     }
   }
 }
