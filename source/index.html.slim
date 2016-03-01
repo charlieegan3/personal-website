@@ -9,7 +9,8 @@
       .rect3
       .rect4
       .rect5
-    =partial('partials/live_row')
+    .row
+      =partial('partials/live_row')
     p.text-center.live Timeline
 
   -page_articles(blog_name = 'timeline').group_by { |a| a.date.strftime('%Y') }.to_a.each_with_index do |year_articles, index|
