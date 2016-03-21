@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1'>
     <title>charlieegan3</title>
+    <script>
+      if (!(window.location.host.startsWith("local")) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+    </script>
     <%= stylesheet_link_tag 'reset' %>
     <%= stylesheet_link_tag 'bootstrap' %>
     <%= stylesheet_link_tag 'style' %>
