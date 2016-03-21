@@ -42,7 +42,8 @@ function setLiveContent(data) {
   $("#github-meta").text(data.commit.created_ago);
 
   $("#lastfm-link").attr("href", data.track.link);
-  $("#lastfm-image").attr("src", data.track.images.large);
+  $("#lastfm-image").attr("src",
+      "https://charlieegan3-image-proxy.herokuapp.com/?url=" + encodeURI(data.track.images.large));
   if (data.track.images.large == "") {
     $("#lastfm-image").parent().remove();
     $(".artist").parent().css('padding-left', "15px");
