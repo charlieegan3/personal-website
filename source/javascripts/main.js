@@ -20,8 +20,7 @@ function setLiveContent(data) {
 
   $('#twitter-link').attr("href", data.tweet.link);
   $('#twitter-content').text(data.tweet.text);
-  $('#twitter-meta').text(data.tweet.location + " - " + data.tweet.created_ago);
-  if (data.tweet.location != null) {
+  if (data.tweet.location != "") {
     $('#twitter-meta').text(data.tweet.location + " - " + data.tweet.created_ago);
   } else {
     $('#twitter-meta').text(data.tweet.created_ago);
