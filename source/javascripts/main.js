@@ -48,7 +48,7 @@ function setLiveContent(data) {
     $(".artist").parent().css('padding-left', "15px");
   }
   $("#lastfm-track").html(data.track.name);
-  $("#lastfm-artist").text(data.track.artist);
+  $("#lastfm-artist").html(data.track.artist);
   $("#lastfm-meta").text(data.track.created_ago);
 
   $("#instagram-link").attr("href", data.image.link);
