@@ -1,0 +1,7 @@
+development:
+  container_name: charlieegan3_dev
+  build: ./
+  ports:
+    - "4567:4567"
+  volumes:
+    - "./:/app"
