@@ -8,17 +8,18 @@
       .rect2
       .rect3
       .rect4
-      .rect5
-    .row
-      =partial('partials/live_row')
-    p.text-center.live
-      a href="/blog"
-        | Blog
-      |&nbsp;&nbsp;&nbsp;
-      a href="/articles"
-        | Articles
-    p.text-center.live
-      | Timeline
+        .rect5
+    .col-md-12
+      .row
+        =partial('partials/live_row')
+      p.text-center.live
+        a href="/blog"
+          | Blog
+        |&nbsp;&nbsp;&nbsp;
+        a href="/articles"
+          | Articles
+      p.text-center.live
+        | Timeline
 
   -page_articles(blog_name = 'timeline').group_by { |a| a.date.strftime('%Y') }.to_a.each_with_index do |year_articles, index|
     -year, articles = year_articles
