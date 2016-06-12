@@ -1,0 +1,8 @@
+---
+title: EDS Prize
+date: 2016-06-12 19:56 UTC
+type: award
+size: 7
+---
+
+I was awarded the EDS Prize in Computing Science for my final honours year grades.
