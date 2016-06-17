@@ -42,8 +42,8 @@ function setLiveContent(data) {
 
   $("#lastfm-link").attr("href", data.track.link);
   $("#lastfm-image").attr("src",
-      "https://charlieegan3-image-proxy.herokuapp.com/?url=" + encodeURI(data.track.images.large));
-  if (data.track.images.large == "") {
+      "https://charlieegan3-image-proxy.herokuapp.com/?url=" + encodeURI(data.track.image));
+  if (data.track.image == "" || data.track.image == null) {
     $("#lastfm-image").parent().remove();
     $(".artist").parent().css('padding-left', "15px");
   }
