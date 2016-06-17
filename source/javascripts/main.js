@@ -36,6 +36,17 @@ function setLiveContent(data) {
     $("#strava-meta").text(data.activity.created_ago);
   }
 
+  for (i = 0; i < data.games.length; i++) {
+    var game = data.games[i];
+    var icon = $('<img/>').attr({ src: game.network_icon, height: "15px" });
+    var link = $('<a></a>').attr({ href: game.action }).html(game.game);
+    var time = $('<span></span>').html(game.time);
+
+    var line = $('<p></p>').attr({ class: "game" }).append(icon, " ", link, " ", time);
+
+    $("#games-box").append(line);
+  }
+
   $("#github-link").attr("href", data.commit.link);
   $("#github-message").text("> " + data.commit.message);
   $("#github-meta").text(data.commit.created_ago);
