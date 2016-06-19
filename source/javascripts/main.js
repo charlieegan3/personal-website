@@ -36,6 +36,11 @@ function setLiveContent(data) {
     $("#strava-meta").text(data.activity.created_ago);
   }
 
+  $("#parkrun-link").attr("href", data.parkrun.link);
+  $("#parkrun-link").text(data.parkrun.location);
+  $("#parkrun-time").text(data.parkrun.time);
+  $("#parkrun-ago").text(data.parkrun.created_ago);
+
   for (i = 0; i < data.games.length; i++) {
     var game = data.games[i];
     var icon = $('<img/>').attr({ src: game.network_icon, height: "15px" });

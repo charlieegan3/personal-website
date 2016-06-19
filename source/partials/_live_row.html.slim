@@ -36,6 +36,8 @@
             =link_to 'http://www.last.fm/user/charlieegan3', target: "_blank"  do
               =image_tag 'lastfm.jpg', class: 'social-icon small'
             span#lastfm-meta
+      .entry.games
+        .entry-body#games-box
     .col-md-6.live
       .entry.github
         .entry-body
@@ -60,8 +62,16 @@
             =link_to 'https://www.strava.com/athletes/charlieegan3' do
               =image_tag 'strava.jpg', class: 'social-icon small'
             span#strava-meta
-      .entry.games
-        .entry-body#games-box
+      .entry.parkrun
+        .entry-body
+          p
+            span#parkrun-time
+            span#at at&nbsp;
+            =link_to '#', id: 'parkrun-link' do
+          p.meta
+            =link_to 'http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706', target: "_blank" do
+              =image_tag 'parkrun.jpg', class: 'social-icon small'
+            span#parkrun-ago
 
 .col-md-4.live
   .entry.instagram
