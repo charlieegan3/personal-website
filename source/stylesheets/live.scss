@@ -16,6 +16,10 @@
     color: DarkGrey;
     font-size: 0.9em;
     text-align: left;
+
+    span {
+      margin-left: 3px;
+    }
   }
 
   .entry-body {
@@ -38,7 +42,7 @@
   p.tweet {
     text-align: center;
     font-family: "Reenie Beanie", monospace;
-    font-size: 1.7em;
+    font-size: 1.5em;
   }
 }
 
