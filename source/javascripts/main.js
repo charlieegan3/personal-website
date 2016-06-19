@@ -28,6 +28,7 @@ function setLiveContent(data) {
 
   $("#strava-link").attr("href", data.activity.link);
   $("#strava-distance").text(data.activity.distance);
+  $("#strava-ytd").text(data.activity.ytd);
   $("#strava-name").text(data.activity.name);
   $("#strava-duration").text(data.activity.moving_time);
   if (data.activity.location != null) {

@@ -88,11 +88,36 @@
     padding-left: 3px;
     padding-right: 3px;
     border-radius: 3px;
+    margin-bottom: -5px;
+
+    .distance {
+      text-align: center;
+      font-size: 1.7em;
+    }
   }
 
-  span.distance {
+  p.ytd-distance-block {
+    background-color: #00e600;
+    border: 2px solid #00b300;
+    border-top: none;
+    color: white;
     text-align: center;
-    font-size: 2em;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
+    span {
+      font-size: 0.8em;
+    }
+
+    .distance {
+      text-align: center;
+      font-size: 1.1em;
+      margin-left: 3px;
+    }
   }
 
   p.name {
