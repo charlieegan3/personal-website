@@ -41,6 +41,11 @@ function setLiveContent(data) {
   $("#parkrun-time").text(data.parkrun.time);
   $("#parkrun-ago").text(data.parkrun.created_ago);
 
+  $("#hackernews-comments-link").text(data.hacker_news.title);
+  $("#hackernews-comments-link").attr("href", data.hacker_news.comments);
+  $("#hackernews-external-link").attr("href", data.hacker_news.url);
+  $("#hackernews-ago").html(data.hacker_news.created_ago);
+
   for (i = 0; i < data.games.length; i++) {
     var game = data.games[i];
     var icon = $('<img/>').attr({ src: game.network_icon, height: "15px" });

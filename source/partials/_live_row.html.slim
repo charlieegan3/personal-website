@@ -72,6 +72,16 @@
             =link_to 'http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706', target: "_blank" do
               =image_tag 'parkrun.jpg', class: 'social-icon small'
             span#parkrun-ago
+      .entry.hacker-news
+        .entry-body
+          p
+            =link_to '#', id: 'hackernews-comments-link' do
+            =link_to '#', id: 'hackernews-external-link' do
+              span.glyphicon.glyphicon-new-window
+          p.meta
+            =link_to 'https://news.ycombinator.com/user?id=charlieegan3', target: "_blank" do
+              =image_tag 'hn.jpg', class: 'social-icon small'
+            span#hackernews-ago
 
 .col-md-4.live
   .entry.instagram
