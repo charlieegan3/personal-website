@@ -73,6 +73,11 @@ function setLiveContent(data) {
   $("#lastfm-artist").html(data.track.artist);
   $("#lastfm-meta").text(data.track.created_ago);
 
+  $("#film-link").attr("href", data.film.link);
+  $("#film-cover").attr("src", data.film.cover);
+  $("#film-title").html(data.film.title);
+  $("#film-meta").html(data.film.created_ago);
+
   $("#instagram-link").attr("href", data.image.link);
   $("#instagram-image").attr("src", data.image.images.standard_resolution);
   if (data.image.location != null) {

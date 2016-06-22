@@ -39,14 +39,6 @@
       .entry.games
         .entry-body#games-box
     .col-md-6.live
-      .entry.github
-        .entry-body
-          =link_to '#', id: 'github-link' do
-            p.commit#github-message
-          p.meta
-            =link_to 'http://github.com/charlieegan3', target: "_blank" do
-              =image_tag 'gh.jpg', class: 'social-icon small'
-            span#github-meta
       .entry.strava
         .entry-body
           =link_to '#', id: 'strava-link' do
@@ -66,27 +58,26 @@
             =link_to 'https://www.strava.com/athletes/charlieegan3' do
               =image_tag 'strava.jpg', class: 'social-icon small'
             span#strava-meta
-      .entry.parkrun
+      .entry.github
         .entry-body
-          p
-            span#parkrun-time
-            span#at at&nbsp;
-            =link_to '#', id: 'parkrun-link' do
+          =link_to '#', id: 'github-link' do
+            p.commit#github-message
           p.meta
-            =link_to 'http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706', target: "_blank" do
-              =image_tag 'parkrun.jpg', class: 'social-icon small'
-            span#parkrun-ago
-      .entry.hacker-news
+            =link_to 'http://github.com/charlieegan3', target: "_blank" do
+              =image_tag 'gh.jpg', class: 'social-icon small'
+            span#github-meta
+      .entry.film
         .entry-body
-          p
-            =link_to '#', id: 'hackernews-comments-link' do
-            =link_to '#', id: 'hackernews-external-link' do
-              span.glyphicon.glyphicon-new-window
+          =link_to '#', id: 'film-link' do
+            .row
+              .col-xs-3
+                =image_tag 'https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG', id: 'film-cover'
+              .col-xs-9
+                p.track#film-title
           p.meta
-            =link_to 'https://news.ycombinator.com/user?id=charlieegan3', target: "_blank" do
-              =image_tag 'hn.jpg', class: 'social-icon small'
-            span#hackernews-ago
-
+            =link_to 'https://letterboxd.com/charlieegan3', target: "_blank"  do
+              =image_tag 'https://letterboxd.com/favicon.ico', class: 'social-icon small'
+            span#film-meta
 .col-md-4.live
   .entry.instagram
     .entry-body
@@ -96,4 +87,23 @@
         =link_to 'http://instagram.com/charlieegan3', target: "_blank"  do
           =image_tag 'insta.jpg', class: 'social-icon small'
         span#instagram-meta
-
+  .entry.parkrun
+    .entry-body
+      p
+        span#parkrun-time
+        span#at at&nbsp;
+        =link_to '#', id: 'parkrun-link' do
+      p.meta
+        =link_to 'http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706', target: "_blank" do
+          =image_tag 'parkrun.jpg', class: 'social-icon small'
+        span#parkrun-ago
+  .entry.hacker-news
+    .entry-body
+      p
+        =link_to '#', id: 'hackernews-comments-link' do
+        =link_to '#', id: 'hackernews-external-link' do
+          span.glyphicon.glyphicon-new-window
+      p.meta
+        =link_to 'https://news.ycombinator.com/user?id=charlieegan3', target: "_blank" do
+          =image_tag 'hn.jpg', class: 'social-icon small'
+        span#hackernews-ago
