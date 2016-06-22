@@ -21,9 +21,9 @@ function setLiveContent(data) {
   $('#twitter-link').attr("href", data.tweet.link);
   $('#twitter-content').text(data.tweet.text);
   if (data.tweet.location != "") {
-    $('#twitter-meta').text(data.tweet.location + " - " + data.tweet.created_ago);
+    $('#twitter-meta').text("posted at " + data.tweet.location + ", " + data.tweet.created_ago);
   } else {
-    $('#twitter-meta').text(data.tweet.created_ago);
+    $('#twitter-meta').text("posted " + data.tweet.created_ago);
   }
 
   $("#strava-link").attr("href", data.activity.link);
@@ -32,26 +32,29 @@ function setLiveContent(data) {
   $("#strava-name").text(data.activity.name);
   $("#strava-duration").text(data.activity.moving_time);
   if (data.activity.location != null) {
-    $("#strava-meta").text(data.activity.location + " - " + data.activity.created_ago);
+    $("#strava-meta").text("completed " + data.activity.location + " - " + data.activity.created_ago);
   } else {
-    $("#strava-meta").text(data.activity.created_ago);
+    $("#strava-meta").text("completed " + data.activity.created_ago);
   }
 
   $("#parkrun-link").attr("href", data.parkrun.link);
   $("#parkrun-link").text(data.parkrun.location);
   $("#parkrun-time").text(data.parkrun.time);
-  $("#parkrun-ago").text(data.parkrun.created_ago);
+  $("#parkrun-ago").text("scanned in " + data.parkrun.created_ago);
 
   $("#hackernews-comments-link").text(data.hacker_news.title);
   $("#hackernews-comments-link").attr("href", data.hacker_news.comments);
   $("#hackernews-external-link").attr("href", data.hacker_news.url);
-  $("#hackernews-ago").html(data.hacker_news.created_ago);
+  $("#hackernews-ago").html("submitted " + data.hacker_news.created_ago);
 
   for (i = 0; i < data.games.length; i++) {
     var game = data.games[i];
     var icon = $('<img/>').attr({ src: game.network_icon, height: "15px" });
     var link = $('<a></a>').attr({ href: game.action }).html(game.game);
-    var time = $('<span></span>').html(game.time);
+    var time = $('<span></span>');
+    if (game.time) {
+      time = $('<span></span>').html("played " + game.time);
+    }
 
     var line = $('<p></p>').attr({ class: "game" }).append(icon, " ", link, " ", time);
 
@@ -60,7 +63,7 @@ function setLiveContent(data) {
 
   $("#github-link").attr("href", data.commit.link);
   $("#github-message").text("> " + data.commit.message);
-  $("#github-meta").text(data.commit.created_ago);
+  $("#github-meta").text("committed " + data.commit.created_ago);
 
   $("#lastfm-link").attr("href", data.track.link);
   $("#lastfm-image").attr("src",
@@ -71,19 +74,19 @@ function setLiveContent(data) {
   }
   $("#lastfm-track").html(data.track.name);
   $("#lastfm-artist").html(data.track.artist);
-  $("#lastfm-meta").text(data.track.created_ago);
+  $("#lastfm-meta").text("played " + data.track.created_ago);
 
   $("#film-link").attr("href", data.film.link);
   $("#film-cover").attr("src", data.film.cover);
   $("#film-title").html(data.film.title);
-  $("#film-meta").html(data.film.created_ago);
+  $("#film-meta").html("watched " + data.film.created_ago);
 
   $("#instagram-link").attr("href", data.image.link);
   $("#instagram-image").attr("src", data.image.images.standard_resolution);
   if (data.image.location != null) {
-    $("#instagram-meta").text(data.image.location + " - " + data.image.created_ago);
+    $("#instagram-meta").text("taken at " + data.image.location + ", " + data.image.created_ago);
   } else {
-    $("#instagram-meta").text(data.image.created_ago);
+    $("#instagram-meta").text("taken " + data.image.created_ago);
   }
 }
 
