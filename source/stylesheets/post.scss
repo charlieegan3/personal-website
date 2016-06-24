@@ -1,10 +1,26 @@
 .post {
-
   h1 {
+    font-size: 1.5em;
+  }
+
+  .post-header{
     font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    color: #737373;
   }
 
   img {
     width: 100%;
+  }
+
+  ul, ol {
+    margin-left: 25px;
+  }
+
+  ol li {
+    padding-left: 5px;
   }
 }
