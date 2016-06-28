@@ -21,6 +21,8 @@ I think the shortest path through the process is as follows:
 
 _Bonus Tip:_ Be impossibly polite (yet firm) all the time - just let it play out.
 
+_Further Reading:_ [Apple Products and Consumer Laws in the United Kingdom](http://www.apple.com/uk/legal/statutory-warranty/)
+
 # My Story
 The process outlined above took some time to learn, read on for the full story of my call center adventure.
 
@@ -53,7 +55,7 @@ I asked to have the paperwork for all the repairs carried out on the laptop, tha
 
 ## April 2016 - June 2016
 
-Put of by my Apple store visit, I continued [discussing the case online](http://forums.macrumors.com/threads/after-a-series-of-repairs-id-be-interested-to-know-my-options.1964855/).
+Put off by my Apple store visit, I continued [discussing the case online](http://forums.macrumors.com/threads/after-a-series-of-repairs-id-be-interested-to-know-my-options.1964855/).
 
 I continued using the laptop and recording subsequent 'graphical anomalies' on video. Here's an [example](https://www.dropbox.com/s/60f42jdq8cgs9h1/flashing_screen.mov?dl=0), and [another](https://www.dropbox.com/s/o1ompbyqgu308gu/graphic_flickering_2.mov?dl=0).
 
@@ -69,7 +71,7 @@ I was told that I needed to present the laptop; inform them that I am making an 
 
 I took the machine in. It's clearly not a common process for staff and it took a little while to get all the paperwork sorted. Overall I had a very good experience with the Stormfront store. They were almost as lost as I was but **were able to verify the fault** and provide a Case ID. I contacted Apple with this only to learn that a Case ID is not enough. They were able to view the Stormfront work but also needed the EU claim form. I collected the returned laptop and incomplete form - the form is to be completed by the original retailer, not the verifying third party.
 
-While originally weary of the empty claim form, Apple accepted this evidence and I was able to move forward in the process. This was the first time I was able to talk directly with Customer Relations - this felt like a huge milestone. In the end they required: my case ID, all the Stormfront paperwork (invoices etc.) and the incomplete claim form.
+While originally wary of the empty claim form, Apple accepted this evidence and I was able to move forward in the process. This was the first time I was able to talk directly with Customer Relations - this felt like a huge milestone. In the end they required: my case ID, all the Stormfront paperwork (invoices etc.) and the incomplete claim form.
 
 This took a few days to get approved by a senior member of the Customer Relations team. The representative called back and took my account details (you will need to have your international transfer information ready as they pay from Ireland). This request was still to be okayed by a member of the finance team. A few days later this was approved and I was told to expect the refund within 15 days. I had not yet returned the laptop and was told to wait until the refund had been processed and the money was in my account before returning the machine to a service point.
 
