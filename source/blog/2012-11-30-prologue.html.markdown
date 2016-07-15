@@ -1,0 +1,16 @@
+---
+layout: post
+title: Prologue
+date: '2012-11-30T18:40:00+00:00'
+tags:
+- first entry
+- prologue
+- new
+- hello world
+- blog
+tumblr_url: http://charlieegan3.tumblr.com/post/46785989556/prologue
+---
+I’ve always liked the idea of keeping a diary, incrementally creating something worthwhile to look back on. This is hopefully the start of something like that.
+
+charlie
+

@@ -1,0 +1,33 @@
+---
+layout: post
+title: Papyrus [Review]
+date: '2013-05-11T01:02:12+01:00'
+tags:
+- s-pen
+- s-note
+- samsung
+- note ii
+- note 2
+- galaxy note 2
+- papyrus
+- review
+- note taking
+- software
+- app
+tumblr_url: http://charlieegan3.tumblr.com/post/50124280120/papyrus-review
+---
+It felt like a long time since I’d done a review on here so here goes.
+
+I have a Galaxy Note II and since Christmas have been using the S-Pen for taking notes in lectures. It’s kind of a laziness thing, not needing to re-write the notes afterwards. I’ve found tagging helps solve the searchable problem in Evernote.
+
+Anyway, this is a review for Papyrus, an S-Note competitor and destroyer. I’ve only got the free version so the gross feature set is considerably less than S-Note, however when taking notes it’s the basic features you want quick access to and fast. This _is_ Papryus.
+
+First off Papyrus has a much nicer default sheet, it’s basically lined paper, white with blue lines. This seems to work a lot nicer than the S-Note one. To put it in perspective, the first thing I used to do when creating a new note in S-Note was to change the background of all the pages - in Papyrus I never even looked to make that change.
+
+Papyrus has been designed with the S-Pen in mind and does all the pressure sensing stuff too. It works but I found It to be unnecessary and turned it off. The main thing is that it’s easy to change the colour - super easy. The pen diameter, for me at least, is a kind of set it and leave it kind of thing - colour isn’t. I use the different colours all the time to mean different things in each note and change between them needs to be as fast as possible. Papyrus has a good range of colours and a gradient style picker too. However the main thing is the recent colours area. While I change colour a lot there’s not an finite number of colours I use and Papyrus gives you quick access to these that S-Note doesn’t.
+
+Papyrus’s notebook setup is largely Evernote inspired, that’s a good thing. It does make it easier to file notes and keep them sorted however I tend to delete notes once they’re up on Evernote anyway.
+
+Papyrus is better in many other ways too but the final one I’d like to mention is the scrolling. In S-Note when you create a new page it takes you to the same place as you were on the last one. This means you start writing at the bottom of the page, not very user friendly. Not only does Papyrus not do this but it also scrolls much better with two fingers.
+
+My only issue with Papyrus is the ‘no finger’ or ’S-Pen Only’ option of S-Note, being able to use the S-Pen exclusively was a nice touch, literally!

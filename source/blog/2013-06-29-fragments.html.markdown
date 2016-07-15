@@ -1,0 +1,41 @@
+---
+layout: post
+title: Fragments
+date: '2013-06-29T01:02:32+01:00'
+tags:
+- android
+- app
+- apple
+- fragmentation
+- updates
+- software
+- versions
+- ios
+- revenue
+- devices
+- app store
+- play
+- google play
+- developers
+tumblr_url: http://charlieegan3.tumblr.com/post/54138037539/fragments
+---
+Many manufactures massively making many mobiles certainly gets you the top spot on the ‘Units Shipped' leader-board, however, theres a problem growing from it: Fragmentation. And it’s quite a big problem.
+
+With Android devices reaching out to all corners of the mobile market it’s creating problems for users everywhere. Cheap phones can’t run the latest versions or don’t get the attention of the update team. Time that is spent though in that area, crucial maintenance and the like is time taken away from the phones at the top. And this is bad for users and developers alike.
+
+Users are delayed in getting new features, they need to wait for their device specific updates to rollout before upping to the latest and greatest in the Android OS scene. This means that there’s less of a 0 day fuss, interest and discussion as there’s less people getting it at once. It might mean that by the time the updates finally do reach you and your phone that they’re of better quality, but the long waits can be somewhat frustrating.
+
+Developers also get grief from their fragmented user base. The number of times I’ve seen apps that have comments in the description like:
+
+> “Still working on frame rate issues for some devices.”
+
+> “…is currently available on certain devices, including the Samsung Galaxy S III, Samsung Galaxy Note II, HTC One X and HTC One X+.”
+
+> “Features may vary by mobile device”
+
+It’s just a pain - and it must be even more of a pain for developers trying to get everything working everywhere.
+
+While it would be extremely unfair to say that all Apple Devices run the latest iOS and apps there is something of a greater clarity in their upgrade system. Every year a device is likely to get dropped and that’s that. Hoping that you upgrade as many users do they soldier on - and it’s winning them the game.
+
+Apple may not be shipping the device to the same levels as the big Android players but in terms of revenue it’s still clearly on top. And certainly when it comes to app sales they’re remaining the clear winner.
+

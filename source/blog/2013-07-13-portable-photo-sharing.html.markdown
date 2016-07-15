@@ -1,0 +1,47 @@
+---
+layout: post
+title: Portable Photo Sharing
+date: '2013-07-13T01:02:43+01:00'
+tags:
+- instagram
+- photo sharing
+- mobile photography
+- mobile photoshop
+- sharing
+- creating
+- photo
+- images
+- photos
+- camera
+- flickr
+- 500px
+- vine
+- video sharing
+- social photography
+---
+Sharing ones snapshots online has, ‘got big’ to say the least. Instagram’s become my service of choice. It gets a hard time - and I can see why. There’s a ton of junk on there - in fact it vastly outweighs all any quality content. There is however _enough _good content to keep me there.
+
+## Flickr
+
+Flickr, the original, has a proven track record. It's phenomenally thorough in what it does and it does it well. It’s probably the best, but not for my needs. If I used a DSLR and didn’t own a smartphone then this is where I’d be. However this is not the case, and this is my mobile photo sharing review.
+
+It’s let down by it’s speed of photo submission. There are too many steps that take too long. There isn’t the snappy feeling as there is with the Instagram upload sequence. Metadata entry is expansive but a fiddle, there’s something to be said for minimalism in apps.
+
+It’s also got a slightly odd community. There are bots that comment and like photos, and some slightly awkward users. It’s also, apparently, not as active. There isn’t anything like the engagement per photo that there is on Instagram.
+
+## 500px
+
+First major problem is: You cannot upload from mobile devices. I don’t know about you but that seems to me to be somewhat, essential!? There’s also a pressure to take out higher level memberships which neither Flickr or Instagram pester you for (although Flickr did).
+
+The content is very high quality though and it’s clearly trying to set a reputation for itself. A valid goal for sure. I think that there can be some very good photos taken on phones and they’re missing out there. It’s not like they filter out rubbish content when it comes from your computer.
+
+The app itself is fairly swish, but the absence of the most important feature makes, to me, it totally pointless.
+
+I publish all my Instagram photos to 500px and Flickr via IFTTT, just for fun.
+
+*** 
+
+Instagram, being mobile first will remain my service of choice for the time being. The speed of submission and browsing make it the clear winner for me. Minus a little spam and plus some slightly more agile editing tools it would be perfect. It’s got the community, now it just needs to keep the app fresh.
+
+_Note on Video Sharing: _Instagram recently got the option to record video clips - much like Twitter’s Vine. Interestingly, being a little later to the party’s certainly made it’s performance on Android much nicer. Vine for Android really does have some catching up to do.
+
