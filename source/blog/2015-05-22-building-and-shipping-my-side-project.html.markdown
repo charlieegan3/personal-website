@@ -1,5 +1,6 @@
 ---
 title: Building and 'shipping' my side project
+date: 2015-05-22 01:00 UTC
 ---
 
 I started lurking on Hacker News and Product Hunt at the beginning of the year. The motivation for building [serializer](http://www.serializer.io) came from an approaching assignment deadline, rather than cutting out news I thought I'd make following it more manageable. For me this meant a sequential feed - I didn't like having to scan the entire ranked list for new items.

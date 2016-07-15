@@ -1,5 +1,6 @@
 ---
 title: Tutoring Codebar
+date: 2015-08-25 1:00 UTC
 ---
 
 While in London I've been lucky enough to attend 20 or so codebar events - over two summer internships. codebar is a weekly mentoring initiative with the goal of improving diversity in technology - for those who didn't know. They've got a website that you can check out [here](http://codebar.io/).
@@ -26,7 +27,7 @@ I think tutoring projects is much tougher, coming up against a wider range of co
 * Encourage students to **listen in** if the work on the other student's project is relevant - you might be able to save an explanation or two this way.
 
 * Don't be a afraid to **do things the "bad way"** but always comment and give a suggestion as to how you might improve the structure given more time. Good students will always at least take notes on this - the best ones will complete the refactor task alone during the week.
- 
+
 * Using **Google is ok**, as is making the suggestion that students read a blog post for an explanation instead of listening to you. Give them a pointer as to where to look, it's good practice for them apart from anything else but it also gives you a change to switch over to the other student. Teach 'Googling skills' where appropriate.
 
 * **Start with a clean git diff**. Don't change anything before finding out what half implemented features are all in progress.

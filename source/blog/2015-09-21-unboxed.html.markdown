@@ -1,5 +1,6 @@
 ---
 title: Summer at Unboxed - Round 2
+date: 2015-09-21 1:00 UTC
 ---
 
 Just over a week ago I completed my second summer internship at Unboxed. I had the opportunity to work on an assortment of projects allowing me to experience a wide range of new tools and technologies. He's a list of some key factors, for me, that made this summer such a success.
