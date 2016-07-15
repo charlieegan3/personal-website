@@ -1,5 +1,6 @@
 =partial('partials/header')
 .container
+  p Blog posts I've written over the years.
   -page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
     .row
       .col-md-12
