@@ -16,6 +16,11 @@ activate :blog do |blog|
 end
 
 activate :blog do |blog|
+  blog.name = "til"
+  blog.prefix = "til"
+end
+
+activate :blog do |blog|
   blog.name = "blog"
   blog.prefix = "blog"
   blog.layout = "post"
