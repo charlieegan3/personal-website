@@ -7,7 +7,7 @@
   -page_articles(blog_name = 'articles').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
     .row
       .col-md-12
-        h1 =year
+        h2 =year
         ul
           -articles.each do |article|
             li
