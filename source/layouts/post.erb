@@ -23,7 +23,10 @@
           <div class="col-md-8 col-md-offset-2">
             <div class="post">
               <h1 class="post-header"><%= current_page.data.title %></h1>
+              <p class="post-date"><%= current_page.data.date.split(" ").first %></>
               <%= yield %>
+              <hr/>
+              <p><%= link_to "blog index", "/blog"%></p>
             </div>
           </div>
         </div>
