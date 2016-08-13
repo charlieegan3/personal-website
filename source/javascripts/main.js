@@ -19,7 +19,7 @@ function setLiveContent(data) {
   $('#location-guess').text(data.metadata.most_recent_location);
 
   $('#twitter-link').attr("href", data.tweet.link);
-  $('#twitter-content').text(data.tweet.text);
+  $('#twitter-content').html(data.tweet.text);
   if (data.tweet.location != "") {
     $('#twitter-meta').text("posted at " + data.tweet.location + ", " + data.tweet.created_ago);
   } else {
