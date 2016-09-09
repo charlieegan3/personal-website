@@ -1,7 +1,8 @@
-raise if ARGV.size != 2
+require 'metainspector'
 
-title = ARGV[0]
-url = ARGV[1]
+raise if ARGV.size != 1
+
+url = ARGV[0]
 
 template =
 %q{---
@@ -9,6 +10,8 @@ title: {{TITLE}}
 date: {{DATE}}
 url: {{URL}}
 ---}
+
+title = MetaInspector.new(url).best_title
 
 slug = title.downcase.gsub(/[^\w\s]/, '').strip.gsub(/\s+/, '-')
 date_string = Time.now.strftime("%Y-%m-%d")
