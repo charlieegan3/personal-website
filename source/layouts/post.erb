@@ -4,7 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1'>
-    <title>charlieegan3</title>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@charlieegan3" />
+    <meta name="twitter:title" content="<%= current_page.data.title || "charlieegan3"%>" />
+    <meta name="twitter:description" content="Blog post by charlieegan3" />
+    <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/754990400042049537/QCD74wRs_400x400.jpg" />
+    <title><%= current_page.data.title || "Blog Post" %> - charlieegan3</title>
     <%= stylesheet_link_tag 'reset' %>
     <%= stylesheet_link_tag 'bootstrap' %>
     <%= stylesheet_link_tag 'style' %>
