@@ -8,6 +8,14 @@
     .col-md-12
       ul
         li.til
+          p.title
+            code
+              |(a || 0) + 1 => a undefined
+            |  but&nbsp;
+            code
+              |a = (a || 0) + 1 => 1
+          p.day 30th September
+        li.til
           p.title That the rails snowman parameter was a thing and that it was ensure IE correctly parsed parameters.
           p.day 23rd September
         li.til
