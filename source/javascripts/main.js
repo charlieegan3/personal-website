@@ -66,11 +66,16 @@ function setLiveContent(data) {
   $("#github-meta").text("committed " + data.commit.created_ago);
 
   $("#lastfm-link").attr("href", data.track.link);
-  $("#lastfm-image").attr("src",
-      "https://charlieegan3-image-proxy.herokuapp.com/?url=" + encodeURI(data.track.image));
   if (data.track.image == "" || data.track.image == null) {
     $("#lastfm-image").parent().remove();
     $(".artist").parent().css('padding-left', "15px");
+  } else {
+    if (data.track.image.startsWith("https")) {
+      $("#lastfm-image").attr("src", data.track.image);
+    } else {
+      $("#lastfm-image").attr("src",
+        "https://charlieegan3-image-proxy.herokuapp.com/?url=" + encodeURI(data.track.image));
+    }
   }
   $("#lastfm-track").html(data.track.name);
   $("#lastfm-artist").html(data.track.artist);
