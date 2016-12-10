@@ -1,6 +1,9 @@
-/.bundle
-/.vagrant
 .DS_Store
-build
 id_rsa
 .gitconfig
+
+.wercker/
+/.bundle
+/.vagrant
+build/
+www/

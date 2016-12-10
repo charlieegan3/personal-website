@@ -40,6 +40,7 @@ GEM
     i18n (0.7.0)
     json (1.8.3)
     kramdown (1.9.0)
+    libv8 (3.16.14.17)
     listen (2.10.1)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
@@ -102,6 +103,7 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redcarpet (3.3.2)
+    ref (2.0.0)
     rouge (1.10.1)
     sass (3.4.18)
     slim (3.0.2)
@@ -118,6 +120,9 @@ GEM
       sprockets (~> 2.0)
       tilt (~> 1.1)
     temple (0.7.5)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -141,3 +146,7 @@ DEPENDENCIES
   middleman-syntax
   redcarpet
   slim
+  therubyracer
+
+BUNDLED WITH
+   1.12.5

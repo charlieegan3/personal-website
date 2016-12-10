@@ -1,0 +1,14 @@
+build:
+  box: ruby:2.3.3
+  steps:
+  - bundle-install
+  - script:
+    code: bundle exec middleman build
+
+deploy:
+  box: google/cloud-sdk
+  steps:
+  - bigtruedata/gcloud-auth-service-account:
+    key: $GCP_SERVICE_ACCOUNT_JSON
+  - bigtruedata/gcloud-app-deploy:
+    filename: app.yaml

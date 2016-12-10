@@ -1,0 +1,23 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+skip_files:
+- ^((?!www).)*$
+
+handlers:
+- url: /
+  static_files: www/index.html
+  upload: www/index.html
+- url: /blog
+  static_files: www/blog/index.html
+  upload: www/blog/index.html
+- url: /articles
+  static_files: www/articles/index.html
+  upload: www/articles/index.html
+- url: /til
+  static_files: www/til/index.html
+  upload: www/til/index.html
+- url: /(.*)
+  static_files: www/\1
+  upload: www/(.*)

@@ -100,6 +100,7 @@ set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 # Build-specific configuration
+set :build_dir, "www"
 configure :build do
   # For example, change the Compass output style for deployment
   # activate :minify_css
