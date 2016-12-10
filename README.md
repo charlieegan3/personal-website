@@ -1,4 +1,4 @@
-# charlieegan3.github.io
+# charlieegan3.com
 
 This is the repo for my personal site, [charlieegan3.com](charlieegan3.com).
 The site has gone through a number of revisions, take a look at the [way back
