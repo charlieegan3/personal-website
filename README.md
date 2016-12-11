@@ -1,4 +1,4 @@
-# charlieegan3.com
+# Personal Site
 
 This is the repo for my personal site, [charlieegan3.com](charlieegan3.com).
 The site has gone through a number of revisions, take a look at the [way back
@@ -16,7 +16,7 @@ my 'current state'. This is updated by a
 My username, charlieegan3, comes from my selection of a Gmail address in 2005.
 _3_ was my primary school lucky number.
 
-# Development
+## Development
 
 ```bash
 docker run -it -v "$(pwd):/app" -p 4567:4567 -w /app ruby bash
@@ -24,7 +24,7 @@ bundle install
 middleman server
 ```
 
-# Deployment
+## Deployment
 
 The app is deployed to a free-tier App Engine instance on GCP using wercker. To
 manually deploy the app run: 
