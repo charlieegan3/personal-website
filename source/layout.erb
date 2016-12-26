@@ -10,6 +10,10 @@
     <meta name="twitter:description" content="Charlie's personal website" />
     <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/754990400042049537/QCD74wRs_400x400.jpg" />
     <title>charlieegan3</title>
+    <script>
+      if (!(window.location.host.startsWith("local")) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+    </script>
     <%= stylesheet_link_tag 'reset' %>
     <%= stylesheet_link_tag 'bootstrap' %>
     <%= stylesheet_link_tag 'style' %>
