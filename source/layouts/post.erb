@@ -10,6 +10,10 @@
     <meta name="twitter:description" content="Blog post by charlieegan3" />
     <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/754990400042049537/QCD74wRs_400x400.jpg" />
     <title><%= current_page.data.title || "Blog Post" %> - charlieegan3</title>
+    <script>
+      if (window.location.hostname == "www.charlieegan3.com")
+        window.location.hostname = "charlieegan3.com";
+    </script>
     <%= stylesheet_link_tag 'reset' %>
     <%= stylesheet_link_tag 'bootstrap' %>
     <%= stylesheet_link_tag 'style' %>
