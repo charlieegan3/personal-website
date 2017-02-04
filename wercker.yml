@@ -10,5 +10,5 @@ deploy:
   steps:
   - bigtruedata/gcloud-auth-service-account:
     key: $GCP_SERVICE_ACCOUNT_JSON
-  - bigtruedata/gcloud-app-deploy:
-    filename: app.yaml
+  - script:
+    code: gcloud app deploy
