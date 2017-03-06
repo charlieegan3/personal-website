@@ -72,9 +72,6 @@ function setLiveContent(data) {
   } else {
     if (data.track.image.startsWith("https")) {
       $("#lastfm-image").attr("src", data.track.image);
-    } else {
-      $("#lastfm-image").attr("src",
-        "https://charlieegan3-image-proxy.herokuapp.com/?url=" + encodeURI(data.track.image));
     }
   }
   $("#lastfm-track").html(data.track.name);
