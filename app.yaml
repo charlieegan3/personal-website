@@ -26,7 +26,7 @@ handlers:
   upload: www/til/index.html
   secure: always
 
-- url: /feed.rss
+- url: /(feed|rss).*
   static_files: www/blog/feed.rss
   upload: www/blog/feed.rss
   secure: always
