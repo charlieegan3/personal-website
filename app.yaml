@@ -35,3 +35,6 @@ handlers:
   static_files: www/\1
   upload: www/(.*)
   secure: always
+
+error_handlers:
+  - file: www/error.html
