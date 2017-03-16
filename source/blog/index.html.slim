@@ -8,4 +8,9 @@
         ul
           -articles.each do |article|
             li =link_to article.title, "/#{article.path}"
+
+  hr
+  =link_to "https://charlieegan3.com/feed.rss", target: "_blank" do
+    | RSS Feed
+
 =partial('partials/footer')
