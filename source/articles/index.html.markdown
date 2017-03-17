@@ -1,7 +1,96 @@
-Originally a list of interesting articles that I read; more recently my
-submissions to the [unboxed weekly roundups](https://unboxed.co/blog/culture/).
+Originally this was just a list of articles - more recently this lists
+my submissions of articles, tools or stories to the 
+[unboxed weekly roundups](https://unboxed.co/blog/culture/).
+
+## 2017
+
+[Cargo Check](https://github.com/rust-lang/cargo/blob/d8159308bde4f3a3ad20a67fb80a6956a64d91d2/src/bin/check.rs#L9) - Rust 1.16 was [announced yesterday](https://blog.rust-lang.org/2017/03/16/Rust-1.16.html) with various interesting changes. `cargo check` is a tool to validate the correctness of a program is now built into Cargo; Rust's build system and package manager. Cargo check is interesting as it saves time by not building the program's binary. Coupled with Rust's compiler messages I thought this sounded pretty useful.
+
+[Scrimba](https://scrimba.com) - I spent a few innovation days playing with various container-based continuous deployment tools last year. I played with both [Wercker](http://www.wercker.com) and [Distelli](https://www.distelli.com) but found both had their quirks when deploying to a GCE cluster. I've yet to play with GCCB but hopefully better ease of use will come from the closer integration.
+
+[What makes WebAssembly fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast) - While this is really about WebAssembly, there's also quite a bit in here about how Javascript is executed by browsers and why parsing and decoding steps - as well as missing type information - make it slower than running WebAssembly. It's part of a series but I hadn't read the others and found it to be quite accessible. Also worth stopping by [caniuse.com](http://caniuse.com/#search=WebAssembly) for a reality check!
+
+[webshit weekly](http://n-gate.com/hackernews/) - Weekly satirical summaries of the distracted Hacker News hive mind - almost as good as this [amazing parody thread](http://bradconte.com/files/misc/HackerNewsParodyThread/) from a few years ago...
+
+[Graphical depiction of ownership and borrowing in Rust](https://rufflewind.com/2017-02-15/rust-move-copy-borrow) - I know this is kind of specific but I also know I'm not the only one here that's interested in [Rust](https://www.rust-lang.org). It's also a really good diagram for something that's not easily understood. There's even a [PDF version](https://rufflewind.com/img/rust-move-copy-borrow.pdf) for making posters to spread the good word.
+
+[Here's What TfL Learned From Tracking Your Phone On the Tube](http://www.gizmodo.co.uk/2017/02/heres-what-tfl-learned-from-tracking-your-phone-on-the-tube/) - Setting any privacy concerns aside; I think these results from tracking passengers around the tube network is really interesting. TFL took efforts to protect privacy and make passengers aware (I noticed the posters). As well as the larger 'traffic flow' maps; there's also a plan drawing of a station with journey times annotated.
+
+[Persona Spectrum](https://twitter.com/nikmd23/status/808409344840712197) - I thought this was a nice diagram, it's part of the Inclusive Design Toolkit and makes a point about the wider value of building accessible websites.
+
+[Sites can fingerprint you accross multiple browsers](https://arstechnica.co.uk/security/2017/02/now-sites-can-fingerprint-you-online-even-when-you-use-multiple-browsers/) - By getting browsers to perform tasks that give away attributes of the host machine, it's possible to track the same device across sessions from multiple browsers. Tasks make use of the GPU and the installed fonts among other features to build profiles.
+
+[Servo Starters](https://starters.servo.org/) - An idea for an upcoming Hackday was to work on some open source projects. The Rust community & mozilla have a number of initiatives for new contributors. _Servo Starters_ is one such initiative for the servo browser engine that lists issues suitable for beginners as well as highlighting mentored.
+
+[Scale API](https://www.scaleapi.com/) - Not sure if anyone else has used [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome) before but this is a similar service for "intelligence as a service" with a nice API (that I haven't used yet). There's also an [SE Daily episode](https://softwareengineeringdaily.com/2016/12/16/scale-api-with-lucy-guo-and-alexandr-wang/) with an interview for those into podcasts.
+
+[Static Site Generators](https://staticsitegenerators.net/) - A static site generator for every language. I feel like I missed someone influential claiming static site generators are literally _the best_ side project ever. Good list nonetheless.
+
+[awesome-bits](https://github.com/keon/awesome-bits) - Another (more awesome) list. Basically it's a write up of bit wise operations of varying complexity, most of the simple ones work in Ruby too.
+
+[C++ Compiler Explorer](http://godbolt.org) - This is a cool project that interactively shows, for a given C++ program, the resulting Assembly Code. It's also interesting to see the difference compiler optimizations make, e.g. [without](https://godbolt.org/g/9DYQmF) vs. [with](https://godbolt.org/g/JEULQ5)
+
+[Where's Susi? Airborne Orangutan Tracking with Python and React.js](https://dirkgorissen.com/2016/04/19/wheres-susi-airborne-orangutan-tracking-with-python-and-react-js/) - This is a side project that produced a fully automated drone for gathering data on the location of rehabilitated Orangutans. (This project was subject of the opening talk of HNLondon this week)
+
+[Squib](http://squib.rocks) - I spent a [recent Hackday](https://unboxed.co/blog/unboxed-hackathon-2-all-in-an-innovation-day-s-work/) working on a simple app to generate art for playing cards. Squib is a ruby DSL for generating & laying out cards - looks like a cool project.
+
+[Invisible Captcha](https://github.com/markets/invisible_captcha) - Simple gem for unobtrusive spam rejection in Rails. We rolled our own version of this in a recent project but it's something that would be nice to reuse on other public forms.
+
+[Stack Overflow Developer Survey 2017](https://www.surveymonkey.com/r/92SGNSF) - Each year stackoverflow asks lots of questions to lots of developers and does a nice write up of the results. Last year they had over 50k responses & did a nice write up of the results [here](http://stackoverflow.com/research/developer-survey-2016).
 
 ## 2016
+
+[The Cloudcast #281 - Monoliths and Microservices](http://www.thecloudcast.net/2016/12/the-cloudcast-281-monoliths-and.html) - An interview with [Anders Wallgren](https://twitter.com/anders_wallgren) with a more balanced take on the Monolith vs. Microservices discussion. The take away for me was that 'monolith problems' often stem from process or organizational culture and that microservices can't fix that.
+
+[Textures.js](http://riccardoscalco.github.io/textures/) - I've had various interesting discussions with [petition map Cale](https://twitter.com/tlfrd) about heat-maps, cartograms and choropleths and how colour can introduce bias. Maybe textures would work better?
+
+[A list of programming languages that are actively developed on GitHub](https://github.com/showcases/programming-languages) - The title really should be "A list of programming languages with a GitHub repo." since a number of these are mirrors - still, it's nice to see this extension to the GitHub Explore page.
+
+[semantic-rs](https://github.com/semantic-rs/semantic-rs) - Earlier in the year I wrote up a [sub-graph matching package](https://crates.io/crates/graph_match) in Rust. Published packages (crates) require the version to be set correctly; I'd done this manually and it's just another thing to remember to do. I haven't used semantic-rs but it looks pretty useful for helping automate the process. I've not yet come across an equivalent for Ruby.
+
+[Finding The Fake-News King](http://www.npr.org/sections/money/2016/12/02/504155809/episode-739-finding-the-fake-news-king) - Short podcast episode about fake news that includes an brief interview with someone running a number of fake news sites. Interesting to hear the story from the other side. The interview is written up [here](http://www.npr.org/sections/alltechconsidered/2016/11/23/503146770/npr-finds-the-head-of-a-covert-fake-news-operation-in-the-suburbs).
+
+[LessPass: Next-Gen Open Source Password Manager](https://lesspass.com) - Even if AES-256 has so far proven unbreakable; maybe we don't need to store passwords at all. LessPass uses a combination of the domain; username and master password to re-generate your password each time it's required. There's also an optional, self hosted encrypted password store for passwords and a cool emoji-hash indicator to make sure you're entering your master password correctly ([see here](https://d262ilb51hltx0.cloudfront.net/max/800/1*wgrq2WIxhyBSfL1Tbr5Qbw.gif)).
+
+[My fight against CDN libraries](http://peppercarrot.com/article390/my-fight-against-cdn-libraries) - A short write up of some alternatives to _consider_ before reaching for that CDN library & it's associated privacy concerns. [Discussion](https://news.ycombinator.com/item?id=13075199)
+
+[IronFunctions](https://github.com/iron-io/functions) - Disclaimer; I haven't used this yet. The project is means of setting up DIY functions as a service. It looks like it's pretty easy to setup and that it ought to be possible to run super cheaply on [hyper.sh](https://console.hyper.sh/register/invite/leKWeNqqKgh9RJxM0Mm3T8d27GKJ3qUL) (that's my referral link - gets us both some free credits). It runs functions in containers so how you write your functions is pretty flexible.
+
+[12 Fractured Apps (2015)](https://medium.com/@kelseyhightower/12-fractured-apps-1080c73d481c) - A short & accesible write up about writing resilient applications. While it uses containerized apps as an example, the ideas about handling interactions with the environment are more generally applicable. If you're interested in containers, Kelsey Hightower has a lot of interesting project and tutorials on his [GitHub](https://github.com/kelseyhightower?tab=repositories) Profile.
+
+[[Discussion Thread] What simple tools or products are you most proud of making?](https://news.ycombinator.com/item?id=12957371) - followww.co](https://followww.co/) - visualises redirects and cookies set along the way; * [launchaco.com](http://launchaco.com/) - a faster more complete domainr * [imguru](https://github.com/FigBug/imguru) - uploads images to Imgur from the command line * [transfer.sh](https://transfer.sh) - a simple CLI for file transfers.
+
+[Why We Chose Turbolinks](https://changelog.com/posts/why-we-chose-turbolinks) - From a podcast regularly interviewing people making the latest cool thing this was an interesting read about the state of Turbolinks and why they chose it for the new Changelog site.
+
+[Rails Docker App Deployment on Kubernetes](http://www.eggie5.com/82-rails-docker-app-deployment-kubernetes) - I went through a this on an innovation day a few weeks ago but never wrote it up. If you're interested in running a containerized Rails app in a mock production setup then this is one way to do it. The [previous post](http://www.eggie5.com/81-rails-docker-app) has a Docker development Rails quick start guide.
+
+[EA Games and Origin quietly bans an entire country - or, why you shouldn't take digital distribution for granted.](https://www.reddit.com/r/gaming/comments/5a51e2/ea_games_and_origin_quietly_bans_an_entire/) - A good long list of all the things you can get away with - most of the time.
+
+[Static typing will not save us from broken software](http://www.drmaciver.com/2016/10/static-typing-will-not-save-us-from-broken-software/) - I think this is an interesting topic. This is a writeup of the tradeoffs of static typing & automated testing. I think one key point is that it's often easier to cover a bug that made it into the wild with a test than model it in a type system. There's also a good discussion over on [Hacker News](https://news.ycombinator.com/item?id=12774024).
+
+[Playing Overwatch on Azure's new monster GPU instances](http://lg.io/2016/10/12/cloudy-gamer-playing-overwatch-on-azures-new-monster-gpu-instances.html) - Need a quick summary of all the places you're logged in? Try this handy vulnerability(?).
+
+[Why Podcasting Still Needs RSS](https://about.radiopublic.com/why-podcasting-still-needs-rss-6a2779e94e96) - A post about building on an existing standard - rather than replacing it with a propriety one (as various other podcast services are doing).
+
+[How could banks with multiple branches work in a world without quick communication?](http://worldbuilding.stackexchange.com/questions/57014/how-could-banks-with-multiple-branches-work-in-a-world-without-quick-communicati) - This stackexchange site has [loads of interesting questions](http://worldbuilding.stackexchange.com/questions?sort=votes). This is a good one from this week about banking and systems of trust. The answers have interesting parallels with TransferWise, cryptocurrencies and the like.
+
+[Running Online Services at Riot](https://engineering.riotgames.com/news/running-online-services-riot-part-i) - While perhaps a little long, it raises some interesting points about what object orientation really means.
+
+[Five Months of Kubernetes](http://danielmartins.ninja/posts/five-months-of-kubernetes.html) - Continuing yesterday's AWS theme; this looks like a good write up of Kubernetes on AWS. I'm thinking trying out [kube-aws](https://github.com/coreos/coreos-kubernetes/tree/master/multi-node/aws) (the tool mentioned in the article) this weekend.
+
+[Slack's Architecture with Keith Adams](http://softwareengineeringdaily.com/2016/09/12/slacks-architecture-with-keith-adams/) - Not sure how keen everyone is on podcasts but if you've ever wondered how Slack fits together behind the scenes this is worth a listen. (As are many of the other episodes for that matter)
+
+[A Beginner's Very Bumpy Journey Through The World of Open Source](https://medium.freecodecamp.com/a-beginners-very-bumpy-journey-through-the-world-of-open-source-4d108d540b39) - I feel like there are lots of "open source: how to start" articles going round but this seemed to place a greater emphasis on sticking at it and being prepared  to try elsewhere if it doesn't work out.
+
+[Examining The Internals Of The Rails Request/Response Cycle](http://www.rubypigeon.com/posts/examining-internals-of-rails-request-response-cycle/) - Our CTO thinks there's a little too much focus on the internal class names which can change but it's useful for understanding how a request flows through the Rails application and how Rails relies on Rack for a lot of that functionality.
+
+["fs" unpublished and restored](http://status.npmjs.org/incidents/dw8cr1lwxkcr) - In responding to a flagged package, npm Inc. broke project builds that had mistakenly required the bogus "fs" package rather than requiring the "fs" module from Node.
+
+[A Container Is A Function Call](https://glyph.twistedmatrix.com/2016/08/defcontainer.html) - This discusses our definition for containers and how Dockerfiles might be improved with some additional, more-descriptive attributes.
+
+[I Peeked Into My `node_modules` Directory And You Won't Believe What Happened Next](https://medium.com/friendship-dot-js/i-peeked-into-my-node-modules-directory-and-you-wont-believe-what-happened-next-b89f63d21558) - A funny story about what's lurking in our external dependencies.
+
+[Professor Frisby's Mostly Adequate Guide to Functional Programming](https://drboolean.gitbooks.io/mostly-adequate-guide/content/) - I've been reading this over the last two weeks, so far it's been a good introduction to functional concepts that didn't sink in when I'd covered them in the past. It uses Javascript and Ramda library for the examples which are easy to test out here in a browser here: http://ramdajs.com/repl/?v=0.21.0
 
 *   [How to use Hyper.sh and AWS ECR to deploy a Hubot instance for less than $3 a month](https://hyper.sh/howto/how-to-use-hyper.sh-and-ecr-to-run-a-hubot-for-3-dollars-per-month.html) 
 *   [Sandstorm Uses Mega-Containerization to Offer Fine-Grained Access Control - The New Stack](http://thenewstack.io/sandstorm-uses-mega-containerization-offer-fine-grained-access-control/) 
