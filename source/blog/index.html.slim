@@ -1,16 +1,12 @@
-=partial('partials/header')
-.container
-  p Blog posts I've written over the years.
-  -page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
-    .row
-      .col-md-12
-        h2 =year
-        ul
-          -articles.each do |article|
-            li =link_to article.title, "/#{article.path}"
+p Blog posts I've written over the years.
+-page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles|
+  .row
+    .col-md-12
+      h2 =year
+      ul
+        -articles.each do |article|
+          li =link_to article.title, "/#{article.path}"
 
-  hr
-  =link_to "https://charlieegan3.com/feed.rss", target: "_blank" do
-    | RSS Feed
-
-=partial('partials/footer')
+hr
+=link_to "https://charlieegan3.com/feed.rss", target: "_blank" do
+  | RSS Feed

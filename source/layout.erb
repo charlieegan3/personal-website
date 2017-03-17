@@ -3,34 +3,38 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1'>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@charlieegan3" />
-    <meta name="twitter:title" content="charlieegan3.com" />
-    <meta name="twitter:description" content="Charlie's personal website" />
-    <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/754990400042049537/QCD74wRs_400x400.jpg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    <%= partial("partials/twitter_meta_tags") %>
+
     <title>charlieegan3</title>
+
     <script>
       if (window.location.hostname == "www.charlieegan3.com")
         window.location.hostname = "charlieegan3.com";
     </script>
-    <%= stylesheet_link_tag 'reset' %>
-    <%= stylesheet_link_tag 'bootstrap' %>
-    <%= stylesheet_link_tag 'style' %>
-    <%= stylesheet_link_tag 'timeline' %>
-    <%= stylesheet_link_tag 'entry' %>
-    <%= stylesheet_link_tag 'icons' %>
-    <%= stylesheet_link_tag 'social' %>
-    <%= stylesheet_link_tag 'live' %>
-    <%= stylesheet_link_tag 'image-row' %>
-    <%= stylesheet_link_tag 'spinner' %>
-    <%= stylesheet_link_tag 'til' %>
+
+    <%= stylesheet_link_tag "reset" %>
+    <%= stylesheet_link_tag "bootstrap" %>
+    <%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "timeline" %>
+    <%= stylesheet_link_tag "entry" %>
+    <%= stylesheet_link_tag "icons" %>
+    <%= stylesheet_link_tag "social" %>
+    <%= stylesheet_link_tag "live" %>
+    <%= stylesheet_link_tag "image-row" %>
+    <%= stylesheet_link_tag "spinner" %>
+    <%= stylesheet_link_tag "til" %>
   </head>
   <body>
-    <div id="main" role="main">
+    <%= partial("partials/header") %>
+
+    <div id="main" role="main" class="container">
       <%= yield %>
     </div>
-    <%= javascript_include_tag 'jquery.min' %>
-    <%= javascript_include_tag 'main' %>
+
+    <%= partial("partials/footer") %>
+
+    <%= javascript_include_tag "jquery.min" %>
+    <%= javascript_include_tag "main" %>
   </body>
 </html>
