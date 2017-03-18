@@ -30,6 +30,22 @@ helpers do
   def even_values(array)
     array.values_at(* array.each_index.select {|i| i.even?})
   end
+  def icon_for_type(type)
+    {
+      "work" => "briefcase",
+      "award" => "star",
+      "competition" => "hourglass",
+      "conference" => "comment",
+      "document" => "file",
+      "education" => "education",
+      "event" => "calendar",
+      "holiday" => "globe",
+      "learning" => "apple",
+      "project" => "console",
+      "sport" => "stats",
+      "teaching" => "blackboard",
+    }[type]
+  end
 end
 
 set :css_dir, 'stylesheets'
