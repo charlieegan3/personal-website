@@ -2,7 +2,7 @@
 title: charlieegan3.com
 date: 2012-12-12 00:00 UTC
 type: event
-size: 11
+width: 11
 ---
 I [registered](https://who.is/whois/charlieegan3.com) charlieegan3.com as a place to live on the Internet. History of the 'stack' has been something like: blogger, tumblr, gh-pages, heroku (rails app), jekyll and now... middleman!
 

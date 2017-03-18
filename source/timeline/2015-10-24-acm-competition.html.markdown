@@ -2,7 +2,7 @@
 title: ACM-UKIEPC 2015 
 date: 2015-10-24
 type: competition
-size: 10
+width: 10
 ---
 In an attempt to better our score 2014 score team woolloomooloo returned, as a duo - 1 man down. We were able to submit solutions for three problems, sadly none were correct.
 

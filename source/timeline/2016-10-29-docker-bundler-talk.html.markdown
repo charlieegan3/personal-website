@@ -2,7 +2,7 @@
 title: Docker-Bundler talk
 date: 2016-10-29 22:08 UTC
 type: teaching
-size: 10
+width: 10
 ---
 I prepared a talk about the pain of bundler in Docker and neat solution we came
 up with for the problem. I first presented the talk at the October meeting of

@@ -30,7 +30,7 @@
         .col-md-6
           -group.each do |article|
             .row class=(index > 0 ? 'later' : '')
-              -size = article.metadata[:page]['size'] || 12
+              -size = article.metadata[:page][:width] || 12
               div class=(i == 0 && size < 12 ? "col-md-#{size.to_i} col-md-offset-#{12 - size.to_i}" : "col-md-#{size.to_i}")
                 =partial("partials/" + article.metadata[:page]['type'], locals: { article: article, index: i })
     -else

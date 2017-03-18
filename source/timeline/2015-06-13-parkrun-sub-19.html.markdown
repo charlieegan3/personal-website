@@ -2,6 +2,6 @@
 title: Sub-19 Parkrun
 date: 2015-06-13
 type: sport
-size: 6
+width: 6
 ---
 I finally broke the 19 minute mark for a 5k at [Inverness event #198](http://www.parkrun.org.uk/inverness/results/weeklyresults/?runSeqNumber=198)

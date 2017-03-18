@@ -2,7 +2,7 @@
 title: serializer.io
 date: 2015-05-18
 type: project
-size: 12
+width: 12
 ---
 In an attempt to keep up with the social news sites Hacker News and Product Hunt while the workload piled on I built the [serializer](http://serializer.io) news reader as a procrastination activity.
 

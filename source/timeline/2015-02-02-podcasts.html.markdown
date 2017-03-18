@@ -2,7 +2,7 @@
 title: Podcasts
 date: 2015-02-02
 type: learning
-size: 9
+width: 9
 ---
 I started listening to podcasts - looking back I ought to have started much sooner. Currently I listen to everything 5by5 RoR, Programming Throwdown and Stack Exchange - I'm also a Changelog Member. They've been a great help with longer runs.
 

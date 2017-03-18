@@ -2,7 +2,7 @@
 title: GCPNext
 date: 2016-10-29 16:22 UTC
 type: conference
-size: 10
+width: 10
 ---
 
 I attended the Google Cloud platform conference and learnt about all the cool

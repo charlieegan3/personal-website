@@ -2,7 +2,7 @@
 title: Container Camp 2016
 date: 2016-10-29 16:10 UTC
 type: conference
-size: 7
+width: 7
 ---
 
 I very much enjoyed Container Camp. I wrote a blog post about what

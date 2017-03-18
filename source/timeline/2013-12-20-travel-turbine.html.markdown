@@ -2,7 +2,7 @@
 title: Travel Turbine
 date: 2013-12-20
 type: project
-size: 11
+width: 11
 ---
 I worked on [Travel Turbine](http://github.com/charlieegan3/travel-turbine) with a [fellow student](https://github.com/IllegalCactus). The application compared various modes of transport within the U.K. and made use of web scraping for data collection. We've kept the project on online and I see it as my first 'useful' app.
 

@@ -2,7 +2,7 @@
 title: Rails Rumble
 date: 2014-10-15
 type: competition
-size: 11
+width: 11
 ---
 I teamed with a fellow student to build a running race time estimator. The idea was too use data from [powerof10](http://www.thepowerof10.info/) to build a basic model for race times. Then given some times by the user we'd be able to find similar runners and make an estimate based on that.
 

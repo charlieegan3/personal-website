@@ -2,7 +2,7 @@
 title: Bookmetrix
 date: 2017-01-11 22:08 UTC
 type: work
-size: 7
+width: 7
 ---
 
 I completed my first project with Unboxed, Bookmetrix, a metrics platform for

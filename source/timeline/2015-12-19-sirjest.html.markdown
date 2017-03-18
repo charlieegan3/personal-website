@@ -2,6 +2,6 @@
 title: sirjest
 date: 2015-12-19 21:36 UTC
 type: project
-size: 10
+width: 10
 ---
 As part of an assignment for the 'Research Methods' course I investigated the relationship between search term errors and search engine prediction accuracy. As part of the project, to gather my data, I was required to run a large number of queries. I implemented *sirjest*, a (very) simple concurrent scraper in Go, my first Go 'project' ([repo](https://github.com/charlieegan3/sirjest)).

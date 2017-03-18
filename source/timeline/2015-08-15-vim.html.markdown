@@ -2,6 +2,6 @@
 title: vim
 date: 2015-08-15
 type: learning
-size: 12
+width: 12
 ---
 Being exposed to the power of vim over the summer (thanks to [Jack](https://github.com/FriedSock)) pushed me to try it out. It hasn't been easy but I think I'm getting there, disabling the arrow keys in Normal mode was the tipping point - take a look at [my vimrc!](https://github.com/charlieegan3/dotfiles/blob/master/.vimrc)

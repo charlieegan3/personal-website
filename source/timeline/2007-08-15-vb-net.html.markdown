@@ -2,6 +2,6 @@
 title: VB.NET
 date: 2007-08-15
 type: learning
-size: 10
+width: 10
 ---
 I started learning event driven programming at school with Visual Basic and Visual Studio. In my final year I built a program to analyze and score keep badminton games, I've since lost the source.

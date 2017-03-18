@@ -2,6 +2,6 @@
 title: Europa Holiday
 date: 2016-06-12 20:11 UTC
 type: holiday
-size: 10
+width: 10
 ---
 At the start of June I went on a 'gap week' to Europe with two friends from school. We went from Vienna, to Prague, to Berlin over the 9 days of full on tourism. We hadn't done a great deal of planning but some excellent guided tours in Prague and Berlin more than made up for that. This was the second and longest time I've been to mainland Europe.
