@@ -55,6 +55,8 @@ activate :syntax
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true, :smartypants => true
 
+activate :sprockets
+
 set :build_dir, "www"
 configure :build do
   activate :minify_css

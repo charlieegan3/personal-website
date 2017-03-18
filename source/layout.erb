@@ -8,15 +8,8 @@
 
     <title>charlieegan3</title>
 
-    <script>
-      if (window.location.hostname == "www.charlieegan3.com")
-        window.location.hostname = "charlieegan3.com";
-    </script>
-
     <%= stylesheet_link_tag "application" %>
-
-    <%= javascript_include_tag "jquery.min" %>
-    <%= javascript_include_tag "main", async: true %>
+    <%= javascript_include_tag "application", async: true %>
   </head>
   <body>
     <%= partial("partials/header") %>

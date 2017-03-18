@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activesupport (5.0.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
@@ -73,6 +73,9 @@ GEM
       servolux
       tilt (~> 2.0)
       uglifier (~> 3.0)
+    middleman-sprockets (4.1.0)
+      middleman-core (~> 4.0)
+      sprockets (>= 3.0)
     middleman-syntax (3.0.0)
       middleman-core (>= 3.2)
       rouge (~> 2.0)
@@ -94,6 +97,9 @@ GEM
     rouge (2.0.7)
     sass (3.4.23)
     servolux (0.12.0)
+    sprockets (3.7.1)
+      concurrent-ruby (~> 1.0)
+      rack (> 1, < 3)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -109,12 +115,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  builder (~> 3.0)
+  builder
   middleman
   middleman-blog
+  middleman-sprockets
   middleman-syntax
   redcarpet
   therubyracer
 
 BUNDLED WITH
-   1.12.5
+   1.14.3

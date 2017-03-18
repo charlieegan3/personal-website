@@ -1,3 +1,8 @@
+//=require "jquery"
+
+if (window.location.hostname == "www.charlieegan3.com")
+  window.location.hostname = "charlieegan3.com";
+
 function displayVisibleEntries(selector) {
   var windowBottom = $(window).scrollTop() + $(window).height();
   $(selector).each(function(i){
