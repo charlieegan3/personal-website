@@ -24,6 +24,9 @@
     <%= stylesheet_link_tag "image-row" %>
     <%= stylesheet_link_tag "spinner" %>
     <%= stylesheet_link_tag "til" %>
+
+    <%= javascript_include_tag "jquery.min" %>
+    <%= javascript_include_tag "main", async: true %>
   </head>
   <body>
     <%= partial("partials/header") %>
@@ -33,8 +36,5 @@
     </div>
 
     <%= partial("partials/footer") %>
-
-    <%= javascript_include_tag "jquery.min" %>
-    <%= javascript_include_tag "main" %>
   </body>
 </html>
