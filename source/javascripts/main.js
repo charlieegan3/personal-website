@@ -2,7 +2,7 @@ function displayVisibleEntries(selector) {
   var windowBottom = $(window).scrollTop() + $(window).height();
   $(selector).each(function(i){
     if(windowBottom > $(this).offset().top){
-      $(this).animate({'opacity':'1', 'margin-top': '7px'}, 400);
+      $(this).animate({"opacity":"1", "margin-top": "7px"}, 400);
     }
   });
 }
@@ -10,20 +10,24 @@ function displayVisibleEntries(selector) {
 function loadLiveContent() {
   $.get("https://s3.amazonaws.com/charlieegan3/status.json", function(data) {
     setLiveContent(JSON.parse(data));
-    $('.spinner').remove();
-    displayVisibleEntries('.live');
+    $(".spinner").remove();
+    displayVisibleEntries(".live");
   });
 }
 
 function setLiveContent(data) {
-  $('#location-guess').text(data.metadata.most_recent_location);
-
-  $('#twitter-link').attr("href", data.tweet.link);
-  $('#twitter-content').html(data.tweet.text);
-  if (data.tweet.location != "") {
-    $('#twitter-meta').text("posted at " + data.tweet.location + ", " + data.tweet.created_ago);
+  if (data.metadata.most_recent_location != "" && data.metadata.most_recent_location != null) {
+    $("#location-name").text(data.metadata.most_recent_location);
   } else {
-    $('#twitter-meta').text("posted " + data.tweet.created_ago);
+    $("#location-section").remove();
+  }
+
+  $("#twitter-link").attr("href", data.tweet.link);
+  $("#twitter-content").html(data.tweet.text);
+  if (data.tweet.location != "") {
+    $("#twitter-meta").text("posted at " + data.tweet.location + ", " + data.tweet.created_ago);
+  } else {
+    $("#twitter-meta").text("posted " + data.tweet.created_ago);
   }
 
   $("#strava-link").attr("href", data.activity.link);
@@ -49,14 +53,14 @@ function setLiveContent(data) {
 
   for (i = 0; i < data.games.length; i++) {
     var game = data.games[i];
-    var icon = $('<img/>').attr({ src: game.network_icon, height: "15px" });
-    var link = $('<a></a>').attr({ href: game.action }).html(game.game);
-    var time = $('<span></span>');
+    var icon = $("<img/>").attr({ src: game.network_icon, height: "15px" });
+    var link = $("<a></a>").attr({ href: game.action }).html(game.game);
+    var time = $("<span></span>");
     if (game.time) {
-      time = $('<span></span>').html("played " + game.time);
+      time = $("<span></span>").html("played " + game.time);
     }
 
-    var line = $('<p></p>').attr({ class: "game" }).append(icon, " ", link, " ", time);
+    var line = $("<p></p>").attr({ class: "game" }).append(icon, " ", link, " ", time);
 
     $("#games-box").append(line);
   }
@@ -68,7 +72,7 @@ function setLiveContent(data) {
   $("#lastfm-link").attr("href", data.track.link);
   if (data.track.image == "" || data.track.image == null) {
     $("#lastfm-image").parent().remove();
-    $(".artist").parent().css('padding-left', "15px");
+    $(".artist").parent().css("padding-left", "15px");
   } else {
     if (data.track.image.startsWith("https")) {
       $("#lastfm-image").attr("src", data.track.image);
@@ -94,9 +98,9 @@ function setLiveContent(data) {
 
 $(document).ready(function() {
   loadLiveContent();
-  displayVisibleEntries('.later');
+  displayVisibleEntries(".later");
   $(window).scroll(function(){
-    displayVisibleEntries('.later');
-    displayVisibleEntries('.live');
+    displayVisibleEntries(".later");
+    displayVisibleEntries(".live");
   });
 });
