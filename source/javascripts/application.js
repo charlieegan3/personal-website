@@ -46,10 +46,14 @@ function setLiveContent(data) {
     $("#strava-meta").text("completed " + data.activity.created_ago);
   }
 
-  $("#parkrun-link").attr("href", data.parkrun.link);
-  $("#parkrun-link").text(data.parkrun.location);
-  $("#parkrun-time").text(data.parkrun.time);
-  $("#parkrun-ago").text("scanned in " + data.parkrun.created_ago);
+  if (data.parkrun != null) {
+    $("#parkrun-link").attr("href", data.parkrun.link);
+    $("#parkrun-link").text(data.parkrun.location);
+    $("#parkrun-time").text(data.parkrun.time);
+    $("#parkrun-ago").text("scanned in " + data.parkrun.created_ago);
+  } else {
+    $(".entry.parkrun").remove();
+  }
 
   $("#hackernews-comments-link").text(data.hacker_news.title);
   $("#hackernews-comments-link").attr("href", data.hacker_news.comments);
