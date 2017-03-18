@@ -57,9 +57,8 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 set :build_dir, "www"
 configure :build do
-  # activate :minify_css
-  # activate :minify_javascript
-
-  # Enable cache buster
-  # activate :asset_hash
+  activate :minify_css
+  activate :minify_javascript
+  activate :asset_hash
+  activate :gzip
 end

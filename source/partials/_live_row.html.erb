@@ -31,9 +31,11 @@
           <p class="tweet" id="twitter-content">
           </p></a>
 
-          <p class="meta"><a href="http://twitter.com/charlieegan3" target="_blank"><img alt=
-          "Twitter" class="social-icon small" src="/images/twitter.jpg"></a><span id=
-          "twitter-meta"></span>
+          <p class="meta">
+            <a href="http://twitter.com/charlieegan3" target="_blank">
+          	  <%= image_tag "twitter.jpg", class: "social-icon small" %>
+          	</a>
+          	<span id="twitter-meta"></span>
           </p>
         </div>
       </div>
@@ -42,8 +44,8 @@
         <div class="entry-body">
           <a href="#" id="lastfm-link">
           <div class="row">
-            <div class="col-xs-3"><img alt="Blank" id="lastfm-image" src=
-            "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG">
+            <div class="col-xs-3">
+              <%= image_tag "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG", id: "lastfm-image" %>
             </div>
 
             <div class="col-xs-9">
@@ -55,9 +57,11 @@
             </div>
           </div></a>
 
-          <p class="meta"><a href="http://www.last.fm/user/charlieegan3" target="_blank"><img alt=
-          "Lastfm" class="social-icon small" src="/images/lastfm.jpg"></a><span id=
-          "lastfm-meta"></span>
+          <p class="meta">
+          	<a href="http://www.last.fm/user/charlieegan3" target="_blank">
+          	  <%= image_tag "lastfm.jpg", class: "social-icon small" %>
+          	</a>
+          	<span id="lastfm-meta"></span>
           </p>
         </div>
       </div>
@@ -92,8 +96,11 @@
             </div>
           </div></a>
 
-          <p class="meta"><a href="https://www.strava.com/athletes/charlieegan3"><img alt="Strava"
-          class="social-icon small" src="/images/strava.jpg"></a><span id="strava-meta"></span>
+          <p class="meta">
+          	<a href="https://www.strava.com/athletes/charlieegan3">
+              <%= image_tag "strava.jpg", class: "social-icon small" %>
+          	</a>
+          	<span id="strava-meta"></span>
           </p>
         </div>
       </div>
@@ -104,8 +111,11 @@
           <p class="commit" id="github-message">
           </p></a>
 
-          <p class="meta"><a href="http://github.com/charlieegan3" target="_blank"><img alt="Gh"
-          class="social-icon small" src="/images/gh.jpg"></a><span id="github-meta"></span>
+          <p class="meta">
+          	<a href="http://github.com/charlieegan3" target="_blank">
+          	  <%= image_tag "gh.jpg", class: "social-icon small" %>
+          	</a>
+          	<span id="github-meta"></span>
           </p>
         </div>
       </div>
@@ -114,8 +124,8 @@
         <div class="entry-body">
           <a href="#" id="film-link">
           <div class="row">
-            <div class="col-xs-3"><img alt="Blank" id="film-cover" src=
-            "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG">
+            <div class="col-xs-3">
+              <%= image_tag "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG", id: "film-cover" %>
             </div>
 
             <div class="col-xs-9">
@@ -124,9 +134,11 @@
             </div>
           </div></a>
 
-          <p class="meta"><a href="https://letterboxd.com/charlieegan3" target="_blank"><img alt=
-          "Favicon" class="social-icon small" src=
-          "https://letterboxd.com/favicon.ico"></a><span id="film-meta"></span>
+          <p class="meta">
+            <a href="https://letterboxd.com/charlieegan3" target="_blank">
+              <%= image_tag "letterboxd.png", class: "social-icon small" %>
+            </a>
+            <span id="film-meta"></span>
           </p>
         </div>
       </div>
@@ -137,11 +149,13 @@
 <div class="col-md-4 live">
   <div class="entry instagram">
     <div class="entry-body">
-      <a href="#" id="instagram-link"><img alt="Blank" id="instagram-image" src=
-      "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG"></a>
+      <%= image_tag "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG", id: "instagram-image" %>
 
-      <p class="meta"><a href="http://instagram.com/charlieegan3" target="_blank"><img alt="Insta"
-      class="social-icon small" src="/images/insta.jpg"></a><span id="instagram-meta"></span>
+      <p class="meta">
+        <a href="http://instagram.com/charlieegan3" target="_blank">
+          <%= image_tag "insta.jpg", class: "social-icon small" %>
+        </a>
+        <span id="instagram-meta"></span>
       </p>
     </div>
   </div>
@@ -152,10 +166,11 @@
       "parkrun-link"></a>
       </p>
 
-      <p class="meta"><a href=
-      "http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706" target=
-      "_blank"><img alt="Parkrun" class="social-icon small" src="/images/parkrun.jpg"></a><span id=
-      "parkrun-ago"></span>
+      <p class="meta">
+        <a href="http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706" target="_blank">
+          <%= image_tag "parkrun.jpg", class: "social-icon small" %>
+        </a>
+        <span id="parkrun-ago"></span>
       </p>
     </div>
   </div>
@@ -166,9 +181,11 @@
       "hackernews-external-link"><span class="glyphicon glyphicon-new-window"></span></a>
       </p>
 
-      <p class="meta"><a href="https://news.ycombinator.com/user?id=charlieegan3" target=
-      "_blank"><img alt="Hn" class="social-icon small" src="/images/hn.jpg"></a><span id=
-      "hackernews-ago"></span>
+      <p class="meta">
+        <a href="https://news.ycombinator.com/user?id=charlieegan3" target="_blank">
+          <%= image_tag "hn.jpg", class: "social-icon small" %>
+        </a>
+        <span id="hackernews-ago"></span>
       </p>
     </div>
   </div>
