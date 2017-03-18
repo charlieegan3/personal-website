@@ -32,7 +32,7 @@
             .row class=(index > 0 ? 'later' : '')
               -size = article.metadata[:page][:width] || 12
               div class=(i == 0 && size < 12 ? "col-md-#{size.to_i} col-md-offset-#{12 - size.to_i}" : "col-md-#{size.to_i}")
-                =partial("partials/" + article.metadata[:page]['type'], locals: { article: article, index: i })
+                =partial("partials/" + article.metadata[:page][:type], locals: { article: article, index: i })
     -else
       .col-md-6.col-md-offset-3
-        =partial("partials/" + articles.first.metadata[:page]['type'], locals: { article: articles.first, index: 1 })
+        =partial("partials/" + articles.first.metadata[:page][:type], locals: { article: articles.first, index: 1 })
