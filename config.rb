@@ -1,6 +1,3 @@
-require 'slim'
-Slim::Engine.disable_option_validator!
-
 activate :blog do |blog|
   blog.name = "timeline"
   blog.prefix = "timeline"

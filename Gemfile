@@ -11,6 +11,4 @@ gem "builder", "~> 3.0"
 
 gem "redcarpet"
 
-gem "slim"
-
 gem "therubyracer"

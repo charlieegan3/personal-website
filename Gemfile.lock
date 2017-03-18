@@ -94,10 +94,6 @@ GEM
     rouge (2.0.7)
     sass (3.4.23)
     servolux (0.12.0)
-    slim (3.0.7)
-      temple (~> 0.7.6)
-      tilt (>= 1.3.3, < 2.1)
-    temple (0.7.7)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -118,7 +114,6 @@ DEPENDENCIES
   middleman-blog
   middleman-syntax
   redcarpet
-  slim
   therubyracer
 
 BUNDLED WITH
