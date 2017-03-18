@@ -13,8 +13,8 @@ function displayVisibleEntries(selector) {
 }
 
 function loadLiveContent() {
-  $.get("https://s3.amazonaws.com/charlieegan3/status.json", function(data) {
-    setLiveContent(JSON.parse(data));
+  $.get("https://storage.googleapis.com/json-charlieegan3/status.json", function(data) {
+    setLiveContent(data);
     $(".spinner").remove();
     displayVisibleEntries(".live");
   });
