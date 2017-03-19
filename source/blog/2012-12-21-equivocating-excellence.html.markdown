@@ -14,7 +14,6 @@ tags:
 - gaming industry
 - improvements
 - computer graphics
-tumblr_url: http://charlieegan3.tumblr.com/post/46786040520/equivocating-excellence
 ---
 I’m mainly writing this for some friends over at [Enemies Everywhere](http://www.enemies-everywhere.com/), It’s a gaming blog and I offered to do a guest post. This is it:
 
@@ -27,5 +26,3 @@ Graphics is next on the hit list. Don’t get me wrong, the work on high end gra
  too. It’s crucial that we keep improving our graphical technologies, both hardware and software, but I feel they bear little relevance when it comes to multiplayer shooters. Sure we don’t want to run around an untextured world but we’re aiming for 0 lag with a high frame rate and complex meshes don’t help and seriously hinder dated console performance. High end graphics should remain the forefront of PC gaming, fantastic emersive campaigns and sandboxes are what people [want](http://en.wikipedia.org/wiki/The_Witcher_2:_Assassins_of_Kings). However to expect the same visuals in the other-worldly multiplayer space would be naive.
 
 The dream of the multitalented game. All games have a speciality - some have great stories, some have huge replay value, but none have consistent acclaim in all play spaces. I say games stick to what they’re good at. Appealing to the wider demographic with secondary many modes is a cheap trick. Just because a game has an extra mode doesn’t make it worth playing. In my opinion Call of Duty’s campaign and Mass Effect 3’s multiplayer are prime examples of this. These again are distractions, and subtract from rather than building great games.
-
-charlie

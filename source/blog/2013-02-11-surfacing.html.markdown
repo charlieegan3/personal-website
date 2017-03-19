@@ -10,7 +10,6 @@ tags:
 - netbook
 - note-taking
 - student
-tumblr_url: http://charlieegan3.tumblr.com/post/46786171012/surfacing
 ---
 I was browsing [here](http://www.microsoft.com/Surface/en-GB/surface-with-windows-8-pro/specifications), taking a little interest in the upcoming Surface Pro from Microsoft when I read this.
 
@@ -25,5 +24,3 @@ Anyway enough of the sales pitch analysis and on the the topic of Surface in G
 I’ve started seeing Surface RTs around, there are about 3 people on my course with them (more than opening use iPads in lectures). I was sitting behind one yesterday. It looked quite good - while the text was very small it looked pretty responsive and useful. Much more like a useful netbook than a tablet - but in a tablet form. The keyboard also seemed to be able to produce text pretty quick too - I’d like to have a go with it actually. The guy was using a rubber stylus to draw diagrams and then typing on the keyboard - it did look like a bit of a _digital note-taking boss!_
 
 That said I’m happy with my system, more than happy in fact. Still, the next time I’m in the centre of town I’ll try and look one out in a shop somewhere - give that keyboard a try. *click
-
-charlie

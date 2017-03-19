@@ -15,7 +15,6 @@ tags:
 - Skype
 - internet access
 - internet connection
-tumblr_url: http://charlieegan3.tumblr.com/post/49549258257/a-story-of-rural-broadband-we-were-relatively
 ---
 We were (relatively) late to get round to broadband - it would have been around 2009 I think. I should start by explaining the situation. We live 4.85 miles from the exchange - this means that we _can actually get_ broadband. Many near us can’t get a DSL line and need to use other solutions. So in terms of signing &amp; setting up we’ve had no issues.
 
@@ -28,6 +27,3 @@ I spent a long time corresponding with the Phone Coop’s tech support, which we
 We left The Phone Coop on the 17th of April 2013. They were great to deal with from start to end, their customer service was also great - it’s just the setup that didn’t cut it on a rural line. Everything is fine now with BT, the bandwidth is less, around 3Mbps, however the line is much more stable than any other domestic line i’ve seen. My guess is that this is because of the SNL adjustment made by The Phone Coop. Now the ping is around 30-40ms, with a max jitter of 1ms. So yeah, I’m happy.
 
 I guess the lesson at the end of the day is: If your exchange doesn’t have LLU or you live any distance from the exchange then be very careful about your choice in ISP. It’s a shame that The Phone Coop didn’t work for us, this means, if others go to the extent of investigation that I did (which few will), that they will always end up with BT. So despite opening up the industry, in rural communities for now at least, BT still has a monopoly on a quality line.
-
--charlie out-
-

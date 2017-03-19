@@ -6,7 +6,6 @@ tags:
 - advertising
 - cinema
 - art
-tumblr_url: http://charlieegan3.tumblr.com/post/46786059425/applied-art
 ---
 I grew up without a T.V. and in doing so missed out on quite a bit in the way of adverts too.  Because of this I think I have a rather more accepting view of adverts than others to the point where I quite enjoy them.
 
@@ -17,5 +16,3 @@ They are art, there is no denying that. However they have much more of a purpose
 There is often a great deal of thought that goes into these shorts, and they are much more than a plain sales pitch.
 
 Art and wonderment aside they also seem to help you get settled in the ‘film watcher mindset’. It’s all just part of being a good capitalist!
-
-charlie

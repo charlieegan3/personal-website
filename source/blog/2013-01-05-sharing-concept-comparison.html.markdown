@@ -10,7 +10,6 @@ tags:
 - sharing
 - share
 - comparison
-tumblr_url: http://charlieegan3.tumblr.com/post/46786075946/sharing-concept-comparison
 ---
 I’ve noticed a growing trend in the use of ‘share’ functions across platforms. It’s an interesting concept with great variation in it’s implementation. I’ll discuss the differences in sharing on Android, OSX and Windows 8.
 
@@ -21,5 +20,3 @@ While [Airdrop](http://en.wikipedia.org/wiki/AirDrop) itself was actually a new 
 One of the reasons behind my lack of experience with the Windows 8 'share [charm](http://winsupersite.com/article/windows8/windows-8-feature-focus-charms-142999)’ is due to the lack of  support. It lacks sources and targets for share actions. This, as with many other features of the new OS, is it’s downfall. I would say, however, that it has a much greater potential than that of OSX.
 
 I would say the separating factor is (near) global visibility. Share is _everywhere_ on Android, this helps familiarize users with the feature and makes them more confident to use it. Windows Charms are good too, perhaps even better setup than android, however the lack of targets turns great ingenuity into nothing. OSX tails behind, crippled by lack of 3rd party support and restricted access to the feature.
-
-charlie

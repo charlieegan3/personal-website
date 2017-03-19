@@ -14,7 +14,6 @@ tags:
 - features
 - idea
 - improvements
-tumblr_url: http://charlieegan3.tumblr.com/post/46786015259/tuneful-tracking
 ---
 The subtle iPod Shuffle often gets overlooked, and rarely spends time in the spotlight. This is because it has, as a class of device, truly fulfilled it’s purpose as the simplest music player.
 
@@ -38,5 +37,3 @@ This new device would have two main new features:
 * The second feature is a simple stop clock. Press a button combination to start the clock, press it again to stop. Simple as that. The current time could be combined with the distance read out.
 
 The technology exists, the market exists - howbeit the device does not, and it should.
-
-charlie

@@ -8,7 +8,6 @@ tags:
 - education
 - scotland
 - information systems
-tumblr_url: http://charlieegan3.tumblr.com/post/101708435789/teaching-computing
 ---
 This is a response to a [post](http://computingandbusiness.blogspot.co.uk/2014/10/sqas-mistake.html) by a friend of mine, Alex Sharpe.
 
@@ -41,5 +40,3 @@ I feel this would cover the core areas of the existing Information Systems and C
 This won’t happen though, largely due to teaching hurdles. You would **need** to have CS Grads with a teaching certificate in _all_ schools, and that’s not going to happen.
 
 Also, If you _want_ to do business and computing, do business _AND_ computing.
-
--charlie-

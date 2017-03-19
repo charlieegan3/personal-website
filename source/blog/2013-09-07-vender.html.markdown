@@ -14,7 +14,6 @@ tags:
 - beanflow.com
 - dive center
 - web based
-tumblr_url: http://charlieegan3.tumblr.com/post/60492049360/vender
 ---
 I’ve spent most of the week (a series of 12 hour days) working with a web application called [vend](http://www.vendhq.com/). It’s a program of my own selection and I was keen to get it working in the small business before I go back to university.
 

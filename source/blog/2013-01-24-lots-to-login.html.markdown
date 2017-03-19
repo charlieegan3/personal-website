@@ -7,7 +7,6 @@ tags:
 - chaos
 - log ins
 - university
-tumblr_url: http://charlieegan3.tumblr.com/post/46786120427/lots-to-login
 ---
 Now that I’m back at university after the Christmas break and starting the second term I’m reminded of the incredible number of different systems (and log ins) I have to use. There is one system per main function yet they are in completely different places. I give you: ‘The University of Aberdeen Portal System!’.
 
@@ -24,4 +23,3 @@ That’s all the systems that are needed for studying, there are some extra ones
 * ePayments the final system I have to use requires a Student ID, Password and DoB to log in. It’s relatively simple after that though to make payments.
 
 Now, I’m wondering if it might be simpler to have _one_ log in combination and _one_ portal for all of that. Is that such a crazy idea?
-charlie

@@ -8,7 +8,6 @@ tags:
 - internet
 - tech
 - news
-tumblr_url: http://charlieegan3.tumblr.com/post/46786013078/sunday-stories
 ---
 Just for a bit of variation, Sunday’s entry will be a collection of links to things that interested me this week.
 
@@ -39,6 +38,3 @@ Personally I use [Keymonk](https://play.google.com/store/apps/details?id=com.ke
 [This Weeks Desktop](http://www.dusso.com/pages/EP3/sac.html)
 
 I change my desktop roughly once a week, this is the current on.
-
-charlie
-

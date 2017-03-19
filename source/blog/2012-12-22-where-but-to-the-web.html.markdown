@@ -10,7 +10,6 @@ tags:
 - web app
 - web development
 - macrabbit
-tumblr_url: http://charlieegan3.tumblr.com/post/46786042630/where-but-to-the-web
 ---
 When you’re learning to program the variety can be very distracting, it’s hard to choose what to program with when there isn’t any real project. It’s just you and some spare time.
 
@@ -25,5 +24,3 @@ So on that note I think web, and web applications, is where I’m headed - I t
 I’ve bought a really nice app called [Espresso](http://macrabbit.com/espresso/) from [MacRabbit](http://macrabbit.com/) on special offer that does lots of the boring stuff for me. Web development is also exceptionally [well documented](http://www.w3schools.com/) online and that’s been a big help so far.
 
 I’m not saying that this is my life path but it’s certainly where I’ll be spending my spare time over the next few months - I think.
-
-charlie

@@ -11,7 +11,6 @@ tags:
 - siri
 - google. chrome
 - personal assistant
-tumblr_url: http://charlieegan3.tumblr.com/post/46786215230/now-chrome
 ---
 One of the better general tech news sites out there is Hexus.net and [this](http://hexus.net/ce/news/internet/49129-google-now-spread-wings-fly-chrome/) story is what sparked this post.
 
@@ -24,5 +23,3 @@ On my computer though i’m nearly always alone, in my room. Being able to cal
 I like to use apps that aren’t chrome. Yes, despite Google’s desires, the best way to do lots of tasks is using an app other than chrome. This means that I would want to be able to access them with ‘Now Chrome’ too. For example: 'Create a new text file here’, or 'pause spotify’.
 
 With Google pushing for an all online world I, sadly, can’t see this being included/one of it's capabilities. That said, even being able to automate the browser and Google apps would be a start.
-
-charlie

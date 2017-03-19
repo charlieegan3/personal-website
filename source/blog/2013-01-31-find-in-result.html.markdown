@@ -7,7 +7,6 @@ tags:
 - browser addon
 - search
 - summly
-tumblr_url: http://charlieegan3.tumblr.com/post/46786142051/find-in-result
 ---
 I’m quite interested in an app called [Summly](http://summly.com/), what originally interested me was the coverage on [BBC](http://www.bbc.co.uk/news/technology-16306742). I guess I was surprised by his age. In an [interview](https://www.youtube.com/watch?v=NIPPYhyqs2g) he talks about how he came up with the idea, it seems the idea was, originally, merely a search enhancement  I think Summly is great, however the problem described in search remains unsolved.
 
@@ -18,5 +17,3 @@ The add-on would monitor the search term from the Google search page or it’s U
 You might also want to make it so that the results page was opened in a new tab to preserve the original search page and it’s position.
 
 This is clearly a problem, not a big one by any means, but something we can certainly improve in terms of usability.
-
-charlie

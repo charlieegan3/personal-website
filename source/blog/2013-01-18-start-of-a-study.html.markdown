@@ -6,7 +6,6 @@ tags:
 - computer science
 - training
 - degree
-tumblr_url: http://charlieegan3.tumblr.com/post/46786106972/start-of-a-study
 ---
 Before taking up my degree I spent a great deal of time trying to [researching](http://forums.macrumors.com/showthread.php?t=1350137) the value of a CS degree. I asked family members in the industry and spent a great deal of time online. While every one of my friends ploughed into university full force, stating that it was _without a doubt_ the best thing to do - it may be for them, but I wasn’t convinced - I’m still not convinced.
 
@@ -23,5 +22,3 @@ I do four courses - one, Management is not directly relevant and is more of a pr
 any_ real skills_ - the others are interesting all the same. We use real tools and learn the basics to real peoples jobs - it’s seems obviously the most useful.
 
 This brings me to my point. If it’s the practical courses that are perhaps the most useful then wouldn’t those skills be better taught on the job, in the world of work? Computer science can still be an option, but I’m currently in need of some explaining as to why it has to be the _only_ option.
-
-charlie

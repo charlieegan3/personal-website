@@ -9,7 +9,6 @@ tags:
 - idea
 - online chat
 - discussion
-tumblr_url: http://charlieegan3.tumblr.com/post/46786149146/disciplined-discussion
 ---
 There are so many different place for us to talk about everything and anything that interest us online. Forums, Twitter, Disqus other comment systems all allow for the mass discussion that is the internet. It's incredibly important that this exist, this exchange is partly what makes the internet great. There are drawbacks though - not with the system but with the ‘level’ of discussion these services foster.There is no problem with the 'lite’ discussion on places like Twitter or YouTube video comments but this style of un-invested conversation largely occupies other mediums too - my regular forum being one of them. I would like to make a proposal: a new place for structured and considered online discussion.
 
@@ -20,5 +19,3 @@ There are two sites that deserve a mention on the topic. [Branch](http://branch.
 The second site is [stackoverflow](http://stackoverflow.com/) - possibly my favourite website. This is clearly for a certain type of discussion but other sites can learn from its system. The moderation is first rate - many experienced members are always editing posts and locking them to prevent 'me too’ comments. There is the option to take a comment discussion to a private chat to sort out an issue which keeps the public content readable. Finally, the structure of question and answer is well done - it’s helped by the voting and acceptance system. There’s something we can all take away from it that’s for sure.
 
 > A new place for structured and considered online discussion.
-
-charlie

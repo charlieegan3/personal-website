@@ -22,7 +22,6 @@ tags:
 - custom pc
 - bittech
 - pcpartpicker
-tumblr_url: http://charlieegan3.tumblr.com/post/75144304805/i-built-a-gaming-pc
 ---
 I thought, seeing as the exams are over and I haven’t posted in a very long time, that I’d put something new up.
 

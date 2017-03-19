@@ -9,7 +9,6 @@ tags:
 - samsung
 - Phablet
 - galaxy note 2
-tumblr_url: http://charlieegan3.tumblr.com/post/46786180453/prized-phablet
 ---
 Yes, another phablet post, it’s something I see as having the potential to make big changes in the industry (and perhaps [fashion](http://online.wsj.com/article/SB10001424127887324442304578236480316234780.html?mod=WSJ_hp_EditorsPicks&utm_source=buffer&buffer_share=5e4bd)!). I’ve got the Galaxy Note 2, the first majorly successful device in the category - it’s been the perfect device for me and it's largely to thank for the success of the category as a whole.This Samsung branded [success](http://www.slate.com/articles/technology/technology/2013/01/samsung_how_the_korean_firm_got_to_be_the_biggest_tech_company_in_the_world.html) is starting to really generate competition, others are starting to take notice, and [recent](http://www.huffingtonpost.com/2013/02/10/iphablet-ipad-mini-retina-apple-rumors_n_2647684.html) [rumours](http://www.macrumors.com/2013/02/13/apples-4-8-inch-iphone-6-reportedly-not-launching-until-mid-2014/) would have us believe that includes big Apple.An Apple phablet is a thrilling prospect. This is what I predict it will need to succeed while fitting in with Apple’s current range of mobile devices:
 
@@ -25,5 +24,3 @@ There are also a few features such as a better share feature that I personally f
 If Apple do venture into the phablet market it needs to be early 2014 at the latest. If it’s not sorted before then Samsung’s phablet experience might be too much to topple with a new take on the walled garden. 
 
 Apple - I wish you luck.
-
-charlie

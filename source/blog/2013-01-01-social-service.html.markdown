@@ -10,7 +10,6 @@ tags:
 - online presence.
 - blogger
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786066240/social-service
 ---
 Lots of big changes have just happened to land in 2012, moving out to university and so on. However, in terms of tech related changes, Social Networks have been the biggest change in my life this year.
 
@@ -43,5 +42,3 @@ So in summary this is how it stands as of the 31st of December 2012 (in order of
 So it would seem there is no perfect **one**, the perfect system for me has a been a bulky blend of **many** different options.
 
 2012 has changed the online face of charlieegan3 for better and for always. 2013 here we come.
-
-charlie

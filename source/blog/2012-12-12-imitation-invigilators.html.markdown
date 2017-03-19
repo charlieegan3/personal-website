@@ -11,7 +11,6 @@ tags:
 - education
 - testing online
 - improvements
-tumblr_url: http://charlieegan3.tumblr.com/post/46786019696/imitation-invigilators
 ---
 At school, and now university, it seems trendy to have lower level assessments sat via [computer](http://en.wikipedia.org/wiki/E-assessment) - students like it for the instant results and teachers **love** the absence of any marking. While computer based testing can be handy, and has definite potential, it currently has some very apparent short-comings.
 
@@ -22,5 +21,3 @@ This is a problem though, there exists fundamental restrictions on what you can 
 With maths though the issues aren’t as apparent and lurk behind the questions themselves. You can’t have answers that are obviously wrong, why even bother putting them in? You also want to try and stop people from just guessing. This means that you have lots of plausible answers with penalty for getting the wrong one. Lets assume we have a candidate who doesn’t guess and forgets one step in a five step question - they’ve now had marks subtracted, fallen prey to the guesser traps. Even when they did 80% of the question correct - surely that just isn’t fair?
 
 While I don’t like to be the pessimist, but we’ve a long way to go. To ask the questions required to fully test a candidate’s understanding we’d be looking to some form of AI marker and that’s certainly quite a long way off.
-
-charlie

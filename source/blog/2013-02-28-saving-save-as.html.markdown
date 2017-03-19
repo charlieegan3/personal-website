@@ -5,7 +5,6 @@ date: '2013-02-28T00:30:00+00:00'
 tags:
 - improvements
 - mountain lion
-tumblr_url: http://charlieegan3.tumblr.com/post/46786210730/saving-save-as
 ---
 Another 10.8 Mountain Lion corrective post here. I was reading OSX Daily and came across [this](http://osxdaily.com/2012/08/27/enable-save-as-os-x-mountain-lion/), an article about how to bring back the lost save as feature.
 
@@ -14,5 +13,3 @@ I have only ever found the replacement ‘Duplicate’ feature to be annoying - 
 Normally I find though that I want to keep working on the current document and save it in it’s current state, not to further clutter my workspace with more active documents.
 
 Some of the other refinements are good however, such as the delete option when closing an unsaved file. It makes it very clear - you’re going to loose this file. However the 'Duplicate’, option to me, was just an odd mistake.
-
-charlie

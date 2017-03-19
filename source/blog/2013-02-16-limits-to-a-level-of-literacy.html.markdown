@@ -13,7 +13,6 @@ tags:
 - censorship
 - school computing
 - study
-tumblr_url: http://charlieegan3.tumblr.com/post/46786182693/limits-to-a-level-of-literacy
 ---
 Had I started this blog whilst still at school this topic is all I would have discussed. It’s not something that really effects me a huge amount now, however I think it’s still an important and interesting topic.
 
@@ -34,5 +33,3 @@ The other problem is that to know what not to block it’s important to understa
 Now I visit stackoverlfow in excess of 10 times a day.
 
 This is a message to those in secondary education: web developers have built you the internet - let’s allow that tool to support the developers of the future.
-
-charlie

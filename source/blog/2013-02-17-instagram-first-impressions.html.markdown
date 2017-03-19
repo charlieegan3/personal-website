@@ -7,7 +7,6 @@ tags:
 - photography
 - Instagram
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786184962/instagram-first-impressions
 ---
 I mentioned a few [posts](http://www.charlieegan3.com/2013/02/photos-revisited.html) back that I was going to try and get back into taking some photos again - mainly just a a little log of where I’ve been. I’ve been using Instagram, it’s a new one for me and this is my experience so far.
 
@@ -18,5 +17,3 @@ Instagram gets a bad rap but I think it’s quite a good service. I like, for th
 I’ve found that tags really give you a big response on a new photo - not sure if that’s good as it gives the chance for bogus tags which are, without a doubt, a bad thing. Still I don’t really search for images and so aren’t a victim of that - also I don’t over tag my photos and I get a couple of likes on my photos all the same.
 
 In terms of content quality, the range is huge. For every professional there are ten, meme-posting teens. It doesn’t bother me - I just wonder why someone wouldn’t want to post there own pictures? That’s how I’ve enjoy using the service.
-
-charlie

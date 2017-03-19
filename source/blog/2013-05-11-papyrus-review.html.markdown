@@ -14,7 +14,6 @@ tags:
 - note taking
 - software
 - app
-tumblr_url: http://charlieegan3.tumblr.com/post/50124280120/papyrus-review
 ---
 It felt like a long time since I’d done a review on here so here goes.
 

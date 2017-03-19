@@ -11,7 +11,6 @@ tags:
 - tech
 - Phablet
 - opinion
-tumblr_url: http://charlieegan3.tumblr.com/post/46786003780/phase-of-phablet-review
 ---
 Before I came to university I never really used a mobile phone much - everyone I needed to contact used email, and so did I, it just worked back then. That all changed though. I don’t know what is is about student life but a mobile phone is essential, an absolute must. ‘Paying As You Go’ became very expensive and I needed to change my system.
 
@@ -34,5 +33,3 @@ It’s also made stronger with its Android bond, my favourite software features 
 Some of the greatest fun though is in the apps, but I’ll save them for another day.
 
 It’s become an all round and perfect solution to information and communication on the go. I’m really glad that this problem pushed me into getting it because, having experienced it now I couldn’t have lived with iOS - and my objection to iOS is definitely a story for another day!
-
-charlie

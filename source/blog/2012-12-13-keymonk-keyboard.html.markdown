@@ -11,7 +11,6 @@ tags:
 - intelligent
 - keyboard
 - app
-tumblr_url: http://charlieegan3.tumblr.com/post/46786021911/keymonk-keyboard
 ---
 My reasons for being an Android fan all boils down to it’s customisation - and it will stay that way at least until everyone else catches up. One of the main and most interesting customisations you can make on Android is the keyboard. This entry is about my personal favourite: [Keymonk](http://keymonk.com/).
 
@@ -26,5 +25,3 @@ All traditional keyboards let you tap with two fingers at once, but dual-finger,
 What’s great about about this keyboard is that, rather than making time consuming, contortionist stretches over the screen with one thumb, you can use two, hence eliminating those awkward movements. Imagine you’re typing the word _‘How’_. You would start by placing your finger on ‘H’ and then move it to ‘o’, the next step would be a long swipe all the way over to ‘w’. With Keymonk though it’s just a case of tapping/re-swiping those other letters with your second thumb.
 
 First hand experience is the only way to fully understand this rather innovative product. There’s a perfectly good free version so if you’ve got an Android phone there’s no excuse! While I’m sure it’s not for everyone, it’s totally changed the way I type.
-
-charlie

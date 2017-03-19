@@ -16,7 +16,6 @@ tags:
 - google now
 - svoice
 - dictation
-tumblr_url: http://charlieegan3.tumblr.com/post/47819336671/unlocking-the-big-phone
 ---
 With another _massive_ confirmed earlier this week, the Galaxy Mega, big phones are getting big.
 

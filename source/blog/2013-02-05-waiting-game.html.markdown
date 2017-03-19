@@ -6,7 +6,6 @@ tags:
 - rails
 - ruby on rails
 - stackoverflow
-tumblr_url: http://charlieegan3.tumblr.com/post/46786154287/waiting-game
 ---
 I’ve been working quite a bit with rails recently and have gotten well and truly stuck. I finally gave in after about 5 hours yesterday and posted [here](http://stackoverflow.com/questions/14665257/rails-linked-models-undefined-method-for-nilnilclass), on stackoverflow. I’m currently waiting it out. Sadly the response hasn’t been the same as it has been in the past - perhaps just because it’s the weekend.
 
@@ -23,5 +22,3 @@ The second major one is the exception handling. In Visual Studio exceptions are 
 These two issues combined make the work a fair bit harder to get done and keep you stuck on single problems for longer. There is just little to go on when it comes to getting to the root of a problem.
 
 I will stick at it and continue to deal with the frustration but [here’s](http://www.udemy.com/blog/wp-content/uploads/2012/01/PROGRAMMING-LANGUAGE-3.png) a nice infographic I came across while considering alternatives in my time of doubt!
-
-charlie

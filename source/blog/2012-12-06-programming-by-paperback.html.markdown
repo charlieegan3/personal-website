@@ -13,7 +13,6 @@ tags:
 - tech
 - idea
 - preference
-tumblr_url: http://charlieegan3.tumblr.com/post/46786006052/programming-by-paperback
 ---
 ‘An Introduction to…’, ‘Beginners Guide for…’, ‘Introducing…’ the list goes on. There is a boundless collection of [books](http://www.amazon.co.uk/s/ref=sr_nr_p_n_feature_browse-b_mrr_0?rh=n%3A266239%2Cn%3A%211025612%2Cn%3A71%2Cn%3A269678%2Cp_n_binding_browse-bin%3A492564011%2Cp_n_feature_browse-bin%3A400530011&bbn=269678&ie=UTF8&qid=1354566413&rnid=400529011) that teach programming. My question is: Are we still so much more familiar with books that they remain the best way to learn?
 
@@ -26,5 +25,3 @@ Getting value for money out of a purchase can motivate us too. While it’s perh
 Some say books are better quality - I say there are different kinds of quality. A book is proof read and well structured into a neat package. Online resources are different in that they’re often user fed, and can lack structure. On this one I take a side, I would say that online option offers a greater quality of learning experience and with zero cost. Take a website like [stackoverflow](http://stackoverflow.com/), it’s comprehensive knowledge and diverse user base make it my first stop. Systems like this put books to shame when it comes to sheer depth and interactivity, I can see them - combined with clear, entry level tutorials -becoming the standard way to learn code.
 
 I’ve clearly had to use both physical and online materials and it does seem to result in a certain solidity. The trend seems to be: get the book; get through approx. ¼ ; then either: give up or continue online. That said I think I’ll replace books in future with beginner tutorials just to save that wastage of experimentation.
-
-charlie

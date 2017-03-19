@@ -8,7 +8,6 @@ tags:
 - future
 - halo
 - mlg
-tumblr_url: http://charlieegan3.tumblr.com/post/46786093353/the-genre-games
 ---
 At the same time as thinking that I’m slowly growing out of video games I remain utterly fascinated by the by the universe of my favorite series: Halo.
 
@@ -23,5 +22,3 @@ There is [talk](http://www.youtube.com/watch?v=N2E9E3en-FU&feature=youtu.be) of 
 I think they need to make a big push to the professional arena, they need to look to keep their FPS games as lean and competitive as attention rises in pro gaming. Whilst doing this they can explore and perhaps make a push for Starcraft with a competitive Sci-Fi RTS.
 
 Whatever they need to do they need to keep their options open and aim to pull in new fans with more than a million dollar advertising campaign.
-
-charlie

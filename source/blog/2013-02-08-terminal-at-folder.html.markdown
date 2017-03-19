@@ -10,7 +10,6 @@ tags:
 - context menu
 - sublime text
 - mountain lion
-tumblr_url: http://charlieegan3.tumblr.com/post/46786163502/terminal-at-folder
 ---
 Say goodbye to `cd rails-app` and embrace the future of terminal!This little adjustment has probably saved me hours over the past few months and is a must for any programmer.
 
@@ -23,5 +22,3 @@ Say goodbye to `cd rails-app` and embrace the future of terminal!This little 
 Now the services menu when right-clicking on a folder contains _New Terminal at Folder._
 
 I’ve also found the terminal built into [Sublime Text 2](http://www.charlieegan3.com/2012/12/sublime-service.html) quite handy recently.
-
-charlie

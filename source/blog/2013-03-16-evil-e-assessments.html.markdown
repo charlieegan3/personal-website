@@ -27,5 +27,3 @@ The idea, in theory, is sound, however there numerous gaping issues that really 
 * _Dropped in Downtime - _Lots of testing systems seem to need a continuos server connection, often to enforce a timer. This is fine, and I can see why it’s done, however everyone knows that the network isn’t flawless and that these things lead to problems. I’m not sure how you solve this one but it’s really not fair to loose out because of a blip in the connection.
 
 Fixing online testing is far from an easy task, it’s certainly not one I’ll take on anytime soon that’s for sure.
-
-charlie

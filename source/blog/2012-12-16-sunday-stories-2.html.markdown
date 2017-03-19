@@ -11,7 +11,6 @@ tags:
 - stories
 - tech
 - news
-tumblr_url: http://charlieegan3.tumblr.com/post/46786028611/sunday-stories-2
 ---
 It’s been over three weeks now and it’s starting to fall into a regular pattern, here’s some highlights from this week online.[News Article](http://www.gizmodo.co.uk/2012/12/valves-definitely-making-a-steam-box-and-its-going-to-take-on-the-ps4-and-xbox/) (Source: Gizmodo)
 
@@ -35,5 +34,3 @@ This has been quite nice to have for some particularly annoying mobile ads. Do
 [This Weeks Desktop](http://kotaku.com/5961994/what-skyrim-looks-like-when-youre-running-100-mods-at-once)
 
 Not technically a single image link but some great scenes all the same - I chose the forest one as my background for the week.
-
-charlie

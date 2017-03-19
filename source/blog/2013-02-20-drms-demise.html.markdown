@@ -8,7 +8,6 @@ tags:
 - office 365
 - sublime text
 - DRM
-tumblr_url: http://charlieegan3.tumblr.com/post/46786192037/drms-demise
 ---
 DRM the three letters represent one of the most controversial topics on the internet: Digital RIght Management. For those of you who don’t know what DRM is it is these _two_ things:
 
@@ -22,5 +21,3 @@ The one that interests me the most are _Online Replacement Systems. _These are s
 Another more radical solution is to build a a new product with an entirely new structure - one often similar to the above. This is more prevalent in the games industry with MMO’s. In yesterday’s post about Destiny, Bungie’s new venture, I talked about how the game works - part of the new system is a constant online connection _requirement_. While the new set-up might be to ensure that the new game doesn’t encroach on the sales of Activation’s Flag ship: Call of Duty I would say it’s more of a challenge to piracy. These large MMO style games with micro transactions have far lower piracy rates. While this _is _one way to get around it, and I can see how it works, it does open up lots of other problems and costs, security and hosting come to mind.
 
 Another method, worthy of a mention is watch I can only describe as 'honesty-ware’. It’s quite a risky model and only seems to work for small projects with a _very _loyal fan base. [Sublime Text 2](http://www.charlieegan3.com/2012/12/sublime-service.html) comes to mind. If you come up with a way to induce sufficient guilt in users for getting away with using your product past the trail period then you have succeeded here. Guilt is incredibly powerful and I can see why it works, I’m just not sure I’d want to risk this model myself.
-
-charlie

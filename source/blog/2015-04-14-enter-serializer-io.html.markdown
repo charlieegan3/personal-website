@@ -10,7 +10,6 @@ tags:
 - reading
 - project
 - website
-tumblr_url: http://charlieegan3.tumblr.com/post/116410032544/enter-serializer-io
 ---
 I’ve tried time and time again to make following tech news work for me. It seems to be an inordinately tough problem (for me) to solve (for myself).
 

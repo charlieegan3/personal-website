@@ -9,7 +9,6 @@ tags:
 - dictation
 - gesture based typing
 - typo
-tumblr_url: http://charlieegan3.tumblr.com/post/46786239808/full-on-typos
 ---
 While I send the majority of emails and communication by typing out messages on a Qwerty keyboard I’m sending more and more from my phone by the week. I’m also using dictation to type longer documents when I’m alone. On my phone I use a the Swype keyboard, I swear by gesture based typing in fact. However Dictation and GBT can lead to some rather extreme typos.
 
@@ -20,5 +19,3 @@ Perfectly formed, our new error-ridden sentences are much harder to decipher and
 These new ‘lazy’ methods remove that first microscopic proof reading we make - completely. Dictation is the worst, it’ll buffer your whole sentence before splurging the whole lot out, ready for more text. This means you just skim the **whole **sentence, rather than each word, often, in my case leading to some significant errors in my text.
 
 I’m not saying this is a critical flaw, far from it, I love these new ways of typing. It’s just an observation of a change, a change that seems to require new skill in proof reading to fix.
-
-charlie

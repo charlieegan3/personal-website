@@ -13,7 +13,6 @@ tags:
 - progression
 - xbox live
 - classes
-tumblr_url: http://charlieegan3.tumblr.com/post/52417676672/lucky-dip-level-ups
 ---
 Lately I’ve been playing quite a bit of Mass Effect 3, namely the multiplayer. It’s been good fun and I’ve gotten a lot more into it than I did last time - I’ve enjoyed taking on the more difficult levels with friends. I really like the game and I’ll keep playing it for a good while yet - however I really dislike their levelling up implementation.
 

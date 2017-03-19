@@ -3,7 +3,6 @@ layout: post
 title: Tools of the Trade
 date: '2013-08-10T01:02:54+01:00'
 tags: []
-tumblr_url: http://charlieegan3.tumblr.com/post/57833622053/tools-of-the-trade
 ---
 Programs that help lighten the load:
 

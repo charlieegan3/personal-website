@@ -15,7 +15,6 @@ tags:
 - games
 - developers
 - competition
-tumblr_url: http://charlieegan3.tumblr.com/post/56558354043/steaming-ahead
 ---
 I’ve got a real issue with app stores. I think they’re great, incredible even. I totally agree with what they’re trying to achieve, only, **not** in the _rather lazy_ way in which content hosts are going about implementation. App Stores are, in too many places, little more than the bare minimum.
 

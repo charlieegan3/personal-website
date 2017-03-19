@@ -13,7 +13,6 @@ tags:
 - apps
 - programs
 - Skeuomorphic
-tumblr_url: http://charlieegan3.tumblr.com/post/46786001654/skeuomorphic-specialisation
 ---
 The ‘app’ software methodology has been a success in the mobile world - and it’s trivially, tiny transactions have certainly made it very profitable. I can’t fault it, it has simplified user interaction for better and for always. Nonetheless it has had some interesting side effects.
 
@@ -32,5 +31,3 @@ Older style apps are far from pretty and even less graceful but none the less th
 New apps fully utilise available graphics power and the result can certainly be quite pleasing, and while I know others don’t, I quite like skeuomorphic apps. The problem with this though is backward compatibility, older machines can’t handle expensive bitmapped interfaces, and sadly, get dropped from the compatibility list.
 
 As a (self perceived) developer in-the-making I find this ‘evolution’ in application style intriguing and would like to keep user interaction design as a future career possibility. Hopefully, in a short a time as possible, me and consumer software development will be in the same place. I just wonder where, and when that will be.
-
-charlie

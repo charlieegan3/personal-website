@@ -10,7 +10,6 @@ tags:
 - value
 - wikipedia
 - giving
-tumblr_url: http://charlieegan3.tumblr.com/post/46786017431/whats-wikipedia-worth
 ---
 > Commerce is fine. Advertising is not evil. But it doesn’t belong here.
 
@@ -25,5 +24,3 @@ Wikipedia represents all that the internet should be: _“…a place we can all
 I have recently made my second small donation, it’s not much, but then neither am I, it seemed a fitting $5.
 
 This was just a small entry to promote the good cause of Wikipedia to the very (very) few people who read this. Please think about making a [donation](https://donate.wikimedia.org/w/index.php?title=Special:FundraiserLandingPage&country=GB&uselang=en&utm_medium=sidebar&utm_source=donate&utm_campaign=C12_en.wikipedia.org).
-
-charlie

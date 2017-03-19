@@ -8,7 +8,6 @@ tags:
 - online presence
 - community
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786068526/rumored-root
 ---
 In 2012, before any of my other social networking endeavors, came an very important stage. [MacRumors forums](http://forums.macrumors.com/member.php?u=669532). Apple has always been an interest of mine and I’ve found, after much comparison since 2005, that MacRumors is the best Apple community out there.
 
@@ -19,5 +18,3 @@ Recently it’s also come in very handy for my blog. On the forums you're allow
 It was my contribution here that unlocked the door to my larger online presence. I guess the thinking was, well, you’ve already got all those forum posts out there, why not go the rest of the way?
 
 I’ve enjoyed building up the network of networks - it’s been good, I hope the many hours will pay off somewhere down the line. If they don’t then at least I’ll have had fun along the way.
-
-charlie

@@ -7,7 +7,6 @@ tags:
 - running
 - gps
 - tracking
-tumblr_url: http://charlieegan3.tumblr.com/post/62460549196/nike-revisited
 ---
 I missed last week - it was move in weekend and I had other things on my mind.<img src="http://media.tumblr.com/9a01c293c93060d9cbc0a570c43d0d69/tum%20%20%20blr_inline_mtkwvnfAo31rj8eap.jpg">
 

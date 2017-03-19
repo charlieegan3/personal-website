@@ -8,7 +8,6 @@ tags:
 - scams
 - verification
 - trust
-tumblr_url: http://charlieegan3.tumblr.com/post/46786084282/defense-mechanism
 ---
 I was called the other day and asked for to verify the email address on my Paypal account. Instantly alarm bells start going off and I jump to the conclusion that this is a scam - I end the call rather rudely. At the time though there was something going on with my account, a negative balance in fact and the phone call had got me worried.
 
@@ -19,5 +18,3 @@ They claimed they had sent me an email today - they hadn’t, all the more sus
 The reason they can’t do that though is because they need to get in touch with me, I could just ignore the button.
 
 The banks give you so many fraud warnings it’s making people really untrusting. This might a good thing for security but it’s created a huge problem for genuine customer support. Authentication is always going to be a major challenge.
-
-charlie

@@ -10,7 +10,6 @@ tags:
 - facebook
 - improvements
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786178335/nonplussed
 ---
 I’m sat here on my phone, they’re all watching football but I’ve been busy on my phone - mainly on Google Plus.
 
@@ -26,5 +25,3 @@ I really wish it was all I had to use but there are some problems:
   * The only other problem is content. It’s all just too well mixed up. Posts from friends, communities etc all get mixed up. Each post is also allocated a significant amount of screen space. This leaves rather a small amount of content on screen which can almost 'detach’ you from the idea that it is in fact a feed at all. They could invest in a more compact twitter like summary feature here to help keep posts of similar size.
 
 Google Plus, with the rise of Android, has the potential to really take the crown. Working on the web version UI and a couple of other minor improvements would my first step to getting there.
-
-charlie

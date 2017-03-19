@@ -14,7 +14,6 @@ tags:
 - improvements
 - program
 - app store
-tumblr_url: http://charlieegan3.tumblr.com/post/46786010880/scrapp-stores
 ---
 Apps Store have [changed](http://waazzupppp.wordpress.com/2012/11/01/editorial-has-the-app-store-killed-the-software-market/) the face of the software market. They serve up content cheaply and consistently. While the content they provide may be better than ever, the stores themselves just aren’t up to scratch.
 
@@ -29,5 +28,3 @@ Lets say I’m looking for a productivity app. I search at the top for “produc
 There is a reasonable amount of variation in app stores - Steam for example does have better than average browsing options, perhaps due to its age, but it’s really let down by a buggy client. However, the mean does tend to be: an over simplistic, under powered and watered down browsing experience.
 
 There’s as much, if not more, money in app stores as in other online retail - why isn’t there the same emphasis on a quality browsing experience?
-
-charlie

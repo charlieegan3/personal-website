@@ -13,7 +13,6 @@ tags:
 - frame rate
 - heaven
 - custom pc
-tumblr_url: http://charlieegan3.tumblr.com/post/46786081417/benchmark-boundaries
 ---
 I’ve really enjoyed building computers. I like how, while it’s reasonably simple, you still get a feel that it’s somehow your own creation. Once you’ve checked for 10 fingers and toes you though want to push it a little more,  make it work. You can buy the latest game, £40, and watch the beautiful graphics bring your computer to its knees, only to get refused refund thanks to the wonders of modern DRM. Or you could just use a benchmarking tool to check that it’s up to scratch.
 
@@ -26,5 +25,3 @@ I know that this may seem kind of obvious but I still get plenty of questions f
 On the topic of benchmarks there is another tool that deserves a mention, [Geekbench](http://browser.primatelabs.com/user/charlieegan3/geekbench2). Geekbench doesn’t have a fancy 3D world but instead uses a set of tests to evaluate CPU and RAM performance. The great thing about Geekbench is a comparable score, you can run the suite on many devices (even phones and tablets) and get a meaningful score out of them.
 
 So there you go, use please use benchmarks as a means to check how well a game will run rather than sending me emails, thanks.
-
-charlie

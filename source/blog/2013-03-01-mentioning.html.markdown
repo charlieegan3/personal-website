@@ -9,7 +9,6 @@ tags:
 - interactions
 - mentions
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786213008/mentioning
 ---
 Facebook, Twitter and Google Plus are all place I use mentions. Some are better at it than others. First off  I think I should say that I feel that on these services, mentions are really important - especially at generating notifications.
 
@@ -20,5 +19,3 @@ Facebook’s is close behind and serves a different purpose. It’s more about k
 Google plus is very much so at the bottom of the pile on the mentions front. I love G+, I really do. It’s my main social network for performing actual social functions. The mentions are just really awkward though. Firstly you have to use the whole name - this means that if one of your friends has a really long 'joke’ online name that your short comments turn into long essays of confusing mentions rather quickly. The other quick with the system is that it’s hard to revise edit in mentions. For instance you can write the correct 'syntax’ and still not get the mention right.
 
 I love Google plus but when it comes to mentions it's definitely in need of a little refinement.
-
-charlie

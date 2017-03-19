@@ -15,7 +15,6 @@ tags:
 - facial recognition
 - udid
 - validation
-tumblr_url: http://charlieegan3.tumblr.com/post/54709855993/an-inbound-biometric-boom
 ---
 Imagine an app that verifies a user in some way, username and password right? The username and password combo works just fine when users have a reason to protect their account. They don’t want others posting as them, buying things on their card or reading confidential messages. This is fine and the number of apps that thrive on this functionality is incredible.
 

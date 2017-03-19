@@ -8,7 +8,6 @@ tags:
 - teaching
 - education
 - university
-tumblr_url: http://charlieegan3.tumblr.com/post/46785991862/programming-propaganda
 ---
 Today I filled out a survey giving feedback on my first term courses, one of those being ‘Programming and Principles’. Programming and Principles was described by the lecturer as: “A course designed to help you think like a programmer.”
 
@@ -23,5 +22,3 @@ I’m not suggesting that we churn through all the Visual Studio errors, learn t
 I think this alteration would help the course better achieve what it aims to do and make it a more valuable experience. 
 
 Not many people like a survey, quite frankly neither do I, but if you have an improvement to suggest its a crime not to bother.
-
-charlie

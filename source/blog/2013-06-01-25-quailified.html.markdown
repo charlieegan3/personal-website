@@ -19,7 +19,6 @@ tags:
 - ror
 - ios
 - e-education
-tumblr_url: http://charlieegan3.tumblr.com/post/51840642673/25-quailified
 ---
 My first year at university came to an end yesterday at 11:30 when I finished my ‘Web Technology’ exam. It’s been a fast few months but in that time I feel I’ve learnt enough to have an opinion on the university way.
 
@@ -51,4 +50,3 @@ Putting these measures in place would greatly reduce the cost of the whole ordea
 Communities like [Coursera](https://www.coursera.org/), [Piazza ](https://piazza.com/)and [Khan Academy](https://www.khanacademy.org/) are all _well on their way_ to achieving this. Given more funding for a greater student base these places have the power to, not only change the way we teach and learn the subject but the industry as a whole, and definitely for the better.
 
 In conclusion, Computer Science is an exciting area to be (trying to) get involved in, however it’s being let down by an outdated teaching model.
-

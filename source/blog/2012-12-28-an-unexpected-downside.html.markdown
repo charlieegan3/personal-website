@@ -10,7 +10,6 @@ tags:
 - insurance
 - retina macbook
 - fanboy
-tumblr_url: http://charlieegan3.tumblr.com/post/46786057177/an-unexpected-downside
 ---
 If you’ve read through any amount of my content on either here or [Twitter](https://twitter.com/charlieegan3) you may have picked up that earlier this year I bought myself a new Apple Macbook. It’s a fantastic machine, the best computer I’ve ever owned - an all out five star product. However there are disadvantages that lie out with the computer it’s self.
 
@@ -21,5 +20,3 @@ I have taken out student laptop insurance which, while very expensive, I deem to
 I think there is a lesson to be learned here. While I doubt I’ll ever get to the point where £2000 loss is negligible, there hopefully there will come a time when it is less worrying. It’s just that when it’s more money than you’ve ever spent and more than you plan on spending for the foreseeable future it’s bound to give a little worry. I think that in future I will go for a cheaper laptop and desktop combo.
 
 That said, it has been a fantastic laptop and has been an outstanding tool and aid and while I remain anti-iOS, I also remain one of the biggest mac fans around.
-
-charlie

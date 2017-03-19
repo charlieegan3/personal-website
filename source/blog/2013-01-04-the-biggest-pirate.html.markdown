@@ -7,7 +7,6 @@ tags:
 - piracy
 - music industry
 - copyright
-tumblr_url: http://charlieegan3.tumblr.com/post/46786073540/the-biggest-pirate
 ---
 Our latest information revolution, the Internet, allows communication and the transfer of information to take place on an heretofore unseen scale. Every time you check your emails, visit a webpage, or even turn on your computer, you take part in this mass interchange of information. There are many ways to share information via the Internet, all very different: different goals, different audiences and different capabilities. We are all a part of this global phenomenon–what is our individual participation in this new world? My concern is not how you update your current Facebook status, or share holiday snaps with your relatives around the world, but how, every day, we break the law. This is such a big problem though because we aren’t the only unaware, mini pirates, there are thousands of us.
 
@@ -26,5 +25,3 @@ I understand that piracy damages the music and film industries, however I think 
 The greedy record labels acting over and above morals, just keep on wanting even more. Though they get enough money from legal sales to end world poverty and find a cure for every disease in the book, sadly they still scramble for every last penny. Every day in the name of their artists, (plank walking peons of profit production), they wage war against individuals and organisations that break copyright laws. These lawsuits are petty acts of injustice against the world in the name of music are outrageous. 
 
 There will forever be wind in the sails of the ever evolving pirate ships for as long as people are treated unfairly.
-
-charlie

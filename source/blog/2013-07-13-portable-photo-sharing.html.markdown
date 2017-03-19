@@ -44,4 +44,3 @@ I publish all my Instagram photos to 500px and Flickr via IFTTT, just for fun.
 Instagram, being mobile first will remain my service of choice for the time being. The speed of submission and browsing make it the clear winner for me. Minus a little spam and plus some slightly more agile editing tools it would be perfect. It’s got the community, now it just needs to keep the app fresh.
 
 _Note on Video Sharing: _Instagram recently got the option to record video clips - much like Twitter’s Vine. Interestingly, being a little later to the party’s certainly made it’s performance on Android much nicer. Vine for Android really does have some catching up to do.
-

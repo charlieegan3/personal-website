@@ -7,7 +7,6 @@ tags:
 - gps
 - idea
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786123421/location-emergency
 ---
 After a discussion a about a week ago I found myself wondering how much longer it must have taken to call the emergency services in the past. Sprinting to the nearest phone box etc. just doesn’t bear thinking about.
 
@@ -24,5 +23,3 @@ Once 'Emergency Mode’ was activated the phone would turn on it’s GPS, get it
 There are a few other optional features, a method to send the service required as part of the text and an option to just call the services in the traditional way.
 
 I think that this would really help people in a crisis and, while I can see why it’s not here already, I think if there is talk of tweeting emergency services then this should be considered too. Personally I think the [tweet idea](http://blog.whiteoaks.co.uk/2012/12/20/-999-emergency-services-putting-their-trust-in-social-media.aspx) is daft, totally unsure how that helps anyone.
-
-charlie

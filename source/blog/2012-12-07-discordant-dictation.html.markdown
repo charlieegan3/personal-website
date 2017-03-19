@@ -4,7 +4,6 @@ title: Discordant Dictation
 date: '2012-12-07T18:52:00+00:00'
 tags:
 - tech
-tumblr_url: http://charlieegan3.tumblr.com/post/46786008294/discordant-dictation
 ---
 Computer Dictation is something I’ve spent a great deal of time trying out. Sadly, it’s been a let down - but not due to poor performance.
 
@@ -15,5 +14,3 @@ First off you have to speak very loudly - much louder than a typical conversatio
 Noise. While the act of dictation makes lots of it, at the same time, it’s completely intolerant of it. Even someone walking about nearby, or closing doors, seemed to be enough to mis-create words.  While it’s good in totally quiet situations for my accent, I’m sure it’s better at dealing with an american accent. Fed an american voice in noisy surroundings it may well cope better.
 
 Technically it’s brilliant but, due to these social noise related flaws, the feature is rendered close to useless and I’d say no technological advancement will change this any time soon.
-
-charlie

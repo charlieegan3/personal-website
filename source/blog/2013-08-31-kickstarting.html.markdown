@@ -7,7 +7,6 @@ tags:
 - nfc ring
 - nfc
 - crowdfunding
-tumblr_url: http://charlieegan3.tumblr.com/post/59816715790/kickstarting
 ---
 I was wary of kickstater for quite some time - It didn’t stock much in the idea. I guess I saw it as being a little risking in the beginning.
 

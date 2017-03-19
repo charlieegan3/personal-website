@@ -7,7 +7,6 @@ tags:
 - hobby
 - learning
 - new skills
-tumblr_url: http://charlieegan3.tumblr.com/post/46786046941/blogging-beginning
 ---
 I’ve not been in the business long, still under a month in fact. In that short time I’ve learn’t my fair share of relevant knowledge, here are my…discoveries!
 
@@ -20,5 +19,3 @@ I read through about 50 guides to increasing traffic but only one mentioned pu
 The other thing that is annoying but is something that I realized from the start - _I am in my stats_. A large percentage of my views are still from Aberdeen University, which of course is me. It was a big problem at the start for stat bending but now my have tailed off it’s a little better.
 
 I’m sure there are many more lessons to learn on the blogging front - I just hope they don’t get the better of me.
-
-charlie

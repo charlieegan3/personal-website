@@ -10,7 +10,6 @@ tags:
 - Mac App Store
 - extensions
 - app
-tumblr_url: http://charlieegan3.tumblr.com/post/46786222074/popclip
 ---
 I’m not a big iOS fan but I’d heard good things about an app that further blurs the line between the iOS and OSX: [PopClip](http://pilotmoon.com/popclip/). When I say it featured on [lifehacker](http://lifehacker.com/5985248/top-10-underhyped-mac-apps) I finally decided to get it.You think it’s certainly not as useful as you might be led to believe but then you realize the [extensions](http://pilotmoon.com/popclip/extensions/) and that all changes.There are absolute loads out there - more than enough to choose from. These are my favorites:
 
@@ -18,5 +17,3 @@ I’m not a big iOS fan but I’d heard good things about an app that further bl
 * Sort. This takes in a number of lines, removes any duplicates, and returns the unique values in lexicographical order.
 
 So it’s not me going over to the iOS way - just getting some extra features that’s all. It’s certainly a lot better than the comparable feature in iOS.
-
-charlie

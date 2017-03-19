@@ -11,7 +11,6 @@ tags:
 - mode7
 - opinion
 - strategy
-tumblr_url: http://charlieegan3.tumblr.com/post/46786024043/foresight-is-futile
 ---
 One of the games I like to play is called [Frozen Synapse](http://www.frozensynapse.com/). It’s a turn based strategy game that lends it’s self nicely to competitive play. You’re reading about it here because: It’s not as well know as it should be, it’s British and above all it’s a great game.
 
@@ -26,5 +25,3 @@ I’ve played multiplayer but found the AI players also very good. So good that 
 Another nice thing is that the game only requires [modest specs](http://www.frozensynapse.com/features.html#sysReqs), meaning you can play it for a long time on battery and on almost any computer.
 
 This game has picked up great reviews and has certainly made a mark, I just thought that I would do my bit to promote it as a loyal player.
-
-charlie

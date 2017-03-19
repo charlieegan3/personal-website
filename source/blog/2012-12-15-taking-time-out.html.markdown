@@ -8,7 +8,6 @@ tags:
 - heath
 - exercise
 - lifestyle
-tumblr_url: http://charlieegan3.tumblr.com/post/46786026375/taking-time-out
 ---
 Recently I’ve had to put in some really long shifts at the computer to get some coursework done. It’s done now but at its peak I was spending up-to 10 hours a day sitting at the computer. This just wasn’t good - I was getting a sore back as well as shoulder pain. You need to keep working though to get stuff done. This was my solution.
 
@@ -21,5 +20,3 @@ It’s simply called: [Time Out](http://www.dejal.com/timeout/). When it’s t
 I’ve been using it for a few days now and it’s really helped with my back as well as helping me keep track of the time. You would think it’s bad being interrupted but I think for me it was just what I needed.
 
 While it doesn’t make it healthy to work away at the computer for hours at a time it certainly makes it less damaging and more bearable. I hope to be able to use computers with as little pain as possible in years to com, hopefully this will help that happen.
-
-charlie

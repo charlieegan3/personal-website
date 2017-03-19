@@ -15,7 +15,6 @@ tags:
 - productivity
 - communication
 - records
-tumblr_url: http://charlieegan3.tumblr.com/post/57198594842/asana
 ---
 My boss regularly asks me for ideas on how to help streamline things in the business. Here’s my review of a product we’ve put into action this week: Asana.
 

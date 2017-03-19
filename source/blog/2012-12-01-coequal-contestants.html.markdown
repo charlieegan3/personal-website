@@ -9,7 +9,6 @@ tags:
 - suggestion
 - video games
 - idea
-tumblr_url: http://charlieegan3.tumblr.com/post/46785994150/coequal-contestants
 ---
 I can’t understand why we all go back to video games. Every time we play it’s ‘the last time’ yet somehow we keep coming back for another dose of disgruntlement and discontent. The games we choose to seem to be inherently frustrating.
 
@@ -40,5 +39,3 @@ Other ideas might be:
 * In game player feedback. Players are rated for good or bad communication, team play etc. by other players. Gives another useful comparison criteria.
 
 That hardly scratches the surface of the full potential of coequal contestant but it’s something to think about all the same.
-
-charlie

@@ -10,7 +10,6 @@ tags:
 - rails
 - XNA
 - RoR
-tumblr_url: http://charlieegan3.tumblr.com/post/46786102080/framework-fluency
 ---
 Yesterday I posted a link to a video in my entry: _Programming Prodigy. _In the video [Santiago Gonzalez](http://www.huffingtonpost.com/2013/01/03/santiago-gonzalez-prodigy-code_n_2404874.html) claims to be _fluent_ in several programming languages. This may be true, it’s good to learn in a broad fashion - however I would like to make a point.
 
@@ -25,5 +24,3 @@ It’s the same with spoken language, you may learn French to enjoy a holiday in
 However, when it comes to learning multiple frameworks it becomes more difficult to become_ ‘fluent in several’_. Because frameworks are often used to do specific task they tend to be rather specialised, focused, or aimed at a certain system. This results in, often complex, very different structures, much harder to pick up than languages themselves. For example the XNA framework used to support the Xbox and Windows Phone is going to be very different to RoR - purely due to the difference in purpose.
 
 That was just an afterthought, a followup to the previous entry.
-
-charlie

@@ -7,7 +7,6 @@ tags:
 - programmer to be
 - inspiration
 - beginning
-tumblr_url: http://charlieegan3.tumblr.com/post/46785999586/countdown-to-computing
 ---
 We had a computer when I was very young - I can hardly remember - it broke and was never replaced. When you’re that age you don’t think anything of it - just get on with life, forget about it the next day.
 
@@ -18,5 +17,3 @@ They fought a long battle and it was 2005 by the time we got our ‘replacement�
 There was an art project going on at school, there are always art projects at school but this one was different: It came with an artist. His name was John McNaught and he moved around different schools doing projects. He is a key figure in the story for one reason: He had a Powerbook G3, and it had Adobe Photoshop. Photoshop is amazing, such a powerful tool, such incredible fun. So there I was, the ten year old charlie, addicted to Photoshop and in serious need of a Mac.
 
 There was peace on the battleground by Christmas of 2005 - all thanks to Mr McNaught (and perhaps some parental finances). iBook was here and, from what I can tell, so was a life long interest.
-
-charlie

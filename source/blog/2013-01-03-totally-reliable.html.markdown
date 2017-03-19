@@ -8,7 +8,6 @@ tags:
 - study
 - ignorance
 - wikipedia
-tumblr_url: http://charlieegan3.tumblr.com/post/46786071002/totally-reliable
 ---
 Soon I’m going to have to start revising for the upcoming exams - In one of my exams I have to cite sources. In the final lecture the tutor brought up the point that Wikipedia is a terrible place and to not even bother with it. I don’t think she could have been more wrong.
 
@@ -17,5 +16,3 @@ Wikipedia does display relatively active content and this might lead you to be
 The second point she made in her blind bashing of the greatest source of free information ever to grace our planet was that 'just anyone can edit it’. This is true, and it’s partly what makes the system so great, however the number of check and balances in place to prevent malicious edits are second to none. There are automated tools to sniff out bad changes, IP blocking for persistent offenders and so on. This leads to a accuracy like no other - much better than one any book or other encyclopedia.
 
 Not all but many of the older generation seem to share this Wikipedia ignorance. I think in the early days there may be been some bad press due to a lack of understanding in the media - the effects of which still linger today. It’s quite frustrating though, sad in a way - I just wish I’d had the courage to correct her in front of 180 students!
-
-charlie

@@ -11,7 +11,6 @@ tags:
 - record
 - log
 - menology
-tumblr_url: http://charlieegan3.tumblr.com/post/46786104854/musical-menology
 ---
 I’ve been keeping this blog, my twitter, my journal and my foursquare as a log of what I think about, where I’ve been and what I plan to do next. I’m enjoying keeping them up but have yet to get to the point where looking back induces any kind of nostalgia. Until yesterday I’d all but forgotten about my oldest set of records -_ my music library_.
 
@@ -20,6 +19,3 @@ It’s a very different kind of record but it’s a record all the same. I’ve 
 'Date Added’ helps a lot and as I’ve moved on with the library I’ve taken care to keep these correct. Hopefully in years to come making the memory playlists will come easier.One word of advice. I get all my music from Spotfiy and plan to continue doing so. Playlists there can be sorted by date added this is fine until you download them. You don’t want to click the tempting 'Get Playlist’ button but instead download the tracks separately and wait for them to finish. This way you maintain the order (while sadly losing the original added date). For me at least that’s quite important.
 
 As long as Apple is careful with iTunes my musical menology should be good for another few years.
-
-**-charlie out- **
-

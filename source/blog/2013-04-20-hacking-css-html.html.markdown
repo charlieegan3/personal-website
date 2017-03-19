@@ -14,7 +14,6 @@ tags:
 - design
 - bootstrap
 - twitter
-tumblr_url: http://charlieegan3.tumblr.com/post/48394085280/hacking-css-html
 ---
 I’m working on a Rails project in my own time, it’s just something for fun really. I love Rails, I’m totally addicted. I am, after a few months, finally starting to feel like I can get real work down and create something genuine and interesting. I have a problem - a problem that is about [33.3%](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller#Component_interactions) of my time:  Views.
 
@@ -27,5 +26,3 @@ I’m aware of an issue - I’m my site, while with the additional style looks q
 I’ve been able to justify it however I think it’s a rare case. There aren’t many creations that can be so easily replicated and implemented into work to look like your own. True their name is on the reverenced sheet but how many users look there? They’ll just think it’s me.
 
 So I’d like to thank [@mdo](http://twitter.com/mdo) &amp; [@fat](http://twitter.com/fat) for a beautiful site - thank you.
-
-charlie

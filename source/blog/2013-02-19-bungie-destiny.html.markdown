@@ -9,7 +9,6 @@ tags:
 - video games
 - destiny
 - activision
-tumblr_url: http://charlieegan3.tumblr.com/post/46786189786/bungie-destiny
 ---
 At the weekend Bungie officially revealed Destiny - their next IP. While some concepts and details were leaked and highly speculated a more concrete story came on Sunday.
 
@@ -22,5 +21,3 @@ The visual style also looks great, it was described as blend between Halo and Ma
 On a final note, I couldn’t help but note some of the tech covered in the video. There was clearly an app for iOS in development alongside main game. I’m going to take a guess that this will be used during the game to view stats or meet up with friends. There was a big emphasis on seamless menus or just a lack of them. It sounded like the player was to totally removed from any technical details - an interesting move too. I like the idea but in practise, my favourite games at the moment are all reasonably technically 'involved’, Frozen Synapse comes to mind.
 
 As long as I can use Bumper Jump or Recon as my button layout in the new game I’ll be happy with the in-game options! Bungie are back.
-
-charlie

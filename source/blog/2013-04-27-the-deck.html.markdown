@@ -18,7 +18,6 @@ tags:
 - social networking
 - scheduling
 - microblogging
-tumblr_url: http://charlieegan3.tumblr.com/post/48964899063/the-deck
 ---
 There’s a reason twitter bought [TweetDeck](http://tweetdeck.com/). It’s the best twitter client out there. Okay it might not have the best UI, but in terms of features it can do things none of the other native clients can even dream of. It pays when daddy makes the API it would seem.
 
@@ -29,5 +28,3 @@ Tweet Scheduling: Technically TweetDeck is separate in that you need another acc
 Filtered Feeds: I follow around 800 people on twitter, that’s probably too many but it does mean when you’re stuck at the station for day you’re always kept up to date! Anyway, I find there are too many links to chew over, too many stories and reviews to read. So, when I’m trying focus these are very distracting. So I filter them out and only view tweets without links - sorted.
 
 Those are the features that have really helped me. There are load more, some really good tools for people with lots of accounts. And it’s free! *cough* [Tweetbot](http://target.georiot.com/Proxy.ashx?grid=13350&GR_URL=https%3a%2f%2fitunes.apple.com%2fus%2fapp%2ftweetbot-for-twitter%2fid557168941%3fls%3d1%26mt%3d12).
-
--charlie out-

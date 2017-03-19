@@ -11,7 +11,6 @@ tags:
 - help
 - support
 - face to face
-tumblr_url: http://charlieegan3.tumblr.com/post/46786031058/remote-rescues
 ---
 I’m sure most of you are familiar with giving ‘IT support’ to family members and friends. I’ve recently arrived home for Christmas and not having to do this quite a relief. There’s something fundamentally challenging about helping someone out over the phone.
 

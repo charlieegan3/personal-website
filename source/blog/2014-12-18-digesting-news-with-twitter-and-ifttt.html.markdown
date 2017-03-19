@@ -12,7 +12,6 @@ tags:
 - reading list
 - feed
 - ruby
-tumblr_url: http://charlieegan3.tumblr.com/post/105518207109/digesting-news-with-twitter-and-ifttt
 ---
 I’ve been trying to cut down on the time I spend reading news for a long time, I even built my own Ruby news aggregator and summariser. Lots of NLP and lots of mess.
 

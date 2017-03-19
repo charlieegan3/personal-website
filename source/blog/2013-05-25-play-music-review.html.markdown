@@ -12,7 +12,6 @@ tags:
 - lastfm
 - smart playlist
 - playlist
-tumblr_url: http://charlieegan3.tumblr.com/post/51261284304/play-music-review
 ---
 After watching the Google IO/13 keynote last week was reminded of the existence of Play Music. I’d originally not bothered with it when I found that the old client would upload through the university’s proxy. Now however it seemed to work and I thought it was worth trying out.
 

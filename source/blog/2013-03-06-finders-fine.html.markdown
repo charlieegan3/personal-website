@@ -14,7 +14,6 @@ tags:
 - improvements
 - totalfinder
 - macrabbit
-tumblr_url: http://charlieegan3.tumblr.com/post/46786224485/finders-fine
 ---
 For those of you who don’t know what Finder is, see [here](http://en.wikipedia.org/wiki/Finder_(software)).
 
@@ -26,5 +25,3 @@ I got a license for and app called ’[TotalFinder](http://totalfinder.binarya
 There’s no need for tabbed browsing in that way for the mac files system. Certainly not for me. If you were working with a file system all day you might want some extra features like those offered in [Path Finder](http://cocoatech.com/pathfinder/) by Cocoatech. I can see some of it’s features being quite handy for sysadmins.
 
 However, I’d say for the rest of us, venturing beyond the default Finder might be a waste of time and money.
-
-charlie

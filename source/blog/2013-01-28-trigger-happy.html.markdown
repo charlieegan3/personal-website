@@ -13,7 +13,6 @@ tags:
 - foursquare
 - online services
 - blogger
-tumblr_url: http://charlieegan3.tumblr.com/post/46786131698/trigger-happy
 ---
 This is the first review I’ve done on here for quite a while - here’s my take on [IFTTT](https://ifttt.com/). [+IFTTT](http://plus.google.com/109525093279809082285) is an online automation service that brings together many online applications. Before I begin there is some IFTTT jargon that you should know:
 
@@ -33,5 +32,3 @@ There are a few minor issues with the service, but none come close to being majo
   * The site’s interface is nice, however it should have a 'condensed view’ for viewing your recipes. It’s as if they only ever expected people to have a handful of recipes. It would be nice to have a more tabular view available for those users with more recipes.
 
 If you’ve read though this and still don’t really understand what it’s all about head [here](http://lifehacker.com/5842307/how-to-supercharge-all-your-favorite-webapps-with-ifttt) or just head over to [IFTTT](http://ifttt.com/) to…
-
-charlie

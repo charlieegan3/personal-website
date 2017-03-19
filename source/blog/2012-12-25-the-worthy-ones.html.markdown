@@ -15,7 +15,6 @@ tags:
 - software
 - app
 - top list
-tumblr_url: http://charlieegan3.tumblr.com/post/46786049530/the-worthy-ones
 ---
 I use Mac and Android - I think it’s the perfect combination of things for me. In the same way that an and aspiring author finds interest in books I find interest in programs and serivces. Software can be a work of art, a genuine invention with the power to do good and help us out.I could go on in there and list all the standard ones that are, quite frankly, great, but I’m going to focus on the ‘rarer’ ones.I’ve been back in the Mac Software scene since July, I’ve spent way too long trying and buying interesting apps - these are the favorites:
 
@@ -34,5 +33,3 @@ I’ve had my Android [Note II](http://www.charlieegan3.com/2012/12/phase-of-pha
 I’ve not included apps that are associated with services or games, they’ll be up tomorrow.
 
 Have a Merry Christmas.
-
-charlie

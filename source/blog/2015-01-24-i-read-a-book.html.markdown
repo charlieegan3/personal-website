@@ -9,7 +9,6 @@ tags:
 - book
 - review
 - fps
-tumblr_url: http://charlieegan3.tumblr.com/post/109035004424/i-read-a-book
 ---
 I recently finished reading [Masters of Doom](http://www.amazon.co.uk/Masters-Doom-created-transformed-culture/dp/0749924896/ref=sr_1_1?ie=UTF8&qid=1422132733&sr=8-1&keywords=masters+of+doom) by David Kushner and thought I’d write a short response. It’s the first book I’ve read from start to finish since I was a child.
 

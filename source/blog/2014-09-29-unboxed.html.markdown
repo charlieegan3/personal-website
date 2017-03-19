@@ -10,7 +10,6 @@ tags:
 - tdd
 - decorator pattern
 - git
-tumblr_url: http://charlieegan3.tumblr.com/post/98725164174/unboxed
 ---
 This summer, July through September, I completed a summer internship at [Unboxed Consulting](http://www.unboxedconsulting.com) - a Rails Consultancy in London. I had a really incredible time and was lucky enough to be invited back. I really can’t wait for next year.
 
@@ -36,4 +35,3 @@ Before using [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_
 This is another thing that’s come up a lot this summer. Following on with the theme of thinking more about my code this is something I’ve come to use in my apps. The idea of separating view logic into a separate presenter class to make a lot of sense - before I’d just never really thought about it. The [Destroy all Software](https://www.destroyallsoftware.com/screencasts) screencasts have been really great at teaching me how best to set this up in fresh projects.
 
 This summarises the key lessons I took away from this summer, there are many others that are smaller or hard to put in words. It was a really great experience, the team at Unboxed were a real joy to work with - I was made to feel extremely welcome. I just can’t to get back into that world.
-

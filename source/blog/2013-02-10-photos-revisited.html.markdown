@@ -9,7 +9,6 @@ tags:
 - deviantart
 - photography
 - Instagram
-tumblr_url: http://charlieegan3.tumblr.com/post/46786167836/photos-revisited
 ---
 I used to take quite a few photos - digital photography and Photoshop were really what got me into computers in the first place. I did have a go at submitting to [istockphoto](http://www.istockphoto.com/) with a few of my better ones. They were only ever interested in ‘happy people shots’ and I didn’t like taking pictures of people - so that died off. The next thing was [deviantart.com](http://deviantart.com/) a few years later but I got bored of that too and closed my account.
 
@@ -22,5 +21,3 @@ I’ve been looking into [flickr](http://www.flickr.com/photos/92984649@N06/) an
 I’m liking it so far and have added one new photo (others taken previously) - thinking about trying to do one each day - however I doubt there are that many nice places to photograph on campus.
 
 I like to keep this blog _purely _text and will not be posting photos on here - there are also storage space limits which I want to remain shy of.
-
-charlie

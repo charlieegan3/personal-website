@@ -8,7 +8,6 @@ tags:
 - algorithm.
 - maths
 - pseudocode
-tumblr_url: http://charlieegan3.tumblr.com/post/46786139682/pseudo-learn
 ---
 I recently sat an exam for a course called ‘Programming and Principles’ ([CS1022](http://homepages.abdn.ac.uk/w.w.vasconcelos/pages/teaching/CS1022/)), it’s a compulsory, first year, computer science course. However only 12.5% of the grade is programming, the rest? Principles.
 
@@ -21,5 +20,3 @@ On the topic of 'real world’ this brings me to my next point. I understand tha
 You might say: these is the fundamentals and you need to know how to use them. I say: it’s not as if we’re going to run out of stuff to learn there are other important topics too, it’s just about priorities. Another response might be: these are cross-language skills. In response: so are design paradigms they get much less coverage, certainly in 1st year.
 
 This Is just how I see it, I believe you can teach everything essential through real practise. This kind of skill should be taught be as part of a specialised algorithms course rather than part of an introduction to computing science as a whole.
-
-charlie

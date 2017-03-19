@@ -3,7 +3,6 @@ layout: post
 title: Fingerprint Footprint
 date: '2013-09-14T01:31:00+01:00'
 tags: []
-tumblr_url: http://charlieegan3.tumblr.com/post/61156382147/fingerprint-footprint
 ---
 Biometric authentication has arrived.
 

@@ -17,7 +17,6 @@ tags:
 - social system
 - foursquare
 - stackoverflow
-tumblr_url: http://charlieegan3.tumblr.com/post/46786236694/gamification-for-good
 ---
 Gamification is a new word for me, even while the concept isn’t. Gamification, for those who don’t know, is the process of implementing a social system that borrows elements from video games. 
 
@@ -38,5 +37,3 @@ Leader-boards is another feature I’ve seen, implemented again in Foursquare. W
 One final feature that I believe deserves a mention is the idea of Bounties. I’ve only ever seen these at stack overflow, however, I think they’re powerful enough to get a mention here. Bounties need to work alongside a user score system, they can be implemented manually or automatically to promote strong positive deeds that are highly desired within the community. This might be answering a tough question all correcting and improving an existing resource.
 
 All in all, I think the effects of a grounded Gamification system can be so much more than just a gimmick.
-
-charlie

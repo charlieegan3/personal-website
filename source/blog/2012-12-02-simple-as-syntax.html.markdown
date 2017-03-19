@@ -11,7 +11,6 @@ tags:
 - suggestion
 - coderunner
 - tech
-tumblr_url: http://charlieegan3.tumblr.com/post/46785996896/simple-as-syntax
 ---
 Popular programs don’t need reviews - their popularity says enough: they’re useful, innovative, even revolutionary. However there are some great solutions out there that really don’t get enough recognition - [CodeRunner](http://krillapps.com/coderunner/) is my personal favourite of that description.
 
@@ -24,5 +23,3 @@ I’ll give you an example. For one of my courses we were given Ruby assignment.
 What’s great though is the same solution worked for my python assessment too, just so perfectly simple to switch language.
 
 It’s the best program out there for all computer science students alike. Problem: “lots of simple programs, lots of different languages, all at once” Answer: **CodeRunner**, every time.
-
-charlie

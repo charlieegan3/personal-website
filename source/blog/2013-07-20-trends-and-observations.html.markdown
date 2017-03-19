@@ -12,7 +12,6 @@ tags:
 - windows
 - apple
 - service
-tumblr_url: http://charlieegan3.tumblr.com/post/55948406072/trends-and-observations
 ---
 Two weeks ago I started working for a local IT business as a Technician, here’s what I’ve learnt.
 

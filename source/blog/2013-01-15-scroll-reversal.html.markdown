@@ -9,7 +9,6 @@ tags:
 - input
 - scrolling
 - mobile
-tumblr_url: http://charlieegan3.tumblr.com/post/46786099832/scroll-reversal
 ---
 This may not seem the most fascinating of topics but I’m still interested in interfaces and how mobile devices are influencing other areas. So, scrolling - it’s a pretty key part of standard interaction. We’ve become very fond of our little scroll wheels and all that - one might expect it to remain constant.
 
@@ -22,5 +21,3 @@ It’s quite an interesting one for me though, which way is really the most int
 However this does create some problems, switching to a PC and back can sometimes be a little awkward.
 
 Apple has had quite a few feeble feature failures, but in terms of trackpads and input they still win hands down over any other manufacturer.
-
-charlie

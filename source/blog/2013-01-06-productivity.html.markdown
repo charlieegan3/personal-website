@@ -11,7 +11,6 @@ tags:
 - post-it
 - productivity
 - app store
-tumblr_url: http://charlieegan3.tumblr.com/post/46786078355/productivity
 ---
 I like to keep organized, I put the few important events there are in my life in my calendar, my calendars + contacts sync and so on - the basics. I keep a task list - on paper and sticky notes though, and have done for some time now. I like to _score things off or bin them for real_ when they’re done.
 
@@ -24,5 +23,3 @@ Things and Things-esque apps are wonderful programs I’m sure - but I think the
 That complexity though, I think, would have to come from working with lots of people and in many places. Certainly when it comes to many people, surely solutions like asana, Astrid or even MS Project would offer a little more functionality and support to such a problem?
 
 I’m reading a [book](http://en.wikipedia.org/wiki/The_Mythical_Man-Month) at the moment on software project management and it’s clear that working on team software projects is uncharted territory for me. For these teams and projects I’m certain the digital tools out there help a great deal. For me though, with my exams and home work, Post-its will, for now, suffice.
-
-charlie

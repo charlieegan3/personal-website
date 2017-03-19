@@ -9,7 +9,6 @@ tags:
 - free internet
 - referral
 - adsense
-tumblr_url: http://charlieegan3.tumblr.com/post/46786035894/malicious-monitoring
 ---
 When you visited this site the link that brought you here tracked your exit and I tracked your entrance. Google gives website owners the [tools](https://www.google.com/analytics/) to monitor the traffic related to their sites.I can tell when the site was visited; if it was visited by you before, and how many pages you loaded. I can tell what browser you used; what your operating system is; who hosts your internet connection and where they say you are. This allows me to test my site for various different usage types to make sure it works for everyone - it's essential for a frustration free web.
 
@@ -20,6 +19,3 @@ Of course Google can use this information for show you [ads](http://www.google.c
 > If you are not paying for it, you’re not the customer; you’re the product being sold.
 
 All I have to say is, that while that is profoundly true, it’s a small price to pay and is easily avoided. It’s the future and I think it’s just a small part of what is ultimatly a good thing.
-
-charlie
-

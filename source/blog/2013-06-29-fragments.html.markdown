@@ -17,7 +17,6 @@ tags:
 - play
 - google play
 - developers
-tumblr_url: http://charlieegan3.tumblr.com/post/54138037539/fragments
 ---
 Many manufactures massively making many mobiles certainly gets you the top spot on the ‘Units Shipped' leader-board, however, theres a problem growing from it: Fragmentation. And it’s quite a big problem.
 
@@ -38,4 +37,3 @@ It’s just a pain - and it must be even more of a pain for developers trying to
 While it would be extremely unfair to say that all Apple Devices run the latest iOS and apps there is something of a greater clarity in their upgrade system. Every year a device is likely to get dropped and that’s that. Hoping that you upgrade as many users do they soldier on - and it’s winning them the game.
 
 Apple may not be shipping the device to the same levels as the big Android players but in terms of revenue it’s still clearly on top. And certainly when it comes to app sales they’re remaining the clear winner.
-

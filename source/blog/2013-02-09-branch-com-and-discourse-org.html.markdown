@@ -7,7 +7,6 @@ tags:
 - online forum
 - discourse.org
 - discussion
-tumblr_url: http://charlieegan3.tumblr.com/post/46786165647/branch-com-and-discourse-org
 ---
 The topic of online discussion interests me greatly - there is just something so incredible it. Talk to who you want, about what interests you and in a way that you like. While I think there are probably enough _places_ to take part in the discussion I think we need at least one more _method_ of structuring that conversation. [Branch.com](http://branch.com/) and [Discourse.org](http://discourse.org/) both put forward offerings to achieve this - both are very different and, in my opinion, far from perfect.
 
@@ -16,5 +15,3 @@ Branch is perhaps the most ‘radical’ and looks almost totally different from
 Discourse is a newer one for me. It’s pitched as more of a “vBulletin Killer” and aims to replace existing forums rather than offer an alternative (like Branch does). It also has [quality discussion](http://meta.discourse.org/t/how-to-arrive-at-a-conclusion/1178) but it is certainly closer to the frivolity of forums. Also most of the discussion is about the system itself due to it being an actual product to buy rather than a product in it’s existing state. There are many shorter and less informed responses and there is a fair but of spam from people trying out the system (I guess interested clients). It’s very well made and excels in some areas that Branch fails in such as [discovery](http://meta.discourse.org/categories). I think it’s still far from the perfect conversational structure however.
 
 These are actually the type of system that I’d like to have a go at building myself - one day.
-
-charlie

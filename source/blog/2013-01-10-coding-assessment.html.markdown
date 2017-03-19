@@ -11,7 +11,6 @@ tags:
 - assessment
 - improvements
 - exam
-tumblr_url: http://charlieegan3.tumblr.com/post/46786088859/coding-assessment
 ---
 As part of an upcoming exam I’ve got to write sections of code in the language we were taught. We’ve had to do this kind of thing before, at school, and I’ve been fine with it. This as a method to access ones programming ability just seems to me to be so fundamentally flawed.
 
@@ -30,5 +29,3 @@ That’s not the only problem, the lack of help I can live with but the inabilit
 To be able to pass the programming questions with top marks you basically need a photographic memory because it _must be executable_. This means that even if you have all the ‘steps’ (even all the lines) included you can still loose marks for the wrong kind of parentheses! In a French test for example you should loose marks for wrong words as it makes it less understandable. Here though, answers with mistakes that would be fixed by auto correction or easily spotted after a trial run should still be able to claim full marks.
 
 I personally think that the _only_ way to test programming ability is by judging a completed project. There is nothing to be gained from blocking internet access or preventing discussion - plagiarism is always obvious too. In recruitment candidates can be asked to write code at the interview - how often do you think this is done in a silent exam hall with pen and paper?
-
-charlie

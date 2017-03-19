@@ -7,7 +7,6 @@ tags:
 - blogger
 - schedule
 - blog
-tumblr_url: http://charlieegan3.tumblr.com/post/46799156843/blogger-and-back-again
 ---
 _I’m back. (on tumblr)_
 
@@ -27,5 +26,3 @@ I’m also going to try and make the content more varied (make us of tumblr). I�
 * _Saturday - Main Post_
 
 Lets hope that fits.
-
-charlie

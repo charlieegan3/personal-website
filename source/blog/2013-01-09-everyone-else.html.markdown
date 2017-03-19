@@ -8,7 +8,6 @@ tags:
 - blog
 - circles
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786086525/everyone-else
 ---
 > ‘50 have you in circles’
 
@@ -23,5 +22,3 @@ I also really like the way that, on the most basic level, the posting system wor
 Hangouts also deserve a mention, Skype charges for these kind of services, so, in some ways it’s been a welcome feature for us rather cheap students. However I find that they have a tendency to sink to nonsense really quickly and can end up being a colossal waste of time.
 
 While I’m not alone on this one, it’s far from unanimous, I think it would be better if I had more than a handful of people in my circles and vice versa. Though some of the others on there right now enjoy that it’s sort of 'our own private playground’ of social space, and wish to keep it that way.
-
-charlie

@@ -10,7 +10,6 @@ tags:
 - automation
 - attachments
 - attachments.me
-tumblr_url: http://charlieegan3.tumblr.com/post/46786144256/gmail-attachments-to-dropbox
 ---
 Answer: [attachments.me](https://attachments.me/). Story:
 
@@ -27,5 +26,3 @@ Before IFTTT I had briefly looked at the other options, there were quite a few b
 When I first looked at this it only seemed to enable you to _selectively_ forward attachments to Dropbox, how wrong I was. If I’d taken the time to look a little closer I would have found that it can, in fact, automatically forward all attachments too.
 
 I’d spent hours trying to build my own way to do this with IFTTT, assuming that there must be a way - it seems there isn’t. The thing that is interesting though is that _attachments.me_** **must be using the GMail API too, just as IFTTT does - I would pay to know how on earth they got that working!
-
-charlie

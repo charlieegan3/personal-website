@@ -14,7 +14,6 @@ tags:
 - internet connection
 - social networking
 - streaming
-tumblr_url: http://charlieegan3.tumblr.com/post/46786199388/capable-connections
 ---
 Earlier in the week sony managed to unveil the new PS4 without showing what it looked like. This apparent lack of detail however was more than made up for by a host of new features. Many of these new features will only be available to a segment PS4 owners: those with a capable connection.
 
@@ -23,5 +22,3 @@ The first feature is a screen sharing option. This allows gamers to share their 
 The streaming feature is perhaps a little hardcore, it won’t be used my all users and those on poorer connections will be able to take advantage of the upgraded specs. However should these users want to test out new games it seems they’ll again need a god-level connection. Demos will be streamed down from the moment the user decides to try out a game. This is great and will, connection depending, by a really great feature. However it’s going to be nothing short of frustrating for those with more humble connections.
 
 I think the PS4 will be great. I really like the emphasis on higher specs (though not the garbage reporting on it - _“PC level…”_). I also like the look of these new network features - I just wonder how many will be able to benefit.
-
-charlie

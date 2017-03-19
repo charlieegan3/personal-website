@@ -23,7 +23,6 @@ tags:
 - review
 - test
 - group test
-tumblr_url: http://charlieegan3.tumblr.com/post/53553747097/android-tower-defence-group-test
 ---
 I’ve not done a review in what feels like a long time, so here’s three combined into one. Three of the bigger games in the Tower Defence scene.
 

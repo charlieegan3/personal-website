@@ -8,7 +8,6 @@ tags:
 - viral
 - emotions
 - social networking
-tumblr_url: http://charlieegan3.tumblr.com/post/46786129257/tags
 ---
 Not all my friends use Twitter, very few in fact. Even those on my _computer science_ course seem to have little interest in the microblogging service.
 
@@ -35,5 +34,3 @@ means #bored and :###.. means #sick. Not to mention that this: (*^3^)/~☆ mea
 I see _why_ there is hostility to our humble hashtag but think it _only_ comes from a lack of understanding.
 
 Further reading: [NY Times](http://www.nytimes.com/2011/06/12/fashion/hashtags-a-new-way-for-tweets-cultural-studies.html?_r=2&pagewanted=all&)
-
-charlie

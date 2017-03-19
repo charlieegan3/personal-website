@@ -8,7 +8,6 @@ tags:
 - apps
 - services
 - service
-tumblr_url: http://charlieegan3.tumblr.com/post/46786051911/the-worthy-ones-2-0
 ---
 Yesterday, as part of what I’m sure was your favorite Christmas present, I covered my top apps for Mac and Android. Two areas though were left out: Services and Games, here goes!I make use of a very wide range of services some paid and some free, these are the ones that have impressed me the most. I’m going to leave out the basics like Evernote, Dropbox, Spotify, we all know they’re great and so I’ll not bore you with them.
 
@@ -29,5 +28,3 @@ That brings me on nicely to the next category: games. I wanted to keep them sepa
 [Halo 4](http://www.halowaypoint.com/en-us/) - It has to be included, it came late in the year and it was tarnished my a horrific university internet connection, however, it’s a great game all the same. It’s 343’s take and I’m going to have to get used to it. It’s certainly a new direction and while it’s almost definitely not as good as previous games it think there is potential and a future for [343](http://en.wikipedia.org/wiki/343_Industries#Games) with Halo - I’m especially interested to see where they go in terms of other genres. [Bungie](http://en.wikipedia.org/wiki/Bungie), my favorite developers new title also [leaked](http://www.bungie.net/News/content.aspx?type=topnews&cid=32235) this year, it looks like it’s well sorted out too. Thanks to the spilt I’m left with the best possible outcome, more great games from a great series and a great developer.
 
 So that’s it for the round-ups, the new year is fast approaching and hopefully some more fantastic feats of software design are headed your way too.
-
-charlie

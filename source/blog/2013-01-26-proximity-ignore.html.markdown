@@ -9,7 +9,6 @@ tags:
 - suggestion
 - idea
 - intelligent feature
-tumblr_url: http://charlieegan3.tumblr.com/post/46786126711/proximity-ignore
 ---
 This is again a suggested feature for mobile phones. It’s not likely to save the same number of lives as yesterdays but it would be a nice feature all the same.
 
@@ -29,5 +28,3 @@ This feature would be user controllable but also have the option of 'sensing’ 
   * …
 
 This would mean an end to the annoying 'over-notification’ problem and the endless flashing LED’s that follow.
-
-charlie

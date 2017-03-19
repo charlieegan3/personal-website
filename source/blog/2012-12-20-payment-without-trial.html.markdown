@@ -13,7 +13,6 @@ tags:
 - improvements
 - steam
 - app store
-tumblr_url: http://charlieegan3.tumblr.com/post/46786038438/payment-without-trial
 ---
 I’m a long time [critic](http://www.charlieegan3.com/2012/12/scrapp-stores.html) of app stores, I think they’ve got a long way to go before they truly become a good thing. They are in danger of becoming all that the consumer expects from a software distribution system, I worry there will be no incentive for content providers to build on the experience.
 
@@ -26,5 +25,3 @@ The second issue is the absence of license types, you either own the softwar
 These suggestions don’t come for free, they have their own problems. For instance how to verify students, stop offering the discounts when they stop being students and how to stop them getting the app for others who don't qualify. On trial front it does open you up to a greater piracy threat, any access to source prior to payment is an opportunity for cracking - something we really want to avoid.
 
 That said, I think these are small problems and in light of what has already been overcome and there’s a good chance that these will in fact become features - it’s just a case of waiting.
-
-charlie

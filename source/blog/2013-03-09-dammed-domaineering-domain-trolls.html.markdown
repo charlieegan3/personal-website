@@ -11,7 +11,6 @@ tags:
 - domain name
 - entrepreneur
 - domain
-tumblr_url: http://charlieegan3.tumblr.com/post/46786231719/dammed-domaineering-domain-trolls
 ---
 As of yesterday I own six domain names - but only use this one. The others are little more than a monetary stake to help motivate me to pursue a certain project.I like the idea of _owning_ a domain - it feels like your own little bit of the internet. All of my domains have cost under £10, a bargain even for a cheap skate like me. The problem is the availability. I once read a joke that pretty much summed up the issue:
 
@@ -24,5 +23,3 @@ This creates quite a big problem for small businesses and entrepreneurs. This t
 I don’t think you can really solve the problem other than opening up more top level domains but one suggestion is to price the domains based on the number registered at an existing address. However this system is hardly foolproof and would be very costly for ICANN to implement.
 
 The search continues.
-
-charlie
