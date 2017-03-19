@@ -122,9 +122,9 @@ function setLiveContent(data) {
   $("#instagram-link").attr("href", data.image.link);
   $("#instagram-image").attr("src", data.image.images.standard_resolution);
   if (data.image.location != null) {
-    $("#instagram-meta").text(data.image.location + ", " + data.image.created_ago);
+    $("#instagram-meta").text(data.image.location + ", posted " + data.image.created_ago);
   } else {
-    $("#instagram-meta").text("taken " + data.image.created_ago);
+    $("#instagram-meta").text("posted " + data.image.created_ago);
   }
 }
 
