@@ -11,28 +11,28 @@ handlers:
   upload: www/index.html
   secure: always
   http_headers:
-    Vary: User-Agent
+    Vary: Accept-Encoding
 
 - url: /(blog|articles|til)/?
   static_files: www/\1/index.html
   upload: www/(blog|articles|til)/index.html
   secure: always
   http_headers:
-    Vary: User-Agent
+    Vary: Accept-Encoding
 
 - url: /(.*\.html)
   static_files: www/\1
   upload: www/(.*)
   secure: always
   http_headers:
-    Vary: User-Agent
+    Vary: Accept-Encoding
 
 - url: /(.*\.(js|css|jpg|png|gif|ico))$
   static_files: www/\1
   upload: www/.*\.(js|css|jpg|png|gif|ico)$
   secure: always
   http_headers:
-    Vary: User-Agent
+    Vary: Accept-Encoding
   expiration: 10d
 
 - url: /(feed|rss).*
