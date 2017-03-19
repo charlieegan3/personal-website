@@ -1,4 +1,5 @@
 //=require "jquery"
+//=require "turbolinks"
 
 if (window.location.hostname == "www.charlieegan3.com")
   window.location.hostname = "charlieegan3.com";
@@ -105,11 +106,13 @@ function setLiveContent(data) {
   }
 }
 
-$(document).ready(function() {
-  loadLiveContent();
-  displayVisibleEntries(".later");
-  $(window).scroll(function(){
+$(document).on("turbolinks:load ready", function() {
+  if (window.location.pathname === "/") {
+    loadLiveContent();
     displayVisibleEntries(".later");
-    displayVisibleEntries(".live");
-  });
+    $(window).scroll(function(){
+      displayVisibleEntries(".later");
+      displayVisibleEntries(".live");
+    });
+  }
 });
