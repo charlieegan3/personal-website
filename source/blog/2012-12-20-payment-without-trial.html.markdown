@@ -14,9 +14,9 @@ tags:
 - steam
 - app store
 ---
-I’m a long time [critic](http://www.charlieegan3.com/2012/12/scrapp-stores.html) of app stores, I think they’ve got a long way to go before they truly become a good thing. They are in danger of becoming all that the consumer expects from a software distribution system, I worry there will be no incentive for content providers to build on the experience.
+I’m a critic of app stores, I think they’ve got a long way to go before they truly become a good thing. They are in danger of becoming all that the consumer expects from a software distribution system, I worry there will be no incentive for content providers to build on the experience.
 
-I’ve already covered the [point](http://www.charlieegan3.com/2012/12/scrapp-stores.html) that they are generally terrible to browse, here are what I see as two other crucial flaws in the App Store model.
+I’ve already covered the [point](/blog/2012/12/08/scrapp-stores.html) that they are generally terrible to browse, here are what I see as two other crucial flaws in the App Store model.
 
 The most prominent is the lack of software trials. Fully functional apps that cease to function at the end of the demo period. The key part is the 100% functionality, this is needed to truly make an informed purchasing decision. There are plenty of lite versions out there but they don’t offer full functionality. They also make the stores terribly cluttered places by creating multiple instances of each product. Would it really be so hard to introduce a ‘Download as Trial’ option to the item page?
 

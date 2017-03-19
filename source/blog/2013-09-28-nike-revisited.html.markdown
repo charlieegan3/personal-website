@@ -8,11 +8,7 @@ tags:
 - gps
 - tracking
 ---
-I missed last week - it was move in weekend and I had other things on my mind.<img src="http://media.tumblr.com/9a01c293c93060d9cbc0a570c43d0d69/tum%20%20%20blr_inline_mtkwvnfAo31rj8eap.jpg">
-
-That ^ is a graph of my runs since getting my nike plus sports watch last month.
-
-While the initial burst of enthusiasm has worn off it’s still helping me to run more. The two large gaps have been holidays and injuries.
+I missed last week - it was move in weekend and I had other things on my mind. While the initial burst of enthusiasm has worn off it’s still helping me to run more. The two large gaps have been holidays and injuries.
 
 In terms of statistics it’s pretty solid. All the information is easy assimilate and seems to be in sensible places. It keeps the UI looking smooth and not too cluttered. Sometimes stats are hard to spot but once you find them  it’s clear to see why they are in fact there.
 

@@ -23,7 +23,7 @@ This is the first review I’ve done on here for quite a while - here’s my tak
 
 To give you a feel two of my current recipes are: Post a link to all my new blog posts on [Twitter](https://twitter.com/charlieegan3/status/293880685662437378) and Add an event to my 'Places' calendar whenever I check in on [Foursquare](https://foursquare.com/charlieegan3). All the recipes I use are also used by others, there’s a sharing feature, however I’ve made modifications to suit. Custom recipes are also really easy to set up.
 
-I [mentioned](http://www.charlieegan3.com/2013/01/musical-menology.html) not so long ago about logging my music - this system has some flaws. It only accounts for the dates the files were created and doesn’t keep a log of every single track you play during a day. However, with the help of the last.fm and Google Drive APIs, I have now solved this problem with IFTTT. A simple Recipe is now triggered every time I play a song, it’s action being to log the song, artist and time in a spreadsheet.
+I [mentioned](/blog/2013/01/17/musical-menology.html) not so long ago about logging my music - this system has some flaws. It only accounts for the dates the files were created and doesn’t keep a log of every single track you play during a day. However, with the help of the last.fm and Google Drive APIs, I have now solved this problem with IFTTT. A simple Recipe is now triggered every time I play a song, it’s action being to log the song, artist and time in a spreadsheet.
 
 There are a few minor issues with the service, but none come close to being major. 
 

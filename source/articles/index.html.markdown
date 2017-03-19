@@ -173,7 +173,7 @@ my submissions of articles, tools or stories to the
 *   [8 years working, now 3-4 months off to learn. Looking for advice](https://news.ycombinator.com/item?id=12259772) 
 *   [Coding For Fun - How to Avoid Creating a Second Job](https://spin.atomicobject.com/2016/08/02/coding-for-fun) 
 *   [To save the world, scripts/create_article.rbt get a job at a charity; go work on Wall Street](http://qz.com/57254/to-save-the-world-dont-get-a-job-at-a-charity-go-work-on-wall-street/) 
-*   [A scripts/create_article.rbs Lament](https://www.maa.org/external_archive/devlin/LockhartsLament.pdfMathematician) 
+*   [A Mathematicians Lament](https://www.maa.org/external_archive/devlin/LockhartsLament.pdf)
 *   [From file-sharing to prison: A Megaupload programmer tells his story](http://arstechnica.com/tech-policy/2016/06/from-file-sharing-to-prison-a-megaupload-programmer-tells-his-story/) 
 *   [Static vs. Dynamic Is the Wrong Question for Working Programmers](http://www.craigstuntz.com/posts/2016-06-18-static-vs-dynamic-wrong-question.html) 
 *   [Example Driven Development](http://www.wilfred.me.uk/blog/2016/07/30/example-driven-development/) 

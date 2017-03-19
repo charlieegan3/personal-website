@@ -21,4 +21,4 @@ Say goodbye to `cd rails-app` and embrace the future of terminal!This little 
 
 Now the services menu when right-clicking on a folder contains _New Terminal at Folder._
 
-I’ve also found the terminal built into [Sublime Text 2](http://www.charlieegan3.com/2012/12/sublime-service.html) quite handy recently.
+I’ve also found the terminal built into [Sublime Text 2](/blog/2012/12/18/sublime-service.html) quite handy recently.

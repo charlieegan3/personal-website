@@ -27,24 +27,18 @@ In an effort to cut back on news consumption (to focus on some exams) I started 
 
 I wanted the content of _Hacker News_ in a **feed** and I wanted my progress along this feed to sync across devices. Enter _serializer_!
 
-<img src="https://41.media.tumblr.com/52abaa7a8001ab42c8a497151%20%20%208aeb083/tumblr_inline_nmtenb8Ifb1rj8eap_540.jpg">
 _serializer_ became a hosted side project of mine with its own domain after reading [this post](http://www.slashie.org/articles/shipping-side-projects/) about ‘shipping’ side projects. That inspired to change _serializer_ into something that might be useful to others.
 
 _hckrnews.com_ ticks the linear box but doesn’t have any syncing / saving of state.
 
 So instead I built _serializer _into a tool with these features:
 
-*    Read-to-here marker
-
-*    Sessions for cross-device syncing without logins
-
-*    Customizable source feeds for users who aren’t me (I currently track /all)
-
-*    Reading time estimates (based on 300wpm and a simple page content extractor)
-
-*    Tweet counts for recent items
-
-*    Basic duplicate removal
+* Read-to-here marker
+* Sessions for cross-device syncing without logins
+* Customizable source feeds for users who aren’t me (I currently track /all)
+* Reading time estimates (based on 300wpm and a simple page content extractor)
+* Tweet counts for recent items
+* Basic duplicate removal
 
 My session also has a save to _Trello_ button who kindly host my 'multilevel reading list’. I plan on ‘releasing’ this at a later date.
 

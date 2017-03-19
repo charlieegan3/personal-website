@@ -13,7 +13,7 @@ tags:
 
 They don’t, that’s just a goal :) 
 
-I’d [mentioned](http://www.charlieegan3.com/2013/01/social-service.html) that my closer friends had migrated to using Google+ over the last year and I’ve kind of tagged along. It’s grown on me though, it’s really well thought out and has some really smart features.
+I’d [mentioned](/blog/2013/01/01/social-service.html) that my closer friends had migrated to using Google+ over the last year and I’ve kind of tagged along. It’s grown on me though, it’s really well thought out and has some really smart features.
 
 My favorite would be the Android App, I know it’s not really a feature so to speak, but it is a key part in making it work so well for me. As an example, we went to have a meal at a [local italian](https://plus.google.com/102830479477024164539/about?gl=uk&hl=en) before we all went home for Christmas. We had sorted it out as an 'Event’ and everything. Once we were there and the event had 'started’ all my photos were automatically uploaded to the event page. This was just so seamless that it more than deserves the 1st mention.
 

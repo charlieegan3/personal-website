@@ -35,9 +35,9 @@ handlers:
     Vary: Accept-Encoding
   expiration: 10d
 
-- url: /(.*\.(json))$
+- url: /(.*\.(json|pdf|csv|zip))$
   static_files: www/\1
-  upload: www/.*\.(json)$
+  upload: www/.*\.(json|pdf|csv|zip)$
   secure: always
   http_headers:
     Vary: Accept-Encoding

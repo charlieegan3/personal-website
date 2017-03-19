@@ -43,7 +43,7 @@ The highest level problems are with the way university education works as a whol
 
 I’ve had one very poorly ran course this last session, the teaching was terrible and I turned to on-line resources at [Khan Academy](https://www.khanacademy.org/), [cgcc](http://www.youtube.com/user/cgcclive) and [UCBerkley](http://www.youtube.com/user/UCBerkeley). These videos and tutorials really got me thinking. Do we need universities to exist as physical institutions? Do degrees need to be so lengthy and inflexible?
 
-I don’t think they do. As long as there’s funding to make **one **good, English, Computer Science, course then that’s all we need. _Don’t try and get researchers to teach if they can’t_, have natural teachers doing the teaching! About feedback and assessments, programs are easy to mark automatically and if people do the courses as alongside work then employers can see the results. [On-line testing](http://www.charlieegan3.com/post/46786234133/evil-e-assessments) is getting better too.
+I don’t think they do. As long as there’s funding to make **one **good, English, Computer Science, course then that’s all we need. _Don’t try and get researchers to teach if they can’t_, have natural teachers doing the teaching! About feedback and assessments, programs are easy to mark automatically and if people do the courses as alongside work then employers can see the results. [On-line testing](/blog/2013/03/16/evil-e-assessments.html) is getting better too.
 
 Putting these measures in place would greatly reduce the cost of the whole ordeal. Not to mention how much more accommodating the system would be for different learners with different paces.
 

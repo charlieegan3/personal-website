@@ -8,7 +8,7 @@ tags:
 - Instagram
 - social networking
 ---
-I mentioned a few [posts](http://www.charlieegan3.com/2013/02/photos-revisited.html) back that I was going to try and get back into taking some photos again - mainly just a a little log of where I’ve been. I’ve been using Instagram, it’s a new one for me and this is my experience so far.
+I mentioned a few [posts](/blog/2013/02/10/photos-revisited.html) back that I was going to try and get back into taking some photos again - mainly just a a little log of where I’ve been. I’ve been using Instagram, it’s a new one for me and this is my experience so far.
 
 I would describe Instagram as less functional Twitter of photos edited to how our mind sees them. Sounds rather daft but the effects are quite, prevalent shall we say! The effects often make the photos look for far from realistic but instead more arty and I would say as how we remember scenes. Take a nice sunset, (a subject the app is full of) how you remember is is different to how the photos look. Often the effects bring the the image closer to ones memory of the scene. I don’t see this as a bad thing - some others do however…
 
