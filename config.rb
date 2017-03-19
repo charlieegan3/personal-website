@@ -43,6 +43,28 @@ helpers do
       "teaching" => "blackboard",
     }[type]
   end
+  def ordinalized_date(date, include_year=false)
+    date = Date.parse(date.to_s)
+    day = date.strftime("%e").strip
+    if include_year
+      "#{day}#{ordinal(day)} #{date.strftime("%B %Y")}"
+    else
+      "#{day}#{ordinal(day)} #{date.strftime("%B")}"
+    end
+  end
+  def ordinal(number)
+    number = number.to_i
+	if (11..13).include?(number % 100)
+	  "th"
+	else
+	  case number % 10
+		when 1; "st"
+		when 2; "nd"
+		when 3; "rd"
+		else    "th"
+	  end
+	end
+  end
 end
 
 set :css_dir, 'stylesheets'

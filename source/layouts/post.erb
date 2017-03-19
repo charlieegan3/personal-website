@@ -25,7 +25,7 @@
               <% end %>
             </h1>
 
-            <p class="post-date"><%= current_page.data.date.to_s.split(" ").first %></>
+            <p class="post-date"><%= ordinalized_date(current_page.data.date, true) %></>
 
             <%= yield %>
 

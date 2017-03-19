@@ -8,6 +8,9 @@
         <% articles.each do |article| %>
           <li>
             <%= link_to article.title, "/#{article.path}" %>
+            <span class="muted">
+              (<%= ordinalized_date(article.date) %>)
+            </span>
           </li>
         <% end %>
       </ul>
