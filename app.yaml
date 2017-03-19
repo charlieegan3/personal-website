@@ -13,7 +13,7 @@ handlers:
   http_headers:
     Vary: User-Agent
 
-- url: /(blog|articles|til)
+- url: /(blog|articles|til)/?
   static_files: www/\1/index.html
   upload: www/(blog|articles|til)/index.html
   secure: always
