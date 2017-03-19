@@ -3,7 +3,7 @@ title: "TIL at Container Camp"
 date: 2016-09-09 22:22:23 +0000
 ---
 
-![Container Camp Screen](/blog/2016/09/09/til-at-container-camp/container_camp_screen.jpg)
+![Container Camp Screen](/blog/2016-09-09-til-at-container-camp/container_camp_screen.jpg)
 
 I was lucky enough to get today off and attend [Container Camp](https://container.camp/uk/2016/schedule). Still relatively new to containers I had a lot to learn, here are some of the most important things I took away from the day.
 

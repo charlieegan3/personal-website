@@ -3,7 +3,7 @@ title: "2016 Macbook for software development: First Impressions"
 date: 2016-07-11 01:22 UTC
 ---
 
-I had [a little trouble with my 2012 rMBP](/blog/2016/06/24/getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law.html) and chose an m7 Retina Macbook as a replacement - after reading positive comments about the performance. I was looking for a different type of machine; namely something more portable; in line with travel plans of the upcoming year. I wanted to find out if the Macbook could do the job.
+I had [a little trouble with my 2012 rMBP](/blog/2016-06-24-getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law.html) and chose an m7 Retina Macbook as a replacement - after reading positive comments about the performance. I was looking for a different type of machine; namely something more portable; in line with travel plans of the upcoming year. I wanted to find out if the Macbook could do the job.
 
 ## My Setup
 I use docker for development; via dlite. I use iTerm and use vim as my main editor. I do not install any additional runtimes or development tools beyond git and my editor to the Macbook itself. I have not installed Xcode (but have the CLI tools installed). I use Safari as my browser, though I have Chrome installed for the occasion when I'm doing something with a frontend focus.

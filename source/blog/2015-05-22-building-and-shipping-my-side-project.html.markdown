@@ -9,7 +9,7 @@ I started lurking on Hacker News and Product Hunt at the beginning of the year. 
 
 I decided on a name pretty quick and bought serializer.io the next day. Students got a discount on *.io* domains at Namecheap (at the time).
 
-![Version 1](/blog/2015/05/22/building-and-shipping-my-side-project/v1.jpg)
+![Version 1](/blog/2015-05-22-building-and-shipping-my-side-project/v1.jpg)
 *Version 1*
 
 **March 11th:** I read this [blog post](http://www.slashie.org/articles/shipping-side-projects/) (about 'shipping' side projects) it was probably shared on Hacker News. (edit: it was [shared on Hacker News](https://news.ycombinator.com/item?id=9184448)).
@@ -32,7 +32,7 @@ I took a break for a while after that, only making very minor changes over the e
 
 **May 18th:** serializer did better than I ever expected and finished the day in the top 10 with around 100 votes at the time. Since I hadn't done any promotion before I saw a vast increase in traffic, I was impressed that the droplet held up.
 
-![trend](/blog/2015/05/22/building-and-shipping-my-side-project/trend.jpg)
+![trend](/blog/2015-05-22-building-and-shipping-my-side-project/trend.jpg)
 *This weeks trend, can you spot the Product Hunt boost?*
 
 This in turn led to some really great feedback from Product Hunters on Twitter and via the feedback form. In response to this I've made the following changes over the last few days:

@@ -24,4 +24,4 @@ Discarding false positives gave this list:
 
 In summary, all attacks that resulted in a service outage were caused by DDoS attacks, and all of these were in 2011.
 
-All collected incidents can be [downloaded here](/blog/2015/10/15/heroku-outage-analysis/incidents.zip).
+All collected incidents can be [downloaded here](/blog/2015-10-15-heroku-outage-analysis/incidents.zip).
