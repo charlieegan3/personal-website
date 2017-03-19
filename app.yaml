@@ -27,9 +27,9 @@ handlers:
   http_headers:
     Vary: Accept-Encoding
 
-- url: /(.*\.(js|css|jpg|png|gif|ico))$
+- url: /(.*\.(js|css|jpg|png|gif|ico|ttf|woff|woff2))$
   static_files: www/\1
-  upload: www/.*\.(js|css|jpg|png|gif|ico)$
+  upload: www/.*\.(js|css|jpg|png|gif|ico|ttf|woff|woff2)$
   secure: always
   http_headers:
     Vary: Accept-Encoding
