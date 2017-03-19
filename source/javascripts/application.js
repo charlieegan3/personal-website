@@ -4,20 +4,42 @@
 if (window.location.hostname == "www.charlieegan3.com")
   window.location.hostname = "charlieegan3.com";
 
-function displayVisibleEntries(selector) {
+function displayVisibleEntries(selector, distance) {
+  var windowBottom = $(window).scrollTop() + $(window).height();
+  $(selector).each(function(i) {
+    if (windowBottom > $(this).offset().top && $(this).css("opacity") != 1) {
+      $(this).animate({ "opacity":"1", "margin-top": distance }, 400);
+    }
+  });
+}
+
+function hideInvisibleEntries(selector) {
   var windowBottom = $(window).scrollTop() + $(window).height();
   $(selector).each(function(i){
-    if(windowBottom > $(this).offset().top){
-      $(this).animate({"opacity":"1", "margin-top": "7px"}, 400);
+    if (windowBottom < $(this).offset().top) {
+      $(this).animate({"opacity":"0"}, 0);
     }
   });
 }
 
 function loadLiveContent() {
-  $.get("https://storage.googleapis.com/json-charlieegan3/status.json", function(data) {
-    setLiveContent(data);
-    $(".spinner").remove();
-    displayVisibleEntries(".live");
+  $.ajax({
+    url: "https://storage.googleapis.com/json-charlieegan3/status.json",
+    success: function(data) {
+      setLiveContent(data);
+      $("#live-toggle").removeClass("col-md-12");
+      $("#live-toggle").addClass("col-md-8");
+      $(".incomplete").removeClass("incomplete");
+    },
+    error: function(data) {
+      $.get("/status.json", function(data) {
+        setLiveContent(data);
+        $("#live-toggle").removeClass("col-md-12");
+        $("#live-toggle").addClass("col-md-8");
+        $(".incomplete").removeClass("incomplete");
+      });
+    },
+    timeout: 1000
   });
 }
 
@@ -108,11 +130,12 @@ function setLiveContent(data) {
 
 $(document).on("turbolinks:load ready", function() {
   if (window.location.pathname === "/") {
+    hideInvisibleEntries(".later");
     loadLiveContent();
-    displayVisibleEntries(".later");
+    displayVisibleEntries(".later", "7px");
     $(window).scroll(function(){
-      displayVisibleEntries(".later");
-      displayVisibleEntries(".live");
+      displayVisibleEntries(".later", "7px");
+      displayVisibleEntries(".live", "0px");
     });
   }
 });

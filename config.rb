@@ -64,3 +64,14 @@ configure :build do
   activate :asset_hash
   activate :gzip
 end
+
+after_build do |builder|
+  require "open-uri"
+  require "json"
+
+  status = open("https://storage.googleapis.com/json-charlieegan3/status.json").read
+  JSON.parse(status)
+
+  local_status_file = File.join(config[:build_dir], "status.json")
+  File.write(local_status_file, status)
+end

@@ -1,7 +1,7 @@
-<div class="col-md-8 live">
+<div id="live-toggle" class="col-md-12 live">
   <div class="row">
     <div class="col-md-12">
-      <div class="entry">
+      <div class="entry status">
         <div class="entry-body">
           <p class="text-center">
             <%= partial('partials/status') %>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 live">
+    <div class="col-md-6 incomplete">
       <div class="entry twitter">
         <div class="entry-body">
           <a href="#" id="twitter-link">
@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 live">
+    <div class="col-md-6 incomplete">
       <div class="entry strava">
         <div class="entry-body">
           <a href="#" id="strava-link">
@@ -148,7 +148,7 @@
   </div>
 </div>
 
-<div class="col-md-4 live">
+<div class="col-md-4 incomplete live">
   <div class="entry instagram">
     <div class="entry-body">
       <%= image_tag "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG", id: "instagram-image" %>

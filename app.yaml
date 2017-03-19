@@ -35,6 +35,14 @@ handlers:
     Vary: Accept-Encoding
   expiration: 10d
 
+- url: /(.*\.(json))$
+  static_files: www/\1
+  upload: www/.*\.(json)$
+  secure: always
+  http_headers:
+    Vary: Accept-Encoding
+  expiration: 10m
+
 - url: /(feed|rss).*
   static_files: www/blog/feed.rss
   upload: www/blog/feed.rss

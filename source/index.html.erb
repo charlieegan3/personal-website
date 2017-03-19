@@ -1,14 +1,6 @@
 <div class="line"></div>
 
 <div class="row live-block">
-  <div class="spinner">
-    <div class="rect1"></div>
-    <div class="rect2"></div>
-    <div class="rect3"></div>
-    <div class="rect4"></div>
-    <div class="rect5"></div>
-  </div>
-
   <div class="col-md-12">
     <div class="row">
       <%= partial('partials/live_row') %>
@@ -37,7 +29,7 @@
       <% [even_values(articles), odd_values(articles)].each_with_index do |group, i| %>
         <div class="col-md-6">
           <% group.each do |article| %>
-            <div class="row <%= index > 0 ? 'later' : '' %>">
+            <div class="row later">
               <% size = article.metadata[:page][:width] || 12 %>
               <div class="<%= i == 0 && size < 12 ? "col-md-#{size.to_i} col-md-offset-#{12 - size.to_i}" : "col-md-#{size.to_i}" %>">
                 <%= partial("partials/entry", locals: { article: article, index: i }) %>
@@ -47,7 +39,7 @@
         </div>
       <% end %>
     <% else %>
-      <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-6 col-md-offset-3 later">
         <%= partial("partials/entry", locals: { article: articles.first, index: 1 }) %>
       </div>
     <% end %>
