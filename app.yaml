@@ -20,12 +20,20 @@ handlers:
   http_headers:
     Vary: User-Agent
 
-- url: /(.*)
+- url: /(.*\.html)
   static_files: www/\1
   upload: www/(.*)
   secure: always
   http_headers:
     Vary: User-Agent
+
+- url: /(.*\.(js|css|jpg|png|gif|ico))$
+  static_files: www/\1
+  upload: www/.*\.(js|css|jpg|png|gif|ico)$
+  secure: always
+  http_headers:
+    Vary: User-Agent
+  expiration: 10d
 
 - url: /(feed|rss).*
   static_files: www/blog/feed.rss
