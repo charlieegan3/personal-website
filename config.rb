@@ -72,6 +72,7 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
+ignore "images/icons"
 
 activate :syntax
 set :markdown_engine, :redcarpet
@@ -88,6 +89,8 @@ configure :build do
 end
 
 after_build do |builder|
+  puts "fetching fallback status.json"
+
   require "open-uri"
   require "json"
 
@@ -96,4 +99,35 @@ after_build do |builder|
 
   local_status_file = File.join(config[:build_dir], "status.json")
   File.write(local_status_file, status)
+end
+
+after_build do |builder|
+  puts "placing site icons"
+  raise unless `cp ./source/images/icons/* ./www` == ""
+end
+
+after_build do |builder|
+  puts "validating HTML"
+
+  HTMLProofer::Utils.class_eval do
+	def clean_content(string)
+	  string = string.encode(Encoding.find("US-ASCII"), { invalid: :replace, undef: :replace, replace: "" })
+	  string.gsub(%r{https?://([^>]+)}i) do |url|
+	  url.gsub(/&(?!amp;)/, "&amp;")
+	 end
+	end
+  end
+
+  HTMLProofer.check_directory(
+	"./www",
+	{
+      verbose: true,
+      parallel: { in_processes: 3 },
+      check_html: true,
+      check_favicon: true,
+      disable_external: true,
+      url_ignore: [/^\#$/],
+      error_sort: :desc
+	}
+  ).run
 end

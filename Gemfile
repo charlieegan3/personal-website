@@ -1,9 +1,10 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 gem "builder"
+gem "html-proofer"
 gem "middleman"
 gem "middleman-blog"
 gem "middleman-syntax"
-gem 'middleman-sprockets'
+gem "middleman-sprockets"
 gem "redcarpet"
 gem "therubyracer"
