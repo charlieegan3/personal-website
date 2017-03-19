@@ -10,30 +10,26 @@ handlers:
   static_files: www/index.html
   upload: www/index.html
   secure: always
+  http_headers:
+    Vary: User-Agent
 
-- url: /blog
-  static_files: www/blog/index.html
-  upload: www/blog/index.html
+- url: /(blog|articles|til)
+  static_files: www/\1/index.html
+  upload: www/(blog|articles|til)/index.html
   secure: always
-
-- url: /articles
-  static_files: www/articles/index.html
-  upload: www/articles/index.html
-  secure: always
-
-- url: /til
-  static_files: www/til/index.html
-  upload: www/til/index.html
-  secure: always
-
-- url: /(feed|rss).*
-  static_files: www/blog/feed.rss
-  upload: www/blog/feed.rss
-  secure: always
+  http_headers:
+    Vary: User-Agent
 
 - url: /(.*)
   static_files: www/\1
   upload: www/(.*)
+  secure: always
+  http_headers:
+    Vary: User-Agent
+
+- url: /(feed|rss).*
+  static_files: www/blog/feed.rss
+  upload: www/blog/feed.rss
   secure: always
 
 error_handlers:
