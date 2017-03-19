@@ -13,26 +13,30 @@
   </head>
 
   <body>
-	<%= partial("partials/header") %>
+    <%= partial("partials/header") %>
 
     <div id="main" role="main" class="container">
-	  <div class="row">
-		<div class="col-md-8 col-md-offset-2">
-		  <div class="post">
-			<h1 class="post-header"><%= current_page.data.title %></h1>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="post">
+            <h1 class="post-header">
+              <% link_to current_page.data.path do %>
+                <%= current_page.data.title %>
+              <% end %>
+            </h1>
 
-			<p class="post-date"><%= current_page.data.date.to_s.split(" ").first %></>
+            <p class="post-date"><%= current_page.data.date.to_s.split(" ").first %></>
 
-			<%= yield %>
+            <%= yield %>
 
-			<hr/>
+            <hr/>
 
-			<p><%= link_to "blog index", "/blog"%></p>
-		  </div>
-		</div>
+            <p><%= link_to "blog index", "/blog" %></p>
+          </div>
+        </div>
       </div>
     </div>
 
-	<%= partial("partials/footer") %>
+    <%= partial("partials/footer") %>
   </body>
 </html>

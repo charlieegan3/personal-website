@@ -7,6 +7,14 @@
 
   .post-header{
     font-size: 2em;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .post-date {
