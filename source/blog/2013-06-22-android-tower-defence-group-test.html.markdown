@@ -3,7 +3,7 @@ layout: post
 title: 'Android Tower Defence: Group Test'
 date: '2013-06-22T01:02:19+01:00'
 tags:
-- tower defense
+- tower defence
 - games
 - mobile games
 - android
@@ -28,7 +28,7 @@ I’ve not done a review in what feels like a long time, so here’s three combi
 
 **Radiant**** Defence**
 
-[Radiant Defence](https://play.google.com/store/apps/details?id=net.hexage.defense&hl=en) by [Hexage](http://www.hexage.net/) is the first game of the genre I started playing on my phone. It’s a really pretty game, the visuals are undoubtably the best of out of the three. The animations very smooth, and backed up on a solid yet sensible color scheme make it a winning combo.
+[Radiant Defence](https://play.google.com/store/apps/details?id=net.hexage.defense&hl=en) by [Hexage](http://www.hexage.net/) is the first game of the genre I started playing on my phone. It’s a really pretty game, the visuals are undoubtedly the best of out of the three. The animations very smooth, and backed up on a solid yet sensible colour scheme make it a winning combo.
 
 The gameplay’s clearly been well thought out too. Players have clear control over the enemies path but is kept nicely in check by a “Module” ration. This allows route choice to be a key part without allowing overpowered endless ‘zigzagings’.
 

@@ -10,7 +10,7 @@ One of the problems with online systems, one that I find particularly interestin
 
 Not all sites openly display a users rank, most still rank users in the background, but I’m interested in the systems that make ranks visible. Common examples would be forums, Foursquare check-ins + badges and I suppose tweets and followers to an extent. These are all numbers that show the level of engagement with the site and this information can be very useful.
 
-Displaying such information to users allows them to formulate behaviors towards each other.
+Displaying such information to users allows them to formulate behaviours towards each other.
 
 Certainly in forums this is very important - I know it is at macrumors.com. Your rank and the time you’re been a member is often what an argument boils down to. It also effects the way in which people respond to you and your posts - it’s quite interesting really.
 

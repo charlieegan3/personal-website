@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Limits to a Level of Literacy
+title: Learning programming through websense
 date: '2013-02-16T00:30:00+00:00'
 tags:
 - coding
@@ -32,4 +32,4 @@ The other problem is that to know what not to block it’s important to understa
 
 Now I visit stackoverlfow in excess of 10 times a day.
 
-This is a message to those in secondary education: web developers have built you the internet - let’s allow that tool to support the developers of the future.
+Looking back I should have asked to have had the filtering relaxed.

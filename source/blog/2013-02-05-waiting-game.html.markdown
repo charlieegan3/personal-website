@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Waiting Game
+title: Getting stuck & self-teaching Rails
 date: '2013-02-05T00:30:00+00:00'
 tags:
 - rails

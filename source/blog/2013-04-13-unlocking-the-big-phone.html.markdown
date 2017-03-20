@@ -19,9 +19,9 @@ tags:
 ---
 With another _massive_ confirmed earlier this week, the Galaxy Mega, big phones are getting big.
 
-I have a sizable phone, the Galaxy Note II, the successor to the Note and original ‘phablet’. Trust me they have all have a single main issue: One handed operation.
+I have a sizeable phone, the Galaxy Note II, the successor to the Note and original ‘phablet’. Trust me they have all have a single main issue: One handed operation.
 
-I find this the biggest pain when holding a dog lead or a trolly case in my left hand. An activity I seem do be doing quite regularly. I’d taken to dictating texts - it solved the typing problem ([Google Keyboard](https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin) is the best for this). The issue of unlocking the phone in the first place was the main set back.
+I find this the biggest pain when holding a dog lead or a trolley case in my left hand. An activity I seem do be doing quite regularly. I’d taken to dictating texts - it solved the typing problem ([Google Keyboard](https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin) is the best for this). The issue of unlocking the phone in the first place was the main set back.
 
 I’d totally forgotten about the 'Face Unlock’ as an option. Yeah it’s less secure but I thought I’d try it out. It works a charm! It doesn’t get it every time but then neither did my overstretched fingers. I’m not sure why I hadn’t done this before.
 

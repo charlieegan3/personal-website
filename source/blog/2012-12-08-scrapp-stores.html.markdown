@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ScrApp Stores
+title: The various shortcomings of 'App Stores'
 date: '2012-12-08T18:52:00+00:00'
 tags:
 - apple
@@ -19,7 +19,7 @@ Apps Store have [changed](http://waazzupppp.wordpress.com/2012/11/01/editorial-
 
 In many ways they do everything you would expect. They offer up content, organise your payments and oversee feedback. They even do some vaguely intelligent things like suggest apps or nice things like hold the odd sale. What’s bad is not what they do, but instead, what they don’t.
 
-You’re thinking well what else should they be doing? The answer: lots. It’s easier to picture when you think about online stores that sell real things - like amazon.com. Think about how you use amazon, say you’re shopping for a kettle, do you just go to the household section and buy the item (kettle or not) at the top of the list? Didn’t think so. You’ll sort out items till you only see kettles and then rank them on various factors.
+You’re thinking well what else should they be doing? The answer: lots. It’s easier to picture when you think about online stores that sell real things - like amazon.com. Think about how you use amazon, say you’re shopping for a kettle, do you just go to the household section and buy the item (kettle or not) at the top of the list? Did’t think so. You’ll sort out items till you only see kettles and then rank them on various factors.
 
 On app stores there are many fewer routes to each product: the home screen, top lists, broad categories and search - which in itself is not good at generic terms at all. While Amazon and eBay allow a [multitude](http://www.ebay.com/sch/ebayadvsearch/?rt=nc) of search and sort apps stores lack any kind of a results filter.
 

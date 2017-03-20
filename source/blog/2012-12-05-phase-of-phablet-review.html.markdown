@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Phase of Phablet. [Review]
+title: I bought a Phablet [Review]
 date: '2012-12-05T18:51:00+00:00'
 tags:
 - android
@@ -27,7 +27,7 @@ The best traits of the phone itself would have to be the following:
 It’s also made stronger with its Android bond, my favourite software features must be:
 
 * The slide down for notifications and common settings must be the most useful - just works perfectly and saves so much time when you’re constantly switching between WiFi and mobile data, silent and normal…
-* The way apps and widgets are handled is also great. The seven, totally customizable home screens took some time to get perfected but now they’re setup they’re really useful. I have (from left to right) News; todos; popular contacts; common apps + twitter, SMS, Email, Data usage + more apps.
+* The way apps and widgets are handled is also great. The seven, totally customise home screens took some time to get perfected but now they’re setup they’re really useful. I have (from left to right) News; todos; popular contacts; common apps + twitter, SMS, Email, Data usage + more apps.
 * Finally, tethering is a handy feature to use on the train, and is all handled by: Android OS.
 
 Some of the greatest fun though is in the apps, but I’ll save them for another day.

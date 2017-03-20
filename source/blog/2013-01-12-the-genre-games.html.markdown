@@ -9,7 +9,7 @@ tags:
 - halo
 - mlg
 ---
-At the same time as thinking that I’m slowly growing out of video games I remain utterly fascinated by the by the universe of my favorite series: Halo.
+At the same time as thinking that I’m slowly growing out of video games I remain utterly fascinated by the by the universe of my favourite series: Halo.
 
 I got into Halo quite a long time ago, early primary school in fact - back then it was Halo: Combat Evolved. However I've only _closely_ followed the franchise since Halo 3.
 

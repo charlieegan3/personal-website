@@ -6,7 +6,7 @@ tags:
 - osx
 - how to
 - operating System
-- customization
+- customisation
 - '10.8'
 - OS
 - bugs
@@ -18,4 +18,4 @@ A problem that I’ve had since upgrading to 10.8 Mountain Lion has been with 
     killall Finder
     echo "Open With has been rebuilt, Finder will relaunch"
 
-Then Relaunching the Finder with <code>⎇+cmd+esc</code> should solve the problem.However I found that the issue kept coming back. I just decided to remove all the apps and assign apps manually. You can do the same by following this guide [here](http://osxdaily.com/2011/02/03/clear-open-with-menu-mac/).
+Then Relaunching the Finder with <code>⎇+cmd+esc</code> should solve the problem. However I found that the issue kept coming back. I just decided to remove all the apps and assign apps manually. You can do the same by following this guide [here](http://osxdaily.com/2011/02/03/clear-open-with-menu-mac/).

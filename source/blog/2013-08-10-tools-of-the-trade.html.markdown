@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tools of the Trade
+title: "IT Technician: Tools of the Trade"
 date: '2013-08-10T01:02:54+01:00'
 tags: []
 ---
@@ -16,7 +16,7 @@ I don’t trust licences - they’re an almighty pain. Produkey solves that - it
 Don’t have the time to read ntbtlog.txt? No problem, this one does that for you. The only pain is that it needs a to run in a Windows environment - so you’ll likely need to take the disk out.
 
 ## Wise Portable Registry Cleaner
-It’s portable. It doesn’t leave remnants and popups on users computers. That’s good enough. Not to mention that it’s a pretty thorough registry cleaner too. It’s fun to tell people you single handedly fixed _1500 _registry errors!
+It’s portable. It doesn’t leave remnants and popups on users computers. That’s good enough. Not to mention that it’s a pretty thorough registry cleaner too. It’s fun to tell people you single helpfully fixed _1500 _registry errors!
 
 ## Autoruns
 An **essential**! An absolute must. This is the first stop in the tune up routine. Get rid of auto starting bloatware - fast! It’s easy to clean out everything from scheduled tasks to hidden startup processes. You’ll find you can easily create Blue Screens if you’re not careful so don’t go overboard. Also, some actually like the 'Ask Toolbar Updater’ - watch out for that too.

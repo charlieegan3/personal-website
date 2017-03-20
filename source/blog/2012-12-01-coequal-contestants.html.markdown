@@ -24,18 +24,18 @@ There needs to be a new focus in video games: coequal contestants.
 
 Players need to start with the same prematch options. They need to play on symmetrical maps and modes. And most importantly with others of equivalent connection quality.
 
-This might sound like a throughly boring game, and it may be, but I think if you could get this to work it would have a new attractive value to exceed the current splurge of limitless customization and heavy graphics.
+This might sound like a thoroughly boring game, and it may be, but I think if you could get this to work it would have a new attractive value to exceed the current splurge of limitless customisation and heavy graphics.
 
-People are attracted to current generation games bristling with features only to lose interest when they see it’s the same incompetent mechanics engrained beneath the gloss.
+People are attracted to current generation games bristling with features only to lose interest when they see it’s the same incompetent mechanics ingrained beneath the gloss.
 
 A coequal contestant game would aim to see a true representation of skill, if you are skilled you are reward by the accompanying score rather than a tacky ordnance drop or perk. If you are unskilled there is no overpowered tool available to boost you - as with everything else in life - skill will come with practice.
 
-Players skill would be represented as per playlist ratio rather than a homogenized score devoid of any meaning. If you’re good at Capture the Flag then this is immediately apparent to the team members or opposition. For example: (Player captures + 0.8*(Team-Player) captures)/Opposition captures. This is then accumulated accross games and should accessible as the players name and voice status. This makes it easy to compare and understand player skill.
+Players skill would be represented as per playlist ratio rather than a homogenised score devoid of any meaning. If you’re good at Capture the Flag then this is immediately apparent to the team members or opposition. For example: (Player captures + 0.8*(Team-Player) captures)/Opposition captures. This is then accumulated across games and should accessible as the players name and voice status. This makes it easy to compare and understand player skill.
 
 Other ideas might be:
 
 * Different Arenas: for example: Pro (less health, less aim assist, greater speed, lower respawns…), Snipers (restricted to that weapon class…). One thing is key: each player is treated the same as every other player in that match. This would allow for more variation but would be implemented fairly.
-* Player disconnection and quiting is severly punished and when the player quits the game ends. Punishment maybe: Only accumulate -ve stats for next 5 games, Ban on any progression  Another way to do it might be to publicly mark (for a limited time) quitters so people can leave before playing with them. You might be allowed 1 quit per fortnight before punishments. You would also want to punish AFK/inactive players to prevent any boosting.
+* Player disconnection and quitting is severely punished and when the player quits the game ends. Punishment maybe: Only accumulate -ve stats for next 5 games, Ban on any progression  Another way to do it might be to publicly mark (for a limited time) quitters so people can leave before playing with them. You might be allowed 1 quit per fortnight before punishments. You would also want to punish AFK/inactive players to prevent any boosting.
 * In game player feedback. Players are rated for good or bad communication, team play etc. by other players. Gives another useful comparison criteria.
 
 That hardly scratches the surface of the full potential of coequal contestant but it’s something to think about all the same.

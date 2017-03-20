@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Skeuomorphic Specialisation
+title: Skeuomorphic Apps and Backwards Compatibility
 date: '2012-12-04T18:50:00+00:00'
 tags:
 - apple

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: pseudo-learn
+title: Learning maths, programming and what to call that
 date: '2013-01-30T00:30:00+00:00'
 tags:
 - computer science

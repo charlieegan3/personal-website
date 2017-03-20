@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Location Emergency
+title: Smartphone 999
 date: '2013-01-25T00:30:00+00:00'
 tags:
 - Emergency
@@ -16,7 +16,7 @@ Also about a week ago I was ask which street’s I used to get for A to B. I had
 
 This task is what I propose we improve next.
 
-Instead of an ‘Emergency Dialler’ we have a single button on the phone’s lock screen. You have to press it and perhaps a combination to ensure that it’s not done in error. Warnings should display (fines for pranks etc.) and it’s important that anyone in a state of shock could use it - avoid being needlessly complex.
+Instead of an ‘Emergency Dialer’ we have a single button on the phone’s lock screen. You have to press it and perhaps a combination to ensure that it’s not done in error. Warnings should display (fines for pranks etc.) and it’s important that anyone in a state of shock could use it - avoid being needlessly complex.
 
 Once 'Emergency Mode’ was activated the phone would turn on it’s GPS, get it’s location and send this as a text to the emergency services. On receiving the text they would then call the user.
 

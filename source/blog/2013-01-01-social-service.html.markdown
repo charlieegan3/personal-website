@@ -17,12 +17,12 @@ I was an exceptionally late adopter of Facebook, I was one of, I think, two peop
 
 Once I’d signed up I became curious, venturing out in the search of a better system. A system to network and fix the lack of any real online presence. I thought that it looked odd for someone so interested in the world of technology was invisible on a Google search, would that not raise questions? What has this guy got to hide? I set off in search of the perfect social mix.
 
-[Twitter](https://twitter.com/charlieegan3) was the first stop and is has grown into my personal favorite  It seemed so very much cleaner in comparison to Facebook, and, while it wasn’t a substitute, it became a much better place to spend time. The other thing that appealed to me was the easy control of content associated with you. Tweets can fly at you but on your profile it’s only your content that appears, I liked that - being able to control ones public appearance with a dexterity Facebook lacked. That said, in the very beginning I didn’t tweet, I just followed individuals and online entities of interest - it became a bite sized news site, and it was that behaviour of the site that got me started. I did eventually follow other 'real people’ however only the ones I cared anything about - I do have the odd conversation on there be generally it’s just me in my tweets and I quite like it that way.
+[Twitter](https://twitter.com/charlieegan3) was the first stop and is has grown into my personal favourite  It seemed so very much cleaner in comparison to Facebook, and, while it wasn’t a substitute, it became a much better place to spend time. The other thing that appealed to me was the easy control of content associated with you. Tweets can fly at you but on your profile it’s only your content that appears, I liked that - being able to control ones public appearance with a dexterity Facebook lacked. That said, in the very beginning I didn’t tweet, I just followed individuals and online entities of interest - it became a bite sized news site, and it was that behaviour of the site that got me started. I did eventually follow other 'real people’ however only the ones I cared anything about - I do have the odd conversation on there be generally it’s just me in my tweets and I quite like it that way.
 It only gathered momentum from there on - and lots happened all at once. On the 'online presence’ front [about.me](http://about.me/charlieegan3) was a quick stop. It was seemed quite a good place to create an online presence - just a simple page, bio and links - no real dynamic content to monitor I still keep my page up and running today however the about page here and the links at the side have all but made it pointless.
 
 It stayed that way for quite a while - I didn’t bother with much else for quite a while. I kept on tweeting but was largely quiet on the others.
 
-The next phase began on the 30th of November. This was the beginning of the blog, the beginning of charlieegan3.com. It started with Tumblr, Tumblr lasted for about ten days, it was going well and I have no complaints with the Tumblr service other than suboptimal SEO. It has the best UI and basics of any blogging service but Blogger.com and it’s greater Google integration pulled me off the Tumblr track.
+The next phase began on the 30th of November. This was the beginning of the blog, the beginning of charlieegan3.com. It started with Tumblr, Tumblr lasted for about ten days, it was going well and I have no complaints with the Tumblr service other than sub-optimal SEO. It has the best UI and basics of any blogging service but Blogger.com and it’s greater Google integration pulled me off the Tumblr track.
 
 The [.blogspot](http://charlieegan3.blogspot.com/) address only lasted so long - I was lead to believe that the lack of a private domain was a major turn off, this had to change. I bought charlieegan3.com on the 12/12/12 - blogger now does all my hosting for me. I saw £7 for the year as a really good deal and just went for it.
 
@@ -32,7 +32,7 @@ That brings me on to the topic of my mobile social networking. Twitter mobile is
 
 So in summary this is how it stands as of the 31st of December 2012 (in order of usage):
 
-* Twitter: _Microblog and news source with some minor interactions._
+* Twitter: _Micro blog and news source with some minor interactions._
 * Google+:_ Sharing and coordination with close friends._
 * Blogger: _My technology related experiences and opinions._
 * Facebook: _Communicating with classmates has become it’s sole purpose._

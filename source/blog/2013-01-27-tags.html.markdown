@@ -1,6 +1,6 @@
 ---
 layout: post
-title: tags
+title: On using hashtags
 date: '2013-01-27T00:30:00+00:00'
 tags:
 - hashtag
@@ -25,11 +25,7 @@ First would be **promotion for interest** is is the most similar to the above
 
 They can also be used as a **personal record**. For instance, when was the last time I tweeted about such a topic? Also, some services use them to see your most tweeted topic, mine tend to be: #cold #aberdeen etc.
 
-Finally, the most controversial use: **sophisticated emotion replacement**. This is the one that tends to get the concept its 'bad press’. I still think it’s very useful, here’s why - to help stamp out the _global, emoticon ambiguity [plague](http://en.wikipedia.org/wiki/List_of_emoticons)_. For instance: 
-
-|-O 
-
-means #bored and :###.. means #sick. Not to mention that this: (*^3^)/~☆ means #blowakiss! How can these complex combinations of unicode characters make more sense than a simple _english _hashtag?
+Finally, the most controversial use: **sophisticated emotion replacement**. This is the one that tends to get the concept its 'bad press’. I still think it’s very useful, here’s why - to help stamp out the _global, emoticon ambiguity [plague](http://en.wikipedia.org/wiki/List_of_emoticons)_. For instance: |-O means #bored and :###.. means #sick. Not to mention that this: (*^3^)/~☆ means #blowakiss! How can these complex combinations of unicode characters make more sense than a simple hashtag?
 
 I see _why_ there is hostility to our humble hashtag but think it _only_ comes from a lack of understanding.
 

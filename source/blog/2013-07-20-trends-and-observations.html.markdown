@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Trends and Observations
+title: Getting another perspective on IT
 date: '2013-07-20T10:00:53+01:00'
 tags:
 - it
@@ -17,7 +17,7 @@ Two weeks ago I started working for a local IT business as a Technician, here’
 
 People are really troubled by their computers, I would go as far to say the older generation are, on average, scared of them. They think that the computer is far more intelligent than it is - they often think it does things autonomously. They believe that it does things that are impossible for it to have done.
 
-The fear is often caused by over estimation of the damage they might. Chances are they couldn’t loose their data if they tried. There’s a common misconception that computers are built with no safeguards.
+The fear is often caused by over estimation of the damage they might cause. Chances are they couldn’t loose their data if they tried. There’s a common misconception that computers are built with no safeguards.
 
 People don’t understand their needs. For instance, if they think they get ‘a lot of email’ they assume they need a large hard-disk. In fact, all they really need is a small hard-disk. People still don’t understand common space requirements.
 

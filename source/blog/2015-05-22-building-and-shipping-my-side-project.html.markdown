@@ -28,7 +28,7 @@ I worked quite hard to get the page weight down. The only javascript on the site
 
 I took a break for a while after that, only making very minor changes over the exam period when I needed a break from the books. I started using an ['over 10 url'](https://news.ycombinator.com/over?points=10) for Hacker News and made some other adjustments to marginally reduce the number of collected items. Pressure of exams and all that.
 
-**May 15th:** I added a link to [points](http://pointsapp.co), a cool app I'd seen on Product Hunt. I'd found it was pretty good at summarizing articles wanted make it a feature. I reached out to points and heard back from [Hugh Jones](https://twitter.com/hjonesr), he liked serializer and the points connection and offered to setup a post on [Product Hunt](http://www.producthunt.com/posts/serializer-io).
+**May 15th:** I added a link to [points](http://pointsapp.co), a cool app I'd seen on Product Hunt. I'd found it was pretty good at summarising articles wanted make it a feature. I reached out to points and heard back from [Hugh Jones](https://twitter.com/hjonesr), he liked serializer and the points connection and offered to setup a post on [Product Hunt](http://www.producthunt.com/posts/serializer-io).
 
 **May 18th:** serializer did better than I ever expected and finished the day in the top 10 with around 100 votes at the time. Since I hadn't done any promotion before I saw a vast increase in traffic, I was impressed that the droplet held up.
 

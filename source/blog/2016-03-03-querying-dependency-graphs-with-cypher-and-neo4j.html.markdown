@@ -4,13 +4,13 @@ date: 2016-03-03 11:51 UTC
 tags:
 ---
 
-As part of my honours project I need to query dependency graphs. A dependency graph is a directed graph where edges represent grammatical relations and nodes are tokens. I use CoreNLP and it gives a nice visualization:
+As part of my honours project I need to query dependency graphs. A dependency graph is a directed graph where edges represent grammatical relations and nodes are tokens. I use CoreNLP and it gives a nice visualisation:
 
 ![dep_graph](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph.png)
 
 So I'm using CoreNLP, why not use tregex to query the dependency parse? Short answer I couldn't get it working for my questions. Longer answer, tregex and semgrex documentation wasn't great, I started playing around with Neo4j in a container and found it could do what I wanted. It also offered a means to persist graphs for many texts that I could query collectively at a later date.
 
-My queries needed to extract a verb and it's arguments. Arguments need to be labeled correctly, this is dependent on the relation to the verb (or another one of it's arguments). For example, if we have the query `nounPhrase verb prep nounPhrase` then the `prep` is not linked directly to the verb but rather the second noun phrase, often the sentence object. Cypher implements an accessible syntax for expressing such patterns, this the query I used for the `np v prep np` pattern above:
+My queries needed to extract a verb and it's arguments. Arguments need to be labelled correctly, this is dependent on the relation to the verb (or another one of it's arguments). For example, if we have the query `nounPhrase verb prep nounPhrase` then the `prep` is not linked directly to the verb but rather the second noun phrase, often the sentence object. Cypher implements an accessible syntax for expressing such patterns, this the query I used for the `np v prep np` pattern above:
 
 ```
 MATCH (verb:Node)

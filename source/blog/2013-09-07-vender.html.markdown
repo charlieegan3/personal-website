@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Vender
+title: Vend POS & replacing desktop apps
 date: '2013-09-07T01:03:29+01:00'
 tags:
 - vend
@@ -29,7 +29,7 @@ Customer files are great but notes don’t have multiple lines for some reason. 
 
 There’s no option to duplicate a product, this is really quite annoying if you’re adding in loads of similar products in on go as we have been this week. I found however that you can press back after new product posting and edit the data to resubmit a new product with slightly different details. Still, little hacks like that shouldn’t be needed to get the job done really.
 
-It’s basically a pretty quick system but sometimes it really hangs on product editing. I have no idea why that should be. It also went down for about 30mins on Thursday this week. However this doesn’t mean that you can’t make sales. The javascript in the sales page and keep a track of it in local data. I was _really_ impressed by this.
+It’s basically a pretty quick system but sometimes it really hangs on product editing. I have no idea why that should be. It also went down for about 30minutes on Thursday this week. However this doesn’t mean that you can’t make sales. The javascript in the sales page and keep a track of it in local data. I was _really_ impressed by this.
 
 Vend’s support has been okay, once you’re into a ticket you’re laughing but that can take a few hours. With other software I’ve found the service to be faster. Still, there’s always the option of phone support for $39 extra - it’s something the shop might need in the end I fear.
 

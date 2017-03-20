@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Terminal at Folder
+title: Terminal-at-Folder
 date: '2013-02-08T00:30:00+00:00'
 tags:
 - lion
@@ -11,7 +11,7 @@ tags:
 - sublime text
 - mountain lion
 ---
-Say goodbye to `cd rails-app` and embrace the future of terminal!This little adjustment has probably saved me hours over the past few months and is a must for any programmer.
+Say goodbye to `cd long/path/to/my-app` and embrace the future of terminal! This little adjustment has probably saved me hours over the past few months and is a must for any programmer.
 
 1. Open_ System Preferences._
 2. Open the _Keyboard_ preference pane.

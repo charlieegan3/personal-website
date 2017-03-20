@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Trigger Happy
+title: "IFTTT: Trigger Happy"
 date: '2013-01-28T00:30:00+00:00'
 tags:
 - google drive
@@ -17,7 +17,7 @@ tags:
 This is the first review I’ve done on here for quite a while - here’s my take on [IFTTT](https://ifttt.com/). [+IFTTT](http://plus.google.com/109525093279809082285) is an online automation service that brings together many online applications. Before I begin there is some IFTTT jargon that you should know:
 
   * Channel: An application that you have ‘linked’.
-  * Trigger: An event that a Channel has. _e.g. 'New Mail Recived’._
+  * Trigger: An event that a Channel has. _e.g. 'New Mail Received’._
   * Action: A task that a Channel can complete automatically.
   * Recipe: A combination of a Trigger and an Action.
 

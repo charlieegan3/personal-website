@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Foresight is Futile
+title: Frozen Synapse [Review]
 date: '2012-12-14T07:00:00+00:00'
 tags:
 - turn based

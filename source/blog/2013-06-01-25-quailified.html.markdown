@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 25% Quailified
+title: 25% Qualified
 date: '2013-06-01T01:02:14+01:00'
 tags:
 - computer science
@@ -13,11 +13,11 @@ tags:
 - university
 - first year
 - level one
-- aberdeen
-- aberdeen university
+- Aberdeen
+- Aberdeen university
 - web technology
-- ror
-- ios
+- RoR
+- iOS
 - e-education
 ---
 My first year at university came to an end yesterday at 11:30 when I finished my ‘Web Technology’ exam. It’s been a fast few months but in that time I feel I’ve learnt enough to have an opinion on the university way.
@@ -27,11 +27,11 @@ I should first mention that I’ve actually really enjoyed my first year and I�
 ## Aberdeen Agitations
 The first set of problems, are, from what I can see, unique to the Aberdeen Computer Science department, however somewhat limited experience makes that rather hard to say with any degree of certainty.
 
-_Discipline Breadth_ More like 'Discipline Drought’... there’s a system that requires us to choose subjects that are from other departments. This, as an option, would be quite a good idea, giving people the choice to learn a little broader should perhaps be encouraged, but never compulsory. Compulsory was what school was for. In making it to university, and to study Computer Science, one hopes that you’ll be able to spend all your time doing your chosen subject, something you’d hopefully enjoy. You should, but it’s not the case at Aberdeen. Here there are only five first year Computer Science courses,_ five out of 8 'slots’_. This means you’ve got to take on extra courses that often aren’t relevant or enjoyable to you. Not a very good system, if you’ve chosen Computer Science, you should be able to spend your time in persuit of that.
+_Discipline Breadth_ there’s a system that requires us to choose subjects that are from other departments. This, as an option, would be quite a good idea, giving people the choice to learn a little broader should perhaps be encouraged, but never compulsory. Compulsory was what school was for. In making it to university, and to study Computer Science, one hopes that you’ll be able to spend all your time doing your chosen subject, something you’d hopefully enjoy. You should, but it’s not the case at Aberdeen. Here there are only five first year Computer Science courses,_ five out of 8 'slots’_. This means you’ve got to take on extra courses that often aren’t relevant or enjoyable to you. Not a very good system, if you’ve chosen Computer Science, you should be able to spend your time in pursuit of that.
 
 _Course Coordination_ There were a few poorly ran courses this year, out of the five that is. This involved things like: irrelevant and expensive textbooks; tutorials with no answers or means of getting them; a lack of past papers; impossibly 'full’ lectures (90 sides); unclear assignments and so on. Most of these issues, but not all, upon inspection, seemed to be related to the constantly refreshed courses. There’s a definite trend in the department to completely revamp courses - all the time. In theory this sounds like a good idea, fresh content and all that, however the reality is the list above - complete absence of valid learning material and student support. It leads to a rather unsatisfactory 'test subject’ feeling.
 
-## Discordant Discipline
+## The Discipline
 While some problems point to issues at a university level I think there are,  more fundamental, issues with the way the subject is taught in general.
 
 Let’s face it, Computer Science is programming. Knowledge of other areas (Networking, HCI…) are best learnt when explored with a programming project in mind and behind, at least that’s how I see it. Given the chance, I’d focus the courses more on current technologies, with one or two that focused on cross language skills. For example, one course on Applied Math that takes time to cover implementations in many languages. Another on design patterns such as the MVC, again with an effort to link it to real world technologies. This would leave the rest open to current trends such as a course in RoR or iOS development.

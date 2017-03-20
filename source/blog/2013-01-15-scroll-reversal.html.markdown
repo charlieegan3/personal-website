@@ -20,4 +20,4 @@ It’s quite an interesting one for me though, which way is really the most int
 
 However this does create some problems, switching to a PC and back can sometimes be a little awkward.
 
-Apple has had quite a few feeble feature failures, but in terms of trackpads and input they still win hands down over any other manufacturer.
+Apple has had quite a few feeble feature failures, but in terms of track-pads and input they still win hands down over any other manufacturer.

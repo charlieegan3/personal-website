@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "'Hacking' CSS & HTML"
+title: "'Hacking' CSS & HTML with Divshot"
 date: '2013-04-20T01:02:08+01:00'
 tags:
 - html

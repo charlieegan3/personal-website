@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fragments
+title: Fragmented Android
 date: '2013-06-29T01:02:32+01:00'
 tags:
 - android
@@ -18,7 +18,7 @@ tags:
 - google play
 - developers
 ---
-Many manufactures massively making many mobiles certainly gets you the top spot on the ‘Units Shipped' leader-board, however, theres a problem growing from it: Fragmentation. And it’s quite a big problem.
+Many manufactures massively making many mobiles certainly gets you the top spot on the ‘Units Shipped' leader-board, however, there's a problem growing from it: Fragmentation. And it’s quite a big problem.
 
 With Android devices reaching out to all corners of the mobile market it’s creating problems for users everywhere. Cheap phones can’t run the latest versions or don’t get the attention of the update team. Time that is spent though in that area, crucial maintenance and the like is time taken away from the phones at the top. And this is bad for users and developers alike.
 
@@ -34,6 +34,4 @@ Developers also get grief from their fragmented user base. The number of times I
 
 It’s just a pain - and it must be even more of a pain for developers trying to get everything working everywhere.
 
-While it would be extremely unfair to say that all Apple Devices run the latest iOS and apps there is something of a greater clarity in their upgrade system. Every year a device is likely to get dropped and that’s that. Hoping that you upgrade as many users do they soldier on - and it’s winning them the game.
-
-Apple may not be shipping the device to the same levels as the big Android players but in terms of revenue it’s still clearly on top. And certainly when it comes to app sales they’re remaining the clear winner.
+While it would be unfair to say that all Apple Devices run the latest iOS; it's in a much better state. Every year a device is likely to get dropped and that’s all there is to it.

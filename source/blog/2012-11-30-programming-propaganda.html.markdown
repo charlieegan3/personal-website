@@ -21,4 +21,4 @@ I’m not suggesting that we churn through all the Visual Studio errors, learn t
 
 I think this alteration would help the course better achieve what it aims to do and make it a more valuable experience. 
 
-Not many people like a survey, quite frankly neither do I, but if you have an improvement to suggest its a crime not to bother.
+Not many people like a survey, quite frankly neither do I, but if you have an improvement to suggest it's a shame not to bother.

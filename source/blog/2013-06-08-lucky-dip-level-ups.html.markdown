@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lucky-dip Level-ups
+title: Say no to lucky-dip level-ups
 date: '2013-06-08T01:02:07+01:00'
 tags:
 - Mass Effect

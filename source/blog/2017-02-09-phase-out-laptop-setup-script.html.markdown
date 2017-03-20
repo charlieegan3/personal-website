@@ -3,7 +3,7 @@ title: "Phasing out my laptop setup script"
 date: 2017-02-09 18:13:53 +0000
 ---
 
-**TL;DR** - I switched from a complicated script that personalized my development laptop to a setup minimal enough to make it irrelevant.
+**TL;DR** - I switched from a complicated script that personalised my development laptop to a setup minimal enough to make it irrelevant.
 
 I've used an Mac as my main computer since 2005, in 2005 I was 11 years old. Recently, a number of factors have pushed me to consider alternatives, the reasons for which are beyond the scope of this post. The consequence is that I've been looking to port my development environment to a Linux workstation.
 

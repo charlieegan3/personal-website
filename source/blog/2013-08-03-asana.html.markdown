@@ -16,7 +16,7 @@ tags:
 - communication
 - records
 ---
-My boss regularly asks me for ideas on how to help streamline things in the business. Here’s my review of a product we’ve put into action this week: Asana.
+Here’s my review of a product we’ve put into action this week: Asana.
 
 We’ve already got a very versatile CRM system that’s a little slow but does the job just fine. What we were lacking was communication in the office, a shared task list if you like. No member of staff is there all the time, and things were getting lost in the chopping and changing about. We’re hoping Asana can help with this.
 

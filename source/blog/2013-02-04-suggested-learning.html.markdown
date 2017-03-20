@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Suggested Learning
+title: The role of autocomplete in learning programming
 date: '2013-02-04T00:30:00+00:00'
 tags:
 - c

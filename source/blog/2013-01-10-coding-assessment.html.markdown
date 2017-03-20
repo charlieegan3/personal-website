@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Coding 'Assessment'
+title: Why I don't like writing code in exams
 date: '2013-01-10T00:30:00+00:00'
 tags:
 - computer science
@@ -22,9 +22,9 @@ These kind of problems though are easily sorted at a computer though, a remind
 
 This brings in many different biases and creates a rather inadequate assessment in my opinion.
 
-First off, you don’t have access to the tools that are _always_ present when you’re working in the real world - no autocomplete, no reference - basically no help. This means that you have to write perfectly executable code, on paper with no aids. Like taking a language writing exam with no dictionary.
+First off, you don’t have access to the tools that are _always_ present when you’re working in the real world - no auto-complete, no reference - basically no help. This means that you have to write perfectly executable code, on paper with no aids. Like taking a language writing exam with no dictionary.
 
-That’s not the only problem, the lack of help I can live with but the inability to check your solution’s correctness is just far too false. When you write a solution you’re always running it, reading the exceptions and making adjustments - it’s all part of the skill. I would even argue that the ability to fix errors is of greater value than memorizing syntax. It’s more than knowledge, it’s a way of thinking about a problem where exceptions are like clues to the mystery. It also transfers well between environments which only makes it all the more valuable.
+That’s not the only problem, the lack of help I can live with but the inability to check your solution’s correctness is just far too false. When you write a solution you’re always running it, reading the exceptions and making adjustments - it’s all part of the skill. I would even argue that the ability to fix errors is of greater value than memorising syntax. It’s more than knowledge, it’s a way of thinking about a problem where exceptions are like clues to the mystery. It also transfers well between environments which only makes it all the more valuable.
 
 To be able to pass the programming questions with top marks you basically need a photographic memory because it _must be executable_. This means that even if you have all the ‘steps’ (even all the lines) included you can still loose marks for the wrong kind of parentheses! In a French test for example you should loose marks for wrong words as it makes it less understandable. Here though, answers with mistakes that would be fixed by auto correction or easily spotted after a trial run should still be able to claim full marks.
 
