@@ -1,4 +1,4 @@
-<p>Blog posts I've written over the years.</p>
+<p>Blog posts, mostly about side projects or things learnt working on them.</p>
 
 <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles| %>
   <div class="row">
