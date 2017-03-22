@@ -13,9 +13,9 @@ handlers:
   http_headers:
     Vary: Accept-Encoding
 
-- url: /(blog|articles|til)/?
+- url: /(blog|links|til)/?
   static_files: www/\1/index.html
-  upload: www/(blog|articles|til)/index.html
+  upload: www/(blog|links|til)/index.html
   secure: always
   http_headers:
     Vary: Accept-Encoding
