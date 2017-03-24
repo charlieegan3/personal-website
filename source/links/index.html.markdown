@@ -4,6 +4,10 @@ my submissions of articles, tools or stories to the
 
 ## 2017
 
+[Git Standup](https://github.com/kamranahmedse/git-standup) - It's often helped to remind yourself of what you were doing yesterday before standup. This is a simple git extension that prints out each commit from the day before; it can also jump back a number of days with `git standup -d 3` for checking on a Monday morning.
+
+[Stackoverflow Developer Survey](https://stackoverflow.com/insights/survey/2017) - Thought it was worth posting this; some interesting bits in there (Rust and Smalltalk as 'most loved'; developers using Windows - even if there's likely to be something of a .Net skew)
+
 [Cargo Check](https://github.com/rust-lang/cargo/blob/d8159308bde4f3a3ad20a67fb80a6956a64d91d2/src/bin/check.rs#L9) - Rust 1.16 was [announced yesterday](https://blog.rust-lang.org/2017/03/16/Rust-1.16.html) with various interesting changes. `cargo check` is a tool to validate the correctness of a program is now built into Cargo; Rust's build system and package manager. Cargo check is interesting as it saves time by not building the program's binary. Coupled with Rust's compiler messages I thought this sounded pretty useful.
 
 [Scrimba](https://scrimba.com) - I spent a few innovation days playing with various container-based continuous deployment tools last year. I played with both [Wercker](http://www.wercker.com) and [Distelli](https://www.distelli.com) but found both had their quirks when deploying to a GCE cluster. I've yet to play with GCCB but hopefully better ease of use will come from the closer integration.
@@ -20,7 +24,7 @@ my submissions of articles, tools or stories to the
 
 [Sites can fingerprint you accross multiple browsers](https://arstechnica.co.uk/security/2017/02/now-sites-can-fingerprint-you-online-even-when-you-use-multiple-browsers/) - By getting browsers to perform tasks that give away attributes of the host machine, it's possible to track the same device across sessions from multiple browsers. Tasks make use of the GPU and the installed fonts among other features to build profiles.
 
-[Servo Starters](https://starters.servo.org/) - An idea for an upcoming Hackday was to work on some open source projects. The Rust community & mozilla have a number of initiatives for new contributors. _Servo Starters_ is one such initiative for the servo browser engine that lists issues suitable for beginners as well as highlighting mentored.
+[Servo Starters](https://starters.servo.org/) - An idea for an upcoming Hackday was to work on some open source projects. The Rust community & Mozilla have a number of initiatives for new contributors. _Servo Starters_ is one such initiative for the servo browser engine that lists issues suitable for beginners as well as highlighting mentored.
 
 [Scale API](https://www.scaleapi.com/) - Not sure if anyone else has used [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome) before but this is a similar service for "intelligence as a service" with a nice API (that I haven't used yet). There's also an [SE Daily episode](https://softwareengineeringdaily.com/2016/12/16/scale-api-with-lucy-guo-and-alexandr-wang/) with an interview for those into podcasts.
 
