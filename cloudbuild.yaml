@@ -1,0 +1,5 @@
+steps:
+- name: ruby:2.3.3
+  args: ["bash", "build.sh"]
+- name: gcr.io/cloud-builders/gcloud
+  args: ["app", "deploy"]
