@@ -33,7 +33,7 @@ usage consistent too.
 I was able to port my vim config to nvim very easily. I had an addon that
 wouldn't work and added the following commands.
 
-```
+```vim
 if has('nvim')
   tnoremap <esc> <C-\><C-n>
 
@@ -47,7 +47,7 @@ endif
 I also added a script to link the nvim configs to the old vim ones. I might
 just move them all to nvim at a later date.
 
-```
+```bash
 #!/bin/bash
 
 ln -s ~/.vim ~/.config/nvim
@@ -59,7 +59,7 @@ I struggled along with a thoroughly inadequate and irregular system for
 pasting in and cutting out of vim for too long. I knew about the `"+`
 register but didn't make use of it.
 
-```
+```vim
 vnoremap <cr> "+y<cr>
 vnoremap <BS> "+p<cr>
 ```
@@ -75,7 +75,7 @@ just used to cycle round until I got the one I wanted - or I'd just use
 FZF (ctrl-p) again. `buftabline` simply shows a list of open buffers at the
 top edge of the window - like almost any other editor... Getting caught up.
 
-```
+```vim
 Plug 'ap/vim-buftabline'
 
 highlight BufTabLineCurrent ctermbg=black
@@ -98,14 +98,14 @@ Whitespace trimming and tabs -> spaces had also been inconsistent in the old
 config. I had been using `vim-stripper` for trimming trailing whitespace but
 it turns out a simple regex does the job:
 
-```
+```vim
 autocmd BufWritePre * :%s/\s\+$//e
 ```
 
 I also opted to use a plugin, `vim-super-retab`, to correct the tabs before
 save. This is in addition to a number of other settings available by default.
 
-```
+```vim
 autocmd BufWritePre * :Tab2Space
 
 set smarttab smartindent expandtab " sane tab settings
