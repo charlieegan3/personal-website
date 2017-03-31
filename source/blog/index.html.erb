@@ -7,7 +7,12 @@
       <ul>
         <% articles.each do |article| %>
           <li>
-            <%= link_to article.title, "/#{article.path}" %>
+            <% if article.data["external_url"] %>
+              <%= link_to article.title, article.data["external_url"] %>
+              <span class="glyphicon glyphicon-share"></span>
+            <% else %>
+              <%= link_to article.title, "/#{article.path}" %>
+            <% end %>
             <span class="muted">
               (<%= ordinalized_date(article.date) %>)
             </span>
