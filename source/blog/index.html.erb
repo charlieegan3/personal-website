@@ -1,4 +1,9 @@
-<p>Blog posts, mostly about side projects or things learnt working on them.</p>
+<p>
+  Blog posts, mostly about side projects or things learnt working on them. My
+  posts on the
+  <a href="https://unboxed.co/blog/author/charlie-egan">unboxed blog</a>
+  are also listed below.
+</p>
 
 <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles| %>
   <div class="row">
