@@ -1,11 +1,5 @@
 .DS_Store
-id_rsa
-.gitconfig
 
-.sass-cache/
-
-.wercker/
-/.bundle
-/.vagrant
-build/
 www/
+/.bundle
+.sass-cache/
