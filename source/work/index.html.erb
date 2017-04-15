@@ -1,0 +1,35 @@
+---
+work_projects:
+  - name: char.gy
+    link: https://char.gy
+    comment: This is a comment about a thing that I will write about in the future
+    image: chargy.png
+  - name: Bookmetrix
+    link: http://bookmetrix.com
+    comment: Bookmetrix is a website that has books on it
+    image: books.png
+---
+<% content_for :page_title do %>
+  Charlie<span class="white">egan3</span>
+<% end %>
+
+<% content_for :page_subtitle do %>
+  I work as a Ruby developer at Unboxed.
+<% end %>
+
+<%= partial "partials/_top_menu" %>
+
+<% current_page.data.work_projects.each_with_index do |work_project, index| %>
+  <div class="flex-ns bg-red near-white mb2 mw7">
+    <div class="flex-col order-<%= index.odd? ? 1 : 0 %>-ns">
+      <div class="pa3">
+        <h2 class="f3 raleway mb4"><%= work_project.name %></h1>
+        <p class="f6"><%= work_project.comment %></p>
+      </div>
+    </div>
+    <div class="flex-col ba bw2 b--red order-<%= index.odd? ? 0 : 1 %>-ns"
+         style="background: url(<%= work_project.image %>); background-size: cover">
+      <img src="<%= work_project.image %>" class="o-0">
+    </div>
+  </div>
+<% end %>
