@@ -1,1 +1,43 @@
-homepage
+---
+menu_blocks:
+  - title: Work
+    path: /work.html
+  - title: Projects
+    path: /work.html
+  - title: Speaking
+    path: /work.html
+  - title: Words
+    path: /work.html
+  - title: Running
+    path: /work.html
+---
+
+<% content_for :page_title do %>
+  <span id="greeting" class="silver">Hello</span><span class="orange">,</span>
+  <span class="gray">I<span class="blue">'</span>m</span>
+  Charlie<span class="white">egan3</span>
+<% end %>
+
+<% content_for :page_subtitle do %>
+  On weekdays I make things for the internet. I like walking quickly.
+<% end %>
+
+<div class="cf">
+  <div class="fl w-100 w-50-ns raleway b">
+    <% current_page.data.menu_blocks.each do |menu_block| %>
+        <% link_to menu_block[:path] do %>
+          <div class="fl w-100 w-50-ns">
+            <div class="mr2-ns mb2 pv3 pv4-ns tc dark-gray ba bw2 b--mid-gray bg-animate hover-bg-light-gray">
+              <%= menu_block[:title] %>
+            </div>
+          </div>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div class="fl w-100 w-50-ns">
+    <div class="fr w-100 mw5-ns">
+      <%= partial "partials/contact_form" %>
+    </div>
+  </div>
+</div>

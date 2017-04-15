@@ -25,7 +25,22 @@
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", async: true %>
   </head>
-  <body>
-    <%= yield %>
+  <body class="bg-near-white">
+    <div class="fixed z-max w05 bg-dark-gray left-0 top-0 bottom-0"></div>
+    <div class="fixed z-max w05 bg-dark-gray right-0 top-0 bottom-0"></div>
+    <div class="fixed z-max h05 bg-dark-gray top-0 left-0 right-0"></div>
+    <div class="fixed z-max h05 bg-dark-gray bottom-0 left-0 right-0"></div>
+
+    <h1 class="raleway b f2 f1-ns ttu ph3 pt2-ns">
+      <%= yield_content(:page_title) %>
+    </h1>
+
+    <p class="sans-serif ph3 mb3">
+      <%= yield_content(:page_subtitle) %>
+    </p>
+
+    <div class="ph3">
+      <%= yield %>
+    </div>
   </body>
 </html>

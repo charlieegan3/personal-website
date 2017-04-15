@@ -1,3 +1,22 @@
-@import "normalize";
+@import "reset";
+
+@import "tachyons";
 
 @import "syntax_highlighting";
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,800');
+
+.raleway {
+  font-family: "Raleway", sans-serif;
+}
+
+.w05 {
+  width: 0.5rem;
+}
+.h05 {
+  height: 0.5rem;
+}
+
+textarea {
+  resize: none;
+}
