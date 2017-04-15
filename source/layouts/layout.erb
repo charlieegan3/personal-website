@@ -1,13 +1,16 @@
 <!doctype html>
-<html lang="en" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" style="">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="theme-color" content="#ffffff">
-    <%= partial("partials/twitter_meta_tags") %>
 
-    <title>charlieegan3</title>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@charlieegan3" />
+    <meta name="twitter:title" content="<%= current_page.data.title || "charlieegan3"%>" />
+    <meta name="twitter:description" content="Blog post by charlieegan3" />
+    <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/754990400042049537/QCD74wRs_400x400.jpg" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -15,16 +18,14 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
+    <title>
+      <%= content_blocks[:title].present? ? yield_content(:title) : "charlieegan3" %>
+    </title>
+
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", async: true %>
   </head>
   <body>
-    <%= partial("partials/header") %>
-
-    <div id="main" role="main" class="container">
-      <%= yield %>
-    </div>
-
-    <%= partial("partials/footer") %>
+    <%= yield %>
   </body>
 </html>
