@@ -1,0 +1,39 @@
+---
+talks:
+  - title: Development Rebundling in Dockerland
+    link: http://skilsmatter.com
+    comment: this is a comment about the talk
+    image: talking.png
+  - title: Northern Lights Docker Bundle Cache
+    link: http://blah.com
+    comment: more talking in the north this time
+    image: nl.jpg
+  - title: FTL
+    link: http://ftl.com
+    comment: what you can do with big query and github
+    image: ftl.png
+---
+
+<% content_for :page_title do %>
+  Charlie<span class="white">egan3</span>
+<% end %>
+
+<% content_for :page_subtitle do %>
+  I gave a talk at LRUG once and I generally speak most days.
+<% end %>
+
+<%= partial "partials/_top_menu" %>
+
+<div class="cf mw8-l mw6-m">
+  <% current_page.data.talks.each do |talk| %>
+    <div class="mb2 pr2 fl w-100 w-50-l">
+      <div class="ba bw2 b--gold" style="background: url(/speaking/<%= talk.image %>); background-size: cover">
+        <img src="/speaking/<%= talk.image %>" class="o-0 h5-l">
+      </div>
+      <div class="pa3 ba b--gold h4-l">
+        <h2 class="f3 raleway mb4"><%= talk.title %></h1>
+        <p class="f6"><%= talk.comment %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
