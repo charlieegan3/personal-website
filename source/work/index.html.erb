@@ -28,8 +28,8 @@ work_projects:
       </div>
     </div>
     <div class="flex-col ba bw2 b--red order-<%= index.odd? ? 0 : 1 %>-ns"
-         style="background: url(<%= work_project.image %>); background-size: cover">
-      <img src="<%= work_project.image %>" class="o-0">
+         style="background: url(/work/<%= work_project.image %>); background-size: cover">
+      <img src="/work/<%= work_project.image %>" class="o-0">
     </div>
   </div>
 <% end %>
