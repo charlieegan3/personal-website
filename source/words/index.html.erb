@@ -1,17 +1,24 @@
 ---
 papers:
-  - title: Argument Mining Conference
-    comment: Paper written for the 2016 argument conference in Berlin
-    link: https://paper
-    image: conference_image.jpg
-  - title: Thesis
-    comment: Undergraduate thesis
-    link: https://paper
-    image: thesis_cover_styled.jpg
-  - title: Heroku Security
-    comment: Heroku security review
-    link: https://paper
-    image: heroku_cover_styled.jpg
+  - title: Summarising the points made in online political debates
+    comment: Paper accepted at the 3rd Workshop on Argument Mining (ACl 2016)
+    link: https://scholar.google.co.uk/citations?view_op=view_citation&hl=en&user=pqb-ZNAAAAAJ&citation_for_view=pqb-ZNAAAAAJ:u5HHmVD_uO8C
+    image: /words/acl2016.png
+
+  - title: The effect of query length and search engine identity on computerised spelling correction of corrupted queries
+    comment: Write up of search engine performance on corrupted queries
+    link: /words/query_corruption_2016.pdf
+    image: /words/query_corruption_2016.png
+
+  - title: An argumentation-based approach to summarizing discussions
+    comment: Honours project thesis. Foundational work for the ACL paper
+    link: /words/thesis.pdf
+    image: /words/thesis.png
+
+  - title: Security discussion of the Heroku PaaS
+    comment: As part of a my security course I wrote up a risk assessment of hosting on the Heroku Platform
+    link: /words/heroku_ra_2016.pdf
+    image: /words/heroku_ra_2016.png
 ---
 <% content_for :page_title do %>
   Charlie<span class="white">egan3</span>
@@ -34,21 +41,9 @@ papers:
                      .take(5) %>
 
 <div class="cf">
-  <div class="fl w-100 w-third-l mt2">
-    <div class="ba b--mid-grey">
-      <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
-        Papers
-      </div>
-      <div class="pa2">
-        <%= partial("partials/item_list",
-                    locals: { items: current_page.data.papers }) %>
-      </div>
-    </div>
-  </div>
-
-  <div class="fl w-100 w-third-l mt2">
-    <div class="ba b--mid-grey mr2-l ml2-l">
-      <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
+  <div class="fl w-100 w-25-l mt2">
+    <div class="ba b--mid-gray mr2-l">
+      <div class="f3 raleway ba b--mid-gray bw2 tc pa2">
         Popular Posts
       </div>
       <div class="pa2">
@@ -57,18 +52,23 @@ papers:
     </div>
   </div>
 
-  <div class="fl w-100 w-third-l mt2">
-    <div class="ba b--mid-grey">
-      <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
+  <div class="fl w-100 w-25-l mt2">
+    <div class="ba b--mid-gray mr2-l">
+      <div class="f3 raleway ba b--mid-gray bw2 tc pa2">
         Recent Posts
       </div>
       <div class="pa2">
         <%= partial("partials/_post_list", locals: { posts: recent_posts, show_year: false }) %>
-        <div class="mt3">
-          <%= link_to "All Blog Posts", "/blog" %>
-          <%= link_to "RSS", "/feed.rss", target: "_blank" %>
+        <div class="mt3 mb2">
+          <%= link_to "All Blog Posts", "/blog", class: "pa1 tc ba bw2 b--mid-gray bg-animate hover-bg-light-gray" %>
+          <%= link_to "RSS", "/feed.rss", target: "_blank", class: "pa1 tc ba bw2 b--mid-gray bg-animate hover-bg-light-gray" %>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="fl w-100 w-50-l mt2">
+      <%= partial("partials/item_list",
+                  locals: { items: current_page.data.papers }) %>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <ol class="list">
   <% posts.each_with_index do |post, index| %>
-  <li class="<%= index == 0 ? "" : "mt2" %>">
+    <li class="<%= index == 0 ? "" : "mt2" %>">
       <div>
         <% if post.data["external_url"] %>
           <%= link_to post.title, post.data["external_url"] %>

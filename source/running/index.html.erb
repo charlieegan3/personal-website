@@ -1,0 +1,32 @@
+---
+talks:
+  - title: Highland Cross
+    link: http://highlandcross.com
+    comment: I've completed this 50 mile, coast-to-coast dualathon four times.
+    image: /running/hc.png
+  - title: Parkrun
+    link: http://profile
+    comment: I've ran a Parkrun almost every week for the last four years.
+    image: /running/parkrun.jpg
+  - title: Strava
+    link: http://profile.com
+    comment: I post my runs on Strava come - kudos for kudos over here.
+    image: /running/map.png
+  - title: Loch Ness Marathon
+    link: http://result
+    comment: I made a huge mistake and completed a marathon for which I was more than a little unprepared.
+    image: /running/marathon.png
+---
+
+<% content_for :page_title do %>
+  Charlie<span class="white">egan3</span>
+<% end %>
+
+<% content_for :page_subtitle do %>
+  I speak most days.
+<% end %>
+
+<%= partial "partials/_top_menu" %>
+
+<%= partial("partials/item_cards",
+            locals: { items: current_page.data.talks }) %>
