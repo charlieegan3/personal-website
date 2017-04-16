@@ -1,35 +1,24 @@
-<p>
-  Blog posts, mostly about side projects or things learnt working on them. My
-  posts on the
-  <a href="https://unboxed.co/blog/author/charlie-egan">unboxed blog</a>
-  are also listed below.
-</p>
+<% content_for :page_title do %>
+  Charlie<span class="white">egan3</span>
+<% end %>
 
-<% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles| %>
-  <div class="row">
-    <div class="col-md-12">
-      <h2><%= year %></h2>
-      <ul>
-        <% articles.each do |article| %>
-          <li>
-            <% if article.data["external_url"] %>
-              <%= link_to article.title, article.data["external_url"] %>
-              <span class="glyphicon glyphicon-share"></span>
-            <% else %>
-              <%= link_to article.title, "/#{article.path}" %>
-            <% end %>
-            <span class="muted">
-              (<%= ordinalized_date(article.date) %>)
-            </span>
-          </li>
-        <% end %>
-      </ul>
+<% content_for :page_subtitle do %>
+  I sometimes cobble together blog posts before forgetting things.
+<% end %>
+
+<%= partial "partials/_top_menu" %>
+
+<% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, posts| %>
+  <div class="ba b--mid-grey mw7 mt2">
+    <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
+      <%= year %>
+    </div>
+    <div class="pa2">
+      <%= partial("partials/_post_list", locals: { posts: posts, show_year: false }) %>
     </div>
   </div>
 <% end %>
 
 <hr>
 
-<% link_to "https://charlieegan3.com/feed.rss", target: "_blank" do %>
-  RSS Feed
-<% end %>
+<%= link_to "RSS", "/feed.rss", target: "_blank" %>

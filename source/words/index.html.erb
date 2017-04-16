@@ -1,21 +1,74 @@
 ---
 papers:
-- heroku
-- thesis
-- arg mining
-
-blog:
-- latest
-- popular
-- all
+  - title: Argument Mining Conference
+    comment: Paper written for the 2016 argument conference in Berlin
+    link: https://paper
+    image: conference_image.jpg
+  - title: Thesis
+    comment: Undergraduate thesis
+    link: https://paper
+    image: thesis_cover_styled.jpg
+  - title: Heroku Security
+    comment: Heroku security review
+    link: https://paper
+    image: heroku_cover_styled.jpg
 ---
 <% content_for :page_title do %>
   Charlie<span class="white">egan3</span>
 <% end %>
 
 <% content_for :page_subtitle do %>
-  I don't write very well but do it anyway.
+  I sometimes cobble together blog posts before forgetting things.
 <% end %>
 
 <%= partial "partials/_top_menu" %>
 
+<% popular_posts = page_articles(blog_name = "blog")
+                     .select { |a| a.data[:featured] }
+                     .sort_by { |a| a.data[:featured] }
+                     .take(5) %>
+
+<% recent_posts  = page_articles(blog_name = "blog")
+                     .sort_by { |a| a.date }
+                     .reverse
+                     .take(5) %>
+
+<div class="cf">
+  <div class="fl w-100 w-third-l mt2">
+    <div class="ba b--mid-grey">
+      <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
+        Papers
+      </div>
+      <div class="pa2">
+        <%= partial("partials/item_list",
+                    locals: { items: current_page.data.papers }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="fl w-100 w-third-l mt2">
+    <div class="ba b--mid-grey mr2-l ml2-l">
+      <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
+        Popular Posts
+      </div>
+      <div class="pa2">
+        <%= partial("partials/_post_list", locals: { posts: popular_posts, show_year: true }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="fl w-100 w-third-l mt2">
+    <div class="ba b--mid-grey">
+      <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
+        Recent Posts
+      </div>
+      <div class="pa2">
+        <%= partial("partials/_post_list", locals: { posts: recent_posts, show_year: false }) %>
+        <div class="mt3">
+          <%= link_to "All Blog Posts", "/blog" %>
+          <%= link_to "RSS", "/feed.rss", target: "_blank" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

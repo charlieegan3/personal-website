@@ -1,6 +1,7 @@
 ---
 title: "Heroku Deploy button treasure hunt with GitHub and BigQuery"
 date: 2017-01-12 17:03:05 +0000
+featured: 2
 ---
 
 Sometime last year I listen to a [Changelog podcast episode](https://changelog.com/podcast/209)
@@ -14,17 +15,17 @@ what people might have already built that was ready to 'self host' on Heroku.
 So after a little fiddling about I settled on the following query:
 
 ```sql
-SELECT repo_name FROM [bigquery-public-data:github_repos.files] 
+SELECT repo_name FROM [bigquery-public-data:github_repos.files]
 WHERE id IN (
-  SELECT id FROM [bigquery-public-data:github_repos.contents] 
+  SELECT id FROM [bigquery-public-data:github_repos.contents]
   WHERE content CONTAINS 'https://www.herokucdn.com/deploy/button.png'
 )
 ```
 
-This gets a list of all the repos that have the Heroku button in some file 
+This gets a list of all the repos that have the Heroku button in some file
 somewhere.
 
-Next I wrote a simple script to get the extra data from the GitHub API 
+Next I wrote a simple script to get the extra data from the GitHub API
 (description, homepage etc). After sorting by stars (because I couldn't think
 of a better thing to sort by) we get the following:
 

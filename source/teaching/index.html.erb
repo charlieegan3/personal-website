@@ -1,10 +1,21 @@
 ---
 teachings:
-  - codebar
-  - cfg
-  - 1:1
-  - abdn
-  - codedojo
+  - title: codebar
+    link: http://codebar.io
+    comment: this is codebar's comment. It might be more than a single sentence
+    image: /teaching/codebar.jpg
+  - title: CFG
+    link: http://codebar.io
+    comment: this is codebar's comment. It might be more than a single sentence
+    image: desktop
+  - title: Teaching Assistant at University of Aberdeen
+    link: http://codebar.io
+    comment: this is codebar's comment. It might be more than a single sentence
+    image: desktop
+  - title: CoderDojo
+    link: http://codebar.io
+    comment: this is codebar's comment. It might be more than a single sentence
+    image: desktop
 ---
 <% content_for :page_title do %>
   Charlie<span class="white">egan3</span>
@@ -16,6 +27,5 @@ teachings:
 
 <%= partial "partials/_top_menu" %>
 
-thing
-
-
+<%= partial("partials/item_cards",
+            locals: { items: current_page.data.teachings }) %>

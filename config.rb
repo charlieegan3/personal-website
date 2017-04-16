@@ -47,23 +47,23 @@ helpers do
     date = Date.parse(date.to_s)
     day = date.strftime("%e").strip
     if include_year
-      "#{day}#{ordinal(day)} #{date.strftime("%B %Y")}"
+      "#{day}#{ordinal(day)} #{date.strftime("%B %y")}"
     else
       "#{day}#{ordinal(day)} #{date.strftime("%B")}"
     end
   end
   def ordinal(number)
     number = number.to_i
-	if (11..13).include?(number % 100)
-	  "th"
-	else
-	  case number % 10
-		when 1; "st"
-		when 2; "nd"
-		when 3; "rd"
-		else    "th"
-	  end
-	end
+        if (11..13).include?(number % 100)
+          "th"
+        else
+          case number % 10
+                when 1; "st"
+                when 2; "nd"
+                when 3; "rd"
+                else    "th"
+          end
+        end
   end
 end
 
@@ -110,17 +110,17 @@ after_build do |builder|
   puts "validating HTML"
 
   HTMLProofer::Utils.class_eval do
-	def clean_content(string)
-	  string = string.encode(Encoding.find("US-ASCII"), { invalid: :replace, undef: :replace, replace: "" })
-	  string.gsub(%r{https?://([^>]+)}i) do |url|
-	  url.gsub(/&(?!amp;)/, "&amp;")
-	 end
-	end
+        def clean_content(string)
+          string = string.encode(Encoding.find("US-ASCII"), { invalid: :replace, undef: :replace, replace: "" })
+          string.gsub(%r{https?://([^>]+)}i) do |url|
+          url.gsub(/&(?!amp;)/, "&amp;")
+         end
+        end
   end
 
   HTMLProofer.check_directory(
-	"./www",
-	{
+        "./www",
+        {
       verbose: true,
       parallel: { in_processes: 3 },
       check_html: true,
@@ -128,6 +128,6 @@ after_build do |builder|
       disable_external: true,
       url_ignore: [/^\#$/],
       error_sort: :desc
-	}
+        }
   ).run
 end
