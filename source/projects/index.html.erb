@@ -1,21 +1,21 @@
 ---
 projects:
-  - name: serializer.io
+  - title: serializer.io
     link: http://serializer.io
     comment: this is a comment about serializer
-    image: serializer.png
-  - name: Twitter Roundup
+    image: /projects/serializer.png
+  - title: Twitter Roundup
     link: http://twitterroundup.com
     comment: RSS feeds for groups of twitter users
-    image: serializer.png
-  - name: Twitter Roundup
+    image: /projects/serializer.png
+  - title: Twitter Roundup
     link: http://twitterroundup.com
     comment: RSS feeds for groups of twitter users
-    image: serializer.png
-  - name: Twitter Roundup
+    image: /projects/serializer.png
+  - title: Twitter Roundup
     link: http://twitterroundup.com
     comment: RSS feeds for groups of twitter users
-    image: serializer.png
+    image: /projects/serializer.png
 ---
 <% content_for :page_title do %>
   Charlie<span class="white">egan3</span>
@@ -27,18 +27,5 @@ projects:
 
 <%= partial "partials/_top_menu" %>
 
-<div class="cf mw8">
-  <% current_page.data.projects.each do |project| %>
-    <div class="fl w-100 w-50-m w-third-l mb2">
-      <div class="mr2 ba b--mid-gray">
-        <div class="ba bw2 b--mid-gray h5-ns" style="background: url(/projects/<%= project.image %>); background-size: cover">
-          <img src="/projects/<%= project.image %>" class="o-0">
-        </div>
-        <div class="pa3">
-          <h2 class="f3 raleway mb3 h3-ns"><%= project.name %></h1>
-          <p class="f6"><%= project.comment %></p>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= partial("partials/item_cards",
+            locals: { items: current_page.data.projects }) %>

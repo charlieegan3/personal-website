@@ -3,15 +3,15 @@ talks:
   - title: Development Rebundling in Dockerland
     link: http://skilsmatter.com
     comment: this is a comment about the talk
-    image: talking.png
+    image: /speaking/talking.png
   - title: Northern Lights Docker Bundle Cache
     link: http://blah.com
     comment: more talking in the north this time
-    image: nl.jpg
+    image: /speaking/nl.jpg
   - title: FTL
     link: http://ftl.com
     comment: what you can do with big query and github
-    image: ftl.png
+    image: /speaking/ftl.png
 ---
 
 <% content_for :page_title do %>
@@ -24,18 +24,5 @@ talks:
 
 <%= partial "partials/_top_menu" %>
 
-<div class="cf mw8">
-  <% current_page.data.talks.each do |talk| %>
-    <div class="fl w-100 w-50-m w-third-l mb2">
-      <div class="mr2 ba b--mid-gray">
-        <div class="ba bw2 b--mid-gray h5-ns" style="background: url(/speaking/<%= talk.image %>); background-size: cover">
-          <img src="/speaking/<%= talk.image %>" class="o-0">
-        </div>
-        <div class="pa3">
-          <h2 class="f3 raleway mb3 h3-ns"><%= talk.title %></h1>
-          <p class="f6"><%= talk.comment %></p>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= partial("partials/item_cards",
+            locals: { items: current_page.data.talks }) %>

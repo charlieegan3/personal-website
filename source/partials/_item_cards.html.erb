@@ -1,0 +1,15 @@
+<div class="cf mw8">
+  <% items.each do |item| %>
+    <div class="fl w-100 w-50-m w-third-l mb2">
+      <div class="mr2 ba b--mid-gray">
+        <div class="ba bw2 b--mid-gray h5-ns" style="background: url(<%= item.image %>); background-size: cover">
+          <img src="<%= item.image %>" class="o-0">
+        </div>
+        <div class="pa3">
+          <h2 class="f3 raleway mb3 h3-ns"><%= item.title %></h1>
+          <p class="f6"><%= item.comment %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
