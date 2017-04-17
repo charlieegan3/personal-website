@@ -31,17 +31,17 @@
     <div class="fixed z-max h05 bg-dark-gray top-0 left-0 right-0"></div>
     <div class="fixed z-max h05 bg-dark-gray bottom-0 left-0 right-0"></div>
 
-    <h1 class="raleway b f2 f1-ns ttu ph3 pt2-ns">
+    <h1 class="raleway b f3 f2-m f1-l ttu ph3 pt2-ns mh1-ns">
       <% link_to "/" do %>
       <%= yield_content(:page_title) %>
       <% end %>
     </h1>
 
-    <p class="sans-serif ph3 mb3">
+    <p class="sans-serif ph3 mb3 mh1-ns">
       <%= yield_content(:page_subtitle) %>
     </p>
 
-    <div class="ph3">
+    <div class="ph3 pb2">
       <%= yield %>
     </div>
   </body>

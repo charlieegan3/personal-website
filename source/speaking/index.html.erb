@@ -26,9 +26,9 @@ teachings:
     link: https://www.abdn.ac.uk/registry/courses/undergraduate/2017/computing_science/cs2012
     comment: I taught on the second-year, web application development course for three terms - we covered basic Ruby, Rails and Postgres
     image: /speaking/aberdeen.png
-  - title: Code First Girls
+  - title: Code First
     link: http://www.codefirstgirls.org.uk
-    comment: I taught a 6 week intro to HTML, CSS & JS course during my final spring term at Aberdeen
+    comment: I taught a six week intro to HTML, CSS & JS course during my final term at Aberdeen
     image: /speaking/cfg.jpg
   - title: CoderDojo
     link: https://zen.coderdojo.com/dojo/gb/university-of-aberdeen-computing-science-meston-building-room-3-11-aberdeen-ab-2-4-3ue/aberdeen
@@ -46,10 +46,10 @@ teachings:
 
 <%= partial "partials/_top_menu" %>
 
-<h2 class="f3 raleway b mt1 mb2">Talks</h2>
+<h2 class="f3 raleway b mh1-ns mb1">Talks</h2>
 <%= partial("partials/item_cards",
             locals: { items: current_page.data.talks }) %>
 
-<h2 class="f3 raleway b mt1 mb2">Teaching</h2>
+<h2 class="f3 raleway b mh1-ns mb1">Teaching</h2>
 <%= partial("partials/item_list",
             locals: { items: current_page.data.teachings }) %>

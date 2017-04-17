@@ -1,15 +1,13 @@
-<div class="cf mw8">
+<div class="flex-ns flex-wrap mw8">
   <% items.each do |item| %>
-    <% link_to item.link do %>
-      <div class="fl w-100 w-50-m w-third-l mb2 bg hover-bg-light-gray">
-        <div class="mr2 ba b--mid-gray">
-          <div class="ba bw2 b--mid-gray h5-ns" style="background: url(<%= item.image %>); background-size: cover">
-            <img src="<%= item.image %>" class="o-0">
-          </div>
-          <div class="pa3 h4-ns">
-            <h2 class="f3 raleway mb3"><%= item.title %></h1>
-            <p class="f6"><%= item.comment %></p>
-          </div>
+    <% link_to item.link, class: "flex-ns w-100 w-50-m w-third-l" do %>
+      <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray">
+        <div class="ba bw2 b--mid-gray h4 h5-l" style="background: url(<%= item.image %>); background-size: cover">
+          <img src="<%= item.image %>" class="o-0">
+        </div>
+        <div class="pa3">
+          <h2 class="f3 raleway mb3"><%= item.title %></h1>
+          <p class="f6"><%= item.comment %></p>
         </div>
       </div>
     <% end %>

@@ -20,16 +20,16 @@ menu_blocks:
   On weekdays I make things for the internet. I like walking quickly.
 <% end %>
 
-<div class="cf">
+<div class="cf mh1-ns">
   <div class="fl w-100 w-50-ns raleway b">
     <% current_page.data.menu_blocks.each do |menu_block| %>
-        <% link_to menu_block[:path] do %>
-          <div class="fl w-100 w-50-ns">
-            <div class="mr2-ns mb2 pv3 pv4-ns tc dark-gray ba bw2 b--mid-gray bg-animate hover-bg-light-gray">
-              <%= menu_block[:title] %>
-            </div>
+      <% link_to menu_block[:path] do %>
+        <div class="fl w-100 w-50-ns">
+          <div class="mr2-ns mb2 pv3 pv4-ns tc dark-gray ba bw2 b--mid-gray bg-animate hover-bg-light-gray">
+            <%= menu_block[:title] %>
           </div>
-        <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

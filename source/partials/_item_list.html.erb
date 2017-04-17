@@ -1,18 +1,16 @@
-<div class="fl">
-  <% items.each_with_index do |item, index| %>
-    <% link_to item[:link] do %>
-      <div class="flex-ns mb2 mw7 ba b--mid-gray bg hover-bg-light-gray">
-        <div class="flex-col order-<%= index.odd? ? 1 : 0 %>-ns">
-          <div class="pa3">
-            <h2 class="f3 raleway mb4"><%= item.title %></h1>
-            <p class="f6"><%= item.comment %></p>
-          </div>
-        </div>
-        <div class="flex-col order-<%= index.odd? ? 0 : 1 %>-ns ba bw2 b--mid-gray <%= index.odd? ? "mr2" : "ml2" %>"
-             style="background: url(<%= item.image %>); background-size: cover">
-          <img src="<%= item.image %>" class="o-0">
+<% items.each_with_index do |item, index| %>
+  <% link_to item[:link], class: "db mw7-l" do %>
+    <div class="flex-ns mb2 mh1-ns ba b--mid-gray bg hover-bg-light-gray">
+      <div class="flex w-50-ns order-<%= index.odd? ? 1 : 0 %>-ns">
+        <div class="pa3">
+          <h2 class="f3 raleway mb3"><%= item.title %></h1>
+          <p class="f6"><%= item.comment %></p>
         </div>
       </div>
-    <% end %>
+      <div class="flex w-50-ns order-<%= index.odd? ? 0 : 1 %>-ns ba bw2 b--mid-gray"
+           style="background: url(<%= item.image %>); background-size: cover">
+        <img src="<%= item.image %>" class="o-0">
+      </div>
+    </div>
   <% end %>
-</div>
+<% end %>
