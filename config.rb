@@ -94,6 +94,40 @@ configure :build do
   activate :gzip
 end
 
+after_configuration do
+  if build?
+    puts "Building custom tachyons import"
+    used_classes = `find .`.split("\n")
+      .select { |file| file.match(/(html|erb)$/) }
+      .map { |file| File.read(file).scan(/class(:|=) ?"([\w\s_\-]+)"/) }
+      .flatten.join(" ")
+      .split(/\s+/).uniq + %w(order-0-ns order-1-ns)
+
+    required_css = File.readlines("source/stylesheets/_tachyons.scss")
+      .select { |line|
+        line.start_with?("@media") ||
+          line == "}\n" ||
+          line[0].match(/\[|\w/) ||
+          used_classes.any? { |c| line.strip.match(/\.#{c}( |:)/) }
+      }.join
+
+    puts "Missing Classes:"
+    used_classes.each do |c|
+      unless required_css.match(/\.#{c}( |:)/)
+        puts c
+      end
+    end
+
+    `cp source/stylesheets/_tachyons.scss source/stylesheets/_backup_tachyons.scss`
+    File.write("source/stylesheets/_tachyons.scss", required_css)
+  end
+end
+
+after_build do
+  puts "Restoring full tachyons list"
+  `mv source/stylesheets/_backup_tachyons.scss source/stylesheets/_tachyons.scss`
+end
+
 after_build do |builder|
   puts "fetching fallback status.json"
 
