@@ -24,6 +24,10 @@
 
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", async: true %>
+
+    <% if content_blocks[:head].present? %>
+      <%= yield_content(:head) %>
+    <% end %>
   </head>
   <body class="bg-near-white ba bw3 b--dark-gray min-vh-100">
     <h1 class="raleway b f3 f2-m f1-l ttu ph3 pt2-ns mh1-ns">

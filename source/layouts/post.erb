@@ -6,6 +6,10 @@
   Charlie<span class="white">egan3</span>
 <% end %>
 
+<% content_for :head do %>
+  <%= stylesheet_link_tag "post" %>
+<% end %>
+
 <% wrap_layout :layout do %>
   <%= partial "partials/_top_menu" %>
 
