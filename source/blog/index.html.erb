@@ -3,22 +3,16 @@
 <% end %>
 
 <% content_for :page_subtitle do %>
-  I sometimes cobble together blog posts before forgetting things.
+  I present to you a long list of blog posts
 <% end %>
 
 <%= partial "partials/_top_menu" %>
 
 <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, posts| %>
-  <div class="ba b--mid-grey mw7 mt2">
-    <div class="f3 raleway ba b--mid-grey bw2 tc pa2">
-      <%= year %>
-    </div>
-    <div class="pa2">
-      <%= partial("partials/_post_list", locals: { posts: posts, show_year: false }) %>
-    </div>
+  <h2 class="f3 raleway b mh1-ns mb1">
+    <%= year %>
+  </h2>
+  <div class="mh1-ns mb3">
+    <%= partial("partials/_post_list", locals: { posts: posts, show_year: false }) %>
   </div>
 <% end %>
-
-<hr>
-
-<%= link_to "RSS", "/feed.rss", target: "_blank" %>

@@ -1,15 +1,26 @@
 <% content_for :title do %>
-  <%= current_page.data.title %>
+  <%= current_page.data.title %> - charlieegan3
+<% end %>
+
+<% content_for :page_title do %>
+  Charlie<span class="white">egan3</span>
 <% end %>
 
 <% wrap_layout :layout do %>
-  <% link_to current_page.url do %>
-    <%= current_page.data.title %>
-  <% end %>
+  <%= partial "partials/_top_menu" %>
 
-  <p><%= ordinalized_date(current_page.data.date, true) %></p>
+  <div class="mh1-ns measure-wide">
+    <h2 class="f3 f2-ns raleway mv4">
+      <% link_to current_page.url, class: "justify dib bl bw2 b--silver pl2 bg-animate hover-bg-light-gray" do %>
+        <%= current_page.data.title %>
+      <% end %>
+      <span class="f7">
+        <%= ordinalized_date(current_page.data.date, true) %>
+      </span>
+    </h2>
+  </div>
 
-  <%= yield %>
-
-  <p><%= link_to "blog index", "/blog" %></p>
+  <div class="post-content mh1-ns">
+    <%= anchor_titles(yield) %>
+  </div>
 <% end %>

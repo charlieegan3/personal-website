@@ -12,13 +12,11 @@ I've been using a static site generated using middleman since the [end of 2015](
 Prior to my App Engine experiments, I also looked into the Google Container Engine for hosting some of my other more involved projects. I found a tool called [wercker](https://www.wercker.com) that I liked the 'interface' for and was keen to keep using on the App Engine for my personal site. The wercker config file; where each pipeline starts from a container image (e.g. one ready to build my site or equipped with the gcloud tooling for deployment) made a lot of sense. So my wercker workflow looks a little like this:
 
 1. **Build** - starting point image: `ruby:2.3.3`
-
   * clone the source
   * bundle install
   * middleman build -> build directory
 
-2. **Deploy** - starting point image: `google/cloud-sdk` 
-
+2. **Deploy** - starting point image: `google/cloud-sdk`
   * (only ran if build completed successfully)
   * (using the build artefact from the last pipeline)
   * deploy the site to the app engine using the gcloud toolchain.
@@ -29,7 +27,7 @@ I've found basing each pipeline step in the workflow on a 'pre-loaded' image lik
 
 I had imported my old posts from Tumblr some time ago but hadn't bothered to check them all for broken links (I found the [broken-link-checker](https://www.npmjs.com/package/broken-link-checker) to be the best thing for this task). I also realised that my `app.yaml` handlers where not serving some of my post attachments. After fixing this issues I thought it'd be nice to automate checking internal links before deploying.
 
-I toyed with the idea of serving the site with one process and running the checker against it in a `Link Test` wercker pipeline. After some looking around I found [HTMLProofer](https://github.com/gjtorikian/html-proofer), a gem for checking validating static HTML. With the help of a little monkey patching to sort out an encoding issue I was able to set this up as an [after_build callback](https://github.com/charlieegan3/personal-website/commit/0e7eac36c74d41baf89f6ac50d02ac930bc5aaea#diff-2620489c404159b5404f13f82e470fbdR109). 
+I toyed with the idea of serving the site with one process and running the checker against it in a `Link Test` wercker pipeline. After some looking around I found [HTMLProofer](https://github.com/gjtorikian/html-proofer), a gem for checking validating static HTML. With the help of a little monkey patching to sort out an encoding issue I was able to set this up as an [after_build callback](https://github.com/charlieegan3/personal-website/commit/0e7eac36c74d41baf89f6ac50d02ac930bc5aaea#diff-2620489c404159b5404f13f82e470fbdR109).
 
 Now if I try and deploy a broken link or a page that renders to invalid HTML the site won't deploy.
 

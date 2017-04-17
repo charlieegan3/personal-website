@@ -37,9 +37,11 @@
       <% end %>
     </h1>
 
-    <p class="sans-serif ph3 mb3 mh1-ns">
-      <%= yield_content(:page_subtitle) %>
-    </p>
+    <% if content_blocks[:page_subtitle].present? %>
+      <p class="sans-serif ph3 mb3 mh1-ns">
+        <%= yield_content(:page_subtitle) %>
+      </p>
+    <% end %>
 
     <div class="ph3 pb2">
       <%= yield %>

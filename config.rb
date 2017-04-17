@@ -65,6 +65,12 @@ helpers do
           end
         end
   end
+  def anchor_titles(html_content)
+    html_content.gsub(/<h.>[^<]+<\/h.>/) do |match|
+      slug = match[4..-6].gsub(/\W+/, "_")[0..100]
+      "<h2 id=\"#{slug}\"><a href=\"\##{slug}\">#{match[4..-6]}</a></h2>"
+    end
+  end
 end
 
 set :css_dir, 'stylesheets'
