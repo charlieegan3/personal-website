@@ -13,9 +13,9 @@ handlers:
   http_headers:
     Vary: Accept-Encoding
 
-- url: /(blog|links|til)/?
+- url: /(\w+)/?
   static_files: www/\1/index.html
-  upload: www/(blog|links|til)/index.html
+  upload: www/(\w+)/index.html
   secure: always
   http_headers:
     Vary: Accept-Encoding
@@ -44,8 +44,8 @@ handlers:
   expiration: 10m
 
 - url: /(feed|rss).*
-  static_files: www/blog/feed.rss
-  upload: www/blog/feed.rss
+  static_files: www/feed.rss
+  upload: www/feed.rss
   secure: always
 
 error_handlers:
