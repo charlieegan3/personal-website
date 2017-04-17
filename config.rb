@@ -104,6 +104,7 @@ end
 after_build do |builder|
   puts "placing site icons"
   raise unless `cp ./source/images/icons/* ./www` == ""
+  raise unless `cp ./www/blog/feed.rss ./www` == ""
 end
 
 after_build do |builder|
