@@ -25,12 +25,7 @@
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", async: true %>
   </head>
-  <body class="bg-near-white">
-    <div class="fixed z-max w05 bg-dark-gray left-0 top-0 bottom-0"></div>
-    <div class="fixed z-max w05 bg-dark-gray right-0 top-0 bottom-0"></div>
-    <div class="fixed z-max h05 bg-dark-gray top-0 left-0 right-0"></div>
-    <div class="fixed z-max h05 bg-dark-gray bottom-0 left-0 right-0"></div>
-
+  <body class="bg-near-white ba bw3 b--dark-gray min-vh-100">
     <h1 class="raleway b f3 f2-m f1-l ttu ph3 pt2-ns mh1-ns">
       <% link_to "/" do %>
         <%= yield_content(:page_title) %>
@@ -43,7 +38,7 @@
       </p>
     <% end %>
 
-    <div class="ph3 pb2">
+    <div class="ph3">
       <%= yield %>
     </div>
   </body>
