@@ -77,7 +77,7 @@ a {
     list-style-type: disc;
   }
   ol {
-    list-style-type: bullet;
+    list-style-type: decimal;
   }
 
   pre {
@@ -96,6 +96,13 @@ a {
     padding-left: .25rem;
     //b--moon-gray
     border-color: #ccc;
+
+    @media screen and (max-width: 30em) {
+      //measure-wide
+      max-width: 100%;
+      //overflow-scroll
+      overflow: scroll;
+    }
   }
 
   em {
