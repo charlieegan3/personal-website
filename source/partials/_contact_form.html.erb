@@ -4,4 +4,25 @@
   <input class="br0 raleway b pv2 w-100 mb2 input-reset ba bw2 b--mid-gray bg-near-white bg-animate hover-bg-light-gray pointer" type="submit" value="Send Email">
 </form>
 
-<%= partial "partials/profiles" %>
+<div class="tc">
+  <div class="dib w2">
+    <% link_to "https://github.com/charlieegan3" do %>
+      <%= File.read("source/images/svg_logos/github.svg") %>
+    <% end %>
+  </div>
+  <div class="dib w2">
+    <% link_to "https://twitter.com/charlieegan3" do %>
+      <%= File.read("source/images/svg_logos/twitter.svg") %>
+    <% end %>
+  </div>
+  <div class="dib w2">
+    <% link_to "https://instagram.com/charlieegan3" do %>
+      <%= File.read("source/images/svg_logos/instagram.svg") %>
+    <% end %>
+  </div>
+  <div class="dib w2">
+    <% link_to "/profiles" do %>
+      <%= File.read("source/images/svg_logos/more.svg") %>
+    <% end %>
+  </div>
+</div>
