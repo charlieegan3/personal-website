@@ -6,7 +6,7 @@ tags:
 
 As part of my honours project I need to query dependency graphs. A dependency graph is a directed graph where edges represent grammatical relations and nodes are tokens. I use CoreNLP and it gives a nice visualisation:
 
-![dep_graph](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph.png)
+![dep_graph](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph.jpg)
 
 So I'm using CoreNLP, why not use tregex to query the dependency parse? Short answer I couldn't get it working for my questions. Longer answer, tregex and semgrex documentation wasn't great, I started playing around with Neo4j in a container and found it could do what I wanted. It also offered a means to persist graphs for many texts that I could query collectively at a later date.
 
@@ -47,9 +47,9 @@ RETURN nsubj, verb, prep, nmod, prep2, verb2;
 ```
 
 This allows sentences like this one to be matched:
-![dep_graph2](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph2.png)
+![dep_graph2](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph2.jpg)
 
 All this is in the interest of information extraction, getting these 'points' extracted correctly is a key part of my project. I'm only just starting to move onto the next step which is using the extracted information for summarization tasks. I'm specifically interested in investigating the relationships between things that people say, for example, those who talk about X are also likely to talk about Y, but not Z. Below is the kind of graph I'm working with at the moment (abortion is one of my sample debate corpora), more fine-grained summaries including information about who talks about what comes next.
 
-![summary_graph](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/summary.png)
+![summary_graph](/blog/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/summary.jpg)
 (I think this last one's quite interesting)

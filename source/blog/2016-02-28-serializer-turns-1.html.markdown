@@ -9,13 +9,13 @@ I've had to maintain serializer over the year. Product Hunt, a key source of ite
 
 Attached are a number of graphs I put together from the first year's data.
 
-![items_day](/blog/2016-02-28-serializer-turns-1/items_day.png)
+![items_day](/blog/2016-02-28-serializer-turns-1/items_day.jpg)
 *Items per day, shows the weekly item trend quite nicely*
-![items_source](/blog/2016-02-28-serializer-turns-1/items_source.png)
+![items_source](/blog/2016-02-28-serializer-turns-1/items_source.jpg)
 *Item % by source*
-![sessions_read](/blog/2016-02-28-serializer-turns-1/sessions_read.png)
+![sessions_read](/blog/2016-02-28-serializer-turns-1/sessions_read.jpg)
 *Of those that use the mark as read feature, how many times have they done so.*
-![topics](/blog/2016-02-28-serializer-turns-1/topics.png)
+![topics](/blog/2016-02-28-serializer-turns-1/topics.jpg)
 *Trends for topics, no surprises really*
-![comp](/blog/2016-02-28-serializer-turns-1/comp.png)
+![comp](/blog/2016-02-28-serializer-turns-1/comp.jpg)
 *Trends for mentioned companies, I'd have thought Twitter would have been higher.*
