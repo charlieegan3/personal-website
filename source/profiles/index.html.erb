@@ -5,13 +5,13 @@ profiles:
 - url: http://twitter.com/charlieegan3
   icon: twitter.jpg
 - url: http://instagram.com/charlieegan3
-  icon: instagram.png
+  icon: instagram.jpg
 - url: https://news.ycombinator.com/use
   icon: hn.jpg
 - url: https://keybase.io/charlieegan3
-  icon: keybase.png
+  icon: keybase.jpg
 - url: https://monzo.me/charlieegan
-  icon: monzo.png
+  icon: monzo.jpg
 - url: http://www.last.fm/user/charlieegan3
   icon: lastfm.jpg
 - url: http://stackoverflow.com/users/1510063/charlie-egan
@@ -19,7 +19,7 @@ profiles:
 - url: https://news.ycombinator.com/item?id=9046286
   icon: notlinked.jpg
 - url: https://letterboxd.com/charlieegan3
-  icon: letterboxd.png
+  icon: letterboxd.jpg
 - url: http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706
   icon: parkrun.jpg
 - url: https://www.strava.co
@@ -31,13 +31,13 @@ profiles:
 - url: https://open.kattis.com/users/charlie
   icon: kattis.jpg
 - url: https://scholar.google.co.uk/citations?user=pqb-ZNAAAAAJ&amp;hl=en
-  icon: scholar.png
+  icon: scholar.jpg
 - url: http://steamcommunity.com/id/charlieegan3
-  icon: steam.png
+  icon: steam.jpg
 - url: http://eu.battle.net/sc2/en/profile/5512289/1/TartanTurtle/
-  icon: sc2.png
+  icon: sc2.jpg
 - url: https://my.playstation.com/TartanTurtle
-  icon: ps.png
+  icon: ps.jpg
 - url: https://halo.bungie.net/stats/reach/default.aspx?player=tartan%20turtle
   icon: bungie.jpg
 ---
@@ -53,7 +53,7 @@ profiles:
 <div class="tc">
   <% current_page.data.profiles.each do |p| %>
     <% link_to p.url, class: "dib w2 mh1" do %>
-      <%= image_tag "image_logos/#{p.icon}", class: "br1" %>
+      <%= image_tag "profiles/#{p.icon}", class: "br1" %>
     <% end %>
   <% end %>
 </div>
