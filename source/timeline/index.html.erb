@@ -9,7 +9,7 @@
 <%= partial "partials/_top_menu" %>
 
 <% page_articles(blog_name = "timeline").group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, articles| %>
-  <h2 class="f3 raleway b mh1-ns mb1"><%= year %></h2>
+  <h2 class="f3 display b mh1-ns mb1"><%= year %></h2>
 
   <div class="mh1-ns mb2">
     <% articles.each do |article| %>

@@ -46,10 +46,10 @@ teachings:
 
 <%= partial "partials/_top_menu" %>
 
-<h2 class="f3 raleway b mh1-ns mb1">Talks</h2>
+<h2 class="f3 display b mh1-ns mb1">Talks</h2>
 <%= partial("partials/item_cards",
             locals: { items: current_page.data.talks }) %>
 
-<h2 class="f3 raleway b mh1-ns mb1">Teaching</h2>
+<h2 class="f3 display b mh1-ns mb1">Teaching</h2>
 <%= partial("partials/item_list",
             locals: { items: current_page.data.teachings }) %>
