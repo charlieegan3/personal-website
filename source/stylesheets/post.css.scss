@@ -10,8 +10,6 @@
     font-family: "Raleway", sans-serif;
     //mt3
     margin-top: 1rem;
-    //measure-wide
-    max-width: 34em;
     //v-btm
     vertical-align: bottom;
   }
@@ -22,8 +20,6 @@
     margin-bottom: .5rem;
     //lh-copy
     line-height: 1.5em;
-    //measure-wide
-    max-width: 34em;
     //dark-gray
     color: #333;
   }
@@ -68,7 +64,7 @@
     border-color: #ccc;
 
     @media screen and (max-width: 30em) {
-      //measure-wide
+      //mw-100
       max-width: 100%;
       //overflow-scroll
       overflow: scroll;
