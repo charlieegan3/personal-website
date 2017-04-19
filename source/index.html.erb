@@ -13,7 +13,7 @@ menu_blocks:
 <% content_for :page_title do %>
   <span id="greeting" class="silver">Hello</span><span class="orange">,</span>
   <span class="gray">I<span class="blue">'</span>m</span>
-  Charlie<span class="white">egan3</span>
+  <%= partial "partials/charlieegan3", locals: { color: "green" } %>
 <% end %>
 
 <% content_for :page_subtitle do %>
