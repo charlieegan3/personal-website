@@ -2,7 +2,7 @@
   <% items.each do |item| %>
     <% link_to item.link, class: "flex-ns w-100 w-50-m w-third-l" do %>
       <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray">
-        <div class="ba bw2 b--mid-gray h4 h5-l" style="background: url(<%= item.image %>); background-size: cover">
+        <div class="ba bw2 b--mid-gray h4-5" style="background: url(<%= item.image %>); background-size: cover">
           <%= image_tag item.image, class: "o-0", alt: "#{item.title} image" %>
         </div>
         <div class="pa3">
