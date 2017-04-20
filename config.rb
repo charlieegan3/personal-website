@@ -100,8 +100,11 @@ after_configuration do
     puts "Building custom tachyons import"
     used_classes = `find .`.split("\n")
       .select { |file| file.match(/(html|erb)$/) }
-      .map { |file| File.read(file).scan(/class(:|=) ?"([\w\s_\-]+)"/) }
-      .flatten.join(" ")
+      .map { |file|
+        File.read(file).scan(/(class|color)(:|=) ?"([\w\s_\-]+)"/)
+          .map(&:last)
+      }.flatten
+      .join(" ")
       .split(/\s+/).uniq + %w(order-0-ns order-1-ns)
 
     required_css = File.readlines("source/stylesheets/_tachyons.scss")
