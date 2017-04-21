@@ -32,13 +32,17 @@
   <body class="bg-near-white ba bw3 b--dark-gray min-vh-100">
     <h1 class="display b f3 f2-m f1-l ttu ph3 pt2-ns mh1-ns">
       <% link_to "/" do %>
-        <%= yield_content(:page_title) %>
+        <% if content_blocks[:page_title].present? %>
+          <%= yield_content(:page_title) %>
+        <% else %>
+          <%= partial "partials/charlieegan3", locals: { highlight: current_page.data.highlight } %>
+        <% end %>
       <% end %>
     </h1>
 
-    <% if content_blocks[:page_subtitle].present? %>
+    <% if current_page.data.subtitle %>
       <p class="sans-serif ph3 f5 f4-ns mb3 mh1-ns">
-        <%= yield_content(:page_subtitle) %>
+        <%= current_page.data.subtitle %>
       </p>
     <% end %>
 

@@ -1,4 +1,6 @@
 ---
+highlight: orange
+
 projects:
   - title: serializer.io
     link: https://github.com/charlieegan3/serializer
@@ -24,16 +26,10 @@ projects:
     link: https://github.com/charlieegan3/dotfiled
     comment: Simple app aggregating common dotfile settings
     image: /projects/dotfiled.jpg
+
+subtitle: I like making things.
 ---
-<% content_for :page_title do %>
-  <%= partial "partials/charlieegan3", locals: { color: "orange" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  I like making things.
-<% end %>
-
-<%= partial "partials/_top_menu" %>
+<%= partial "partials/_top_menu", locals: { selected: 1, highlight: current_page.data.highlight } %>
 
 <%= partial("partials/item_cards",
             locals: { items: current_page.data.projects }) %>

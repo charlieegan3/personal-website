@@ -1,4 +1,6 @@
 ---
+highlight: green
+
 menu_blocks:
   - title: Work
     path: /work
@@ -8,16 +10,14 @@ menu_blocks:
     path: /speaking
   - title: Words
     path: /words
+
+subtitle: On weekdays I make things for the internet. I like walking quickly.
 ---
 
 <% content_for :page_title do %>
   <span id="greeting" class="silver">Hello</span><span class="orange">,</span>
   <span class="gray">I<span class="blue">'</span>m</span>
-  <%= partial "partials/charlieegan3", locals: { color: "green" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  On weekdays I make things for the internet. I like walking quickly.
+  <%= partial "partials/charlieegan3", locals: { highlight: current_page.data.highlight } %>
 <% end %>
 
 <div class="cf mh1-ns">

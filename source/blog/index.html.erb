@@ -1,11 +1,7 @@
-<% content_for :page_title do %>
-  <%= partial "partials/charlieegan3", locals: { color: "gold" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  I present to you a long list of blog posts
-<% end %>
-
+---
+highlight: gold
+subtitle: I present to you a long list of blog posts
+---
 <%= partial "partials/_top_menu" %>
 
 <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, posts| %>

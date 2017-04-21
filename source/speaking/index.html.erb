@@ -1,4 +1,6 @@
 ---
+highlight: pink
+
 talks:
   - title: Development Rebundling in Dockerland - LRUG
     link: https://skillsmatter.com/skillscasts/9120-development-re-bundling-in-dockerland
@@ -34,17 +36,10 @@ teachings:
     link: https://zen.coderdojo.com/dojo/gb/university-of-aberdeen-computing-science-meston-building-room-3-11-aberdeen-ab-2-4-3ue/aberdeen
     comment: I tutored school students at the Coderdojo after school club series
     image: /speaking/coderdojo.jpg
+
+subtitle: I speak most days.
 ---
-
-<% content_for :page_title do %>
-  <%= partial "partials/charlieegan3", locals: { color: "pink" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  I speak most days.
-<% end %>
-
-<%= partial "partials/_top_menu" %>
+<%= partial "partials/_top_menu", locals: { selected: 2, highlight: current_page.data.highlight } %>
 
 <h2 class="f3 display b mh1-ns mb1">Talks</h2>
 <%= partial("partials/item_cards",

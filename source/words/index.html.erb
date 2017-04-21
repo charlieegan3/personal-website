@@ -1,4 +1,6 @@
 ---
+highlight: blue
+
 papers:
   - title: Summarising the points made in online political debates
     comment: Paper accepted at the 3rd Workshop on Argument Mining (ACl 2016)
@@ -19,16 +21,10 @@ papers:
     comment: As part of a my security course I wrote up a risk assessment of hosting on the Heroku Platform
     link: /words/heroku_ra_2016.pdf
     image: /words/heroku_ra_2016.jpg
+
+subtitle: I have written.
 ---
-<% content_for :page_title do %>
-  <%= partial "partials/charlieegan3", locals: { color: "blue" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  I have written.
-<% end %>
-
-<%= partial "partials/_top_menu" %>
+<%= partial "partials/_top_menu", locals: { selected: 3, highlight: current_page.data.highlight } %>
 
 <% popular_posts = page_articles(blog_name = "blog")
                      .select { |a| a.data[:featured] }

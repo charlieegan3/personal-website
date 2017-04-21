@@ -1,4 +1,6 @@
 ---
+highlight: purple
+
 work_projects:
   - title: char.gy
     link: https://char.gy
@@ -13,16 +15,10 @@ work_projects:
       We worked to import new content and built tools for authors to promote
       books.
     image: /work/bookmetrix.jpg
+
+subtitle: I work as a Ruby developer.
 ---
-<% content_for :page_title do %>
-  <%= partial "partials/charlieegan3", locals: { color: "purple" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  I work as a Ruby developer.
-<% end %>
-
-<%= partial "partials/_top_menu" %>
+<%= partial "partials/_top_menu", locals: { selected: 0, highlight: current_page.data.highlight } %>
 
 <%= partial("partials/item_list",
             locals: { items: current_page.data.work_projects }) %>

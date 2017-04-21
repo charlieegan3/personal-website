@@ -1,4 +1,6 @@
 ---
+highlight: dark-red
+
 profiles:
 - url: http://github.com/charlieegan3
   icon: gh.jpg
@@ -40,16 +42,9 @@ profiles:
   icon: ps.jpg
 - url: https://halo.bungie.net/stats/reach/default.aspx?player=tartan%20turtle
   icon: bungie.jpg
+
+subtitle: Find me in these places.
 ---
-
-<% content_for :page_title do %>
-  <%= partial "partials/charlieegan3", locals: { color: "dark-red" } %>
-<% end %>
-
-<% content_for :page_subtitle do %>
-  Find me in these places.
-<% end %>
-
 <div class="tc">
   <% current_page.data.profiles.each do |p| %>
     <% link_to p.url, class: "dib w2 mh1" do %>
