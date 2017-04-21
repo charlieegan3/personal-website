@@ -98,14 +98,9 @@ end
 after_configuration do
   if build?
     puts "Building custom tachyons import"
-    used_classes = `find .`.split("\n")
-      .select { |file| file.match(/(html|erb)$/) }
-      .map { |file|
-        File.read(file).scan(/(class|color)(:|=) ?"([\w\s_\-]+)"/)
-          .map(&:last)
-      }.flatten
-      .join(" ")
-      .split(/\s+/).uniq + %w(order-0-ns order-1-ns)
+
+    used_classes = File.readlines("source/stylesheets/used_classes.txt")
+      .map(&:chomp)
 
     required_css = File.readlines("source/stylesheets/_tachyons.scss")
       .select { |line|
@@ -118,7 +113,7 @@ after_configuration do
     puts "Missing Classes:"
     used_classes.each do |c|
       unless required_css.match(/\.#{c}( |:)/)
-        puts c
+        puts "\t#{c}"
       end
     end
 
