@@ -86,4 +86,17 @@
     //measure-wide
     max-width: 34em;
   }
+
+  img {
+    //ba
+    border-style: solid;
+    //bw2
+    border-width: .25rem;
+    //b--moon-gray
+    border-color: #ccc;
+    //mw-100
+    max-width: 100%;
+
+    box-sizing: border-box;
+  }
 }

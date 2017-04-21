@@ -3,6 +3,8 @@ title: Getting a full refund for a faulty Macbook under UK consumer law
 date: 2016-06-24 14:54 UTC
 featured: 1
 ---
+![statement](/blog/2016-06-24-getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law/statement.jpg)
+
 Below I describe the process of making a UK consumer law claim for a faulty Apple laptop. This write-up represents almost 3 months of intermittent work, 10's of hours of phone calls and various special trips to Apple outlets.
 
 _TLDR;_ I was 'successful' in claiming a full refund for a 2012 Retina Macbook Pro totalling £2288.20. I have now purchased a new 2016 Macbook m7. The process takes a long time. Also, I believe I was mis sold Applecare, it only appears to entitle you to faster service in the first three years, beyond your basic rights as a consumer in the UK.
