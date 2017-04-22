@@ -2,14 +2,13 @@
 
 .post-content {
   h1, h2, h3, h4, h5 {
-    // space anchors away from border
-    line-height: 2em;
     //f4
     font-size: 1.25rem;
     //display
     font-family: "Montserrat", sans-serif;
     //mt3
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
     //v-btm
     vertical-align: bottom;
   }
