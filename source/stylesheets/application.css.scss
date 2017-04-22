@@ -5,9 +5,19 @@
 
 @import "montserrat";
 
-.display {
-  font-family: "Montserrat", sans-serif;
+a {
+  color: inherit;
+  text-decoration: none;
 }
+
+textarea { resize: none; }
+
+.justify {
+  text-align: justify;
+}
+.display { font-family: "Montserrat", sans-serif; }
+.h4-5 { height: 10rem; }
+.hidden { visibility: hidden; }
 
 .egan {
   color: #f2f2f2;
@@ -16,18 +26,4 @@
     1px -1px 0 #ddd,
     -1px 1px 0 #ddd,
     1px 1px 0 #ddd;
-}
-
-.justify {
-  text-align: justify;
-}
-.h4-5 { height: 10rem; }
-
-textarea {
-  resize: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
