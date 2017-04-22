@@ -60,18 +60,17 @@ var liveFeed = {};
     var items = context.extractItems(data);
     var feed = document.getElementById("feed");
     var template = context.extractTemplate();
-    feed.innerHTML = "";
 
+    var rows = "";
     for (var i = 0; i < items.length; i++) {
       var row = context.renderTemplate(template, items[i].data.created_ago, context.generateMessage(items[i]));
       if (i === items.length - 1) {
         row = row.replace("bb b--light-silver", "")
       }
-
-      feed.insertAdjacentHTML("beforeend",
-        row
-      );
+      rows += row;
     }
+
+    feed.innerHTML = rows;
 
     feed.classList.remove("hidden");
   };
@@ -102,6 +101,6 @@ var liveFeed = {};
 
 liveFeed.init();
 
-document.addEventListener("turbolinks:render", function(event) {
+document.addEventListener("turbolinks:load", function(event) {
   liveFeed.init();
 })
