@@ -102,6 +102,12 @@ after_configuration do
     used_classes = File.readlines("source/stylesheets/used_classes.txt")
       .map(&:chomp)
 
+    used_classes += File.readlines("source/stylesheets/missing_class_list.txt")
+      .map(&:chomp)
+
+    used_classes.sort.uniq!
+    p used_classes
+
     required_css = File.readlines("source/stylesheets/_tachyons.scss")
       .select { |line|
         line.start_with?("@media") ||
