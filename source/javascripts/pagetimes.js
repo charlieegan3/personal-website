@@ -7,7 +7,7 @@ var pagetimes = {};
           domain: window.location.host,
           path: window.location.pathname
         }
-      ).always(function(a,b) {console.log(a)});
+      );
     }, 5000);
   };
 })(pagetimes);

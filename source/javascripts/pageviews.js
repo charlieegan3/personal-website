@@ -6,7 +6,7 @@ var pageviews = {};
         domain: window.location.host,
         path: window.location.pathname
       }
-    ).always(function(a,b) {console.log(a)});
+    );
   };
 })(pageviews);
 
