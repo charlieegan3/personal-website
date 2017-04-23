@@ -103,4 +103,4 @@ liveFeed.init();
 
 document.addEventListener("turbolinks:load", function(event) {
   liveFeed.init();
-})
+});
