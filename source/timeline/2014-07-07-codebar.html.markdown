@@ -1,7 +1,0 @@
----
-title: Codebar
-date: 2014-07-07
-type: teaching
-width: 8
----
-While at the Brighton Ruby conference I learned of [codebar](http://codebar.io) and attended several times as a coach in the following weeks while I was still in London on internship.

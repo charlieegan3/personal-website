@@ -1,7 +1,0 @@
----
-title: BCS Prize
-date: 2014-05-30
-type: award
-width: 8
----
-I received a prize for achieving the best overall marks for level 2 computer science courses.

@@ -1,7 +1,0 @@
----
-title: C#, XNA
-date: 2012-02-02
-type: learning
-width: 10
----
-Exploring from my comfort zone of Visual Studio I was able to experiment with XNA, this was a lot of fun. Making games takes a ton of time!

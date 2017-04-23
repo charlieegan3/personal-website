@@ -1,7 +1,0 @@
----
-title: Faster than Lightning
-date: 2017-02-08
-type: teaching
-width: 9
----
-Unboxed ran the first [public FTL evening](https://twitter.com/Ubxd/status/829410765803253760) and I spoke briefly about [some work](/blog/2017/01/12/heroku-treasure.html) I'd done with BigQuery to find 'self-hostable' projects on GitHub. 

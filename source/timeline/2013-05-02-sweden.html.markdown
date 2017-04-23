@@ -1,7 +1,0 @@
----
-title: Sweden!
-date: 2013-05-02 14:25 UTC
-type: holiday
-width: 7
----
-I went to Sweden for the weekend, leaving the British Isles for the first and only time in my life thus far.

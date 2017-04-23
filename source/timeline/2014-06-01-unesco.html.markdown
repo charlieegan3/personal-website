@@ -1,6 +1,0 @@
----
-title: Network for Social Enterprise Project
-date: 2014-06-01
-type: work
----
-I worked on short-term project while studying and built a private social network, CMS and analytics platform for social enterprises. We used Rails and Comfy Mexican Sofa to build the site - this was my first paid project. The system was apparently 'well received' at an UNESCO conference in July.

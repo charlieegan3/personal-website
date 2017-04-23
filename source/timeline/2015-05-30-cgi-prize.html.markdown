@@ -1,7 +1,0 @@
----
-title: CGI Prize
-date: 2015-05-30
-type: award
-width: 7
----
-I received a prize for the highest marks in level 3 computing science.

@@ -1,7 +1,0 @@
----
-title: Finished at Dingwall Academy
-date: 2012-06-15
-type: education
-width: 8
----
-I completed high school with AAABB Highers and ABC Advanced Highers.

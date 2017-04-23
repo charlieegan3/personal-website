@@ -1,9 +1,4 @@
 activate :blog do |blog|
-  blog.name = "timeline"
-  blog.prefix = "timeline"
-end
-
-activate :blog do |blog|
   blog.name = "blog"
   blog.prefix = "blog"
   blog.layout = "post"
