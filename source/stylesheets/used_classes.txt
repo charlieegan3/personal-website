@@ -3,12 +3,14 @@ alt
 b
 b--blue
 b--dark-gray
+b--light-silver
 b--mid-gray
 b--orange
 b--pink
 b--purple
 b--silver
 ba
+bb
 bb-0-ns
 bg
 bg-animate
@@ -16,6 +18,7 @@ bg-near-white
 bl
 bl-0-ns
 blue
+br
 br-0-ns
 br0
 br1
@@ -31,10 +34,13 @@ dark-red
 db
 dib
 display
+egan
 f1-l
 f2-m
 f2-ns
 f3
+f4
+f4-l
 f4-ns
 f5
 f6
@@ -49,6 +55,7 @@ gold
 gray
 green
 h4-5
+hidden
 highlight
 hover-bg-light-gray
 input-reset
@@ -75,6 +82,7 @@ mw7-l
 mw8
 n
 nb
+nowrap
 o
 o-0
 o-20
@@ -88,10 +96,12 @@ pa2
 pa3
 ph3
 pink
+pl1
 pl2
 plaintext
 pointer
 post-content
+pr1
 pt2-ns
 purple
 pv2
@@ -105,6 +115,7 @@ sql
 sr
 tc
 tex
+tr
 ttu
 viml
 w-100
