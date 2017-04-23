@@ -16,14 +16,12 @@ var liveFeed = {};
     });
   };
 
-  context.extractTemplate = function() {
-    var template = document.querySelector("#feed tr");
-    template.parentNode.removeChild(template);
-    return template.outerHTML;
-  };
-
-  context.renderTemplate = function(template, time, message) {
-    return (template).replace("TIME", time).replace("MESSAGE", message);
+  context.renderTemplate = function(time, message) {
+    var template = '<tr class="bb b--light-silver">\
+        <td class="nowrap tr pv2 pr1 br b--mid-gray">TIME</td>\
+        <td class="pl1">MESSAGE</td>\
+      </tr>';
+    return template.replace("TIME", time).replace("MESSAGE", message);
   };
 
   context.linkedText = function(text, link, classes) {
@@ -59,11 +57,10 @@ var liveFeed = {};
   context.display = function(data) {
     var items = context.extractItems(data);
     var feed = document.getElementById("feed");
-    var template = context.extractTemplate();
 
     var rows = "";
     for (var i = 0; i < items.length; i++) {
-      var row = context.renderTemplate(template, items[i].data.created_ago, context.generateMessage(items[i]));
+      var row = context.renderTemplate(items[i].data.created_ago, context.generateMessage(items[i]));
       if (i === items.length - 1) {
         row = row.replace("bb b--light-silver", "")
       }
