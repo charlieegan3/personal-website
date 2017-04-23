@@ -19,3 +19,4 @@ hover-bg-moon-gray
 hover-bg-light-red
 b--light-silver
 b--mid-gray
+nowrap

@@ -3,14 +3,12 @@ alt
 b
 b--blue
 b--dark-gray
-b--light-silver
 b--mid-gray
 b--orange
 b--pink
 b--purple
 b--silver
 ba
-bb
 bb-0-ns
 bg
 bg-animate
@@ -18,7 +16,6 @@ bg-near-white
 bl
 bl-0-ns
 blue
-br
 br-0-ns
 br0
 br1
@@ -41,11 +38,12 @@ f2-ns
 f3
 f4
 f4-l
-f4-ns
 f5
 f6
+f6-l
 f7
 fl
+fl-l
 flex
 flex-l
 flex-ns
@@ -70,6 +68,7 @@ mh1
 mh1-ns
 mi
 min-vh-100
+ml6-l
 mr1
 mr2-ns
 mt0-l
@@ -85,8 +84,9 @@ nb
 nowrap
 o
 o-0
-o-20
+o-30
 o-40
+o-70
 orange
 order-0-ns
 order-1-ns
@@ -115,7 +115,6 @@ sql
 sr
 tc
 tex
-tr
 ttu
 viml
 w-100
@@ -126,4 +125,3 @@ w-50-m
 w-50-ns
 w-third-l
 w2
-white
