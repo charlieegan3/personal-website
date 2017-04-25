@@ -28,16 +28,22 @@ var liveFeed = {};
     return "<a class=\"lh-copy bb bg-animate b--light-silver " + classes + "\" href=\"" + link + "\">" + text + "</a>"
   };
 
+  context.cleanLongWords = function(string) {
+    return string
+      .replace(/\S{15,}/, "...")
+      .replace(/http\S+/, "...");
+  }
+
   context.generateMessage = function(item) {
     var data = item.data;
     switch(item.type) {
       case "commit":
-        return "Committed \"" + context.linkedText(data.message, data.link, "code hover-bg-light-green") + "\"";
+        return "Committed \"" + context.linkedText(context.cleanLongWords(data.message), data.link, "code hover-bg-light-green") + "\"";
       case "tweet":
         if (data.location != null && data.location != "") {
           return "Tweeted from \"" + data.location + ": " + context.linkedText(data.text, data.link, "hover-bg-light-blue") + "\"";
         } else {
-          return "Tweeted \"" + context.linkedText(data.text, data.link, "hover-bg-light-blue") + "\"";
+          return "Tweeted \"" + context.linkedText(context.cleanLongWords(data.text), data.link, "hover-bg-light-blue") + "\"";
         }
       case "track":
         return "Listened to " + context.linkedText(data.name, data.link, "i hover-bg-light-red") + " by " + context.linkedText(data.artist, data.link, "hover-bg-light-red");
