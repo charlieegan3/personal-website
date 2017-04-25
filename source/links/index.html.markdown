@@ -1,3 +1,6 @@
+---
+noindex: true
+---
 Originally this was just a list of articles - more recently this lists
 my submissions of articles, tools or stories to the
 [unboxed weekly roundups](https://unboxed.co/blog/culture/).

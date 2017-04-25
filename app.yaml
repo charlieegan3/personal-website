@@ -48,5 +48,10 @@ handlers:
   upload: www/feed.rss
   secure: always
 
+- url: /sitemap.*
+  static_files: www/sitemap.xml
+  upload: www/sitemap.xml
+  secure: always
+
 error_handlers:
   - file: www/error.html

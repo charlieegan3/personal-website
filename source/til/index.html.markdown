@@ -1,6 +1,9 @@
+---
+noindex: true
+---
 A list of things I learnt that I remembered to note down.
 
-## 2017 
+## 2017
 
 * Websockets are not supported on phantomjs <v2 _(17th March)_
 * You need to keep the google site verification TXT records in place. _(16th March)_

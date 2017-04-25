@@ -4,7 +4,8 @@ activate :blog do |blog|
   blog.layout = "post"
 end
 
-page '/blog/feed.rss', layout: false
+page "/blog/feed.rss", layout: false
+page "/sitemap.xml", layout: false
 
 # Change Compass configuration
 # compass_config do |config|
