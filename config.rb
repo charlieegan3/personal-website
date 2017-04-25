@@ -17,28 +17,6 @@ page "/sitemap.xml", layout: false
 
 # Methods defined in the helpers block are available in templates
 helpers do
-  def odd_values(array)
-    array.values_at(* array.each_index.select {|i| i.odd?})
-  end
-  def even_values(array)
-    array.values_at(* array.each_index.select {|i| i.even?})
-  end
-  def icon_for_type(type)
-    {
-      "work" => "briefcase",
-      "award" => "star",
-      "competition" => "hourglass",
-      "conference" => "comment",
-      "document" => "file",
-      "education" => "education",
-      "event" => "calendar",
-      "holiday" => "globe",
-      "learning" => "apple",
-      "project" => "console",
-      "sport" => "stats",
-      "teaching" => "blackboard",
-    }[type]
-  end
   def ordinalized_date(date, include_year=false)
     date = Date.parse(date.to_s)
     day = date.strftime("%e").strip
