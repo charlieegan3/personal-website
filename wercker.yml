@@ -3,7 +3,7 @@ build:
   steps:
   - bundle-install
   - script:
-    code: bundle exec middleman build
+    code: bundle exec middleman build --verbose
 
 deploy:
   box: google/cloud-sdk
