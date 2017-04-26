@@ -4,7 +4,7 @@ date: 2017-01-12 17:03:05 +0000
 featured: 2
 ---
 
-Sometime last year I listen to a [Changelog podcast episode](https://changelog.com/podcast/209)
+Sometime last year I listened to a [Changelog podcast episode](https://changelog.com/podcast/209)
 about the GitHub data that's been made available on [BigQuery](https://cloud.google.com/bigquery/pricing),
 Google's tool for querying large datasets. Over Christmas I finally thought up
 a query worth running.
