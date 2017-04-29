@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /home.html
+Disallow: /dnf.html
+Disallow: /links.html
+Disallow: /til.html
