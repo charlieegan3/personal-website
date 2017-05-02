@@ -3,7 +3,7 @@ title: Things I like about Rust
 date: 2016-07-11 01:33 UTC
 ---
 
-I've recently completed my first useful Rust application. [standpoint.io](http://standpoint.io) is a demo of an information extraction approach implemented as part of my honours project. I have implemented a dependency graph query tool as part of this approach; the application's Rust component. This is short post about some things I've enjoyed about Rust so far.
+I've recently completed my first useful Rust application. standpoint is a demo of an information extraction approach implemented as part of my honours project. I have implemented a dependency graph query tool as part of this approach; the application's Rust component. This is short post about some things I've enjoyed about Rust so far.
 
 ## Cargo
 Coming from Ruby, Bundler is a tough act to follow. I've never needed had to push the edges on Bundler or Cargo but Cargo absolutely feels of a comparable quality. As part of my project I implemented a crate for querying a generic graph. Cargo made this process really easy. This is more than connecting and publishing to crates.io, cargo is the whole picture - running tests & compiling too. Whether one should publish packages which are likely only for personal use is another matter, in this case it seemed to make sense for me.

@@ -2,20 +2,8 @@
 layout: post
 title: Equivocating Excellence
 date: '2012-12-21T07:00:00+00:00'
-tags:
-- xbox
-- gaming
-- future
-- mass effect
-- suggestion
-- customisation
-- multi purpose
-- call of duty
-- gaming industry
-- improvements
-- computer graphics
 ---
-I’m mainly writing this for some friends over at [Enemies Everywhere](http://www.enemies-everywhere.com/), It’s a gaming blog and I offered to do a guest post. This is it:
+I’m mainly writing this for some friends over at Enemies Everywhere (update: site is no more), It’s a gaming blog and I offered to do a guest post. This is it:
 
 I’ve covered multiplayer gaming [before](/blog/2012/12/01/coequal-contestants.html) - sadly, it's something that's held back by so many gripes it’s often hard to know where to start. I made the point that there are some aspects that need more attention. Today I’ll cover some things that distract from the real work towards the perfect shooter.
 

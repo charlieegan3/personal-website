@@ -8,7 +8,7 @@ I had [a little trouble with my 2012 rMBP](/blog/2016-06-24-getting-a-full-refun
 ## My Setup
 I use docker for development; via dlite. I use iTerm and use vim as my main editor. I do not install any additional runtimes or development tools beyond git and my editor to the Macbook itself. I have not installed Xcode (but have the CLI tools installed). I use Safari as my browser, though I have Chrome installed for the occasion when I'm doing something with a frontend focus.
 
-You can get a better feel for my setup from my [Brewfile](http://github.com/charlieegan3/dotfiles/blob/master/Brewfile).
+You can get a better feel for my setup from my Brewfile (Edit: removed, see [here](https://charlieegan3.com/blog/2017/02/09/phase-out-laptop-setup-script.html))
 
 ## Docker
 Docker works really great and I've yet to notice a task that runs noticeably faster on my old Macbook Pro. This system continues to be a nice way to isolate projects and is a system that the Macbook seems to be very capable of hosting.

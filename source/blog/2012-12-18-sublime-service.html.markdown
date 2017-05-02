@@ -24,7 +24,7 @@ are many different colorings and some great little editing tools. However the
 best thing about the software was the a customer support response.
 
 I should first note my experiences with other developers. I
-contacted [Guided Ways](http://www.2doapp.com/index.html) and various other
+contacted [Guided Ways](https://www.2doapp.com/) and various other
 developers only to be brushed off about a student license. In some ways this is
 fine, smaller developers often only have one license type. With Sublime Text
 though they were quite happy let me continue using the trial for the time

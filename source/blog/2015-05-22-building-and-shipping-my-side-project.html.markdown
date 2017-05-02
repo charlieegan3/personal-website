@@ -6,14 +6,14 @@ featured: 4
 
 I started lurking on Hacker News and Product Hunt at the beginning of the year. The motivation for building [serializer](http://www.serializer.io) came from an approaching assignment deadline, rather than cutting out news I thought I'd make following it more manageable. For me this meant a sequential feed - I didn't like having to scan the entire ranked list for new items.
 
-**March 6th:** The first working version took around 30 minutes to build and was running on Heroku soon after. This was prior to the new [dyno pricing](https://www.heroku.com/beta-pricing). I used [kaffine](http://kaffeine.herokuapp.com) to keep the site alive.
+**March 6th:** The first working version took around 30 minutes to build and was running on Heroku soon after. This was prior to the new [dyno pricing](https://www.heroku.com/beta-pricing). I used kaffine (discontinued) to keep the site alive.
 
 I decided on a name pretty quick and bought serializer.io the next day. Students got a discount on *.io* domains at Namecheap (at the time).
 
 ![Version 1](/blog/2015-05-22-building-and-shipping-my-side-project/v1.jpg)
 *Version 1*
 
-**March 11th:** I read this [blog post](http://www.slashie.org/articles/shipping-side-projects/) (about 'shipping' side projects) it was probably shared on Hacker News. (edit: it was [shared on Hacker News](https://news.ycombinator.com/item?id=9184448)).
+**March 11th:** I read this [blog post](https://news.ycombinator.com/item?id=9184448) (about 'shipping' side projects) it was probably shared on Hacker News. (edit: it was [shared on Hacker News](https://news.ycombinator.com/item?id=9184448)).
 
 I set to adding some extra features. Read-to-Here marker, 'loginless' syncing, pick and choose custom feeds and tweet counts came about pretty quickly.
 
@@ -29,7 +29,7 @@ I worked quite hard to get the page weight down. The only javascript on the site
 
 I took a break for a while after that, only making very minor changes over the exam period when I needed a break from the books. I started using an ['over 10 url'](https://news.ycombinator.com/over?points=10) for Hacker News and made some other adjustments to marginally reduce the number of collected items. Pressure of exams and all that.
 
-**May 15th:** I added a link to [points](http://pointsapp.co), a cool app I'd seen on Product Hunt. I'd found it was pretty good at summarising articles wanted make it a feature. I reached out to points and heard back from [Hugh Jones](https://twitter.com/hjonesr), he liked serializer and the points connection and offered to setup a post on [Product Hunt](http://www.producthunt.com/posts/serializer-io).
+**May 15th:** I added a link to [points](https://news.ycombinator.com/item?id=9462755), a cool app I'd seen on Product Hunt. I'd found it was pretty good at summarising articles wanted make it a feature. I reached out to points and heard back from [Hugh Jones](https://twitter.com/hjonesr), he liked serializer and the points connection and offered to setup a post on [Product Hunt](http://www.producthunt.com/posts/serializer-io).
 
 **May 18th:** serializer did better than I ever expected and finished the day in the top 10 with around 100 votes at the time. Since I hadn't done any promotion before I saw a vast increase in traffic, I was impressed that the droplet held up.
 
