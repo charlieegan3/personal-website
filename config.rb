@@ -130,17 +130,15 @@ after_build do |builder|
   puts "validating HTML"
 
   HTMLProofer::Utils.class_eval do
-        def clean_content(string)
-          string = string.encode(Encoding.find("US-ASCII"), { invalid: :replace, undef: :replace, replace: "" })
-          string.gsub(%r{https?://([^>]+)}i) do |url|
-          url.gsub(/&(?!amp;)/, "&amp;")
-         end
-        end
+    def clean_content(string)
+      string = string.encode(Encoding.find("US-ASCII"), { invalid: :replace, undef: :replace, replace: "" })
+      string.gsub(%r{https?://([^>]+)}i) do |url|
+        url.gsub(/&(?!amp;)/, "&amp;")
+      end
+    end
   end
 
-  HTMLProofer.check_directory(
-        "./www",
-        {
+  HTMLProofer.check_directory("./www", {
       verbose: true,
       parallel: { in_processes: 3 },
       check_html: true,
@@ -148,6 +146,5 @@ after_build do |builder|
       disable_external: true,
       url_ignore: [/^\#$/],
       error_sort: :desc
-        }
-  ).run
+    }).run
 end
