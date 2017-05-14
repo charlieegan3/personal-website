@@ -20,7 +20,15 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
     <title>
-      <%= content_blocks[:title].present? ? yield_content(:title) : "charlieegan3" %>
+      <%=
+        if content_blocks[:title].present?
+          yield_content(:title)
+        elsif current_page.data.title.present?
+          current_page.data.title
+        else
+          "charlieegan3"
+        end
+      %>
     </title>
 
     <%= stylesheet_link_tag "application" %>
