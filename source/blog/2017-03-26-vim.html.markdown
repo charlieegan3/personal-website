@@ -1,6 +1,7 @@
 ---
 title: Fixing up my vimrc
 date: 2017-03-26 00:48:53 +0000
+featured: 3
 ---
 
 After working closely with a proficient vim user on a summer internship; I

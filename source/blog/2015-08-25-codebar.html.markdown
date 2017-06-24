@@ -1,7 +1,6 @@
 ---
 title: Tutoring Codebar
 date: 2015-08-25 1:00 UTC
-featured: 3
 ---
 
 While in London I've been lucky enough to attend 20 or so codebar events - over two summer internships. codebar is a weekly mentoring initiative with the goal of improving diversity in technology - for those who didn't know. They've got a website that you can check out [here](http://codebar.io/).

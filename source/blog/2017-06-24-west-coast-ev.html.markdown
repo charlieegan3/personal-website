@@ -13,12 +13,12 @@ Renault Zoe:
 ![image](/blog/2017-06-24-west-coast-ev/map.png)
 
 * `A` **Home in Muir of Ord**
-* `B` Cathedral Car Park
+* `B` Inverness Cathedral Car Park
 * `C` Drumnadrochit Tourist Info
 * `D` Fort William Lidl
 * `E` Mallaig Ferry Terminal Car Park
 * `F` Lochboisdale *(no charger)*
-* `G` **Homore (holiday cottage for a week)**
+* `G` **Howmore (holiday cottage for a week)**
 * `H` Liniclate School
 * `I` Berneray *(no charger)*
 * `J` Leverburgh Harbour Car Park
@@ -58,14 +58,17 @@ Some pictures:
 *Leverburgh was actually working - great charge point location!*
 
 ![image](/blog/2017-06-24-west-coast-ev/tarbert.jpg)
-*Tarbert was also working - Zoe had a new view for the charge again*
+*Tarbert was also working (though a little rusty) - Zoe had a nice view for the charge again*
 
 ![image](/blog/2017-06-24-west-coast-ev/stornoway.jpg)
 *Competition for charge point space in Stornoway*
 
 ![image](/blog/2017-06-24-west-coast-ev/ullapool.jpg)
-*Quick boost at the start of the home straight*
+*Quick boost at Ullapool, the start of the home straight*
+
 ![image](/blog/2017-06-24-west-coast-ev/home_straight.jpg)
-*One the home straight at Glascarnoch Dam*
+*On the home straight at Glascarnoch dam*
+
 ![image](/blog/2017-06-24-west-coast-ev/home.jpg)
 *Home is where the charge point starts automatically*
+

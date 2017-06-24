@@ -30,8 +30,7 @@ title: charlieegan3 - words
 
 <% popular_posts = page_articles(blog_name = "blog")
                      .select { |a| a.data[:featured] }
-                     .sort_by { |a| a.data[:featured] }
-                     .take(5) %>
+                     .sort_by { |a| a.data[:featured] } %>
 
 <% recent_posts  = page_articles(blog_name = "blog")
                      .sort_by { |a| a.date }
