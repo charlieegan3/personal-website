@@ -8,6 +8,7 @@
     font-family: "Montserrat", sans-serif;
     //mt3
     margin-top: 2rem;
+    //mb2
     margin-bottom: 0.5rem;
     //v-btm
     vertical-align: bottom;
@@ -73,6 +74,13 @@
   em {
     font-style: italic;
     text-justify: none;
+  }
+
+  //caption
+  img + em {
+    vertical-align: top;
+    //f7
+    font-size: .75rem;
   }
 
   hr {
