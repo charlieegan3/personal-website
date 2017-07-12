@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+#
 `middleman build` rescue puts "build failed continuing"
 
 used_classes = `find www`.split("\n")

@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+#
 raise if ARGV.size != 1
 
 title = ARGV[0]
