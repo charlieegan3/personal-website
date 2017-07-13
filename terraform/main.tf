@@ -2,6 +2,10 @@ variable "project" {
   default = "charlieegan3-www"
 }
 
+variable "domain" {
+  default = "charlieegan.com"
+}
+
 # Infrastructure State
 terraform {
   backend "s3" {
@@ -37,7 +41,7 @@ resource "aws_s3_bucket" "www" {
   }
 }
 
-resource "aws_cloudfront_distribution" "s3_distribution" {
+resource "aws_cloudfront_distribution" "www" {
   origin {
     domain_name = "${aws_s3_bucket.www.bucket_domain_name}"
     origin_id   = "${aws_s3_bucket.www.id}"
@@ -86,5 +90,22 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   viewer_certificate {
     cloudfront_default_certificate = true
+  }
+}
+
+# DNS
+resource "aws_route53_zone" "primary" {
+  name = "${var.domain}"
+}
+
+resource "aws_route53_record" "alias" {
+  zone_id = "${aws_route53_zone.primary.id}"
+  name    = "${var.domain}"
+  type    = "A"
+
+  alias {
+    name                   = "${aws_cloudfront_distribution.www.domain_name}"
+    zone_id                = "${aws_cloudfront_distribution.www.hosted_zone_id }"
+    evaluate_target_health = false
   }
 }
