@@ -3,16 +3,10 @@ variable "project" {
 }
 
 # Infrastructure State
-resource "aws_s3_bucket" "state" {
-  bucket = "${var.project}-state"
-}
-
-data "terraform_remote_state" "www" {
-  backend = "s3"
-
-  config {
-    bucket = "${aws_s3_bucket.state.id}"
-    region = "${aws_s3_bucket.state.region}"
+terraform {
+  backend "s3" {
+    bucket = "charlieegan3-www-state"
+    region = "eu-west-1"
     key    = "terraform.tfstate"
   }
 }
