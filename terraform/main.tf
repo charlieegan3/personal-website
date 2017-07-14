@@ -42,6 +42,8 @@ resource "aws_s3_bucket" "www" {
 }
 
 resource "aws_cloudfront_distribution" "www" {
+  aliases = ["${var.domain}"]
+
   origin {
     domain_name = "${aws_s3_bucket.www.bucket_domain_name}"
     origin_id   = "${aws_s3_bucket.www.id}"
@@ -65,7 +67,7 @@ resource "aws_cloudfront_distribution" "www" {
       }
     }
 
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = "allow-all"
 
     min_ttl     = 0
     default_ttl = 3600
