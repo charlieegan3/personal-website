@@ -49,16 +49,17 @@ resource "aws_s3_bucket" "content" {
 
   policy = <<EOF
 {
-    "Statement": [ {
-        "Action": [
-            "s3:GetObject"
-        ],
-        "Effect": "Allow",
-        "Resource": "arn:aws:s3:::${var.project}-website-content/*",
-        "Principal": {
-            "AWS": [ "*" ]
-        }
-    } ]
+        "Version": "2008-10-17",
+        "Statement": [
+                {
+                        "Effect": "Allow",
+                        "Principal": {
+                                "AWS": "*"
+                        },
+                        "Action": "s3:GetObject",
+                        "Resource": "arn:aws:s3:::${var.project}-website-content/*"
+                }
+        ]
 }
   EOF
 
@@ -149,16 +150,17 @@ resource "aws_s3_bucket" "www-redirect" {
 
   policy = <<EOF
 {
-    "Statement": [ {
-        "Action": [
-            "s3:GetObject"
-        ],
-        "Effect": "Allow",
-        "Resource": "arn:aws:s3:::${var.project}-www-redirect/*",
-        "Principal": {
-            "AWS": [ "*" ]
-        }
-    } ]
+        "Version": "2008-10-17",
+        "Statement": [
+                {
+                        "Effect": "Allow",
+                        "Principal": {
+                                "AWS": "*"
+                        },
+                        "Action": "s3:GetObject",
+                        "Resource": "arn:aws:s3:::${var.project}-www-redirect/*"
+                }
+        ]
 }
   EOF
 
