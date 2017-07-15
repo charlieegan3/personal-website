@@ -3,7 +3,7 @@
 require "json"
 
 MAX_CONCURRENCY = 20
-S3_BUCKET = "charlieegan3-www-build"
+S3_BUCKET = "charlieegan3-www-website-content"
 
 WEBSITE_CONFIG = <<-JSON
 {

@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
 variable "project" {
   default = "charlieegan3-www"
 }
@@ -9,15 +13,38 @@ variable "domain" {
 # Infrastructure State
 terraform {
   backend "s3" {
-    bucket = "charlieegan3-www-state"
-    region = "eu-west-1"
+    bucket = "charlieegan3-www-terraform-state"
+    region = "us-east-1"
     key    = "terraform.tfstate"
   }
 }
 
-# Website
-resource "aws_s3_bucket" "www" {
-  bucket = "${var.project}-build"
+# Route53 shared zone
+resource "aws_route53_zone" "default" {
+  name = "${var.domain}"
+}
+
+# ACM
+data "aws_acm_certificate" "default" {
+  domain   = "${var.domain}"
+  statuses = ["ISSUED"]
+}
+
+# Site content
+resource "aws_route53_record" "content" {
+  zone_id = "${aws_route53_zone.default.id}"
+  name    = "${var.domain}"
+  type    = "A"
+
+  alias {
+    name                   = "${aws_cloudfront_distribution.content.domain_name}"
+    zone_id                = "${aws_cloudfront_distribution.content.hosted_zone_id}"
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_s3_bucket" "content" {
+  bucket = "${var.project}-website-content"
   acl    = "public-read"
 
   policy = <<EOF
@@ -27,7 +54,7 @@ resource "aws_s3_bucket" "www" {
             "s3:GetObject"
         ],
         "Effect": "Allow",
-        "Resource": "arn:aws:s3:::${var.project}-build/*",
+        "Resource": "arn:aws:s3:::${var.project}-website-content/*",
         "Principal": {
             "AWS": [ "*" ]
         }
@@ -41,23 +68,28 @@ resource "aws_s3_bucket" "www" {
   }
 }
 
-resource "aws_cloudfront_distribution" "www" {
+resource "aws_cloudfront_distribution" "content" {
+  enabled = true
   aliases = ["${var.domain}"]
 
   origin {
-    domain_name = "${aws_s3_bucket.www.bucket_domain_name}"
-    origin_id   = "${aws_s3_bucket.www.id}"
+    domain_name = "${aws_s3_bucket.content.website_endpoint}"
+    origin_id   = "${aws_s3_bucket.content.id}"
+
+    custom_origin_config {
+      origin_protocol_policy = "http-only"
+      http_port              = 80
+      https_port             = 443
+      origin_ssl_protocols   = ["TLSv1.2", "TLSv1.1", "TLSv1"]
+    }
   }
 
-  enabled         = true
   is_ipv6_enabled = true
-
-  default_root_object = "index.html"
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${aws_s3_bucket.www.id}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
 
     forwarded_values {
       query_string = false
@@ -67,7 +99,7 @@ resource "aws_cloudfront_distribution" "www" {
       }
     }
 
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
 
     min_ttl     = 0
     default_ttl = 3600
@@ -82,7 +114,7 @@ resource "aws_cloudfront_distribution" "www" {
     response_page_path = "/error.html"
   }
 
-  price_class = "PriceClass_200"
+  price_class = "PriceClass_100"
 
   "restrictions" {
     "geo_restriction" {
@@ -91,23 +123,100 @@ resource "aws_cloudfront_distribution" "www" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = "${data.aws_acm_certificate.default.arn}"
+
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1"
   }
 }
 
-# DNS
-resource "aws_route53_zone" "primary" {
-  name = "${var.domain}"
-}
-
-resource "aws_route53_record" "alias" {
-  zone_id = "${aws_route53_zone.primary.id}"
-  name    = "${var.domain}"
+# Redirect www
+resource "aws_route53_record" "www-redirect" {
+  zone_id = "${aws_route53_zone.default.id}"
+  name    = "www.${var.domain}"
   type    = "A"
 
   alias {
-    name                   = "${aws_cloudfront_distribution.www.domain_name}"
-    zone_id                = "${aws_cloudfront_distribution.www.hosted_zone_id }"
+    name                   = "${aws_cloudfront_distribution.www-redirect.domain_name}"
+    zone_id                = "${aws_cloudfront_distribution.www-redirect.hosted_zone_id}"
     evaluate_target_health = false
+  }
+}
+
+resource "aws_s3_bucket" "www-redirect" {
+  bucket = "${var.project}-www-redirect"
+  acl    = "public-read"
+
+  policy = <<EOF
+{
+    "Statement": [ {
+        "Action": [
+            "s3:GetObject"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::${var.project}-www-redirect/*",
+        "Principal": {
+            "AWS": [ "*" ]
+        }
+    } ]
+}
+  EOF
+
+  website {
+    redirect_all_requests_to = "charlieegan.com"
+  }
+}
+
+resource "aws_cloudfront_distribution" "www-redirect" {
+  enabled = true
+  aliases = ["www.${var.domain}"]
+
+  origin {
+    domain_name = "${aws_s3_bucket.www-redirect.website_endpoint}"
+    origin_id   = "${aws_s3_bucket.www-redirect.id}"
+
+    custom_origin_config {
+      origin_protocol_policy = "http-only"
+      http_port              = 80
+      https_port             = 443
+      origin_ssl_protocols   = ["TLSv1.2", "TLSv1.1", "TLSv1"]
+    }
+  }
+
+  is_ipv6_enabled = true
+
+  default_cache_behavior {
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "${aws_s3_bucket.www-redirect.id}"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    min_ttl     = 0
+    default_ttl = 3600
+    max_ttl     = 86400
+  }
+
+  price_class = "PriceClass_100"
+
+  "restrictions" {
+    "geo_restriction" {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    acm_certificate_arn = "${data.aws_acm_certificate.default.arn}"
+
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1"
   }
 }
