@@ -109,6 +109,52 @@ resource "aws_cloudfront_distribution" "content" {
     compress = true
   }
 
+  cache_behavior {
+    path_pattern     = "*.js"
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    min_ttl     = 0
+    default_ttl = 604800   #week
+    max_ttl     = 18144000 #month
+
+    compress = true
+  }
+
+  cache_behavior {
+    path_pattern     = "*.css"
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    min_ttl     = 0
+    default_ttl = 604800   #week
+    max_ttl     = 18144000 #month
+
+    compress = true
+  }
+
   custom_error_response {
     error_code         = "404"
     response_code      = "404"
