@@ -31,7 +31,7 @@
       %>
     </title>
 
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "application", async: true %>
     <%= javascript_include_tag "application", async: true %>
 
     <% if content_blocks[:head].present? %>
