@@ -198,6 +198,10 @@ resource "aws_cloudfront_distribution" "content" {
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1"
   }
+
+  tags {
+    Use = "content"
+  }
 }
 
 # Redirect www
@@ -289,5 +293,9 @@ resource "aws_cloudfront_distribution" "www-redirect" {
 
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1"
+  }
+
+  tags {
+    Use = "redirect"
   }
 }
