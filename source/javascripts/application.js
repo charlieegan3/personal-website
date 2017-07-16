@@ -7,3 +7,4 @@
 //=require "logger"
 //=require "pageviews"
 //=require "pagetimes"
+//=require "index_redirect"
