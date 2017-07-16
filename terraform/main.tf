@@ -104,7 +104,7 @@ resource "aws_cloudfront_distribution" "content" {
 
     min_ttl     = 0
     default_ttl = 3600
-    max_ttl     = 86400
+    max_ttl     = 18144000
 
     compress = true
   }
@@ -125,9 +125,9 @@ resource "aws_cloudfront_distribution" "content" {
 
     viewer_protocol_policy = "redirect-to-https"
 
-    min_ttl     = 0
-    default_ttl = 604800   #week
-    max_ttl     = 18144000 #month
+    min_ttl     = 18144000
+    default_ttl = 18144000
+    max_ttl     = 18144000
 
     compress = true
   }
@@ -148,9 +148,32 @@ resource "aws_cloudfront_distribution" "content" {
 
     viewer_protocol_policy = "redirect-to-https"
 
-    min_ttl     = 0
-    default_ttl = 604800   #week
-    max_ttl     = 18144000 #month
+    min_ttl     = 18144000
+    default_ttl = 18144000
+    max_ttl     = 18144000
+
+    compress = true
+  }
+
+  cache_behavior {
+    path_pattern     = "*.jpg"
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    min_ttl     = 18144000
+    default_ttl = 18144000
+    max_ttl     = 18144000
 
     compress = true
   }
