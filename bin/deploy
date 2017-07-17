@@ -31,8 +31,8 @@ print_section("Middleman build", false)
 puts `middleman build`
 
 print_section("Syncing Bucket")
-# puts `aws s3 sync --delete www s3://#{S3_BUCKET}`
-puts `aws s3 sync www s3://#{S3_BUCKET}`
+# puts `aws s3 sync www s3://#{S3_BUCKET}`
+puts `aws s3 sync --delete www s3://#{S3_BUCKET}`
 
 print_section("Configuring pages")
 index_files = `find www`
@@ -73,6 +73,9 @@ blog_files.each_slice(MAX_CONCURRENCY).each do |blog_file_group|
   end
   Process.waitall
 end
+
+print_section("Setting cache headers")
+puts `aws s3 cp --recursive s3://#{S3_BUCKET}/ s3://#{S3_BUCKET}/ --exclude "*" --include "*.css" --include "*application-*.js" --include "*.jpg" --include "*.png" --cache-control 'max-age=31104000' --metadata-directive REPLACE`
 
 print_section("Finished")
 puts Time.now - start_time
