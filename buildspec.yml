@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - bundle install
+  build:
+    commands:
+      - middleman build
+  post_build:
+    commands:
+      - echo "deploy"
+      - date > build_data
+artifacts:
+  files:
+    - build_data
+  discard-paths: yes
