@@ -70,7 +70,7 @@ resource "aws_codebuild_project" "www" {
 
   environment {
     compute_type = "BUILD_GENERAL1_SMALL"
-    image        = "aws/codebuild/eb-ruby-2.3-amazonlinux-64:2.1.6"
+    image        = "aws/codebuild/ruby:2.3.1"
     type         = "LINUX_CONTAINER"
   }
 
