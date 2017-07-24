@@ -44,6 +44,16 @@ resource "aws_iam_policy" "codebuild_policy" {
         "*"
       ],
       "Action": [
+        "cloudfront:CreateInvalidation",
+        "cloudfront:ListDistributions"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Resource": [
+        "*"
+      ],
+      "Action": [
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents"
