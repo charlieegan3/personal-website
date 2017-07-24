@@ -1,3 +1,39 @@
+variable "assets_min_ttl" {
+  default = 18144000
+}
+
+variable "assets_default_ttl" {
+  default = 18144000
+}
+
+variable "assets_max_ttl" {
+  default = 18144000
+}
+
+variable "assets_compress" {
+  default = true
+}
+
+variable "assets_forwarded_param" {
+  default = false
+}
+
+variable "assets_forwarded_cookies" {
+  default = "none"
+}
+
+variable "allowed_methods" {
+  default = ["GET", "HEAD", "OPTIONS"]
+}
+
+variable "cached_methods" {
+  default = ["GET", "HEAD"]
+}
+
+variable "viewer_protocol_policy" {
+  default = "redirect-to-https"
+}
+
 resource "aws_route53_record" "content" {
   zone_id = "${aws_route53_zone.default.id}"
   name    = "${var.domain}"
@@ -56,97 +92,6 @@ resource "aws_cloudfront_distribution" "content" {
 
   is_ipv6_enabled = true
 
-  default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${aws_s3_bucket.content.id}"
-
-    forwarded_values {
-      query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    viewer_protocol_policy = "redirect-to-https"
-
-    min_ttl     = 0
-    default_ttl = 3600
-    max_ttl     = 18144000
-
-    compress = true
-  }
-
-  cache_behavior {
-    path_pattern     = "*.js"
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${aws_s3_bucket.content.id}"
-
-    forwarded_values {
-      query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    viewer_protocol_policy = "redirect-to-https"
-
-    min_ttl     = 18144000
-    default_ttl = 18144000
-    max_ttl     = 18144000
-
-    compress = true
-  }
-
-  cache_behavior {
-    path_pattern     = "*.css"
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${aws_s3_bucket.content.id}"
-
-    forwarded_values {
-      query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    viewer_protocol_policy = "redirect-to-https"
-
-    min_ttl     = 18144000
-    default_ttl = 18144000
-    max_ttl     = 18144000
-
-    compress = true
-  }
-
-  cache_behavior {
-    path_pattern     = "*.jpg"
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${aws_s3_bucket.content.id}"
-
-    forwarded_values {
-      query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    viewer_protocol_policy = "redirect-to-https"
-
-    min_ttl     = 18144000
-    default_ttl = 18144000
-    max_ttl     = 18144000
-
-    compress = true
-  }
-
   custom_error_response {
     error_code         = "404"
     response_code      = "404"
@@ -170,5 +115,142 @@ resource "aws_cloudfront_distribution" "content" {
 
   tags {
     Use = "content"
+  }
+
+  default_cache_behavior {
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = 0
+    default_ttl = 3600
+    max_ttl     = 18144000
+
+    compress = true
+  }
+
+  cache_behavior {
+    path_pattern     = "*.js"
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = "${var.assets_forwarded_param}"
+
+      cookies {
+        forward = "${var.assets_forwarded_cookies}"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = "${var.assets_min_ttl}"
+    default_ttl = "${var.assets_default_ttl}"
+    max_ttl     = "${var.assets_max_ttl}"
+
+    compress = "${var.assets_compress}"
+  }
+
+  cache_behavior {
+    path_pattern     = "*.css"
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = "${var.assets_forwarded_param}"
+
+      cookies {
+        forward = "${var.assets_forwarded_cookies}"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = "${var.assets_min_ttl}"
+    default_ttl = "${var.assets_default_ttl}"
+    max_ttl     = "${var.assets_max_ttl}"
+
+    compress = "${var.assets_compress}"
+  }
+
+  cache_behavior {
+    path_pattern     = "*.jpg"
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = "${var.assets_forwarded_param}"
+
+      cookies {
+        forward = "${var.assets_forwarded_cookies}"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = "${var.assets_min_ttl}"
+    default_ttl = "${var.assets_default_ttl}"
+    max_ttl     = "${var.assets_max_ttl}"
+
+    compress = "${var.assets_compress}"
+  }
+
+  cache_behavior {
+    path_pattern     = "*.png"
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = "${var.assets_forwarded_param}"
+
+      cookies {
+        forward = "${var.assets_forwarded_cookies}"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = "${var.assets_min_ttl}"
+    default_ttl = "${var.assets_default_ttl}"
+    max_ttl     = "${var.assets_max_ttl}"
+
+    compress = "${var.assets_compress}"
+  }
+
+  cache_behavior {
+    path_pattern     = "images/*"
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = "${var.assets_forwarded_param}"
+
+      cookies {
+        forward = "${var.assets_forwarded_cookies}"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = "${var.assets_min_ttl}"
+    default_ttl = "${var.assets_default_ttl}"
+    max_ttl     = "${var.assets_max_ttl}"
+
+    compress = "${var.assets_compress}"
   }
 }
