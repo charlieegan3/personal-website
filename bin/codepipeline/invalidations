@@ -7,7 +7,7 @@ ADDITIONAL_PATHS = %w(/)
 
 system("aws configure set preview.cloudfront true")
 
-distributions = JSON.parse(`aws cloudfront list-distributions`)
+distributions = JSON.parse(`aws cloudfront list-distributions --output json`)
 distribution = distributions["DistributionList"]["Items"].select { |d| d["Aliases"].to_s.include? DOMAIN }.first
 id = distribution["ARN"].split("/").last
 
