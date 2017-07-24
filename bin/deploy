@@ -28,7 +28,7 @@ end
 start_time = Time.now
 
 print_section("Syncing Bucket", false)
-puts `aws s3 sync --delete www s3://#{S3_BUCKET}`
+system("aws s3 sync --delete www s3://#{S3_BUCKET}") || exit(1)
 
 print_section("Configuring pages")
 index_files = `find www`
@@ -41,10 +41,10 @@ index_files.each do |index_file|
   fork do
     object_name = index_file.split("/")[0]
 
-    puts `aws s3 cp s3://#{S3_BUCKET}/#{index_file} s3://#{S3_BUCKET}/#{object_name} --content-type text/html`
+    system("aws s3 cp s3://#{S3_BUCKET}/#{index_file} s3://#{S3_BUCKET}/#{object_name} --content-type text/html") || exit(1)
 
-    puts `aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{index_file} --key #{index_file} --website-redirect-location /#{object_name}`.split("\n").join(" ")
-    puts `aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{index_file} --key #{index_file.gsub("/index.html", ".html")} --website-redirect-location /#{object_name}`.split("\n").join(" ")
+    system("aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{index_file} --key #{index_file} --website-redirect-location /#{object_name}") || exit(1)
+    system("aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{index_file} --key #{index_file.gsub("/index.html", ".html")} --website-redirect-location /#{object_name}") || exit(1)
   end
 end
 Process.waitall
@@ -62,16 +62,16 @@ blog_files.each_slice(MAX_CONCURRENCY).each do |blog_file_group|
       file_name = blog_file.split("/").last
       object_name = blog_file.gsub(file_name, file_name.gsub(".html", ""))
 
-      puts `aws s3 cp s3://#{S3_BUCKET}/#{blog_file} s3://#{S3_BUCKET}/#{object_name} --content-type text/html`
-      puts `aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{blog_file} --key #{blog_file} --website-redirect-location /#{blog_file.gsub(".html", "")}`.split("\n").join(" ")
-      puts `aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{blog_file} --key #{blog_file.gsub(".html", "/index.html")} --website-redirect-location /#{blog_file.gsub(".html", "")}`.split("\n").join(" ")
+      system("aws s3 cp s3://#{S3_BUCKET}/#{blog_file} s3://#{S3_BUCKET}/#{object_name} --content-type text/html") || exit(1)
+      system("aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{blog_file} --key #{blog_file} --website-redirect-location /#{blog_file.gsub(".html", "")}") || exit(1)
+      system("aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/#{blog_file} --key #{blog_file.gsub(".html", "/index.html")} --website-redirect-location /#{blog_file.gsub(".html", "")}") || exit(1)
     end
   end
   Process.waitall
 end
 
 print_section("Setting cache headers")
-puts `aws s3 cp --recursive s3://#{S3_BUCKET}/ s3://#{S3_BUCKET}/ --exclude "*" --include "*.css" --include "*application-*.js" --include "*.jpg" --include "*.png" --cache-control 'max-age=31104000' --metadata-directive REPLACE`
+system("aws s3 cp --recursive s3://#{S3_BUCKET}/ s3://#{S3_BUCKET}/ --exclude \"*\" --include \"*.css\" --include \"*application-*.js\" --include \"*.jpg\" --include \"*.png\" --cache-control 'max-age=31104000' --metadata-directive REPLACE") || exit(1)
 
 print_section("Finished")
 puts "#{Time.now - start_time} seconds"
