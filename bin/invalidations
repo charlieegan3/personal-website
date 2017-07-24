@@ -2,7 +2,7 @@
 
 require "json"
 
-DOMAIN = "charlieegan.com"
+DOMAIN = "charlieegan3.com"
 ADDITIONAL_PATHS = %w(/)
 
 system("aws configure set preview.cloudfront true")
