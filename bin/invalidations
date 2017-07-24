@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require "json"
+
+DOMAIN = "charlieegan.com"
+ADDITIONAL_PATHS = %w(/)
+
+system("aws configure set preview.cloudfront true")
+
+distributions = JSON.parse(`aws cloudfront list-distributions`)
+distribution = distributions["DistributionList"]["Items"].select { |d| d["Aliases"].to_s.include? DOMAIN }.first
+id = distribution["ARN"].split("/").last
+
+paths = `ls www/*/index.html`.split("\n").map { |p| "/" + p.split("/")[1] }
+paths += ADDITIONAL_PATHS
+
+system("aws cloudfront create-invalidation --distribution-id #{id} --paths #{paths.join(" ")}")

@@ -11,6 +11,7 @@ phases:
   post_build:
     commands:
       - bin/deploy
+      - bin/invalidations
       - date > build_data
 artifacts:
   files:
