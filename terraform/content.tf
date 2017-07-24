@@ -23,7 +23,7 @@ variable "assets_forwarded_cookies" {
 }
 
 variable "allowed_methods" {
-  default = ["GET", "HEAD", "OPTIONS"]
+  default = ["GET", "HEAD"]
 }
 
 variable "cached_methods" {
