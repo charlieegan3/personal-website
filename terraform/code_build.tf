@@ -34,8 +34,8 @@ resource "aws_iam_policy" "codebuild_policy" {
         "s3:GetBucketVersioning"
       ],
       "Resource": [
-        "${aws_s3_bucket.foo.arn}",
-        "${aws_s3_bucket.foo.arn}/*"
+        "${aws_s3_bucket.codepipeline.arn}",
+        "${aws_s3_bucket.codepipeline.arn}/*"
       ]
     },
     {

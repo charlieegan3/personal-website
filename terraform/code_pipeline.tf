@@ -10,9 +10,10 @@ variable "github_branch" {
   default = "aws"
 }
 
-resource "aws_s3_bucket" "foo" {
-  bucket = "charlieegan3-example-codepipeline-artifact"
-  acl    = "private"
+resource "aws_s3_bucket" "codepipeline" {
+  bucket        = "charlieegan3-www-codepipeline"
+  acl           = "private"
+  force_destroy = true
 }
 
 resource "aws_iam_role" "foo" {
@@ -51,8 +52,8 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.foo.arn}",
-        "${aws_s3_bucket.foo.arn}/*"
+        "${aws_s3_bucket.codepipeline.arn}",
+        "${aws_s3_bucket.codepipeline.arn}/*"
       ]
     },
     {
@@ -84,7 +85,7 @@ resource "aws_codepipeline" "foo" {
   role_arn = "${aws_iam_role.foo.arn}"
 
   artifact_store {
-    location = "${aws_s3_bucket.foo.bucket}"
+    location = "${aws_s3_bucket.codepipeline.bucket}"
     type     = "S3"
   }
 
