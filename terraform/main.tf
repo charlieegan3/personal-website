@@ -7,7 +7,7 @@ variable "project" {
 }
 
 variable "domain" {
-  default = "charlieegan.com"
+  default = "charlieegan3.com"
 }
 
 # Infrastructure State

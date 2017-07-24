@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "www-redirect" {
   EOF
 
   website {
-    redirect_all_requests_to = "charlieegan.com"
+    redirect_all_requests_to = "${var.domain}"
   }
 }
 
