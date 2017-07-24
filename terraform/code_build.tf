@@ -84,6 +84,11 @@ resource "aws_codebuild_project" "www" {
     compute_type = "BUILD_GENERAL1_SMALL"
     image        = "aws/codebuild/ruby:2.3.1"
     type         = "LINUX_CONTAINER"
+
+    environment_variable {
+      "name"  = "AWS_DEFAULT_OUTPUT"
+      "value" = "text"
+    }
   }
 
   source {
