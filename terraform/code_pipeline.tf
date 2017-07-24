@@ -16,8 +16,8 @@ resource "aws_s3_bucket" "codepipeline" {
   force_destroy = true
 }
 
-resource "aws_iam_role" "foo" {
-  name = "test-role"
+resource "aws_iam_role" "codepipeline" {
+  name = "charlieegan3-www-codepipeline-role"
 
   assume_role_policy = <<EOF
 {
@@ -37,7 +37,7 @@ EOF
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
   name = "codepipeline_policy"
-  role = "${aws_iam_role.foo.id}"
+  role = "${aws_iam_role.codepipeline.id}"
 
   policy = <<EOF
 {
@@ -80,9 +80,9 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
 EOF
 }
 
-resource "aws_codepipeline" "foo" {
-  name     = "tf-test-pipeline"
-  role_arn = "${aws_iam_role.foo.arn}"
+resource "aws_codepipeline" "www" {
+  name     = "charlieegan3-www"
+  role_arn = "${aws_iam_role.codepipeline.arn}"
 
   artifact_store {
     location = "${aws_s3_bucket.codepipeline.bucket}"
@@ -120,7 +120,7 @@ resource "aws_codepipeline" "foo" {
       version         = "1"
 
       configuration {
-        ProjectName = "${aws_codebuild_project.foo.name}"
+        ProjectName = "${aws_codebuild_project.www.name}"
       }
     }
   }
