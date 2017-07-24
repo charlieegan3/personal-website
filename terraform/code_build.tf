@@ -33,7 +33,9 @@ resource "aws_iam_policy" "codebuild_policy" {
       ],
       "Resource": [
         "${aws_s3_bucket.codepipeline.arn}",
-        "${aws_s3_bucket.codepipeline.arn}/*"
+        "${aws_s3_bucket.codepipeline.arn}/*",
+        "${aws_s3_bucket.content.arn}",
+        "${aws_s3_bucket.content.arn}/*"
       ]
     },
     {
