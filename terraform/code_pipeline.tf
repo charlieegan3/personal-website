@@ -98,7 +98,7 @@ resource "aws_codepipeline" "www" {
       owner            = "ThirdParty"
       provider         = "GitHub"
       version          = "1"
-      output_artifacts = ["test"]
+      output_artifacts = ["source"]
 
       configuration {
         Owner  = "${var.github_user}"
@@ -116,7 +116,7 @@ resource "aws_codepipeline" "www" {
       category        = "Build"
       owner           = "AWS"
       provider        = "CodeBuild"
-      input_artifacts = ["test"]
+      input_artifacts = ["source"]
       version         = "1"
 
       configuration {

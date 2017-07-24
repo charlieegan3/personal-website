@@ -12,8 +12,3 @@ phases:
     commands:
       - bin/deploy
       - bin/invalidations
-      - date > build_data
-artifacts:
-  files:
-    - build_data
-  discard-paths: yes
