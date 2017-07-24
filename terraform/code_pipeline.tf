@@ -7,7 +7,7 @@ variable "github_repo" {
 }
 
 variable "github_branch" {
-  default = "aws"
+  default = "master"
 }
 
 resource "aws_s3_bucket" "codepipeline" {
