@@ -3,14 +3,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - bundle install
+      - bundle install --path vendor/bundle
+      - chmod +x bin/*
   build:
     commands:
-      - middleman build
+      - bundle exec middleman build
   post_build:
     commands:
-      - echo "deploy"
+      - aws --version
       - date > build_data
+      - bin/deploy
 artifacts:
   files:
     - build_data
