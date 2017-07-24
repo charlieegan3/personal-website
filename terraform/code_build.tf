@@ -1,5 +1,5 @@
 resource "aws_iam_role" "codebuild_role" {
-  name = "codebuild-role-"
+  name = "codebuild-role"
 
   assume_role_policy = <<EOF
 {
@@ -29,9 +29,7 @@ resource "aws_iam_policy" "codebuild_policy" {
     {
       "Effect":"Allow",
       "Action": [
-        "s3:GetObject",
-        "s3:GetObjectVersion",
-        "s3:GetBucketVersioning"
+        "s3:*"
       ],
       "Resource": [
         "${aws_s3_bucket.codepipeline.arn}",
