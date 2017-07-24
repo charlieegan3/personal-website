@@ -1,6 +1,7 @@
 ---
 title: "'Host a static website ~5 minutes'"
 date: 2017-07-16 14:47:53 +0100
+featured: 3
 ---
 
 ![Host a static site](/blog/2017-07-16-host-a-static-website-5-minutes/misleading.jpg)
