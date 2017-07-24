@@ -3,12 +3,13 @@ version: 0.2
 phases:
   install:
     commands:
-      - chmod +x bin/*
-      - bin/bundle
+      - chmod +x bin/codepipeline/*
+      - bin/codepipeline/bundle
   build:
     commands:
-      - bin/build
+      - bin/codepipeline/build
   post_build:
     commands:
-      - bin/deploy
-      - bin/invalidations
+      - bin/codepipeline/deploy
+      - bin/codepipeline/invalidations
+      - bin/codepipeline/cleanup
