@@ -83,7 +83,7 @@ var liveFeed = {};
       return;
 
     var request = new XMLHttpRequest();
-    request.open("GET", "https://storage.googleapis.com/json-charlieegan3/status.json", true);
+    request.open("GET", "/status.json", true);
 
     request.onload = function() {
       if (request.status >= 200 && request.status < 400) {

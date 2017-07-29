@@ -115,7 +115,7 @@ after_build do |builder|
   require "open-uri"
   require "json"
 
-  status = open("https://storage.googleapis.com/json-charlieegan3/status.json").read
+  status = open("https://charlieegan3.com/status.json").read
   JSON.parse(status)
 
   local_status_file = File.join(config[:build_dir], "status.json")
