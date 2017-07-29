@@ -140,6 +140,29 @@ resource "aws_cloudfront_distribution" "content" {
   }
 
   cache_behavior {
+    path_pattern     = "status.json"
+    allowed_methods  = "${var.allowed_methods}"
+    cached_methods   = "${var.cached_methods}"
+    target_origin_id = "${aws_s3_bucket.content.id}"
+
+    forwarded_values {
+      query_string = "${var.assets_forwarded_param}"
+
+      cookies {
+        forward = "${var.assets_forwarded_cookies}"
+      }
+    }
+
+    viewer_protocol_policy = "${var.viewer_protocol_policy}"
+
+    min_ttl     = 0
+    default_ttl = 600
+    max_ttl     = 600
+
+    compress = "${var.assets_compress}"
+  }
+
+  cache_behavior {
     path_pattern     = "*.js"
     allowed_methods  = "${var.allowed_methods}"
     cached_methods   = "${var.cached_methods}"
