@@ -55,7 +55,7 @@ looking game and I’m getting good fun out of it. It did seem to break my
 computer a few times, and not through overheating. It was a really bizarre
 issue that I still don’t quite understand, it appears to have been some driver
 issue. I’m quite happy that after [much fiddling
-around](http://forums.bit-tech.net/showthread.php?p=3483715) it seems to have
+around](https://forums.bit-tech.net/index.php?threads/lost-dedicated-gpu-output.266776/) it seems to have
 gone away. Annoyingly I lost a 4 hour save and had to start again. I will make
 sure I still finish the main story at least and I have already started again.
 

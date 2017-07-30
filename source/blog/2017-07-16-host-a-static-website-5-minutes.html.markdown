@@ -154,7 +154,7 @@ So that's how to 'Host a static website ~1 weekend'. I'm not sure how to do
 it in 5 mins yet.
 
 I've yet to move this under charlieegan3.com (currently it's on
-[charlieegan.com](https://charlieegan.com)) while I test it out. Currently
+charlieegan.com) while I test it out. Currently
 'production' is running for free on App Engine so I'm interested to compare the
 costs before switching.  Renewing Lets Encrypt on GAE is a pain so this
 solution with ACM is likely to win anyway. CDN's are also 'cool'.
