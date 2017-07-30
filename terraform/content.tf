@@ -46,6 +46,18 @@ resource "aws_route53_record" "content" {
   }
 }
 
+resource "aws_route53_record" "content_aaaa" {
+  zone_id = "${aws_route53_zone.default.id}"
+  name    = "${var.domain}"
+  type    = "AAAA"
+
+  alias {
+    name                   = "${aws_cloudfront_distribution.content.domain_name}"
+    zone_id                = "${aws_cloudfront_distribution.content.hosted_zone_id}"
+    evaluate_target_health = false
+  }
+}
+
 resource "aws_s3_bucket" "content" {
   bucket = "${var.project}-website-content"
   acl    = "public-read"

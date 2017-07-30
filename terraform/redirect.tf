@@ -10,6 +10,18 @@ resource "aws_route53_record" "www-redirect" {
   }
 }
 
+resource "aws_route53_record" "www-redirect_aaaa" {
+  zone_id = "${aws_route53_zone.default.id}"
+  name    = "www.${var.domain}"
+  type    = "AAAA"
+
+  alias {
+    name                   = "${aws_cloudfront_distribution.www-redirect.domain_name}"
+    zone_id                = "${aws_cloudfront_distribution.www-redirect.hosted_zone_id}"
+    evaluate_target_health = false
+  }
+}
+
 resource "aws_s3_bucket" "www-redirect" {
   bucket = "${var.project}-www-redirect"
   acl    = "public-read"
