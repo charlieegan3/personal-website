@@ -10,8 +10,10 @@ variable "domain" {
   default = "charlieegan3.com"
 }
 
-# Infrastructure State
+# Terraform & Terraform state config
 terraform {
+  required_version = "0.10.0-beta2"
+
   backend "s3" {
     bucket = "charlieegan3-www-terraform-state"
     region = "us-east-1"
