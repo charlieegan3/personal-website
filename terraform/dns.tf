@@ -24,6 +24,17 @@ resource "aws_route53_record" "dkim" {
   ]
 }
 
+resource "aws_route53_record" "dkim_postmark" {
+  zone_id = "${aws_route53_zone.default.zone_id}"
+  name    = "20161022200133pm._domainkey"
+  type    = "TXT"
+  ttl     = "300"
+
+  records = [
+    "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3jfeS5Uh/rgG0SWX4SCYhMud9WpyLT/xU7+nceVjIvMyWtzmiG8+OoDvsENi/Mga4PM7VwfFhc6nxmIuhiJ33v9oJ5W21DQzo+kzLLvUIGKELkwLgesnvJLVKmMZSGlfbne04XW5JlgzqYQtjKgqk5yqa/CB4jU9AtKL/7QdTUwIDAQAB",
+  ]
+}
+
 resource "aws_route53_record" "txt" {
   zone_id = "${aws_route53_zone.default.zone_id}"
   name    = "${var.domain}"
