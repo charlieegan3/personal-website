@@ -70,7 +70,12 @@ blog_files.each_slice(MAX_CONCURRENCY).each do |blog_file_group|
   Process.waitall
 end
 
-print_section("Setting cache headers")
+print_section("Duplicate feed object")
+%w(feed feed.xml).each do |target|
+  system("aws s3 cp s3://#{S3_BUCKET}/feed.rss s3://#{S3_BUCKET}/#{target} --content-type text/xml")
+end
+
+print_section("Setting asset cache headers")
 system("aws s3 cp --recursive s3://#{S3_BUCKET}/ s3://#{S3_BUCKET}/ --exclude \"*\" --include \"*.css\" --include \"*application-*.js\" --include \"*.jpg\" --include \"*.png\" --cache-control 'max-age=31104000' --metadata-directive REPLACE") || exit(1)
 
 print_section("Finished")
