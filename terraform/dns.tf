@@ -47,3 +47,15 @@ resource "aws_route53_record" "txt" {
     "google-site-verification=cBz1vO6h2fvtz4FMtm27PAqLdkTh1SM0-z-aRo92K-M",
   ]
 }
+
+resource "aws_route53_record" "borked" {
+  zone_id = "${aws_route53_zone.default.id}"
+  name    = "borked.${var.domain}"
+  type    = "A"
+
+  alias {
+    name                   = "db40xtci7hzh7.cloudfront.net"
+    zone_id                = "Z2FDTNDATAQYW2"
+    evaluate_target_health = false
+  }
+}
