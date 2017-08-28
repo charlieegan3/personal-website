@@ -115,11 +115,15 @@ after_build do |builder|
   require "open-uri"
   require "json"
 
-  status = open("https://charlieegan3.com/status.json").read
-  JSON.parse(status)
+  begin
+    status = open("https://charlieegan3.com/status.json").read
+    JSON.parse(status)
 
-  local_status_file = File.join(config[:build_dir], "status.json")
-  File.write(local_status_file, status)
+    local_status_file = File.join(config[:build_dir], "status.json")
+    File.write(local_status_file, status)
+  rescue
+    puts "Failed to get status"
+  end
 end
 
 after_build do |builder|
