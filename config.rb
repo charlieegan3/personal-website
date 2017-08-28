@@ -60,6 +60,8 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 activate :sprockets
 
+activate :livereload
+
 set :build_dir, "www"
 configure :build do
   activate :minify_html
