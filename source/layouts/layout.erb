@@ -2,14 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="theme-color" content="#ffffff"/>
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@charlieegan3" />
     <meta name="twitter:title" content="<%= current_page.data.title || "charlieegan3" %>" />
     <meta name="twitter:description" content="<%= current_page.destination_path.include?("blog") ? "Blog post by charlieegan3" : "Charlie's personal website" %>"/>
     <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/754990400042049537/QCD74wRs_400x400.jpg" />
+
+    <meta name="description" content="Charlie Egan's personal website & blog."/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -24,7 +26,7 @@
         elsif current_page.data.title.present?
           current_page.data.title
         else
-          "charlieegan3"
+          "charlieegan3's personal site & blog"
         end
       %>
     </title>
