@@ -59,3 +59,11 @@ resource "aws_route53_record" "borked" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "www" {
+  zone_id = "${aws_route53_zone.default.id}"
+  name    = "serializer.${var.domain}"
+  type    = "A"
+  ttl     = "300"
+  records = ["46.101.14.206"]
+}
