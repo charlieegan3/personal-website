@@ -12,7 +12,7 @@ variable "domain" {
 
 # Terraform & Terraform state config
 terraform {
-  required_version = "0.10.0-beta2"
+  required_version = "0.11.2"
 
   backend "s3" {
     bucket = "charlieegan3-www-terraform-state"
