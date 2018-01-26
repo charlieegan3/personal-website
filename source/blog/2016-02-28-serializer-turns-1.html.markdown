@@ -3,7 +3,7 @@ title: serializer turns 1
 date: 2016-02-28 13:40 UTC
 ---
 
-It's been almost a year since I started work on [serializer.io](http://serializer.io), my newsreader side project. Before putting serializer together I'd had trouble finding a solution for reading news across multiple devices in a way that made sense. So far it's worked well, and apparently for some others too, for $5 in hosting a month serializer serves a linear newsfeed to around 75 visitor a day.
+It's been almost a year since I started work on [serializer.io](http://serializer.charlieegan3.com), my newsreader side project. Before putting serializer together I'd had trouble finding a solution for reading news across multiple devices in a way that made sense. So far it's worked well, and apparently for some others too, for $5 in hosting a month serializer serves a linear newsfeed to around 75 visitor a day.
 
 I've had to maintain serializer over the year. Product Hunt, a key source of items, has changed three times in a way that needed me to adjust the scraper. Other than that and the occasional stylistic change serializer has run without intervention and collected over 75,000 links in the process. I've even received some donations from by recently added PayPal Donate button.
 

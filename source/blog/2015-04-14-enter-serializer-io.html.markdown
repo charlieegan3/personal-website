@@ -46,4 +46,4 @@ I have _lobste.rs, slashdot, betalist, macrumors, qudos, designer news _&amp;_ a
 
 serializer feels like it’s here to stay as my source of news - perhaps largely due to the amount of work it’s been!
 
-If you’re interested [take a look](http://www.serializer.io) and let me know what you think.
+If you’re interested [take a look](http://serializer.charlieegan3.com) and let me know what you think.
