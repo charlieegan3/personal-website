@@ -63,7 +63,7 @@ resource "aws_route53_record" "borked" {
 resource "aws_route53_record" "www" {
   zone_id = "${aws_route53_zone.default.id}"
   name    = "serializer.${var.domain}"
-  type    = "A"
+  type    = "CNAME"
   ttl     = "300"
-  records = ["46.101.14.206"]
+  records = ["serializer.charlieegan3.com.herokudns.com"]
 }
