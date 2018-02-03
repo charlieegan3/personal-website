@@ -1,7 +1,6 @@
 ---
 title: "Heroku Deploy button treasure hunt with GitHub and BigQuery"
 date: 2017-01-12 17:03:05 +0000
-featured: 2
 ---
 
 Sometime last year I listened to a [Changelog podcast episode](https://changelog.com/podcast/209)

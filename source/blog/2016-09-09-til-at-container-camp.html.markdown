@@ -1,6 +1,7 @@
 ---
 title: "TIL at Container Camp"
 date: 2016-09-09 22:22:23 +0000
+featured: 3
 ---
 
 ![Container Camp Screen](/blog/2016-09-09-til-at-container-camp/container_camp_screen.jpg)

@@ -1,6 +1,7 @@
 ---
 title: "Terraform adventures: Deploy a serverless microservice ~2 mins"
 date: 2017-08-10 22:18:40 +0100
+featured: 2
 ---
 
 `terraform destroy` has been a game changer for my public cloud toy projects.
