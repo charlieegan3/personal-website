@@ -2,21 +2,27 @@
 highlight: purple
 
 work_projects:
+  - title: Jetstack
+    link: https://jetstack.io
+    comment: Cloud-native consultancy (current)
+    image: /work/jetstack.jpg
+
+  - title: unboxed
+    link: https://unboxed.co
+    comment: Rails &amp; product development consultancy
+    image: /work/unboxed.jpg
+
   - title: chargy
     link: https://char.gy
-    comment: I'm currently working on the chargy project.
-      I've been working on user onboarding and some upgrades to our AWS
-      infrastructure.
+    comment: Back office for on-street EV charger IoT system
     image: /work/chargy.jpg
 
   - title: Bookmetrix
     link: http://bookmetrix.com
-    comment: I worked for a period of four months on the Bookmetrix project.
-      We worked to import new content and built tools for authors to promote
-      books.
+    comment: Ebooks metrics and data aggreation platform
     image: /work/bookmetrix.jpg
 
-subtitle: I work as a Ruby developer.
+subtitle: I work with computers.
 
 priority: 1
 
@@ -24,5 +30,18 @@ title: charlieegan3 - work
 ---
 <%= partial "partials/_top_menu", locals: { selected: 0, highlight: current_page.data.highlight } %>
 
-<%= partial("partials/item_list",
-            locals: { items: current_page.data.work_projects }) %>
+<div class="flex-ns flex-wrap mw8">
+  <% current_page.data.work_projects.each do |item| %>
+    <% link_to item.link, class: "flex-ns w-100 w-50-m w-third-l" do %>
+      <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray w-100">
+        <div class="ba bw2 b--mid-gray h4-5" style="background: url(<%= item.image %>); background-size: cover; background-position: center center;">
+          <%= image_tag item.image, class: "o-0", alt: "#{item.title} image" %>
+        </div>
+        <div class="pa3">
+          <h2 class="f3 display mb3"><%= item.title %></h2>
+          <p class="f6"><%= item.comment %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

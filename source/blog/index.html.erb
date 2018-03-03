@@ -6,13 +6,36 @@ priority: 1
 
 title: charlieegan3 - blog
 ---
-<%= partial "partials/_top_menu" %>
+<%= partial "partials/_top_menu", locals: { selected: 2, highlight: current_page.data.highlight } %>
 
-<% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, posts| %>
-  <h2 class="f3 display b mh1-ns mb1">
-    <%= year %>
-  </h2>
-  <div class="mh1-ns mb3">
-    <%= partial("partials/_post_list", locals: { posts: posts, show_year: false }) %>
+<% popular_posts = page_articles(blog_name = "blog")
+                     .select { |a| a.data[:featured] }
+                     .sort_by { |a| a.data[:featured] } %>
+
+<% recent_posts  = page_articles(blog_name = "blog")
+                     .sort_by { |a| a.date }
+                     .reverse
+                     .take(5) %>
+
+<div class="mh1-ns">
+  <h2 class="f5 f3-l display b mb1 mt3">Most Read</h2>
+  <div class="">
+    <%= partial("partials/_post_list", locals: { posts: popular_posts, show_year: true }) %>
   </div>
-<% end %>
+
+  <h2 class="f5 f3-l display b mb1 mt3">Recent</h2>
+  <div class="">
+    <%= partial("partials/_post_list", locals: { posts: recent_posts, show_year: false }) %>
+  </div>
+
+  <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, posts| %>
+    <h2 class="f3 display b mb1 mt3">
+      <%= year %>
+    </h2>
+    <div class="mb3">
+      <%= partial("partials/_post_list", locals: { posts: posts, show_year: false }) %>
+    </div>
+  <% end %>
+
+  <%= link_to "RSS", "/feed.rss", target: "_blank", class: "blue db mb2" %>
+</div>

@@ -1,7 +1,7 @@
 ---
 highlight: orange
 
-projects:
+code:
   - title: Geraint
     link: https://github.com/charlieegan3/geraint
     comment: Twitter bot that uses AWS Polly to narrate @dril tweets
@@ -57,6 +57,63 @@ projects:
     comment: "'Linearizing' tracker for tech news. Built on Rails, Dokku &amp; Digital Ocean."
     image: /projects/serializer.jpg
 
+talks:
+  - title: Development Rebundling in Dockerland - LRUG
+    link: https://skillsmatter.com/skillscasts/9120-development-re-bundling-in-dockerland
+    comment: First meetup talk where I talk about a means of making repeated bundle installations in container builds less painful
+    image: /projects/lrug.jpg
+  - title: Development Rebundling in Dockerland - v2
+    link: http://northernlightsconf.co.uk/
+    comment: I gave a brushed up version of the Bundler talk at the 2016 Northern Lights Conference in Aberdeen
+    image: /projects/nl.jpg
+  - title: Heroku Treasure Hunt - Unboxed FTL
+    link: /blog/2017/01/12/heroku-treasure.html
+    comment: Super short talk about some things I found out using BigQuery
+    image: /projects/ftl.jpg
+
+teachings:
+  - title: codebar
+    link: http://codebar.io
+    comment: Workshops for learners from under-represented groups
+    image: /projects/codebar.jpg
+  - title: WWC
+    link: https://www.womenwhocode.com/
+    comment: Free Ruby workshops &amp; tutorial sessions
+    image: /projects/wwc.jpg
+  - title: Teaching Assistant at UoA
+    link: https://www.abdn.ac.uk/registry/courses/undergraduate/2017/computing_science/cs2012
+    comment: Second-year, computer-science, web application development course covering Ruby &amp; Postgres
+    image: /projects/aberdeen.jpg
+  - title: Code First
+    link: http://www.codefirstgirls.org.uk
+    comment: I taught a six week intro to HTML, CSS & JS course during my final term at Aberdeen
+    image: /projects/cfg.jpg
+  - title: CoderDojo
+    link: https://zen.coderdojo.com/dojo/gb/university-of-aberdeen-computing-science-meston-building-room-3-11-aberdeen-ab-2-4-3ue/aberdeen
+    comment: I tutored school students at the Coderdojo after school club series
+    image: /projects/coderdojo.jpg
+
+papers:
+  - title: Summarising the points made in online political debates
+    comment: Paper accepted at the 3rd Workshop on Argument Mining (ACl 2016)
+    link: https://scholar.google.co.uk/citations?view_op=view_citation&hl=en&user=pqb-ZNAAAAAJ&citation_for_view=pqb-ZNAAAAAJ:u5HHmVD_uO8C
+    image: /projects/acl2016.jpg
+
+  - title: Search engine correction accuracy study
+    comment: Write up of search engine performance on corrupted queries
+    link: /projects/query_corruption_2016.pdf
+    image: /projects/query_corruption_2016.jpg
+
+  - title: An argumentation-based approach to summarizing discussions
+    comment: Honours project thesis. Foundational work for the ACL paper
+    link: /projects/thesis.pdf
+    image: /projects/thesis.jpg
+
+  - title: Security discussion of the Heroku PaaS
+    comment: As part of a my security course I wrote up a risk assessment of hosting on the Heroku Platform
+    link: /projects/heroku_ra_2016.pdf
+    image: /projects/heroku_ra_2016.jpg
+
 subtitle: Some things I've made.
 
 priority: 1
@@ -65,5 +122,24 @@ title: charlieegan3 - projects
 ---
 <%= partial "partials/_top_menu", locals: { selected: 1, highlight: current_page.data.highlight } %>
 
-<%= partial("partials/item_cards",
-            locals: { items: current_page.data.projects }) %>
+<div class="flex-ns w-100 mw8">
+  <div class="w-100 w-third-ns">
+    <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Side Projects</h2>
+    <%= partial("partials/item_cards",
+                locals: { items: current_page.data.code }) %>
+  </div>
+
+  <div class="w-100 w-third-ns">
+    <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Talks &amp; Teaching</h2>
+    <%= partial("partials/item_cards",
+                locals: { items: current_page.data.talks }) %>
+    <%= partial("partials/item_cards",
+                locals: { items: current_page.data.teachings }) %>
+  </div>
+
+  <div class="w-100 w-third-ns">
+    <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Papers</h2>
+    <%= partial("partials/item_cards",
+                locals: { items: current_page.data.papers }) %>
+  </div>
+</div>

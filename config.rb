@@ -161,6 +161,4 @@ after_build do
   puts "Removing blog link html extensions"
   content = File.read("www/blog/index.html").gsub(/("\/blog[^"]+).html"/, '\1"')
   File.write("www/blog/index.html", content)
-  content = File.read("www/words/index.html").gsub(/("\/blog[^"]+).html"/, '\1"')
-  File.write("www/words/index.html", content)
 end
