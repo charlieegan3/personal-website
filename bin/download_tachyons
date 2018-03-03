@@ -11,5 +11,6 @@ config[:css][:allow_comments] = false
 content = Sanitize::CSS.stylesheet(content, config)
 
 content = content.gsub(/\n+/, "\n")
+content = content.gsub(/\s+\n/, "\n")
 
-File.write("source/stylesheets/_tachyons.scss", content.strip)
+File.write("source/stylesheets/_tachyons.scss", content.strip + "\n")
