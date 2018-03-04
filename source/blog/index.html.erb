@@ -15,20 +15,71 @@ title: charlieegan3 - blog
 <% recent_posts  = page_articles(blog_name = "blog")
                      .sort_by { |a| a.date }
                      .reverse
-                     .take(5) %>
+                     .take(6) %>
+
+<h2 class="f5 f3-l mh1-ns display b mb1 mt3">Most Read</h2>
+<div class="flex-ns flex-wrap mw8">
+  <% popular_posts.each do |item| %>
+    <% link = "/#{item.path}" %>
+    <% if item.data["external_url"] %>
+      <% link = item.data["external_url"] %>
+    <% end %>
+    <% link_to link, class: "flex-ns w-100 w-50-m w-third-l" do %>
+      <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray w-100">
+        <% thumbnail_reference = item.data[:thumbnail] %>
+        <% thumbnail_ext = thumbnail_reference.split(".").last %>
+        <% thumbnail_path = asset_path(thumbnail_ext, thumbnail_reference) %>
+        <div class="ba bw2 b--mid-gray h4-5" style="background: url(<%= thumbnail_path %>); background-size: cover; background-position: left center;">
+          <%= image_tag thumbnail_path, class: "o-0", style: "width: 0px; height: 0px;", alt: "#{item.title} image" %>
+        </div>
+        <div class="pa3">
+          <h2 class="f5 display mb3"><%= item.title %></h2>
+          <p class="f6 gray">
+            <%= ordinalized_date(item.date, true) %>
+            <% if item.data["external_url"] %>
+              <span class="blue">External</span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<h2 class="f5 f3-l mh1-ns display b mb1 mt3">Recent</h2>
+<div class="flex-ns flex-wrap mw8">
+  <% recent_posts.each do |item| %>
+    <% link = "/#{item.path}" %>
+    <% if item.data["external_url"] %>
+      <% link = item.data["external_url"] %>
+    <% end %>
+    <% link_to link, class: "flex-ns w-100 w-50-m w-third-l" do %>
+      <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray w-100">
+        <% thumbnail_reference = item.data[:thumbnail] %>
+        <% thumbnail_ext = thumbnail_reference.split(".").last %>
+        <% thumbnail_path = asset_path(thumbnail_ext, thumbnail_reference) %>
+        <div class="ba bw2 b--mid-gray h4-5" style="background: url(<%= thumbnail_path %>); background-size: cover; background-position: left center;">
+          <%= image_tag thumbnail_path, class: "o-0", style: "width: 0px; height: 0px;", alt: "#{item.title} image" %>
+        </div>
+        <div class="pa3">
+          <h2 class="f5 display mb3"><%= item.title %></h2>
+          <p class="f6 gray">
+            <%= ordinalized_date(item.date, true) %>
+            <% if item.data["external_url"] %>
+              <span class="blue">External</span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "RSS", "/feed.rss", target: "_blank", class: "db mh1-ns mw5-ns b f5 f4-l mt2 mr2-ns pa2 mb2 tc dark-gray ba bw2 b--orange bg-animate hover-bg-orange hover-white" %>
 
 <div class="mh1-ns">
-  <h2 class="f5 f3-l display b mb1 mt3">Most Read</h2>
-  <div class="">
-    <%= partial("partials/_post_list", locals: { posts: popular_posts, show_year: true }) %>
-  </div>
-
-  <h2 class="f5 f3-l display b mb1 mt3">Recent</h2>
-  <div class="">
-    <%= partial("partials/_post_list", locals: { posts: recent_posts, show_year: false }) %>
-  </div>
-
-  <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each do |year, posts| %>
+  <% page_articles(blog_name = 'blog').group_by { |a| a.date.strftime('%Y') }.to_a.each_with_index do |data, index| %>
+    <% year, posts = data %>
     <h2 class="f3 display b mb1 mt3">
       <%= year %>
     </h2>
@@ -36,6 +87,4 @@ title: charlieegan3 - blog
       <%= partial("partials/_post_list", locals: { posts: posts, show_year: false }) %>
     </div>
   <% end %>
-
-  <%= link_to "RSS", "/feed.rss", target: "_blank", class: "blue db mb2" %>
 </div>

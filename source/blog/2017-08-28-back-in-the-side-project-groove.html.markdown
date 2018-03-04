@@ -1,6 +1,7 @@
 ---
 title: "Back in the side-project groove"
 date: 2017-08-28 16:25:45 +0100
+thumbnail: /blog/2017-08-28-back-in-the-side-project-groove/rssmerge.png
 ---
 
 Since starting work full-time I've been lacking the energy and time for side

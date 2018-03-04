@@ -2,6 +2,7 @@
 title: "A Weekend with The Google Cloud Platform"
 date: 2016-12-26 20:16:37 +0000
 featured: 6
+thumbnail: https://cloud.epam.com/site/develop/hybrid_cloud/g=c=p/google_console.png
 ---
 
 For some time I've been looking to consolidate my 'side project infrastructure'. I have two projects running Digital Ocean droplets ([serializer.io](http://serializer.charlieegan3.com) and standpoint); json-charlieegan3 runs on [hyper.sh](https://hyper.sh) making use of an S3 bucket; [charlieegan3.com](https://charlieegan3.com) runs on [Netlify](https://www.netlify.com) (but is about to move to App Engine standard) and I have the usual handful of tasks & apps running on Heroku.

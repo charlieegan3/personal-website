@@ -55,6 +55,8 @@ h4-5
 hidden
 highlight
 hover-bg-light-gray
+hover-bg-orange
+hover-white
 input-reset
 javascript
 k
@@ -90,6 +92,7 @@ o-70
 orange
 p
 pa1
+pa2
 pa3
 ph3
 pl2
@@ -108,6 +111,7 @@ shell
 silver
 sql
 sr
+style
 tc
 tex
 ttu

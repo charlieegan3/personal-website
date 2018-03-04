@@ -2,6 +2,7 @@
 title: Deploying Go as a binary on Heroku
 date: 2015-12-26 13:05 UTC
 featured: 5
+thumbnail: https://www-assets2.herokucdn.com/assets/languages/go/platform-b2790dda558414c70924b86205bf1204a2b9e9cccd6133d7a8d67fe983f6dcbb.png
 ---
 Here are the steps to deploy a "Hello World" Go app on Heroku as a binary - rather than the method outlined in their [tutorial](https://www.heroku.com/go#see-it-in-action) which uses GoDeps.
 
