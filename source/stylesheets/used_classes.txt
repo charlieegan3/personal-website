@@ -60,6 +60,7 @@ hover-white
 input-reset
 javascript
 k
+kp
 list
 m
 mb1
@@ -82,6 +83,8 @@ mw6
 mw8
 n
 nb
+nf
+no
 nowrap
 nx
 o
@@ -104,14 +107,18 @@ purple
 pv2
 pv3
 pv4-ns
+ruby
 s1
 s2
 sans-serif
 shell
+si
 silver
 sql
 sr
+ss
 style
+sx
 tc
 tex
 ttu
