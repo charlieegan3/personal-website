@@ -11,6 +11,7 @@ ba
 bb-0-ns
 bg
 bg-animate
+bg-dark-gray
 bg-near-white
 bl
 bl-0-ns
@@ -54,6 +55,7 @@ green
 h4-5
 hidden
 highlight
+hover-bg-dark-gray
 hover-bg-light-gray
 hover-bg-orange
 hover-white
@@ -61,6 +63,7 @@ input-reset
 javascript
 k
 kp
+light-gray
 list
 m
 mb1
