@@ -23,15 +23,24 @@ priority: 1
 
 <div class="cf mh1-ns">
   <div class="fl w-100 w-50-ns">
-    <% current_page.data.menu_blocks.each do |menu_block| %>
-      <% link_to menu_block[:path] do %>
-        <div class="fl w-100 w-third-ns mb3">
-          <div class="display b f5 f4-l mr2-ns mb2 pv3 pv4-ns tc dark-gray ba bw2 b--mid-gray bg-animate hover-bg-light-gray">
-            <%= menu_block[:title] %>
+    <div class="mb3">
+      <% current_page.data.menu_blocks.each do |menu_block| %>
+        <% link_to menu_block[:path] do %>
+          <div class="fl w-100 w-50-ns">
+            <div class="display b f5 f4-l mr2-ns mb2 pv3 pv4-ns tc dark-gray ba bw2 b--mid-gray bg-animate hover-bg-light-gray">
+              <%= menu_block[:title] %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <% link_to "https://photos.charlieegan3.com", target: "_blank" do %>
+        <div class="fl w-100 w-50-ns mb3">
+          <div class="display b f5 f4-l mr2-ns mb2 pv3 pv4-ns tc ba bw2 b--mid-gray bg-dark-gray light-gray bg-animate hover-bg-dark-gray">
+            Photos
           </div>
         </div>
       <% end %>
-    <% end %>
+    </div>
 
     <div class="fl w-100">
       <div class="mr2-ns mb2 f7 f6-l">
