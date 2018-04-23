@@ -132,15 +132,12 @@ Standard blurring out the motion of the waves example:
 ![gun](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/gun.jpg)
 [Source Video](https://photos.charlieegan3.com/photos/2016-05-29-1261099882943047095/)
 
-Think this is the best example of a night one I have:
-![round](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/round.jpg)
-[Source Video](https://photos.charlieegan3.com/photos/2014-11-11-851569460029121935/)
-
 Stacking is also good for removing people from busy shots:
+
 ![crowd](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/crowd.jpg)
 [Source Video](https://photos.charlieegan3.com/photos/2014-10-22-836785782090590192/)
 
-These are all pretty poor quality videos taken on a Galaxy Note II. Here's one
+These are both pretty poor quality videos taken on a Galaxy Note II. Here's one
 of a plane coming in to land at Heathrow this afternoon. No tripod, 4k, pixel 2.
 (Click for full-size)
 
@@ -148,6 +145,35 @@ of a plane coming in to land at Heathrow this afternoon. No tripod, 4k, pixel 2.
 ![4k](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/4k.jpg)
 ](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/4k.jpg)
 [Source Video](https://photos.app.goo.gl/9tvOK7kZRoKtke9p1)
+
+Or one from a video I took on the way to work:
+
+[
+![4k](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/church.jpg)
+](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/church.jpg)
+[Source Video](https://photos.app.goo.gl/jl985Kju1IuqPtX32)
+
+This one's based of a short video waiting for the lights in putney, just
+holding it in my hand.
+
+[
+![4k](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/putney.jpg)
+](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/putney.jpg)
+[Source Video](https://photos.app.goo.gl/yEZkWcx0NK2VgXIs2)
+
+You can also create some more unusual ones:
+
+[
+![4k](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/trainblur.jpg)
+](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/trainblur.jpg)
+[Source Video](https://photos.app.goo.gl/zTSZhgbvMN90K02c2)
+
+Sometimes it's not always best to attempt to align the shots!
+
+[
+![4k](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/art.jpg)
+](/blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/art.jpg)
+[Source Video](https://photos.app.goo.gl/zTSZhgbvMN90K02c2)
 
 ## How can I get it?
 If you're interested to try this out let me know and I can let you in. I'm
