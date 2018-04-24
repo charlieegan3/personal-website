@@ -4,6 +4,8 @@ date: 2018-04-22 22:50:55 +0100
 thumbnail: /blog/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/diagram.png
 ---
 
+**Update** _You can try the project [here](https://charlieegan3-stackr.herokuapp.com/). Code available [here](https://github.com/charlieegan3/stackr)._
+
 ## Intro
 
 At the end of last year I started paying for a Creative Cloud subscription so
