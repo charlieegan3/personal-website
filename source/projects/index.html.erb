@@ -126,25 +126,20 @@ priority: 1
 title: charlieegan3 - projects
 ---
 <%= partial "partials/_top_menu", locals: { selected: 1, highlight: current_page.data.highlight } %>
-
+  <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Side Projects</h2>
 <div class="flex-ns w-100 mw8">
-  <div class="w-100 w-third-ns">
-    <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Side Projects</h2>
-    <%= partial("partials/item_cards",
-                locals: { items: current_page.data.code }) %>
-  </div>
+  <%= partial("partials/item_cards",
+              locals: { items: current_page.data.code }) %>
+</div>
 
-  <div class="w-100 w-third-ns">
-    <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Talks &amp; Teaching</h2>
-    <%= partial("partials/item_cards",
-                locals: { items: current_page.data.talks }) %>
-    <%= partial("partials/item_cards",
-                locals: { items: current_page.data.teachings }) %>
-  </div>
+<h2 class="f5 f3-l display b mh1-ns mb1 mt3">Papers</h2>
+<div class="flex-ns w-100 mw8">
+  <%= partial("partials/item_cards",
+              locals: { items: current_page.data.papers }) %>
+</div>
 
-  <div class="w-100 w-third-ns">
-    <h2 class="f5 f3-l display b mh1-ns mb1 mt3">Papers</h2>
-    <%= partial("partials/item_cards",
-                locals: { items: current_page.data.papers }) %>
-  </div>
+<h2 class="f5 f3-l display b mh1-ns mb1 mt3">Talks &amp; Teaching</h2>
+<div class="flex-ns w-100 mw8">
+  <%= partial("partials/item_cards",
+              locals: { items: current_page.data.talks + current_page.data.teachings }) %>
 </div>
