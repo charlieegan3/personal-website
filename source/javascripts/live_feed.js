@@ -5,7 +5,7 @@ var liveFeed = {};
       { type: "commit", data: data.commit },
       { type: "tweet",  data: data.tweet },
       { type: "track",  data: data.track },
-      { type: "image",  data: data.image },
+      { type: "post",  data: data.post },
       { type: "film",   data: data.film },
       { type: "activity", data: data.activity }
     ];
@@ -41,23 +41,25 @@ var liveFeed = {};
         return "Committed \"" + context.linkedText(context.cleanLongWords(data.message), data.link, "code hover-bg-light-green") + "\"";
       case "tweet":
         if (data.location != null && data.location != "") {
-          return "Tweeted from \"" + data.location + ": " + context.linkedText(data.text, data.link, "hover-bg-light-blue") + "\"";
+          return context.linkedText("Tweeted from " + data.location, data.link, "hover-bg-light-blue");
         } else {
-          return "Tweeted \"" + context.linkedText(context.cleanLongWords(data.text), data.link, "hover-bg-light-blue") + "\"";
+          return "Posted a " + context.linkedText("tweet", data.link, "hover-bg-light-blue") + "\"";
         }
       case "track":
-        return "Listened to " + context.linkedText(data.name, data.link, "i hover-bg-light-red") + " by " + context.linkedText(data.artist, data.link, "hover-bg-light-red");
-      case "image":
+        return context.linkedText("Listened", data.profile, "i hover-bg-light-red") + " to " + context.linkedText(data.name, data.link, "i hover-bg-light-red") + " by " + data.artist;
+      case "post":
         if (data.location != null && data.location != "") {
-          return "Posted a " + context.linkedText("picture from " + data.location, data.link, "hover-bg-light-pink");
+          return "Posted a " + context.linkedText("picture from \"" + data.location + "\"", data.link, "hover-bg-light-pink");
         } else {
           return "Posted a " + context.linkedText("picture", data.link);
         }
       case "film":
         return "Watched a film called " + context.linkedText(data.title, data.link, "b serif hover-bg-moon-gray");
       case "activity":
-        return "Ran " + context.linkedText(data.distance + "km in " + data.moving_time, data.link, "hover-bg-light-red") + " <span class=\"mid-gray\">(YTD: " + data.ytd +"km)</span>";
+        return "Completed a " + context.linkedText((Math.round(data.distance / 100) / 10) + "km " + data.type.toLowerCase() + " - \"" + data.name + "\"", data.link, "hover-bg-light-red");
     }
+
+    return ""
   };
 
   context.display = function(data) {
@@ -66,7 +68,10 @@ var liveFeed = {};
 
     var rows = "";
     for (var i = 0; i < items.length; i++) {
-      var row = context.renderTemplate(items[i].data.created_ago, context.generateMessage(items[i]));
+      var row = context.renderTemplate(items[i].data.created_at_string, context.generateMessage(items[i]));
+      if (row == "") {
+        continue;
+      }
       if (i === items.length - 1) {
         row = row.replace("bb b--light-silver", "")
       }
