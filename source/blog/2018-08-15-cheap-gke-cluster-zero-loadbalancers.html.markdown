@@ -11,19 +11,19 @@ I didn't want to spend any money though, or at least I wanted to do this on the
 cheap. I also didn't want to run a real node in my flat.
 
 What I really wanted was a GKE cluster. I needed to just focus on getting things
-running. Eventually, I want to run all my side-projects a Kubernetes cluster - 5
+running. Eventually, I want to run all my side-projects on Kubernetes - 5
 year plan!
 
 There were some problems with the money though. I was doing this on the cheap.
 
 I could get nodes on Digital Ocean really cheap. I also liked the idea of running
 a cluster on Scaleway. I just didn't really want to deal with the actual
-managing of the cluster - hmm.
+managing the cluster - hmm.
 
 I looked into the [Single Node Kubernetes Cluster](https://github.com/kelseyhightower/kubeadm-single-node-cluster)
 guides a bit. I tried the one for [Digtal Ocean](https://github.com/julianvmodesto/kubeadm-single-node-cluster-digitalocean).
 
-I just didn't really want to bother with the upgrades & faff. In the end I came
+I didn't want to bother with the upgrades & faff. In the end I came
 up with a better idea.
 
 One of the main reasons I'd been avoiding using GKE was the load balancer
