@@ -135,7 +135,7 @@ tolerations and nodeSelector.
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: default-http-backend
+  name: ingress-nginx
 spec:
   template:
     spec:
