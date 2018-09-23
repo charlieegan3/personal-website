@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-
-PATH="/charlieegan3-www/source"
-BUCKET="charlieegan3-www-codepipeline"
-
-system("aws s3 rm --recursive s3://#{BUCKET}#{PATH}")

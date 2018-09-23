@@ -1,3 +1,6 @@
+TAG := $(shell tar -cf - . | md5sum | cut -f 1 -d " ")
+PROJECT := personal-website
+
 run: own docker_build mm_server
 build: own docker_build mm_classes mm_build
 
@@ -13,3 +16,10 @@ open:
 	firefox http://localhost:4567
 own:
 	sudo chown -R $$(whoami) *
+
+build_prod:
+	docker build -t charlieegan3/$(PROJECT):latest -t charlieegan3/$(PROJECT):${TAG} -f Dockerfile.prod .
+
+push: build_prod
+	docker push charlieegan3/$(PROJECT):latest
+	docker push charlieegan3/$(PROJECT):${TAG}
