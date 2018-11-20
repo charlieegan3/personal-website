@@ -19,7 +19,7 @@ slug = title.downcase.gsub(/[^\w\s]/, '').strip.gsub(/\s+/, '-')
 date_string = Time.now.strftime("%Y-%m-%d")
 base_path = "source/blog/#{date_string}-#{slug}"
 path = "#{base_path}.html.markdown"
-thumbnail_path = "#{base_path}/thumbnail.jpg"
+thumbnail_path = "#{base_path.gsub(/^source/, "")}/thumbnail.jpg"
 contents = template
              .gsub("{{TITLE}}", "\"#{title}\"")
              .gsub("{{DATE}}", Time.new.to_s)
