@@ -8,18 +8,19 @@ title: charlieegan3 - blog
 ---
 <%= partial "partials/_top_menu", locals: { selected: 2, highlight: current_page.data.highlight } %>
 
-<% popular_posts = page_articles(blog_name = "blog")
-                     .select { |a| a.data[:featured] }
-                     .sort_by { |a| a.data[:featured] } %>
-
 <% recent_posts  = page_articles(blog_name = "blog")
                      .sort_by { |a| a.date }
                      .reverse
                      .take(6) %>
 
-<h2 class="f5 f3-l mh1-ns display b mb1 mt3">Most Read</h2>
+<% popular_posts = page_articles(blog_name = "blog")
+                     .select { |a| a.data[:featured] }
+                     .sort_by { |a| a.data[:featured] } %>
+
+
+<h2 class="f5 f3-l mh1-ns display b mb1 mt3">Recent</h2>
 <div class="flex-ns flex-wrap mw8">
-  <% popular_posts.each do |item| %>
+  <% recent_posts.each do |item| %>
     <% link = "/#{item.path}" %>
     <% if item.data["external_url"] %>
       <% link = item.data["external_url"] %>
@@ -46,9 +47,9 @@ title: charlieegan3 - blog
   <% end %>
 </div>
 
-<h2 class="f5 f3-l mh1-ns display b mb1 mt3">Recent</h2>
+<h2 class="f5 f3-l mh1-ns display b mb1 mt3">Most Read</h2>
 <div class="flex-ns flex-wrap mw8">
-  <% recent_posts.each do |item| %>
+  <% popular_posts.each do |item| %>
     <% link = "/#{item.path}" %>
     <% if item.data["external_url"] %>
       <% link = item.data["external_url"] %>
