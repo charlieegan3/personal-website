@@ -1,22 +1,34 @@
 #!/usr/bin/env ruby
 
-raise if ARGV.size != 1
-
-title = ARGV[0]
+if ARGV.size < 1
+  puts "Enter title:"
+  title = gets.chomp
+else
+  title = ARGV[0]
+end
 
 template =
 %q{---
 title: {{TITLE}}
 date: {{DATE}}
+thumbnail: {{THUMB}}
 ---
 }
 
 slug = title.downcase.gsub(/[^\w\s]/, '').strip.gsub(/\s+/, '-')
 date_string = Time.now.strftime("%Y-%m-%d")
-path = "source/blog/#{date_string}-#{slug}.html.markdown"
+base_path = "source/blog/#{date_string}-#{slug}"
+path = "#{base_path}.html.markdown"
+thumbnail_path = "#{base_path.gsub(/^source/, "")}/thumbnail.jpg"
 contents = template
              .gsub("{{TITLE}}", "\"#{title}\"")
              .gsub("{{DATE}}", Time.new.to_s)
+             .gsub("{{THUMB}}", thumbnail_path)
 
 File.open(path, 'w').write(contents)
+
+# create asset dir, save a blank image for the thumbnail
+`mkdir -p source/blog/#{date_string}-#{slug}`
+`touch #{thumbnail_path}`
+
 puts path + " Saved."
