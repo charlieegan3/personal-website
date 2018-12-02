@@ -38,7 +38,9 @@ var liveFeed = {};
     var data = item.data;
     switch(item.type) {
       case "commit":
-        return "Committed \"" + context.linkedText(context.cleanLongWords(data.message), data.link, "code hover-bg-light-green") + "\"";
+        var segments = data.url.split("/");
+        var sha = segments[segments.length - 1];
+        return "Committed \"" + context.linkedText(context.cleanLongWords(data.message), "https://github.com/" + data.repo.name + "/commit/" + sha, "code hover-bg-light-green") + "\"";
       case "tweet":
         if (data.location != null && data.location != "") {
           return context.linkedText("Tweeted from " + data.location, data.link, "hover-bg-light-blue");
@@ -49,14 +51,14 @@ var liveFeed = {};
         return context.linkedText("Listened", data.profile, "i hover-bg-light-red") + " to " + context.linkedText(data.name, data.link, "i hover-bg-light-red") + " by " + data.artist;
       case "post":
         if (data.location != null && data.location != "") {
-          return "Posted a " + context.linkedText("picture from \"" + data.location + "\"", data.link, "hover-bg-light-pink");
+          return "Posted a " + context.linkedText("picture from \"" + data.location + "\"", data.url, "hover-bg-light-pink");
         } else {
-          return "Posted a " + context.linkedText("picture", data.link);
+          return "Posted a " + context.linkedText("picture", data.url);
         }
       case "film":
         return "Watched a film called " + context.linkedText(data.title, data.link, "b serif hover-bg-moon-gray");
       case "activity":
-        return "Completed a " + context.linkedText((Math.round(data.distance / 100) / 10) + "km " + data.type.toLowerCase() + " - \"" + data.name + "\"", data.link, "hover-bg-light-red");
+        return "Completed a " + context.linkedText((Math.round(data.distance / 100) / 10) + "km " + data.type.toLowerCase() + " - \"" + data.name + "\"", data.url, "hover-bg-light-red");
     }
 
     return ""
