@@ -3,7 +3,7 @@ layout: post
 title: "Instagram - First Impressions"
 date: '2013-02-17T00:30:00+00:00'
 ---
-I mentioned a few [posts](/blog/2013/02/10/photos-revisited.html) back that I
+I mentioned a few [posts](/blog/2013/02/10/photos-revisited) back that I
 was going to try and get back into taking some photos again - mainly just a a
 little log of where I’ve been. I’ve been using Instagram, it’s a new one for me
 and this is my experience so far.

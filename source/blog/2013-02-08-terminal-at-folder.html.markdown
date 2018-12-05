@@ -14,5 +14,5 @@ is a must for any programmer.
 
 Now the services menu when right-clicking on a folder contains _New Terminal at Folder._
 
-I’ve also found the terminal built into [Sublime Text 2](/blog/2012/12/18/sublime-service.html)
+I’ve also found the terminal built into [Sublime Text 2](/blog/2012/12/18/sublime-service)
 quite handy recently.

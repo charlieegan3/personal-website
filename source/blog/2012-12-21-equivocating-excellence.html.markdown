@@ -5,7 +5,7 @@ date: '2012-12-21T07:00:00+00:00'
 ---
 I’m mainly writing this for some friends over at Enemies Everywhere (update: site is no more), It’s a gaming blog and I offered to do a guest post. This is it:
 
-I’ve covered multiplayer gaming [before](/blog/2012/12/01/coequal-contestants.html) - sadly, it's something that's held back by so many gripes it’s often hard to know where to start. I made the point that there are some aspects that need more attention. Today I’ll cover some things that distract from the real work towards the perfect shooter.
+I’ve covered multiplayer gaming [before](/blog/2012/12/01/coequal-contestants) - sadly, it's something that's held back by so many gripes it’s often hard to know where to start. I made the point that there are some aspects that need more attention. Today I’ll cover some things that distract from the real work towards the perfect shooter.
 
 Customisation is the first snag, it sits forever at the figurehead of marketing campaigns because it’s easy to sell. It’s easy to show off the variety of the new weapons, perks and power-ups you’ve coded   in, really easy. Thanks to this they have been moved to pole position and are often all that is talked about the new game. You can’t blame developers for this and there have been some really original and noteworthy specimens from this cycle. However I think it is _taking up too much time_ and is only obscuring from problems closer to the core of the system being sold.
 

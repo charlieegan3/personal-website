@@ -4,5 +4,4 @@
 //=require "expanding_text_area"
 //=require "live_feed"
 //=require "ajax"
-//=require "index_redirect"
 //=require "pageviews"

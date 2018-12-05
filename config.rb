@@ -62,6 +62,8 @@ activate :sprockets
 
 activate :livereload
 
+activate :directory_indexes
+
 set :build_dir, "www"
 configure :build do
   activate :minify_html

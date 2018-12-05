@@ -76,10 +76,10 @@ a hack but it means that RSSMerge doesn't require any state at all. The feed URL
 of the RSSMerge feed is just the endpoint + raw feed list parameter. E.g.
 
 ```
-https://api-rssmerge.charlieegan3.com/build?source=https://gist.githubusercontent.com/...
+https://rssmerge.cluster.charlieegan3.com/build?source=...
 ```
 
-([Example link](https://api-rssmerge.charlieegan3.com/build?source=https://gist.githubusercontent.com/charlieegan3/9190409c458bc4aa17ef52a8b682aba4/raw/60043038a1c8f668acddb506db58bdc049f144bd/rssmerge_sample))
+([Example link](https://rssmerge.cluster.charlieegan3.com/build?source=https://gist.githubusercontent.com/charlieegan3/9190409c458bc4aa17ef52a8b682aba4/raw/60043038a1c8f668acddb506db58bdc049f144bd/rssmerge_sample))
 
 This can be used by IFTTT to create roundups like this:
 

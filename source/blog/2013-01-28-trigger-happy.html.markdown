@@ -3,20 +3,18 @@ layout: post
 title: "IFTTT: Trigger Happy"
 date: '2013-01-28T00:30:00+00:00'
 ---
-This is the first review I’ve done on here for quite a while - here’s my take
-on [IFTTT](https://ifttt.com/). [+IFTTT](http://plus.google.com/109525093279809082285) 
-is an online automation service that brings together many online applications. Before I begin there is
-some IFTTT jargon that you should know:
+This is the first review I’ve done on here for quite a while - here’s my take on
+[IFTTT](https://ifttt.com/). IFTTT is an online automation service that brings
+together many online applications. Before I begin there is some IFTTT jargon
+that you should know:
 
 * Channel: An application that you have ‘linked’.
 * Trigger: An event that a Channel has. _e.g. 'New Mail Received’._
 * Action: A task that a Channel can complete automatically.
 * Recipe: A combination of a Trigger and an Action.
 
-To give you a feel two of my current recipes are: Post a link to all my new
-blog posts on
-[Twitter](https://twitter.com/charlieegan3/status/293880685662437378)  and Add
-an event to my 'Places' calendar whenever I check in on
+To give you a feel two of my current recipes are: Post a link to all my new blog
+posts on Twitter and Add an event to my 'Places' calendar whenever I check in on
 [Foursquare](https://foursquare.com/charlieegan3).  All the recipes I use are
 also used by others, there’s a sharing feature, however I’ve made modifications
 to suit. Custom recipes are also really easy to set up.
