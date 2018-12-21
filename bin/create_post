@@ -29,6 +29,6 @@ File.open(path, 'w').write(contents)
 
 # create asset dir, save a blank image for the thumbnail
 `mkdir -p source/blog/#{date_string}-#{slug}`
-`touch #{thumbnail_path}`
+`touch source/blog/#{date_string}-#{slug}/thumbnail.jpg`
 
 puts path + " Saved."
