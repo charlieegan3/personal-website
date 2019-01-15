@@ -4,7 +4,7 @@ var liveFeed = {};
     var items = [
       { type: "commit", data: data.commit },
       { type: "tweet",  data: data.tweet },
-      { type: "track",  data: data.track },
+      { type: "play",  data: data.play },
       { type: "post",  data: data.post },
       { type: "film",   data: data.film },
       { type: "activity", data: data.activity }
@@ -47,8 +47,8 @@ var liveFeed = {};
         } else {
           return "Posted a " + context.linkedText("tweet", data.link, "hover-bg-light-blue") + "\"";
         }
-      case "track":
-        return context.linkedText("Listened", data.profile, "i hover-bg-light-red") + " to " + context.linkedText(data.name, data.link, "i hover-bg-light-red") + " by " + data.artist;
+      case "play":
+        return context.linkedText("Listened", "https://music.charlieegan3.com/recent", "i hover-bg-light-red") + " to " + data.track + " by " + data.artist;
       case "post":
         if (data.location != null && data.location != "") {
           return "Posted a " + context.linkedText("picture from \"" + data.location + "\"", data.url, "hover-bg-light-pink");
