@@ -86,28 +86,6 @@ talks:
     comment: Super short talk about some things I found out using BigQuery
     image: /projects/ftl.jpg
 
-teachings:
-  - title: codebar
-    link: http://codebar.io
-    comment: Workshops for learners from under-represented groups
-    image: /projects/codebar.jpg
-  - title: WWC
-    link: https://www.womenwhocode.com/
-    comment: Free Ruby workshops &amp; tutorial sessions
-    image: /projects/wwc.jpg
-  - title: Teaching Assistant at UoA
-    link: https://www.abdn.ac.uk/registry/courses/undergraduate/2017/computing_science/cs2012
-    comment: Second-year, computer-science, web application development course covering Ruby &amp; Postgres
-    image: /projects/aberdeen.jpg
-  - title: Code First
-    link: http://www.codefirstgirls.org.uk
-    comment: I taught a six week intro to HTML, CSS & JS course during my final term at Aberdeen
-    image: /projects/cfg.jpg
-  - title: CoderDojo
-    link: https://zen.coderdojo.com/dojo/gb/university-of-aberdeen-computing-science-meston-building-room-3-11-aberdeen-ab-2-4-3ue/aberdeen
-    comment: I tutored school students at the Coderdojo after school club series
-    image: /projects/coderdojo.jpg
-
 papers:
   - title: Summarising the points made in online political debates
     comment: Paper accepted at the 3rd Workshop on Argument Mining (ACl 2016)
@@ -148,8 +126,8 @@ title: charlieegan3 - projects
               locals: { items: current_page.data.papers }) %>
 </div>
 
-<h2 class="f5 f3-l display b mh1-ns mb1 mt3">Talks &amp; Teaching</h2>
+<h2 class="f5 f3-l display b mh1-ns mb1 mt3">Talks</h2>
 <div class="flex-ns w-100 mw8">
   <%= partial("partials/item_cards",
-              locals: { items: current_page.data.talks + current_page.data.teachings }) %>
+              locals: { items: current_page.data.talks }) %>
 </div>

@@ -1,31 +1,30 @@
 ---
 highlight: purple
 
-work_projects:
+jobs:
   - title: Jetstack
     link: https://jetstack.io
-    comment: Cloud-native consultancy (current)
+    comment: Cloud-native consultancy
     image: /work/jetstack.jpg
-
-  - title: Babylon Health
-    link: https://babylonhealth.com
-    comment: Subscription health service provider
-    image: /work/babylon.jpg
+    projects:
+    - title: Babylon Health
+      link: https://babylonhealth.com
+      comment: Subscription health service provider
+      image: /work/babylon.jpg
 
   - title: unboxed
     link: https://unboxed.co
     comment: Rails &amp; product development consultancy
     image: /work/unboxed.jpg
-
-  - title: chargy
-    link: https://char.gy
-    comment: Back office for on-street EV charger IoT system
-    image: /work/chargy.jpg
-
-  - title: Bookmetrix
-    link: http://bookmetrix.com
-    comment: Ebooks metrics and data aggreation platform
-    image: /work/bookmetrix.jpg
+    projects:
+    - title: chargy
+      link: https://char.gy
+      comment: Back office for on-street EV charger IoT system
+      image: /work/chargy.jpg
+    - title: Bookmetrix
+      link: http://bookmetrix.com
+      comment: Ebooks metrics and data aggregation platform
+      image: /work/bookmetrix.jpg
 
 subtitle: I work with computers & their human counterparts.
 
@@ -35,18 +34,33 @@ title: charlieegan3 - work
 ---
 <%= partial "partials/_top_menu", locals: { selected: 0, highlight: current_page.data.highlight } %>
 
-<div class="flex-ns flex-wrap mw8">
-  <% current_page.data.work_projects.each do |item| %>
-    <% link_to item.link, class: "flex-ns w-100 w-50-m w-third-l" do %>
-      <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray w-100">
-        <div class="ba bw2 b--mid-gray h4-5" style="background: url(<%= item.image %>); background-size: cover; background-position: center center;">
-          <%= image_tag item.image, class: "o-0", alt: "#{item.title} image" %>
+<div class="mw8">
+  <% current_page.data.jobs.each do |item| %>
+    <div>
+      <% link_to item.link, class: "" do %>
+        <div class="mh1-ns mb2 bg hover-bg-light-gray ba b--mid-gray mw6">
+          <div class="ba bw2 b--mid-gray h3 mw5" style="background: url(<%= item.image %>); background-size: cover; background-position: center center;">
+            <%= image_tag item.image, class: "o-0", alt: "#{item.title} image" %>
+          </div>
+          <p class="pa2 f6"><%= item.comment %></p>
+          <p class="pa2 b f6">Projects</p>
+
+          <div class="flex-ns flex-wrap">
+            <% item.projects.each do |project| %>
+              <% link_to project.link, class: "flex-ns mw5" do %>
+                <div class="mh2 mb2 bg hover-bg-light-gray ba b--mid-gray">
+                  <div class="ba bw1 b--mid-gray h2 mw4" style="background: url(<%= project.image %>); background-size: cover; background-position: center center;">
+                    <%= image_tag project.image, class: "o-0", alt: "#{project.title} image" %>
+                  </div>
+                  <div class="pa3">
+                    <p class="f7"><%= project.comment %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-        <div class="pa3">
-          <h2 class="f3 display mb3"><%= item.title %></h2>
-          <p class="f6"><%= item.comment %></p>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
