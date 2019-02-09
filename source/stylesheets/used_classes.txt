@@ -20,6 +20,7 @@ br-0-ns
 br0
 br1
 bt-ns
+bw1
 bw2
 bw2-ns
 bw3
@@ -52,11 +53,13 @@ fr
 gold
 gray
 green
+h2
+h3
 h4-5
 hidden
 highlight
-hover-bg-dark-gray
 hover-bg-light-gray
+hover-bg-mid-gray
 hover-bg-orange
 hover-white
 input-reset
@@ -72,6 +75,7 @@ mb3
 measure-wide
 mh1
 mh1-ns
+mh2
 mi
 min-vh-100
 ml6-l
@@ -81,13 +85,19 @@ mt1
 mt2
 mt3
 mv4
+mw4
+mw5
 mw5-ns
+mw6
 mw8
 n
+na
 nb
 nf
+nn
 no
 nowrap
+nv
 nx
 o
 o-0
@@ -100,6 +110,7 @@ pa1
 pa2
 pa3
 ph3
+pi
 pl2
 plaintext
 pointer
@@ -110,9 +121,11 @@ pv2
 pv3
 pv4-ns
 ruby
+s
 s1
 s2
 sans-serif
+sh
 shell
 si
 silver
@@ -134,3 +147,4 @@ w-50-ns
 w-third-l
 w-third-ns
 w2
+yaml
