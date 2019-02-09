@@ -45,7 +45,7 @@ var liveFeed = {};
         if (data.location != null && data.location != "") {
           return context.linkedText("Tweeted from " + data.location, data.link, "hover-bg-light-blue");
         } else {
-          return "Posted a " + context.linkedText("tweet", data.link, "hover-bg-light-blue") + "\"";
+          return "Posted a " + context.linkedText("tweet", data.link, "hover-bg-light-blue");
         }
       case "play":
         return context.linkedText("Listened", "https://music.charlieegan3.com/recent", "i hover-bg-light-red") + " to " + data.track + " by " + data.artist;
