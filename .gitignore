@@ -5,3 +5,5 @@ www/
 .sass-cache/
 
 vendor
+
+public
