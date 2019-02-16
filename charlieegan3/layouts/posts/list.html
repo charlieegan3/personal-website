@@ -7,16 +7,14 @@
 
 	{{ range .Paginator.Pages }}
 		<div>
-			<h2 class="clear-heading moon-gray f5">
-				<a href="{{.Permalink}}">
-					{{ .Title }}
-				</a>
-			</h2>
-			<p>
+			<h2 class="moon-gray f5">{{ .Title }}</h2>
+			<p class="tj">
 				<span class="gray">
 					{{ dateFormat "Jan 2 2006" .Date }}
 				</span>
+				-
 				{{ .Summary }}
+				<a href="{{.Permalink}}">Read</a>
 			</p>
 		</div>
 	{{ end }}

@@ -3,3 +3,4 @@ languageCode: en-us
 title: charlieegan3
 summaryLength: 25
 taxonomies: {}
+pygmentsCodeFences: true
