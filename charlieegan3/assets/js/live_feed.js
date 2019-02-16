@@ -112,6 +112,5 @@ var liveFeed = {};
 liveFeed.init();
 
 document.addEventListener("turbolinks:load", function(event) {
-	console.log("hereh");
   liveFeed.init();
 });
