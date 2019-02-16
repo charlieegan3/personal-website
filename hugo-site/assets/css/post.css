@@ -46,6 +46,18 @@
     max-width: 100%;
     overflow: scroll;
   }
+  .post-content h1,
+  .post-content h2,
+  .post-content h3,
+  .post-content h4,
+  .post-content h5 {
+    font-size: 1.1rem;
+  }
+
+  .post-content p,
+  .post-content li {
+    font-size: 0.9rem;
+  }
 }
 .post-content em {
   font-style: italic;
