@@ -7,6 +7,7 @@ type_colors:
   experiment: bg-dark-green
   paper: bg-dark-red
   talk: bg-purple
+  thesis: bg-dark-gray
 
 link_types:
 - name: Demo

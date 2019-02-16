@@ -28,7 +28,7 @@ var welcomeMessage = {
 
     greetingElem.innerHTML = "";
     for (var i = 0; i < greeting.length; i++) {
-        await welcomeMessage.sleep(Math.floor((Math.random() * 100) + 10));
+        await welcomeMessage.sleep(Math.floor((Math.random() * 120) + 50));
         greetingElem.innerHTML += greeting[i];
     }
   }

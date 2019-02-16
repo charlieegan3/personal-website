@@ -3,18 +3,18 @@
 {{ end }}
 
 {{ define "main" }}
-	<h1>{{ .Title }}</h1>
+	<h1 class="moon-gray">{{ .Title | lower }}</h1>
 	<div class="post-content">
 		{{ .Content }}
 	</div>
 	{{ range $v := .Params.projects }}
 		<h2 class="f5 mt4">{{ index $v "title" }}</h2>
 		<p>
-			<span class="f6 ph2 pv1 br3 white {{ index $.Params.type_colors (index $v "type") }}">
-				{{ index $v "type" }}
+			<span class="f7 lh-big ph2 ba b--white pv05 br3 white {{ index $.Params.type_colors (index $v "type") }}">
+				{{- index $v "type" -}}
 			</span>
+			{{ index $v "comment"}}
 		</p>
-		<p>{{ index $v "comment"}}</p>
 		<ul>
 			{{ range $l := $.Params.link_types }}
 				{{ $name := index $l "name" }}

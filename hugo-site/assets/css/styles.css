@@ -6,6 +6,15 @@ body {
 	background-color: #212121;
 }
 
+.lh-big {
+	line-height: 2;
+}
+
+.pv05 {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
 a, a:hover, a:visited {
   color: #71a7ed;
   text-decoration: none;
