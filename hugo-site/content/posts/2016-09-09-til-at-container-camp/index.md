@@ -3,7 +3,6 @@ aliases:
 - /blog/2016/09/09/til-at-container-camp
 title: "TIL at Container Camp"
 date: 2016-09-09 22:22:23 +0000
-featured: 3
 ---
 
 ![Container Camp

@@ -3,7 +3,6 @@ aliases:
 - /blog/2017/07/16/host-a-static-website-5-minutes
 title: "Terraform adventures: Host a static website ~5 minutes"
 date: 2017-07-16 14:47:53 +0100
-featured: 4
 ---
 
 ![Host a static site](/posts/2017-07-16-host-a-static-website-5-minutes/misleading.jpg)

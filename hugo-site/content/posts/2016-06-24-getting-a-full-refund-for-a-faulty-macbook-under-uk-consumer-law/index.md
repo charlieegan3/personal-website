@@ -3,8 +3,8 @@ aliases:
 - /blog/2016/06/24/getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law
 title: Getting a full refund for a faulty Macbook under UK consumer law
 date: 2016-06-24 14:54:00 +0000
-featured: 1
 ---
+
 ![statement](/posts/2016-06-24-getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law/statement.jpg)
 
 Below I describe the process of making a UK consumer law claim for a faulty Apple laptop. This write-up represents almost 3 months of intermittent work, 10's of hours of phone calls and various special trips to Apple outlets.
