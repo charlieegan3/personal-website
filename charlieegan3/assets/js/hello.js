@@ -18,8 +18,6 @@ var welcomeMessage = {
   }
 }
 
-welcomeMessage.display();
-
-document.addEventListener("turbolinks:render", function(event) {
+document.addEventListener("turbolinks:load", function(event) {
   welcomeMessage.display();
 })
