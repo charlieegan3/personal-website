@@ -10,20 +10,6 @@
   color: #99999;
 }
 
-.post-content h1:before { content: "#" }
-.post-content h2:before { content: "##" }
-.post-content h3:before { content: "###" }
-.post-content h4:before { content: "####" }
-.post-content h5:before { content: "#####" }
-.post-content h1:before,
-.post-content h2:before,
-.post-content h3:before,
-.post-content h4:before,
-.post-content h5:before {
-	opacity: 0.7;
-	padding-right: 5px;
-}
-
 .post-content p,
 .post-content li {
   text-align: justify;

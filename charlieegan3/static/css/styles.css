@@ -18,3 +18,25 @@ ul {
 ol {
 	padding-left: 30px;
 }
+
+h1:before { content: "#" }
+h2:before { content: "##" }
+h3:before { content: "###" }
+h4:before { content: "####" }
+h5:before { content: "#####" }
+h1:before,
+h2:before,
+h3:before,
+h4:before,
+h5:before {
+	opacity: 0.7;
+	padding-right: 5px;
+}
+.clear-heading:before {
+	padding: 0px;
+	content: "";
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #ccc;
+}
