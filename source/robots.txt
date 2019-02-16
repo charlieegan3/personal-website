@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /dnf.html
-Disallow: /links.html
-Disallow: /til.html

@@ -1,0 +1,30 @@
+{{ define "title" }}
+	Posts - {{ $.Site.Title -}}
+{{ end }}
+
+{{ define "main" }}
+	<h1 class="moon-gray">Posts</h1>
+
+	{{ range .Paginator.Pages }}
+		<div>
+			<h2 class="moon-gray f5">{{ .Title }}</h2>
+			<p class="tj">
+				<span class="gray">
+					{{ dateFormat "Jan 2 2006" .Date }}
+				</span>
+				-
+				{{ .Summary }}
+				<a href="{{.RelPermalink}}">Read</a>
+			</p>
+		</div>
+	{{ end }}
+
+	{{ if gt .Paginator.TotalPages 1 }}
+		{{ if .Paginator.HasPrev }}
+			<a href="{{ .Paginator.Prev.URL }}" aria-label="Previous">previous</a>
+		{{ end }}
+		{{ if .Paginator.HasNext }}
+			<a class="fr" href="{{ .Paginator.Next.URL }}" aria-label="Next">next</a>
+		{{ end }}
+	{{ end }}
+{{ end }}
