@@ -3,7 +3,6 @@ aliases:
 - /blog/2018/04/22/bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh
 title: "Bringing Photoshop image-stacking to mobile with FFmpeg, Hugin, ImageMagick & Hyper.sh"
 date: 2018-04-22 22:50:55 +0100
-thumbnail: /posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/diagram.png
 ---
 
 **Update** _You can try the project [here](https://charlieegan3-stackr.herokuapp.com/). Code available [here](https://github.com/charlieegan3/stackr)._

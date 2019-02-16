@@ -4,7 +4,6 @@ aliases:
 title: Getting a full refund for a faulty Macbook under UK consumer law
 date: 2016-06-24 14:54:00 +0000
 featured: 1
-thumbnail: /posts/2016-06-24-getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law/statement.jpg
 ---
 ![statement](/posts/2016-06-24-getting-a-full-refund-for-a-faulty-macbook-under-uk-consumer-law/statement.jpg)
 

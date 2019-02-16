@@ -3,7 +3,6 @@ aliases:
 - /blog/2018/11/20/how-i-learned-to-stop-worrying-and-build-my-own-lastfm
 title: "Tracking all the plays or how I learned to stop worrying and build my own Last.fm"
 date: 2018-11-20 23:22:48 +0000
-thumbnail: /posts/2018-11-20-how-i-learned-to-stop-worrying-and-build-my-own-lastfm/thumbnail.png
 ---
 
 For my latest side project I built a tool to better track the music I listen to.

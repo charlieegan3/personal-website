@@ -3,7 +3,6 @@ aliases:
 - /blog/2018/08/15/cheap-gke-cluster-zero-loadbalancers
 title: "Running a cheap GKE cluster with public ingress & zero load balancers"
 date: 2018-08-15 21:53:39 +0100
-thumbnail: /posts/2018-08-15-cheap-gke-cluster-zero-loadbalancers/containers.jpg
 ---
 
 Joining Jetstack earlier this year finally convinced me that I needed a
@@ -164,7 +163,3 @@ cluster.charlieegan3.com. 300   IN      A       35.197.243.26
 So there you have it. If I need to run more stuff I can just use a bigger
 preemptible node or add another. They're cheap enough for me at the moment and
 worth it for the convenience of GKE - imo.
-
-***
-
-_Thumbnail Photo by William Felker on Unsplash_

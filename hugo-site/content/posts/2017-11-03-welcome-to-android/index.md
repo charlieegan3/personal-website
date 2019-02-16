@@ -3,7 +3,6 @@ aliases:
 - /blog/2017/11/03/welcome-to-android
 title: "Welcome to Android"
 date: 2017-11-03 09:57:34 +0000
-thumbnail: https://i.imgur.com/wvQpYET.gif
 ---
 
 For a series of reasons I recently bought a Google Pixel 2. I've been wanting a

@@ -3,7 +3,6 @@ aliases:
 - /blog/2018/03/04/backing-up-instagram
 title: "Backing up Instagram"
 date: 2018-03-04 17:23:43 +0000
-thumbnail: /posts/2018-03-04-backing-up-instagram/jul_17th.jpg
 ---
 
 I enjoy using Instagram to share my photos. The restricted feature-set;

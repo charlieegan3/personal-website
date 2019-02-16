@@ -3,7 +3,6 @@ aliases:
 - /blog/2017/06/24/west-coast-ev
 title: 500 kilometres of electric-car, west-coast exploring
 date: 2017-06-24 00:22:00 +0000
-thumbnail: /posts/2017-06-24-west-coast-ev/road_to_fort_william.jpg
 ---
 
 I've been working on [char.gy](https://char.gy) for the last few months. I fear

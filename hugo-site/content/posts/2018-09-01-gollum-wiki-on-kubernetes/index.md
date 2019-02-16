@@ -3,7 +3,6 @@ aliases:
 - /blog/2018/09/01/gollum-wiki-on-kubernetes
 title: Running a wiki with Gollum on Kubernetes
 date: 2018-09-01 18:20:12 +0100
-thumbnail: /posts/2018-09-01-gollum-wiki-on-kubernetes/patrick-tomasso-71909-unsplash.jpg
 ---
 
 I've long been
@@ -314,7 +313,3 @@ This gives me a wiki that only I can access, that's encrypted and available on
 all my devices. I didn't even need to build the interface #winning.
 
 (but wow, GPG UI so hard...)
-
-***
-
-_Tumbnail by Patrick Tomasso on Unsplash_

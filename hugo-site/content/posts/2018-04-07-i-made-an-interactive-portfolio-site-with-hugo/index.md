@@ -3,7 +3,6 @@ aliases:
 - /blog/2018/04/07/i-made-an-interactive-portfolio-site-with-hugo
 title: "I made an interactive portfolio site with Hugo"
 date: 2018-04-07 17:44:26 +0100
-thumbnail: /posts/2018-04-07-i-made-an-interactive-portfolio-site-with-hugo/photo_grid.png
 ---
 
 My [last post](/posts/2018-03-04-backing-up-instagram)
