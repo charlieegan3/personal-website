@@ -1,0 +1,90 @@
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5 {
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  vertical-align: bottom;
+  color: #99999;
+}
+
+.post-content h1:before { content: "#" }
+.post-content h2:before { content: "##" }
+.post-content h3:before { content: "###" }
+.post-content h4:before { content: "####" }
+.post-content h5:before { content: "#####" }
+.post-content h1:before,
+.post-content h2:before,
+.post-content h3:before,
+.post-content h4:before,
+.post-content h5:before {
+	opacity: 0.7;
+	padding-right: 5px;
+}
+
+.post-content p,
+.post-content li {
+  text-align: justify;
+  margin-bottom: 0.5rem;
+  line-height: 1.5em;
+  font-size: 1rem;
+}
+.post-content p code {
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1px 3px;
+}
+.post-content li {
+  margin-bottom: 0rem;
+}
+.post-content ul, .post-content ol {
+  margin-bottom: 0.5rem;
+}
+.post-content ol {
+  list-style-type: decimal;
+}
+.post-content pre {
+  background-color: #151515;
+  border-color: #181818;
+  border-left-style: solid;
+  border-left-width: 20px;
+  border-width: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+@media screen and (max-width: 30em) {
+  .post-content pre {
+    max-width: 100%;
+    overflow: scroll;
+  }
+}
+.post-content em {
+  font-style: italic;
+  text-justify: none;
+}
+.post-content img + em {
+  vertical-align: top;
+  font-size: 0.75rem;
+}
+.post-content hr {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin-left: 0;
+  max-width: 34em;
+}
+.post-content img {
+  border-style: solid;
+  border-width: 0.25rem;
+  border-color: #ccc;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.post-content blockquote {
+  font-size: 0.9em;
+  font-style: italic;
+  padding-left: 2rem;
+}

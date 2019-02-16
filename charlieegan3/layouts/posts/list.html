@@ -1,0 +1,30 @@
+{{ define "title" }}
+	Posts - {{ $.Site.Title -}}
+{{ end }}
+
+{{ define "main" }}
+	{{ range first 10 .Pages }}
+		<div>
+			<h2 class="moon-gray f5">
+				<a href="{{.Permalink}}">
+					<span class="o-70 pr1">#</span>{{ .Title }}
+				</a>
+			</h2>
+			<p>
+				<span class="gray">
+					{{ dateFormat "Jan 2 2006" .Date }}
+				</span>
+				{{ .Summary }}
+			</p>
+		</div>
+	{{ end }}
+	<ul>
+	{{ range after 10 .Pages }}
+		<li class="moon-gray">
+			<a href="{{.Permalink}}">
+				{{ .Title | truncate 60 }}
+			</a>
+		</li>
+	{{ end }}
+	</ul>
+{{ end }}

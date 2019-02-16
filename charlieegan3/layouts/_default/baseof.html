@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{{- block "title" . -}}
+				{{- $.Site.Title -}}
+			{{- end -}}
+		</title>
+		<meta name="Description" content="{{- block "description" . -}} {{- end -}} - {{- $.Site.Title -}}">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css" />
+		<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}css/post.css" />
+
+		{{ $hello := resources.Get "js/hello.js" }}
+		{{ $turbolinks := resources.Get "js/turbolinks.js" }}
+
+		{{ $jsFiles := slice }}
+		{{ if isset $.Site.Params "turbolinks" }}
+			{{ $jsFiles = $jsFiles | append $turbolinks }}
+		{{ end }}
+		{{ $jsFiles = $jsFiles | append $hello }}
+
+		{{ $js := $jsFiles | resources.Concat "js/bundle.js"| resources.Minify | resources.Fingerprint }}
+		<script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+	</head>
+	<body class="bg-darker-gray light-silver code">
+		{{ if isset $.Site.Params "turbolinks" }}
+			turbo
+		{{ end }}
+		<section class="mw7 center pa3-ns ph5-ns">
+			{{- block "main" . -}}
+			{{- end -}}
+		</section>
+	</body>
+</html>

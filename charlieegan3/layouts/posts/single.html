@@ -1,0 +1,16 @@
+{{ define "title" }}
+	{{- htmlUnescape .Params.title -}} - {{- $.Site.Title -}}
+{{ end }}
+
+{{ define "main" }}
+	<a href="/posts">things</a>
+	<h1 class="moon-gray">
+		<span class="o-70 pr1">#</span>{{ .Title }}
+	</h1>
+	<div class="gray bb bw1 pb2 b--dark-gray">
+		Posted {{ dateFormat "Jan 2 2006" .Date }}
+	</div>
+	<div class="post-content">
+		{{ .Content }}
+	</div>
+{{ end }}

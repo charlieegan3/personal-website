@@ -1,0 +1,20 @@
+.bg-darker-gray {
+	background-color: #212121;
+}
+
+a, a:hover, a:visited {
+  color: #71a7ed;
+  text-decoration: none;
+}
+
+ul li:before {
+	content: "* ";
+	opacity: 0.7;
+}
+ul {
+	padding-left: 0px;
+	list-style-type: none;
+}
+ol {
+	padding-left: 30px;
+}
