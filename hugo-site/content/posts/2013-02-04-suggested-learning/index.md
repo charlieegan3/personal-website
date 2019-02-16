@@ -16,7 +16,7 @@ look up the syntax and error messages that come with every minute of work. With
 C# I didn’t have a book but I did have Visual Studio.
 
 Visual Studio has one big bonus over my
-[current](/posts/2012/12/18/sublime-service)
+[current](/posts/2012-12-18-sublime-service)
 [setup](http://macrabbit.com/espresso/) - _real_ code completion.
 
 This made experimentation as a learner a huge amount more successful. It would

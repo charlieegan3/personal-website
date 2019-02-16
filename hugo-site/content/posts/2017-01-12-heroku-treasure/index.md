@@ -36,6 +36,6 @@ of a better thing to sort by) we get the following:
 4. [Wekan](https://github.com/wekan/wekan/wiki) - The open-source Trello-like kanban.
 5. [Paperwork](https://github.com/twostairs/paperwork) - OpenSource note-taking & archiving.
 
-Full set of Heroku ready apps can be found [here](/posts/2017/01/12/heroku-treasure/heroku-deploy-button-results.csv).
+Full set of Heroku ready apps can be found [here](/posts/2017-01-12-heroku-treasure/heroku-deploy-button-results.csv).
 A few days later I got an invoice £11.76 so I guess it'll be a while before I
 have such reckless fun like this again...

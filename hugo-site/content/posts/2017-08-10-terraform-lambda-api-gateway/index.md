@@ -12,7 +12,7 @@ Building up a reproduceable config that can brought straight back the next time
 you come to work on the project is invaluable.
 
 Quite coincidentally, after my [last
-post](/posts/2017/07/16/host-a-static-website-5-minutes) about migrating my
+post](/posts/2017-07-16-host-a-static-website-5-minutes) about migrating my
 personal site to AWS I found myself grappling with another X minute getting
 started tutorial in Terraform. I've had this idea for a web app that scans
 websites for broken links that isn't generally terrible and might even be

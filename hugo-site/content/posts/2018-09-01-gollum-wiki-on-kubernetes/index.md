@@ -7,7 +7,7 @@ thumbnail: /posts/2018-09-01-gollum-wiki-on-kubernetes/patrick-tomasso-71909-uns
 ---
 
 I've long been
-[searching](/posts/2017/01/12/heroku-treasure) for a
+[searching](/blog/2017/01/12/heroku-treasure) for a
 good, self-hosted, personal wiki. I went as far to build my own with client-side
 encryption running on Heroku as a Rails app. I guess this was version 1. This
 post is about version 2.
@@ -27,7 +27,7 @@ post is about version 2.
 
 **Why even do this at all?**
 
-I'm moving all my side-projects to Kubernetes. Some deets on my cluster [here](/posts/2018/08/15/cheap-gke-cluster-zero-loadbalancers).
+I'm moving all my side-projects to Kubernetes. Some deets on my cluster [here](/blog/2018/08/15/cheap-gke-cluster-zero-loadbalancers).
 
 **Why not run version 1 on Kubernetes then?**
 
