@@ -1,3 +1,4 @@
+{{ define "width" }}mw8{{ end }}
 {{ define "main" }}
 <h1><!--
     --><span id="greeting">hello</span><span class="orange">,</span>
@@ -5,5 +6,38 @@
 	charlieegan<span class="gold">3</span>
 </h1>
 
-<p>I build things on the internet. I like walking quickly.</p>
+<p class="pb4">I build things on the internet. I like walking quickly.</p>
+
+<div>
+	<div class="fl-l w-60-l pr2-l">
+		<table id="feed" class="w-100 hidden f6"></table>
+	</div>
+	<div class="fr-l w-40-l">
+		<form action="https://formspree.io/me@charlieegan3.com" method="POST">
+			<textarea id="message" style="resize: none;" rows="4" class="code silver bg-darker-gray pa1 w-100 mb2 input-reset ba bw1 b--mid-gray" name="message" placeholder="message"></textarea>
+			<input class="bg-darker-gray silver code pa1 w-100 mb2 input-reset ba bw1 b--mid-gray" type="email" name="_replyto" placeholder="email">
+			<input class="bg-darker-gray silver b code pv2 w-100 mb2 input-reset ba bw1 b--mid-gray bg-animate hover-bg-dark-gray pointer" type="submit" value="send">
+		</form>
+		<div class="pt3 pb2 tc mb2">
+			<div class="o-60">
+				{{ with .Site.GetPage "/profiles" }}
+					{{ range $v := .Params.profiles }}
+						{{ range $p := (index $v "list") }}
+							{{ if (index $p "featured")}}
+								<a target="_blank" href="{{ index $p "url" }}">
+									<img class="grayscale w2 br2" src="/profiles/{{ index $p "icon" }}">
+								</a>
+							{{ end }}
+						{{ end }}
+					{{ end }}
+				{{ end }}
+			</div>
+
+			<div class="f7 mt1">
+				<a href="mailto:me@charlieegan3.com">me@charlieegan3.com</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 {{ end }}

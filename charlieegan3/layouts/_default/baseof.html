@@ -13,27 +13,29 @@
 		<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}css/styles.css" />
 		<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}css/post.css" />
 
-		{{ $hello := resources.Get "js/hello.js" }}
-		{{ $turbolinks := resources.Get "js/turbolinks.js" }}
-
 		{{ $jsFiles := slice }}
 		{{ if isset $.Site.Params "turbolinks" }}
-			{{ $jsFiles = $jsFiles | append $turbolinks }}
+			{{ $jsFiles = $jsFiles | append (resources.Get "js/turbolinks.js") }}
 		{{ end }}
-		{{ $jsFiles = $jsFiles | append $hello }}
+		{{ $jsFiles = $jsFiles | append (resources.Get "js/hello.js") }}
+		{{ $jsFiles = $jsFiles | append (resources.Get "js/live_feed.js") }}
 
-		{{ $js := $jsFiles | resources.Concat "js/bundle.js"| resources.Minify | resources.Fingerprint }}
+		{{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
+		{{ if isset $.Site.Params "minify" }}
+			{{ $js = $jsFiles | resources.Concat "js/bundle.js"| resources.Minify | resources.Fingerprint }}
+		{{ end }}
+		{{ $js = $js | resources.Fingerprint }}
 		<script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 	</head>
 	<body class="bg-darker-gray light-silver">
-		<section class="mw7 center pa3-ns ph5-ns">
-			<a href="/">home</a>
-			<a href="/posts">posts</a>
-			<a href="/profiles">profiles</a>
-			<a href="/projects">projects</a>
-
-			{{- block "main" . -}}
-			{{- end -}}
+		<section class="{{- block "width" . -}}mw7{{- end }} center pa3 ph5-ns pb5">
+			<div>
+				<a href="/">home</a>
+				<a href="/posts">posts</a>
+				<a href="/profiles">profiles</a>
+				<a href="/projects">projects</a>
+			</div>
+			{{- block "main" . -}}{{- end -}}
 		</section>
 	</body>
 </html>

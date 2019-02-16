@@ -6,10 +6,13 @@ profiles:
   list:
   - url: http://github.com/charlieegan3
     icon: gh.jpg
+    featured: true
   - url: http://twitter.com/charlieegan3
     icon: twitter.jpg
+    featured: true
   - url: http://instagram.com/charlieegan3
     icon: instagram.jpg
+    featured: true
   - url: https://news.ycombinator.com/item?id=9045677
     icon: notlinked.jpg
 - name: Forum
@@ -26,6 +29,7 @@ profiles:
   list:
   - url: https://www.strava.com/athletes/1238371
     icon: strava.jpg
+    featured: true
   - url: http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706
     icon: parkrun.jpg
 - name: Media
