@@ -1,0 +1,11 @@
+{{ define "title" }}
+	{{- htmlUnescape .Params.title -}} - {{- $.Site.Title -}}
+{{ end }}
+
+{{ define "main" }}
+	<h1>{{ .Title }}</h1>
+	<div class="post-content">
+		<img class="mt1 fl mr3 w3 br-100 ba bw2 b--white" src="/face.jpg">
+		{{ .Content }}
+	</div>
+{{ end }}

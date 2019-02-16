@@ -5,5 +5,5 @@ build:
 	docker build -t charlieegan3/$(PROJECT):latest -t charlieegan3/$(PROJECT):${TAG} .
 
 push: build
-	docker push charlieegan3/$(PROJECT):latest
 	docker push charlieegan3/$(PROJECT):${TAG}
+	docker push charlieegan3/$(PROJECT):latest

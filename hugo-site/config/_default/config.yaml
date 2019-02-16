@@ -12,6 +12,11 @@ menu:
     title: homepage
     url: /
     weight: 1
+  - identifier: about
+    name: about
+    title: read all about it
+    url: /about/
+    weight: 2
   - identifier: posts
     name: posts
     title: view my blog posts
