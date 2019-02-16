@@ -1,6 +1,7 @@
 ---
 title: about
 type: about
+summary: Hello, my name is Charlie - nice to meet you.
 ---
 
 Hello, my name is Charlie - nice to meet you. I work as a Solutions Engineer at
