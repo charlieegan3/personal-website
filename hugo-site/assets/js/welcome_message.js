@@ -18,14 +18,18 @@ var welcomeMessage = {
       greeting = "good evening";
     }
 
-    document.getElementById("greeting").innerHTML = "";
-    await welcomeMessage.sleep(50);
+    await welcomeMessage.sleep(100);
+    var greetingElem = document.getElementById("greeting")
+
+    greetingElem.innerHTML = "";
     for (var i = 0; i < greeting.length; i++) {
-    	await welcomeMessage.sleep(Math.floor((Math.random() * 100) + 10));
-    	document.getElementById("greeting").innerHTML += greeting[i];
-	}
+        await welcomeMessage.sleep(Math.floor((Math.random() * 100) + 10));
+        greetingElem.innerHTML += greeting[i];
+    }
   }
 }
+
+welcomeMessage.display();
 
 document.addEventListener("turbolinks:load", function(event) {
   welcomeMessage.display();
