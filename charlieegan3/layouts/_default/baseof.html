@@ -25,7 +25,7 @@
 		{{ $js := $jsFiles | resources.Concat "js/bundle.js"| resources.Minify | resources.Fingerprint }}
 		<script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 	</head>
-	<body class="bg-darker-gray light-silver code">
+	<body class="bg-darker-gray light-silver">
 		<section class="mw7 center pa3-ns ph5-ns">
 			<a href="/">home</a>
 			<a href="/posts">posts</a>
