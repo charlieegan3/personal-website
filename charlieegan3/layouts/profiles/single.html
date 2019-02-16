@@ -11,7 +11,7 @@
 		<h2 class="f5">{{ index $v "name" }}</h2>
 		{{ range $p := (index $v "list") }}
 		<a target="_blank" href="{{ index $p "url" }}">
- 			<img class="w2 br2" src="{{ index $p "icon" }}">
+			<img class="w2 br2" src="{{ $.Permalink }}{{ index $p "icon" }}">
 		</a>
 		{{ end }}
 	{{ end }}

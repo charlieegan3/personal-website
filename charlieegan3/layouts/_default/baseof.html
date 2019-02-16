@@ -9,9 +9,16 @@
 		<meta name="Description" content="{{- block "description" . -}} {{- end -}} - {{- $.Site.Title -}}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css" />
-		<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}css/styles.css" />
-		<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}css/post.css" />
+		{{ $cssFiles := slice }}
+		{{ $cssFiles = $cssFiles | append (resources.Get "css/tachyons.css") }}
+		{{ $cssFiles = $cssFiles | append (resources.Get "css/styles.css") }}
+		{{ $cssFiles = $cssFiles | append (resources.Get "css/post.css") }}
+		{{ $css := $cssFiles | resources.Concat "css/bundle.css" }}
+		{{ if isset $.Site.Params "minify" }}
+			{{ $css = $css | resources.Minify }}
+		{{ end }}
+		{{ $css = $css | resources.Fingerprint }}
+		<link rel="stylesheet" type="text/css" href="{{ $css.Permalink }}" />
 
 		{{ $jsFiles := slice }}
 		{{ if isset $.Site.Params "turbolinks" }}
@@ -22,7 +29,7 @@
 
 		{{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
 		{{ if isset $.Site.Params "minify" }}
-			{{ $js = $jsFiles | resources.Concat "js/bundle.js"| resources.Minify | resources.Fingerprint }}
+			{{ $js = $js | resources.Minify }}
 		{{ end }}
 		{{ $js = $js | resources.Fingerprint }}
 		<script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
