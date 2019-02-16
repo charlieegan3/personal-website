@@ -24,7 +24,7 @@
 		{{ if isset $.Site.Params "turbolinks" }}
 			{{ $jsFiles = $jsFiles | append (resources.Get "js/turbolinks.js") }}
 		{{ end }}
-		{{ $jsFiles = $jsFiles | append (resources.Get "js/hello.js") }}
+		{{ $jsFiles = $jsFiles | append (resources.Get "js/welcome_message.js") }}
 		{{ $jsFiles = $jsFiles | append (resources.Get "js/live_feed.js") }}
 
 		{{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
