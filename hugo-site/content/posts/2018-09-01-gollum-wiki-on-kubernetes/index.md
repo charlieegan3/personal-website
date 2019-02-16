@@ -27,7 +27,7 @@ post is about version 2.
 
 **Why even do this at all?**
 
-I'm moving all my side-projects to Kubernetes. Some deets on my cluster [here](/blog/2018/08/15/cheap-gke-cluster-zero-loadbalancers).
+I'm moving all my side-projects to Kubernetes. Some deets on my cluster [here](/posts/2018-08-15-cheap-gke-cluster-zero-loadbalancers).
 
 **Why not run version 1 on Kubernetes then?**
 

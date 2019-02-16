@@ -101,7 +101,7 @@ What I needed was to be able to run an arbitrary container with some params.
 Hyper.sh to the rescue!
 
 I'd recently enjoyed using Hyper.sh to [automate my photo
-website](https://charlieegan3.com/blog/2018/04/07/i-made-an-interactive-portfolio-site-with-hugo)
+website](/posts/2018-04-07-i-made-an-interactive-portfolio-site-with-hugo)
 and thought it'd work well here too - mainly because containers can run for as
 long as required.
 

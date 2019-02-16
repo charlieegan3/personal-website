@@ -6,7 +6,7 @@ date: 2018-04-07 17:44:26 +0100
 thumbnail: /posts/2018-04-07-i-made-an-interactive-portfolio-site-with-hugo/photo_grid.png
 ---
 
-My [last post](https://charlieegan3.com/blog/2018/03/04/backing-up-instagram)
+My [last post](/posts/2018-03-04-backing-up-instagram)
 explained about how I create backups of my Instagram posts. I had a few people
 ask about why this was useful. Other than the Instagram doomsday-scenario, in
 it's current form (a git repo with some images and JSON metadata) it wasn't.

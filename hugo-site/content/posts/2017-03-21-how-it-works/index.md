@@ -35,7 +35,7 @@ Now if I try and deploy a broken link or a page that renders to invalid HTML the
 
 ## Live Status
 
-I have a task that runs every 10 mins on Heroku to update the live sections on the homepage. This is a [separate repo](https://github.com/charlieegan3/json-charlieegan3) and is basically a set of scrapers and API clients for a number of sites and services I use around the web. The task gathers all the latest data from each service and pushes the result to a [json file](https://github.com/charlieegan3/json-charlieegan3) in a storage bucket. There is also a [fallback copy](https://charlieegan3.com/status.json) of the status file saved into the build directory when this site is built. This project is pretty hacked together; I'd like to make it more modular but for now it does the job. I think the live sections on the homepage are a nice feature.
+I have a task that runs every 10 mins on Heroku to update the live sections on the homepage. This is a [separate repo](https://github.com/charlieegan3/json-charlieegan3) and is basically a set of scrapers and API clients for a number of sites and services I use around the web. The task gathers all the latest data from each service and pushes the result to a [json file](https://github.com/charlieegan3/json-charlieegan3) in a storage bucket. There is also a [fallback copy](/status.json) of the status file saved into the build directory when this site is built. This project is pretty hacked together; I'd like to make it more modular but for now it does the job. I think the live sections on the homepage are a nice feature.
 
 ## Noscript Friendly
 

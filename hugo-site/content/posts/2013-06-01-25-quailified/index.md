@@ -84,7 +84,7 @@ English, Computer Science, course then that’s all we need. _Don’t try and ge
 researchers to teach if they can’t_, have natural teachers doing the teaching!
 About feedback and assessments, programs are easy to mark automatically and if
 people do the courses as alongside work then employers can see the results.
-[On-line testing](/blog/2013/03/16/evil-e-assessments) is getting better
+[On-line testing](/posts/2013-03-16-evil-e-assessments) is getting better
 too.
 
 Putting these measures in place would greatly reduce the cost of the whole

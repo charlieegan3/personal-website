@@ -10,7 +10,7 @@ become a good thing. They are in danger of becoming all that the consumer
 expects from a software distribution system, I worry there will be no incentive
 for content providers to build on the experience.
 
-I’ve already covered the [point](/blog/2012/12/08/scrapp-stores) that they
+I’ve already covered the [point](/posts/2012-12-08-scrapp-stores) that they
 are generally terrible to browse, here are what I see as two other crucial
 flaws in the App Store model.
 
