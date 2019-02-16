@@ -26,10 +26,11 @@
 		<script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 	</head>
 	<body class="bg-darker-gray light-silver code">
-		{{ if isset $.Site.Params "turbolinks" }}
-			turbo
-		{{ end }}
 		<section class="mw7 center pa3-ns ph5-ns">
+			<a href="/">home</a>
+			<a href="/posts">posts</a>
+			<a href="/profiles">profiles</a>
+
 			{{- block "main" . -}}
 			{{- end -}}
 		</section>
