@@ -4,3 +4,26 @@ title: charlieegan3
 summaryLength: 25
 taxonomies: {}
 pygmentsCodeFences: true
+
+menu:
+  main:
+  - identifier: home
+    name: home
+    title: homepage
+    url: /
+    weight: 1
+  - identifier: posts
+    name: posts
+    title: view my blog posts
+    url: /posts/
+    weight: 2
+  - identifier: projects
+    name: projects
+    title: view my projects
+    url: /projects/
+    weight: 3
+  - identifier: profiles
+    name: profiles
+    title: find me elsewhere
+    url: /profiles/
+    weight: 4

@@ -36,12 +36,15 @@
 	</head>
 	<body class="bg-darker-gray light-silver">
 		<section class="{{- block "width" . -}}mw7{{- end }} center pa3 ph5-ns pb5">
-			<div>
-				<a href="/">home</a>
-				<a href="/posts">posts</a>
-				<a href="/profiles">profiles</a>
-				<a href="/projects">projects</a>
-			</div>
+			<nav class="sidebar-nav">
+				{{ $currentPage := . }}
+				{{ range .Site.Menus.main }}
+					{{ $active := false }}
+					{{ if $.IsNode }}{{ if eq .URL $currentPage.RelPermalink }}{{ $active = true }}{{ end }}{{ end }}
+					{{ if $.IsPage }}{{ if eq .Identifier $.Type }}{{ $active = true }}{{ end }}{{ end }}
+					<a class="{{if $active }} bb bw1 b--silver{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
+				{{ end }}
+			</nav>
 			{{- block "main" . -}}{{- end -}}
 		</section>
 	</body>
