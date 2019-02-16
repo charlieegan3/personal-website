@@ -1,9 +1,14 @@
 var welcomeMessage = {
+  locked: false,
+
   sleep: function(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
 
   display: async function() {
+	if (welcomeMessage.locked)
+		return;
+    welcomeMessage.locked = true;
     if (window.location.pathname != "/")
       return;
 
