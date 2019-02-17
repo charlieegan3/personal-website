@@ -5,6 +5,16 @@ summaryLength: 25
 taxonomies: {}
 pygmentsCodeFences: true
 
+outputFormats:
+  SearchIndex:
+    mediaType: "application/json"
+    baseName: "searchindex"
+    isPlainText: true
+    notAlternative: true
+
+outputs:
+  home: ["HTML", "SearchIndex"]
+
 menu:
   main:
   - identifier: home

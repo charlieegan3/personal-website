@@ -26,6 +26,8 @@
 		{{ end }}
 		{{ $jsFiles = $jsFiles | append (resources.Get "js/welcome_message.js") }}
 		{{ $jsFiles = $jsFiles | append (resources.Get "js/live_feed.js") }}
+		{{ $jsFiles = $jsFiles | append (resources.Get "js/elasticlunr.js") }}
+		{{ $jsFiles = $jsFiles | append (resources.Get "js/search.js") }}
 
 		{{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
 		{{ if isset $.Site.Params "minify" }}
@@ -44,6 +46,9 @@
 					{{ if $.IsPage }}{{ if eq .Identifier $.Type }}{{ $active = true }}{{ end }}{{ end }}
 					<a class="{{if $active }} bb bw1 b--silver{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
 				{{ end }}
+				<a href="/search">
+					<img class="fr grow" style="width: 20px; filer: invert(.75); -webkit-filter: invert(.75);" src="/search.svg"/>
+				</a>
 			</nav>
 			{{- block "main" . -}}{{- end -}}
 		</section>
