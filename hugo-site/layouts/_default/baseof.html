@@ -24,6 +24,9 @@
 		{{ if isset $.Site.Params "turbolinks" }}
 			{{ $jsFiles = $jsFiles | append (resources.Get "js/turbolinks.js") }}
 		{{ end }}
+		{{ if isset $.Site.Params "google_analytics" }}
+			{{ $jsFiles = $jsFiles | append (resources.Get "js/pageviews.js") }}
+		{{ end }}
 		{{ $jsFiles = $jsFiles | append (resources.Get "js/welcome_message.js") }}
 		{{ $jsFiles = $jsFiles | append (resources.Get "js/live_feed.js") }}
 		{{ $jsFiles = $jsFiles | append (resources.Get "js/elasticlunr.js") }}
