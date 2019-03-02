@@ -5,6 +5,9 @@ title: "Running a cheap GKE cluster with public ingress & zero load balancers"
 date: 2018-08-15 21:53:39 +0100
 ---
 
+**Update**: I've posted about a small refinement
+[here](/posts/2019-03-02-running-a-cheap-gke-cluster-revisted/).
+
 Joining Jetstack earlier this year finally convinced me that I needed a
 side-project cluster. All the cool kids had one and I wanted one too.
 
