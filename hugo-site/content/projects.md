@@ -22,6 +22,10 @@ link_types:
   key: talk
 
 projects:
+- title: "kubectl vapply"
+  type: experiment
+  github: https://github.com/charlieegan3/kubectl-vapply
+  comment: Remove old Kubernetes objects when applying new ones
 - title: "charlieegan3: Music"
   type: side-project
   blog: /blog/2018/11/20/how-i-learned-to-stop-worrying-and-build-my-own-lastfm
