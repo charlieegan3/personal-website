@@ -1,9 +1,10 @@
 TAG := $(shell tar -cf - . | md5sum | cut -f 1 -d " ")
 PROJECT := personal-website
+REPO := quay.io/charlieegan3/$(PROJECT)
 
 build:
-	docker build -t charlieegan3/$(PROJECT):latest -t charlieegan3/$(PROJECT):${TAG} .
+	docker build -t $(REPO):latest -t $(REPO):${TAG} .
 
 push: build
-	docker push charlieegan3/$(PROJECT):${TAG}
-	docker push charlieegan3/$(PROJECT):latest
+	docker push $(REPO):${TAG}
+	docker push $(REPO):latest
