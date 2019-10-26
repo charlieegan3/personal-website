@@ -11,7 +11,7 @@ good, self-hosted, personal wiki. I went as far to build my own with client-side
 encryption running on Heroku as a Rails app. I guess this was version 1. This
 post is about version 2.
 
-### Why
+## Why
 
 **Why was version 1 not good enough?**
 
@@ -33,7 +33,7 @@ I'm moving all my side-projects to Kubernetes. Some deets on my cluster [here](/
 I didn't want to run the database for it in-cluster. Some of the information in
 the wiki I'm really keen to keep. I want to store the wiki in git.
 
-# What
+## What
 
 While looking for a git based wiki, I came across
 [gollum](https://github.com/gollum/gollum). gollum is a ruby gem that runs a
@@ -86,14 +86,14 @@ oauth2_proxy for certain backends. This is easily configured with the
 With this setup, I had a means of only allowing traffic into the service that
 passed my oauth check (to have my email).
 
-## 'gollum-server'
+### 'gollum-server'
 
 I should also explain how this all fits together and works with gollum running
 in a container. There's a tricky bit and it's to do with GPG...
 
 This is the Dockerfile for the service, pretty harmless right?
 
-```
+```Dockerfile
 FROM ruby:2.4
 
 RUN apt-get remove gnupg -y
@@ -117,79 +117,80 @@ do?
 
 I'll break it down.
 
-1. Configure the container's git installation:
+#### 1. Configure the container's git installation:
 
-	Note that we're settings some flags for gcrypt here too. I learned what to
-	set here from [this page](http://git-annex.branchable.com/tips/fully_encrypted_git_repositories_with_gcrypt/) - I think...
+Note that we're settings some flags for gcrypt here too. I learned what to
+set here from [this
+page](http://git-annex.branchable.com/tips/fully_encrypted_git_repositories_with_gcrypt/) - I think...
 
-	```bash
-	git config --global user.email "wiki@example.com"
-	git config --global user.name "Wiki Robot"
+```bash
+git config --global user.email "wiki@example.com"
+git config --global user.name "Wiki Robot"
 
-	git config --global --add gcrypt.publish-participants true
-	git config --global --add gcrypt.participants $GPG_KEY_ID
-	git config --global user.signingkey $GPG_KEY_ID
-	git config --global commit.gpgsign true
-	```
+git config --global --add gcrypt.publish-participants true
+git config --global --add gcrypt.participants $GPG_KEY_ID
+git config --global user.signingkey $GPG_KEY_ID
+git config --global commit.gpgsign true
+```
 
-1. Save the credentials to download the repo from GitHub:
+#### 2. Save the credentials to download the repo from GitHub:
 
-	These are stored as a secret in Kubernetes and available as environment
-	variables.
+These are stored as a secret in Kubernetes and available as environment
+variables.
 
-	```bash
-	mkdir -p ~/.ssh
-	echo $SSH_PUBLIC > ~/.ssh/id_rsa.pub
-	echo $SSH_PRIVATE | awk '{gsub(/\\n/,"\n")}1' > ~/.ssh/id_rsa
-	echo $GITHUB_COM_KEY > ~/.ssh/known_hosts
-	chmod 0400 ~/.ssh/*
-	```
+```bash
+mkdir -p ~/.ssh
+echo $SSH_PUBLIC > ~/.ssh/id_rsa.pub
+echo $SSH_PRIVATE | awk '{gsub(/\\n/,"\n")}1' > ~/.ssh/id_rsa
+echo $GITHUB_COM_KEY > ~/.ssh/known_hosts
+chmod 0400 ~/.ssh/*
+```
 
-1. Do the same for GPG and configure it.
+#### 3. Do the same for GPG and configure it.
 
-	I set the cache-ttl to be long so that I only need to do the pinentry once.
-	GPG pinentry is a major pain & the hardest part about making this while
-	project work.
+I set the cache-ttl to be long so that I only need to do the pinentry once.
+GPG pinentry is a major pain & the hardest part about making this while
+project work.
 
-	```bash
-	mkdir ~/.gpg
-	echo $GPG_PUBLIC | awk '{gsub(/\\n/,"\n")}1' | base64 -d > ~/.gpg/public.key
-	echo $GPG_PRIVATE | awk '{gsub(/\\n/,"\n")}1' | base64 -d > ~/.gpg/private.key
-	gpg --pinentry-mode loopback --passphrase="$GPG_PASSPHRASE" --import ~/.gpg/*.key
+```bash
+mkdir ~/.gpg
+echo $GPG_PUBLIC | awk '{gsub(/\\n/,"\n")}1' | base64 -d > ~/.gpg/public.key
+echo $GPG_PRIVATE | awk '{gsub(/\\n/,"\n")}1' | base64 -d > ~/.gpg/private.key
+gpg --pinentry-mode loopback --passphrase="$GPG_PASSPHRASE" --import ~/.gpg/*.key
 
-	echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
-	echo "pinentry-mode loopback" >> ~/.gnupg/gpg-agent.conf
-	echo "default-cache-ttl 34560000" >> ~/.gnupg/gpg-agent.conf
-	echo "maximum-cache-ttl 34560000" >> ~/.gnupg/gpg-agent.conf
-	echo "max-cache-ttl 34560000" >> ~/.gnupg/gpg-agent.conf
-	gpg-connect-agent reloadagent /bye
-	```
+echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+echo "pinentry-mode loopback" >> ~/.gnupg/gpg-agent.conf
+echo "default-cache-ttl 34560000" >> ~/.gnupg/gpg-agent.conf
+echo "maximum-cache-ttl 34560000" >> ~/.gnupg/gpg-agent.conf
+echo "max-cache-ttl 34560000" >> ~/.gnupg/gpg-agent.conf
+gpg-connect-agent reloadagent /bye
+```
 
-1. Create a passphrase expect script to handle the first and only GPG prompt:
+#### 4. Create a passphrase expect script to handle the first and only GPG prompt:
 
-	```bash
-	cat > /usr/local/bin/passphrase <<EOF
-	#!/usr/bin/expect
+```bash
+cat > /usr/local/bin/passphrase <<EOF
+#!/usr/bin/expect
 
-	set timeout 60
-	set command [lindex \$argv 0]
+set timeout 60
+set command [lindex \$argv 0]
 
-	eval spawn "\$command"
-	expect "Enter passphrase:" { send -- "$GPG_PASSPHRASE\n" }
-	expect eof
-	EOF
+eval spawn "\$command"
+expect "Enter passphrase:" { send -- "$GPG_PASSPHRASE\n" }
+expect eof
+EOF
 
-	chmod +x /usr/local/bin/passphrase
-	```
+chmod +x /usr/local/bin/passphrase
+```
 
-1. Use this massive, great, whopping HACK to clone the repo from GitHub:
+#### 5. Use this massive, great, whopping HACK to clone the repo from GitHub:
 
-	Since we set a high ttl, we aren't prompted on future operations with GPG,
-	thank _god_.
+Since we set a high ttl, we aren't prompted on future operations with GPG,
+thank _god_.
 
-	```bash
-	passphrase "git clone $REPO_REMOTE site" && cd site
-	```
+```bash
+passphrase "git clone $REPO_REMOTE site" && cd site
+```
 
 Finally the entrypoint starts gollum with our 'pyramid of doom' custom config:
 
@@ -235,7 +236,7 @@ I run the updates to git in another ruby thread to keep the wiki responsive.
 The deployment is really boring. Just run the container with some secrets
 available.
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -277,7 +278,7 @@ with our config above.
 The ingress is a little more interesting, we can see the annotations for the
 oauth proxy:
 
-```
+```yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -305,7 +306,7 @@ spec:
           servicePort: 80
 ```
 
-### Conclusion
+## Conclusion
 
 It works - just about.
 
