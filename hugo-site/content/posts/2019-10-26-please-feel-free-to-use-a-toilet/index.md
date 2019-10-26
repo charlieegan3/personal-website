@@ -31,13 +31,13 @@ particularly liked...
   facing seats. There's a [video
   here](https://www.youtube.com/watch?v=DxDrPeb2mxs) of a similar more modern
   design in Sydney.
-- The TFL map is famous for being easy to use, however one thing I'd love to
+- The TFL map is famous for being easy to use, however one thing I'd love
   help with is navigating complex underground stations such as Bank or Green
-  Park. I think the main problem is that it's hard to picture of the tunnels
+  Park. I think the main problem is that it's hard to picture how the tunnels
   connect in 3D space.
 
-  This is something many stations we used while in Japan sorted. These station
-  maps really are a work of art.
+  This is something many stations in Japan had sorted - I think they're a work
+  of art.
 
   ![map of station](map.jpg)
 
@@ -59,7 +59,7 @@ particularly liked...
   getting better but this simple system was amazingly effective too.
 - In Osaka, many of the subway cars had holding handles at three different
   heights for different heights of passenger.
-- Something that was confusing for us was that some trains turn into trains fro
+- Something that was confusing for us was that some trains turn into trains for
   other lines when they get to a central station, and you can just remain on the
   train.
 - Dot matrix indicators have better resolution, colors, etc. We just have
@@ -91,7 +91,7 @@ Random street-based observations follow...
 - In Osaka, it seems one can cycle anywhere, pavement, road, crowded shopping
   centre. Watch out for them but they're probably already watching out for you.
 - There are chair lifts in some public spaces to help with steps. This isn't
-  very common but we I did notice this in a few different places. I wonder if
+  very common but I did notice this in a few different places. I wonder if
   this would be possible without vandalism here...
 
 ## Shinkansen
@@ -104,18 +104,21 @@ _waiting for the train experience of my life - refreshing drink in hand_
   looking out the window while travelling so this was a win for me.
 - We might have missed something but it seems there's a set rate for the trains
   for each route. We paid about £120 to go from Tokyo to Osaka and it didn't
-  seem to make any difference how far we looked ahead. This is the dream.
+  seem to make any difference how far we looked ahead. I'd take predictability
+  of over the mess we have but I still think there are better ways to price
+  tickets than either system.
 - Shinkansen drivers dress like pilots - seems appropriate for a train who's
   ancestry is based largely on aeroplane design.
 - All coaches are quiet coaches. If you want to make a call then you can just
-  walk to the vestibule area. People play by the rules too.
+  walk to the vestibule area. People play by the rules too, unlike the fuckers
+  that chat in the quiet coach here...
 - Arrow displays light up to say which side to alight while the train approaches
   the platform. There is also an announcement when the stop will not last long
   and encourages people to prepare to exit around 10 mins before the train
   stops. We stopped for just over 2 mins in Nagoya.
-- Passengers leaving train take rubbish and bin it on platform. This matches
-  the general rule of taking rubbish home with you. I really respect this and
-  think is it coming in some more rural public spaces in Scotland.
+- Passengers leaving the train take rubbish and bin it on platform. This matches
+  the general rule of taking rubbish home with you. I really appreciated this
+  too.
 - Shinkansen trains have numbers like flights. This number is printed on your
   ticket. While it's a small touch, it makes it easy to know you're on exactly
   the right train.
@@ -125,7 +128,7 @@ _look at all that space for my knobbly knees!_
 
 ## Please feel free to use a toilet
 I'm not sure what the rest of us were doing while the Japanese were designing
-their toilets but we got a long way behind - again. Many have heated seats and
+their toilets but we got a long way behind. Many have heated seats and
 some even play music.
 
   ![toilet that plays music](poop-tunes.jpg)
@@ -134,23 +137,23 @@ Relative to my experience of finding public toilets in the UK, public toilets in
 Japan are _everywhere_. They are mostly very clean and well looked after if not
 modern. Foam soap (to reduce the amount of waste) is much more common, while
 hand dryers are much less so. I noticed (after some time) that many carry a
-small hand towel with them - this is something I've taken to doing when I
-remember too so I don't need to use hand dryers (I hate hand dryers but that's
+small hand towel with them - I've tried to make this a habit of my own too.
+This means I don't need to use hand dryers (I hate hand dryers but that's
 another post...).
 
   ![my bullet train handtowel](handtowel.jpg)
+  _my bulltet train themed hand towel from the Kyoto rail museum_
 
-In the UK there are 'public' toilets in places like pret. However, they're
-usually disgusting and locked unless you buy something and get the code on the
-receipt. In Japan, having a toilet was something to bring people in. Feel free,
-don't mind if I do!
+In the UK there are 'public' toilets in places like pret. However, locked unless
+you buy something and get the code on the receipt. In Japan, having a toilet was
+something to bring people in. Feel free, don't mind if I do!
 
   ![shop advertising toilet](free-toilet.jpg)
 
 ## Would it be OK to have the bill so we can start waiting for the card machine?
 
 In Japan they don't seem to have that dance at the end of the meal out. When you
-are ready to do you just walk up, pay, and leave. I appreciated that. Bells on
+are ready to go you just walk up, pay, and leave. I appreciated that. Bells on
 tables were also a great idea.
 
 Eating while walking around was also not a thing - we learned that people just
@@ -162,7 +165,7 @@ Some things didn't make much sense to me though... like these pre-fried chips...
 
 ![refrigerated fries](fries.jpg)
 
-or this bum
+or this bum beer
 
 ![bum advert for beer](bum-beer.jpg)
 
@@ -170,7 +173,7 @@ this salad
 
 ![salad at breakfast](breakfast.jpg)
 
-this small butter child advert
+or this small butter child advert
 
 ![butter child on toast ad](butter-child.jpg)
 
