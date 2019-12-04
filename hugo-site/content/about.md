@@ -4,13 +4,13 @@ type: about
 summary: Hello, my name is Charlie - nice to meet you.
 ---
 
-Hello, my name is Charlie - nice to meet you. I work as a Solutions Engineer at
+Hello, my name is Charlie - nice to meet you. I work at
 [Jetstack](https://jetstack.io). Here's a little bit about me.
 
 I go to:
 
 * [Parkrun](http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706)
-* a '[book club](http://london.computation.club/)'
+* & help organise this '[book club](http://london.computation.club/)'
 * board game nights
 * yoga (and spin classes with [scoreboards](https://www.strava.com/activities/2095479215))
 
@@ -18,7 +18,7 @@ I'm interested in:
 
 * [photography](https://photos.charlieegan3.com)
 * quantified self
-* [Kubernetes](https://kubernetes.io/)
+* [Kubernetes](https://kubernetes.io/), [OPA](https://www.openpolicyagent.org)
 * personal finance
 * public transport systems and their usability
 
