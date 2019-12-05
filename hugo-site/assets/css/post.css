@@ -22,9 +22,9 @@
   line-height: 1.5em;
   font-size: 1rem;
 }
-.post-content p code {
+.post-content p code, .post-content ul code {
   font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.07);
   padding: 1px 3px;
 }
 .post-content ul, .post-content ol {
@@ -44,7 +44,7 @@
   border-width: 1rem;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  padding-left: 0.25rem;
+  padding: 1rem 0.25rem;
 }
 @media screen and (max-width: 30em) {
   .post-content pre {
