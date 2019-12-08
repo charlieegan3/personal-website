@@ -22,6 +22,21 @@ link_types:
   key: talk
 
 projects:
+- title: "flashcards"
+  type: experiment
+  github: https://github.com/charlieegan3/flashcards
+  comment: Spaced repetition tool MVP
+- title: "Policing Christmas Trees"
+  type: talk
+  github: https://github.com/charlieegan3/policing-christmas-trees
+  comment: Using OPA to keep Christmas safe and fun
+  blog: /posts/2019-12-05-rego-fun/
+  demo: https://xmas-trees.charlieegan3.com
+- title: "charlieegan3/infrastructure"
+  type: side-project
+  github: https://github.com/charlieegan3/infrastructure
+  comment: Personal side project platform configuration
+  blog: /posts/2019-12-08-charlieegan3-infra
 - title: "kubectl vapply"
   type: experiment
   github: https://github.com/charlieegan3/kubectl-vapply
