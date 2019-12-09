@@ -30,11 +30,12 @@ rather than use something like [gitcrypt](https://github.com/AGWA/git-crypt) or
 this was more of a tongue twister than anything particularly good but I do
 appreciate how transparent the public repo can be.
 
-In the repo there are two 'projects',GCP & K8s. GCP is a relatively simple
+In the repo there are two 'projects'; GCP & K8s. GCP is a relatively simple
 Terraform stack to deploy a GKE cluster, DNS configuration, object storage
-resources, KMS etc. K8s is a collection of folders, on for each namespace in the
-cluster (which map approximately to side projects). Most of these are raw YAMLs
-but there are also some of my (signature?) Docker Helm template projects too.
+resources, KMS etc. K8s is a collection of folders, one for each namespace in
+the cluster (which map approximately to side projects). Most of these are raw
+YAMLs but there are also some of my (signature?) Docker Helm template projects
+too.
 
 I was keen to make this public so it was easier to share my config more easily
 with others - in particular with customers while working on site.
