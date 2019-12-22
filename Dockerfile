@@ -13,6 +13,7 @@ RUN \
 
 WORKDIR /app
 
+COPY hugo-site/content .
 COPY hugo-site .
 
 RUN hugo --environment=production --minify

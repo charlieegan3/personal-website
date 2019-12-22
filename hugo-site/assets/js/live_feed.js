@@ -90,7 +90,7 @@ var liveFeed = {};
       return;
 
     var request = new XMLHttpRequest();
-    request.open("GET", "/status.json", true);
+    request.open("GET", "/data/status.json", true);
 
     request.onload = function() {
       if (request.status >= 200 && request.status < 400) {
