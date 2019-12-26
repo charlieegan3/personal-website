@@ -8,3 +8,9 @@ build:
 push: build
 	docker push $(REPO):${TAG}
 	docker push $(REPO):latest
+
+build_arm:
+	docker build -t $(REPO):arm-${TAG} -f Dockerfile.arm .
+
+push_arm: build_arm
+	docker push $(REPO):arm-${TAG}
