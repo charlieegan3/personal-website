@@ -7,6 +7,8 @@ date: 2018-04-22 22:50:55 +0100
 
 **Update** _You can try the project [here](https://charlieegan3-stackr.herokuapp.com/). Code available [here](https://github.com/charlieegan3/stackr)._
 
+**Update 2** I have taken down the live demo - there are now many apps that make this easy on phones.
+
 ## Intro
 
 At the end of last year I started paying for a Creative Cloud subscription so
