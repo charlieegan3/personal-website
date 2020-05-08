@@ -13,7 +13,7 @@ steps:
 - name: deploy
   image: plugins/docker
   settings:
-    repo: charlieegan3/photos-rebuilder
+    repo: charlieegan3/personal-website
     username: charlieegan3
     password:
       from_secret: DOCKER_PASSWORD
