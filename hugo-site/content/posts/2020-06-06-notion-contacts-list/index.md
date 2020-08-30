@@ -1,6 +1,6 @@
 ---
-title: "Building a contact list in Notion that works for me"
-date: 2020-06-06 15:33:24 +0100
+title: Building a contact list in Notion that works for me
+date: 2020-06-06 15:00:00 +0100
 ---
 
 Earlier this week I found myself migrating my contact list to Notion. I decided
@@ -9,11 +9,11 @@ effectively manage my contacts:
 
 - Syncing delays and inconsistencies with Exchange for contacts
 - Not being able to have nicknames work in the way that I want (e.g. only on my
-  phone / WhatsApp)
+phone / WhatsApp)
 - A means of archiving contacts, without deleting them
 - ...and the straw that broke the camels back: being able to store birthdays and
-  have a birthday calendar (this is something that is meant to be supported but
-  it just doesn't work at all)
+have a birthday calendar (this is something that is meant to be supported but
+it just doesn't work at all)
 
 I've had a lot of fun in putting Notion to work for me over the last 6 months
 and thought it was worth a shot for this too. A few years ago I was set on
@@ -29,7 +29,7 @@ simple to sync to my phone - even if it were to be a manual task (I don't update
 my contacts much and can still update in Notion from anywhere).
 
 I decided to use iCloud to get the contacts to my phone. On
-[iCloud.com](http://icloud.com) it's possible to upload a vcard with many
+[iCloud.com](http://icloud.com/) it's possible to upload a vcard with many
 contacts. It's also possible to delete all your contacts easily when uploading a
 new list (not possible on Outlook). If I ever find myself in the situation where
 I have an Android phone again I'll find some way to go via Google or similar.
@@ -45,11 +45,11 @@ was easy. This is what I ended up with.
 
 I have a database in Notion that I can export (with subpages to get pictures)
 
-![Notion export options](export.png)
+![export.png](export.png)
 
 The table has the following properties:
 
-![Notion contacts table properties](properties.png)
+![properties.png](properties.png)
 
 The computed fields are included in the export. `Display Name` is set to the
 nickname if present and otherwise both First and Last names. This is the value
@@ -152,7 +152,7 @@ File.write("contacts.vcard", vcards.join)
 puts "done"
 ```
 
-Once that's run, I open [iCloud.com](http://icloud.com), delete all the contacts
+Once that's run, I open [iCloud.com](http://icloud.com/), delete all the contacts
 (ctrl+A, delete) and upload the file. It's a very quick process and they're on
 my phone instantly.
 
