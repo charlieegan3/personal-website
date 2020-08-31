@@ -1,8 +1,12 @@
 name: refresh-notion-data
 
 on:
-  schedule:
-    - cron: "* * * * *"
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: Version name
+        required: true
+        default: 'Notion Update'
 
 jobs:
   build:
@@ -20,7 +24,6 @@ jobs:
         gem install bundler
         bundle install --jobs 4 --retry 3
 
-        ./bin/check_notion.rb
         ./bin/export_notion.rb
         ./bin/import_notion.rb
-        ./bin/commit.rb
+        ./bin/commit.rb "${{ github.event.inputs.versionName }}"

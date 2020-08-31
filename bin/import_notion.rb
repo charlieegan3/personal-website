@@ -4,11 +4,6 @@ require "time"
 require "uri"
 require "fileutils"
 
-unless File.exists?("export.zip")
-  puts "no exported data"
-  exit
-end
-
 # extract the zip
 zip_path = "export.zip"
 puts "Using zip: #{zip_path}"

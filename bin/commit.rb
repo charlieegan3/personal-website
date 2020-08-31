@@ -5,12 +5,9 @@ def run(command)
   fail unless system(command)
 end
 
-unless File.exists?("version_string")
-  puts "no version, not commiting"
-  exit
+if ARGV.length < 1
+  fail "missing version name as first arg"
 end
-
-version_string = File.read("version_string").strip
 
 # configure git if needed
 email = `git config --global user.email`.chomp
@@ -23,5 +20,5 @@ end
 
 # commit the content changes
 run("git add content")
-run("git commit --allow-empty -m '#{version_string}'")
+run("git commit -m '#{ARGV[0]}'")
 run("git push origin master")
