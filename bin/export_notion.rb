@@ -5,6 +5,11 @@ require "net/http"
 require "json"
 require "down"
 
+unless File.exists?("version_string")
+  puts "no version, not exporting"
+  exit
+end
+
 # Start the export
 url = URI("https://www.notion.so/api/v3/enqueueTask")
 

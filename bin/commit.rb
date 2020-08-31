@@ -5,15 +5,12 @@ def run(command)
   fail unless system(command)
 end
 
-version_string = File.read("version_string").strip rescue ""
-
-if ARGV.length < 1  && version_string == ""
-  fail "need commit message as arg"
+unless File.exists?("version_string")
+  puts "no version, not commiting"
+  exit
 end
 
-if version_string == ""
-  version_string = ARGV[0]
-end
+version_string = File.read("version_string").strip
 
 # configure git if needed
 email = `git config --global user.email`.chomp
