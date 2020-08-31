@@ -3,6 +3,8 @@ title: SemVer comparisons with OPA
 date: 2020-05-08 11:29:00 +0000
 ---
 
+**Update:** I've written a follow up post [here](/posts/2020-08-31-rego-semver-contribution/) explaining how I later added this functionality to Rego itself.
+
 ![versions.png](versions.png)
 
 I recently found myself faced with the task of writing [OPA](https://www.openpolicyagent.org/) policies that involved comparing [Semantic Versions](https://semver.org/). It seemed like an interesting challenge, and something more useful than [validating Christmas trees](https://www.notion.so/posts/2019-12-05-rego-fun/)...
@@ -16,7 +18,6 @@ is_greater_or_equal("1.0.0", "2.0.0")
 // => false
 is_greater_or_equal("1.0.0", "1")
 // => true
-
 ```
 
 While some of the functions are refined from their original implementations, the
@@ -33,7 +34,6 @@ on the following object - for better or worse.
   "minor": int,
   "patch": int,
 }
-
 ```
 
 Next, I needed a means of parsing the version strings and getting back versions
@@ -54,7 +54,6 @@ parse_version_string("1")
 // and also...
 parse_version_string("v1.0.0")
 // => { "major": 1, "minor": 0, "patch": 0 }
-
 ```
 
 To implement `parse_version_string`, it seemed to make sense to start by
@@ -66,7 +65,6 @@ parse_version_string(version_string) = version {
 	components := split(version_string, ".")
 	version := new_version_from_components(components, count(components))
 }
-
 ```
 
 Using multiple function heads (or whatever these are called in Rego) seemed like
@@ -90,7 +88,6 @@ new_version(major, minor, patch) = version {
 			"patch": to_number(patch)
 		}
 }
-
 ```
 
 Note that I also wanted `new_version` to work with strings or numbers (this made my tests easier to write and handling the 'v' prefix possible).
@@ -117,7 +114,6 @@ is_key_greater(key, a, b) = result {
 is_key_equal(key, a, b) = result {
 	result := a[key] == b[key]
 }
-
 ```
 
 These will return the integer comparison of the components at the given ‘key’
@@ -133,7 +129,6 @@ is_greater(a, b) = result {
 		{ is_key_equal("major", a, b), is_key_equal("minor", a, b), is_key_greater("patch", a, b) },
 	} & { { true } } == { { true } }
 }
-
 ```
 
 This reads as: “bind the result to true if the set of conditions contains one
@@ -149,7 +144,6 @@ is_equal(a, b) = result {
 	keys := ["major", "minor", "patch"]
 	result := { r | key := keys[_]; r := is_key_equal(key, a, b) } == { true }
 }
-
 ```
 
 I read this as, “for all version components (with keys master, minor, patch),
@@ -164,7 +158,6 @@ is_greater_or_equal(a, b) = result {
 		is_equal(a, b),
 	} & { true } == { true }
 }
-
 ```
 
 I read this as: “any element in the set { is_greater(a, b), is_equal(a, b) } is
