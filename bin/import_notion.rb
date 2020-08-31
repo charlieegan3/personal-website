@@ -3,6 +3,8 @@
 require "time"
 require "uri"
 require "fileutils"
+require "csv"
+require "yaml"
 
 # extract the zip
 zip_path = "export.zip"
@@ -109,3 +111,29 @@ EOF
 
   File.write("content/#{slug}.md", markdown_content)
 end
+
+puts "---"
+# load projects
+csvs = Dir.glob("output/Website**/Projects *.csv").to_a
+fail if csvs.length != 1
+
+puts "processing: #{csvs[0]}"
+projects = []
+CSV.read(csvs[0])[1..-1].each do |row|
+  project = {
+    "title" => row[0],
+    "type" => row[1],
+    "demo" => row[2],
+    "github" => row[3],
+    "paper" => row[4],
+    "blog" => row[5],
+    "talk" => row[6],
+    "comment" => row[7],
+  }
+
+  projects << project.delete_if { |_, v| v.nil? }
+end
+
+content = File.read("content/projects.md")
+content.gsub!(/projects:.*---/m, "projects:\n" + projects.to_yaml[4..-1] + "---")
+File.write("content/projects.md", content)
