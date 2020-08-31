@@ -1,10 +1,8 @@
 name: refresh-notion-data
 
 on:
-  push:
-    branches: [ master ]
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "* * * * *"
 
 jobs:
   build:
