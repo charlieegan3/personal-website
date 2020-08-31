@@ -84,3 +84,33 @@ EOF
     FileUtils.cp(asset, post_dir)
   end
 end
+
+puts "---"
+# load pages
+pages = Dir.glob("output/Website**/Pages **/**/*.md").to_a
+pages.each do |page|
+  puts "processing file: #{page.split("/").last}"
+
+  content_lines = File.readlines(page)
+
+  # get the post title from the first line
+  slug = content_lines[0][2..-1].strip
+
+  title = content_lines.find { |e| e.start_with? "title: " }.gsub("title:", "").strip
+  summary = content_lines.find { |e| e.start_with? "summary: " }.gsub("summary:", "").strip
+  type = content_lines.find { |e| e.start_with? "type: " }.gsub("type:", "").strip
+
+  content = content_lines[5..-1].join
+
+  markdown_content = <<-EOF
+---
+title: #{title}
+summary: #{summary}
+type: #{type}
+---
+
+#{content}
+EOF
+
+  File.write("content/#{slug}.md", markdown_content)
+end
