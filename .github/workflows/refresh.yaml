@@ -11,8 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build and push
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+    - name: Refresh and commit data
       run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+
         ./bin/check_notion.rb && \
         ./bin/export_notion.rb && \
         ./bin/import_notion.rb && \
