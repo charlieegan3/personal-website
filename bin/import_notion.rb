@@ -7,7 +7,7 @@ require "fileutils"
 # extract the zip
 zip_path = "export.zip"
 puts "Using zip: #{zip_path}"
-fail "can't unzip" unless system("unzip -o #{zip_path} -d output")
+fail "can't unzip" unless system("unzip -q -o #{zip_path} -d output")
 
 puts "---"
 # load posts
