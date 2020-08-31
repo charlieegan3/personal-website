@@ -1,6 +1,6 @@
 ---
 title: Building a contact list in Notion that works for me
-date: 2020-06-06 15:00:00 +0100
+date: 2020-06-06 15:00:00 +0000
 ---
 
 Earlier this week I found myself migrating my contact list to Notion. I decided
