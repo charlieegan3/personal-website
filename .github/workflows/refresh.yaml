@@ -21,9 +21,14 @@ jobs:
       env:
         NOTION_COOKIE: ${{ secrets.NOTION_COOKIE }}
       run: |
+        git fetch --unshallow origin
+
         gem install bundler
         bundle install --jobs 4 --retry 3
 
         ./bin/export_notion.rb
         ./bin/import_notion.rb
         ./bin/commit.rb "${{ github.event.inputs.versionName }}"
+
+        # this is here since the action does not trigger the other on push to master
+        ruby ./bin/build_site.rb
