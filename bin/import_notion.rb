@@ -12,7 +12,7 @@ end
 # extract the zip
 zip_path = "export.zip"
 puts "Using zip: #{zip_path}"
-system("unzip -o #{zip_path} -d output")
+fail "can't unzip" unless system("unzip -o #{zip_path} -d output")
 
 puts "---"
 # load posts
@@ -68,7 +68,7 @@ posts.each do |post|
 
   # write the file to the content dir
   post_dir = "content/posts/#{slug}"
-  system("mkdir -p #{post_dir}")
+  fail "can't mkdir" unless system("mkdir -p #{post_dir}")
 
   markdown_content = <<-EOF
 ---
