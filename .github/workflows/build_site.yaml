@@ -11,4 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build and push
       run: |
+        git fetch --unshallow origin
         ruby ./bin/build_site.rb
