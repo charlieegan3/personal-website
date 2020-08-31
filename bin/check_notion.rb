@@ -57,6 +57,8 @@ if previous_versions.empty?
   fail "no old versions found"
 end
 
+puts previous_versions
+
 if previous_versions.include? version_string
   puts "version '#{version_string}' is present"
   exit 1

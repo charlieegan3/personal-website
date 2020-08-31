@@ -77,7 +77,6 @@ loop do
 end
 
 # Download the file
-puts export_url
 retry_count = 0
 loop do
   begin
