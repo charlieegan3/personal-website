@@ -1,10 +1,2 @@
-.DS_Store
-
-www/
-/.bundle
-.sass-cache/
-
-vendor
-
-_gen
 output
+version_string

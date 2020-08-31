@@ -1,0 +1,17 @@
+name: refresh-notion-data
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push
+      run: |
+        ./bin/check_notion.rb && \
+        ./bin/export_notion.rb && \
+        ./bin/import_notion.rb && \
+        ./bin/commit.rb
