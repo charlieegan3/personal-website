@@ -16,6 +16,8 @@ jobs:
       with:
         ruby-version: 2.6
     - name: Refresh and commit data
+      env:
+        NOTION_COOKIE: ${{ secrets.NOTION_COOKIE }}
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
