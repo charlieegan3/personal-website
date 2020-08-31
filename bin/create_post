@@ -16,7 +16,7 @@ date: {{DATE}}
 
 slug = title.downcase.gsub(/[^\w\s]/, '').strip.gsub(/\s+/, '-')
 date_string = Time.now.strftime("%Y-%m-%d")
-base_path = "hugo-site/content/posts/#{date_string}-#{slug}"
+base_path = "content/posts/#{date_string}-#{slug}"
 `mkdir #{base_path}`
 path = "#{base_path}/index.md"
 contents = template

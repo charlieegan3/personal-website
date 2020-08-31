@@ -1,0 +1,14 @@
+name: build-site
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push
+      run: |
+        ruby ./bin/build_site.rb

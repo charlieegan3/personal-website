@@ -62,7 +62,7 @@ posts.each do |post|
   content = content.split("\n")[6..-1].join("\n")
 
   # write the file to the content dir
-  post_dir = "hugo-site/content/posts/#{slug}"
+  post_dir = "content/posts/#{slug}"
   system("mkdir -p #{post_dir}")
 
   markdown_content = <<-EOF
