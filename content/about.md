@@ -4,7 +4,6 @@ summary: Hello, my name is Charlie - nice to meet you.
 type: about
 ---
 
-
 Hello, my name is Charlie - thanks for stopping by! Nice to meet you 👋. I work at [Jetstack](https://jetstack.io/) 💼. Here's a little bit about me.
 
 I go to:
