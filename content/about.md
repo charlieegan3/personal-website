@@ -5,7 +5,7 @@ type: about
 ---
 
 
-Hello, my name is Charlie - thanks for stopping by! Nice to meet you 👋. I work at [Jetstack](https://jetstack.io/) 💼. Here's a little bit about me.
+Hello, my name is Charlie - thanks for stopping by! Nice to meet you 👋. Here's a little bit about me.
 
 Before COVID-19 I used to go to:
 
@@ -28,3 +28,5 @@ Other things I do:
 - 🎶 [track](https://music.charlieegan3.com/) all the music I listen to
 - 🧻 keep a [blog](https://www.notion.so/posts) & write a journal
 - 🎽 [run](https://www.strava.com/athletes/1238371), bike, swim - but not all three at once just yet!
+
+I work at [Jetstack](https://jetstack.io/) 💼.
