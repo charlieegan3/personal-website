@@ -119,17 +119,11 @@ fail if csvs.length != 1
 
 puts "processing: #{csvs[0]}"
 projects = []
+# title has some strange char at the start
+keys = ["title"] + CSV.read(csvs[0])[0][1..-1]
 CSV.read(csvs[0])[1..-1].each do |row|
-  project = {
-    "title" => row[0],
-    "type" => row[1],
-    "demo" => row[2],
-    "github" => row[3],
-    "paper" => row[4],
-    "blog" => row[5],
-    "talk" => row[6],
-    "comment" => row[7],
-  }
+  project = Hash[*keys.zip(row).flatten]
+  project = Hash[*project.sort_by { |k, _| k }.flatten]
 
   projects << project.delete_if { |_, v| v.nil? }
 end
