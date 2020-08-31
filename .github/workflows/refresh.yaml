@@ -3,10 +3,12 @@ name: refresh-notion-data
 on:
   workflow_dispatch:
     inputs:
-      versionName:
-        description: Version name
+      commitSubject:
+        description: Subject
         required: true
-        default: 'Notion Update'
+      commitDetail:
+        description: Detail
+        required: false
 
 jobs:
   build:
@@ -28,7 +30,7 @@ jobs:
 
         ./bin/export_notion.rb
         ./bin/import_notion.rb
-        ./bin/commit.rb "${{ github.event.inputs.versionName }}"
+        ./bin/commit.rb "${{ github.event.inputs.commitSubject }}" "${{ github.event.inputs.commitDetail }}"
 
         # this is here since the action does not trigger the other on push to master
         ruby ./bin/build_site.rb
