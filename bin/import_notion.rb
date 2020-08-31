@@ -68,7 +68,7 @@ posts.each do |post|
   markdown_content = <<-EOF
 ---
 title: #{title}
-date: #{date.strftime("%Y-%m-%d %T %z")}
+date: #{date.strftime("%Y-%m-%d %T +0000")}
 ---
 
 #{content}
