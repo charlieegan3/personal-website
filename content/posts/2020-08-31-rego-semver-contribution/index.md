@@ -5,7 +5,7 @@ date: 2020-08-31 18:00:00 +0000
 
 ![Screenshot_from_2020-08-31_22-09-36.png](Screenshot_from_2020-08-31_22-09-36.png)
 
-This is a post about a recent contribution I made to the OPA project, OPA (Open Policy Agent) aims to provide a standard means of authorization in the form of a policy server with a domain specific language called Rego. The project has [good documentation](https://www.openpolicyagent.org/docs/latest/) where you can read more about it.
+This is a post about a recent contribution I made to the OPA project. OPA (Open Policy Agent) aims to provide a standard means of authorization in the form of a policy server with a domain specific language called Rego. The project has [good documentation](https://www.openpolicyagent.org/docs/latest/) where you can read more about it.
 
 ## Why do this in the first place?
 
