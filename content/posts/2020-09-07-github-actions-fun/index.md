@@ -9,9 +9,9 @@ Two years ago, GitHub announced *Actions,* their repo-integrated, workflow autom
 
 Starting out with the most self-centered & self-promoting entry in the list is my repo that updates [my own GitHub profile](https://github.com/charlieegan3).  At the time of writing, it looks like this:
 
-![charlieegan3_(Charlie_Egan).png](charlieegan3_(Charlie_Egan).png)
+![profile.png](profile.png)
 
-This section of the page shows the readme of the [charlieegan3/charlieegan3 repo](https://github.com/charlieegan3/charlieegan3). In that repo I have a [script](https://github.com/charlieegan3/charlieegan3/blob/fa92f0cbfacf6820873b699d7a5bdf9e355b05bf/hack/update_readme.rb) that gets this information from my website and replicates it here. It also has a little emoji for the city at the time of day it’s meant to be for me here in London.
+This section of the page shows the readme of the [charlieegan3/charlieegan3 repo](https://github.com/charlieegan3/charlieegan3). In that repo I have a [script](https://github.com/charlieegan3/charlieegan3/blob/fa92f0cbfacf6820873b699d7a5bdf9e355b05bf/hack/update_readme.rb) that gets this information from my website and replicates it here. It also has a little emoji for the city at the time of day it’s meant to be for me here in London. This little project was my GitHub Actions gateway drug!
 
 Sadly it’s not especially easy to replicate, mostly that script just processes [the data](https://charlieegan3.github.io/json-charlieegan3/build/status.json) that’s updated by another, older project called [json-charlieegan3](https://github.com/charlieegan3/json-charlieegan3). Which leads me on to...
 
@@ -19,7 +19,7 @@ Sadly it’s not especially easy to replicate, mostly that script just processes
 
 This project is older than GitHub Actions, but now runs there too. It’s long been responsible for updating this little ‘live’ section on my site. It’s run in all kinds of places before, from Heroku to GKE to my Raspberry Pi cluster to... 🥁 GitHub Actions!
 
-![charlieegan3.png](charlieegan3.png)
+![live.png](live.png)
 
 This one makes use of git/GitHub as the storage too and shares the generated JSON file via GitHub pages with [charlieegan3.com](http://charlieegan3.com). Committing and pushing from Actions is pretty nice as you don’t need to configure the access to the repo, just update the files and commit the result back. This works in the same way as charlieegan3/charlieegan3 for the profile README update.
 
@@ -49,7 +49,7 @@ on:
 
 These two fields allow me to set the commit message Subject and detail. GitHub uses this to generate the form like this:
 
-![Actions__charlieegan3personal-website.png](Actions__charlieegan3personal-website.png)
+![trigger.png](trigger.png)
 
 Then when I click `Run workflow` I get my site updated from Notion with a nice commit message explaining what’s been added.
 

@@ -9,6 +9,7 @@ require "yaml"
 # extract the zip
 zip_path = "export.zip"
 puts "Using zip: #{zip_path}"
+fail "can't remove output dir" unless system("rm -rf output")
 fail "can't unzip" unless system("unzip -q -o #{zip_path} -d output")
 
 puts "---"
@@ -69,6 +70,7 @@ posts.each do |post|
 
   # write the file to the content dir
   post_dir = "content/posts/#{slug}"
+  fail "clean old dir" unless system("rm -rf #{post_dir}")
   fail "can't mkdir" unless system("mkdir -p #{post_dir}")
 
   markdown_content = <<-EOF
