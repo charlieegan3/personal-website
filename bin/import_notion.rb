@@ -17,6 +17,8 @@ posts = Dir.glob("output/Website**/Posts**/**/*.md").to_a
 posts.each do |post|
   puts "processing file: #{post.split("/").last}"
 
+  page_id = post.scan(/(\w+).md/).first.first
+
   content_lines = File.readlines(post)
 
   if content_lines.any? { |e| e.strip == "draft: Yes" }
@@ -52,8 +54,10 @@ posts.each do |post|
   end
 
   # remove the notion path for images, make relative.
-  path_prefix = URI.encode(post.split("/")[-1].gsub(/\.md$/, ""))+"/"
-  content = content_lines.join("").gsub(path_prefix, "")
+  pattern = "\([%\w]+#{page_id}/"
+  content = content_lines.join("")
+    .gsub(/\([%\w]+#{page_id}\//, "(")
+    .gsub(/!\[[%\w]+#{page_id}\//, "![")
 
   # correctly format md captions
   content.scan(/^\ncaption: .*/).each do |caption|
