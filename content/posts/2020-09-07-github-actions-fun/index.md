@@ -1,37 +1,39 @@
 ---
-title: Fun things I’m using GitHub Actions for
+title: Fun things I’m doing with GitHub Actions
 date: 2020-09-07 07:00:00 +0000
 ---
 
-Two years ago, GitHub announced *Actions,* their repo-integrated, workflow automated product. It took me ages to get access, then when I finally did, it seemed to get a bit of a bad review for being rough around the edges. Roll on 6 months and I’m having a great time with it. This posts is a list of the fun things I’m using GitHub actions for - spoiler alert, not many really seem to fit the intended use case... 
+Two years ago, GitHub announced *Actions,* their repo-integrated, workflow automation product. It took me ages to get access, then when I finally did, it seemed to get a bit of a bad review for being rough around the edges. Roll on 6 months and I’m having a great time with it. This posts is a list of the fun things I’m doing with GitHub Actions - spoiler alert, not many really seem to fit the intended use case... 
 
 ## charlieegan3/charlieegan3
 
-The most narcissistic entry in the list is my repo that updates [my own GitHub profile](https://github.com/charlieegan3).  At the time of writing, it looks like this:
+Starting out with the most self-centered & self-promoting entry in the list is my repo that updates [my own GitHub profile](https://github.com/charlieegan3).  At the time of writing, it looks like this:
 
-![Fun%20things%20I%E2%80%99m%20using%20GitHub%20Actions%20for%20b3f1ebdace99464e975fa098644edcfa/charlieegan3_(Charlie_Egan).png](Fun%20things%20I%E2%80%99m%20using%20GitHub%20Actions%20for%20b3f1ebdace99464e975fa098644edcfa/charlieegan3_(Charlie_Egan).png)
+![Fun%20things%20I%E2%80%99m%20doing%20with%20GitHub%20Actions%20b3f1ebdace99464e975fa098644edcfa/charlieegan3_(Charlie_Egan).png](Fun%20things%20I%E2%80%99m%20doing%20with%20GitHub%20Actions%20b3f1ebdace99464e975fa098644edcfa/charlieegan3_(Charlie_Egan).png)
 
-This section of the page shows the readme of the [charlieegan3/charlieegan3 repo](https://github.com/charlieegan3/charlieegan3). In that repo I have a [script](https://github.com/charlieegan3/charlieegan3/blob/fa92f0cbfacf6820873b699d7a5bdf9e355b05bf/hack/update_readme.rb) that does gets this information from my website and replicates it here. It also has a little emoji for the city at the time of day it’s meant to be for me here in London.
+This section of the page shows the readme of the [charlieegan3/charlieegan3 repo](https://github.com/charlieegan3/charlieegan3). In that repo I have a [script](https://github.com/charlieegan3/charlieegan3/blob/fa92f0cbfacf6820873b699d7a5bdf9e355b05bf/hack/update_readme.rb) that gets this information from my website and replicates it here. It also has a little emoji for the city at the time of day it’s meant to be for me here in London.
 
 Sadly it’s not especially easy to replicate, mostly that script just processes [the data](https://charlieegan3.github.io/json-charlieegan3/build/status.json) that’s updated by another, older project called [json-charlieegan3](https://github.com/charlieegan3/json-charlieegan3). Which leads me on to...
 
 ## json-charlieegan3
 
-This project is older than GitHub actions. It’s long been responsible for updating this little ‘Live’ section on my site. It’s run in all kinds of places before, from Heroku to GKE to my Raspberry Pi cluster to... 🥁 GitHub Actions!
+This project is older than GitHub Actions, but now runs there too. It’s long been responsible for updating this little ‘live’ section on my site. It’s run in all kinds of places before, from Heroku to GKE to my Raspberry Pi cluster to... 🥁 GitHub Actions!
 
-![Fun%20things%20I%E2%80%99m%20using%20GitHub%20Actions%20for%20b3f1ebdace99464e975fa098644edcfa/charlieegan3.png](Fun%20things%20I%E2%80%99m%20using%20GitHub%20Actions%20for%20b3f1ebdace99464e975fa098644edcfa/charlieegan3.png)
+![Fun%20things%20I%E2%80%99m%20doing%20with%20GitHub%20Actions%20b3f1ebdace99464e975fa098644edcfa/charlieegan3.png](Fun%20things%20I%E2%80%99m%20doing%20with%20GitHub%20Actions%20b3f1ebdace99464e975fa098644edcfa/charlieegan3.png)
 
-This one makes use of git/GitHub as the storage now too and shares the generated JSON file via GitHub pages. Committing and pushing from Actions is pretty nice as you don’t need to configure the access to the repo, just update the files and commit the result back. This works in the same way as charlieegan3/charlieegan3 for the profile update.
+This one makes use of git/GitHub as the storage too and shares the generated JSON file via GitHub pages with [charlieegan3.com](http://charlieegan3.com). Committing and pushing from Actions is pretty nice as you don’t need to configure the access to the repo, just update the files and commit the result back. This works in the same way as charlieegan3/charlieegan3 for the profile README update.
 
 ## personal-website
 
-My personal website is now, once again, back on GitHub. I use actions to build the site with [Hugo](https://gohugo.io/) and to commit the result to a `netlify` branch. This is then picked up and deployed to Netlify. I don’t use pages for my personal site to keep [charlieegan3.github.io](http://charlieegan3.github.io) simple and my other Pages working.
+My personal website is now, once again, back on GitHub. I use actions to build the site with [Hugo](https://gohugo.io/) and to commit the result to a `netlify` branch. This is then picked up and deployed to Netlify. I don’t use pages for my personal site to keep [charlieegan3.github.io](http://charlieegan3.github.io) simple and my other Pages sites working.
 
 This is pretty boring, everyone and their mum has a Hugo site these days... what makes this interesting? 
 
-So glad you asked. I’ve also got a script that can import page content and posts from [Notion](https://notion.so). I [make use of the export functionality](https://github.com/charlieegan3/personal-website/blob/master/bin/export_notion.rb) to get a zip of the page called ‘Website’ and all it’s children pages. Using this data, I then have a script to [import](https://github.com/charlieegan3/personal-website/blob/master/bin/import_notion.rb) this into the existing Hugo site.
+So glad you asked. I’ve also got a script that can import page content and posts from [Notion](https://notion.so). I [make use of the export functionality](https://github.com/charlieegan3/personal-website/blob/master/bin/export_notion.rb) to get a zip of the page called ‘*Website*’ and all it’s children pages. Using this data, I then have a script to [import](https://github.com/charlieegan3/personal-website/blob/master/bin/import_notion.rb) this into the existing Hugo site.
 
-This is all a bit of a hack, but it seems to work really nicely. This post was written in Notion for example. What’s nice about using Notion for me is that it takes the friction out of writing on my iPad. I can import images and format the post easily. Then to actually update the repo, I make use of this little known(?) GitHub Actions feature called `workflow_dispatch`. It looks a bit like this:
+This is all a bit of a hack, but it seems to work really nicely. This post is the second to be written using Notion as the ‘CMS’ (Content Management System). What’s nice about using Notion for me is that it takes the friction out of writing on my iPad. I can import images and format the post easily.
+
+To actually update the repo, I make use of this little known(?) GitHub Actions feature called `workflow_dispatch`. It looks a bit like this:
 
 ```yaml
 on:
@@ -47,11 +49,11 @@ on:
 
 These two fields allow me to set the commit message Subject and detail. GitHub uses this to generate the form like this:
 
-![Fun%20things%20I%E2%80%99m%20using%20GitHub%20Actions%20for%20b3f1ebdace99464e975fa098644edcfa/Actions__charlieegan3personal-website.png](Fun%20things%20I%E2%80%99m%20using%20GitHub%20Actions%20for%20b3f1ebdace99464e975fa098644edcfa/Actions__charlieegan3personal-website.png)
+![Fun%20things%20I%E2%80%99m%20doing%20with%20GitHub%20Actions%20b3f1ebdace99464e975fa098644edcfa/Actions__charlieegan3personal-website.png](Fun%20things%20I%E2%80%99m%20doing%20with%20GitHub%20Actions%20b3f1ebdace99464e975fa098644edcfa/Actions__charlieegan3personal-website.png)
 
 Then when I click `Run workflow` I get my site updated from Notion with a nice commit message explaining what’s been added.
 
-At work we once had work with a professional blogger. One of the things he explained was super important was reducing the friction to update and create content. This seemed so simple, and I’ve taken it to heart. Before last weekend, I didn’t have WYSIWYG to published site properly automated, now I do and this is my second post in 2 weeks. Not committing to that frequency, but it’s just an interesting change for me.
+At work we once had lunch with a professional blogger. One of the things he explained was important was reducing the friction to update and create content. This seemed so simple, and I’ve taken it to heart. Before last weekend, I didn’t have the path from WYSIWYG → published site properly automated, now I do and this is my second post in 2 weeks. Not committing to that schedule, but it’s just an interesting change for me.
 
 ## notion-export & dropbox-backup
 
@@ -80,7 +82,7 @@ File.open("export.zip") do |f|
 end
 ```
 
-**dropbox-backup** might be a rather unexpected project. I don’t know anyone else that backs up their cloud storage. My school computing teacher said that computers allow you to make mistakes very quickly, I’m sure that’s not original, but it stuck with me. I make reasonably heavy use of automation and bulk update tools like [Rclone](http://rclone.org/) to manage my Dropbox, since it contains things like the only digital copy of photos going back as far as 1950, that paying BackBlaze for £2 a month for some space in b2 was worth it.
+**dropbox-backup** might be a rather unexpected project. I don’t know anyone else that backs up their personal cloud storage. My school computing teacher said that computers allow you to make mistakes very quickly, I’m sure that’s not original, but it stuck with me. I make reasonably heavy use of automation and bulk update tools like [Rclone](http://rclone.org/) to manage my Dropbox and since it contains things like the only digital copy of photos going back as far as 1950, paying BackBlaze £2 a month for some space in b2 felt worth it.
 
 This repo contains only the GitHub Actions manifest really:
 
@@ -113,7 +115,7 @@ jobs:
           --exclude "Vault/**"
 ```
 
-Here we see a really clear example of Actions as ‘cron-as-a-service’, and I suppose a secret store too.
+Here we see a really clear example of Actions as ‘cron-as-a-service’, and I suppose a secret store too for Rclone config.
 
 ## photos & music
 
@@ -121,7 +123,7 @@ My two ‘flagship’ (lol) projects are my [Instagram-driven & enhanced photo l
 
 **photos** downloads new post data, downloads missing locations, and then stores the media from the post in object storage. It then commits the updated data files which kicks off another action to build the site and push it to the `netlify` branch. Seems like a pretty good fit, but I need to make the requests to Instagram via my residential proxy these days. The GitHub IPs appear to be unable to make the same requests...
 
-**music** does quite [a lot more](https://github.com/charlieegan3/music/tree/master/.github/workflows)... I summary, the following tasks are all running in Actions:
+**music** does quite [a lot more](https://github.com/charlieegan3/music/tree/master/.github/workflows)... in summary, the following tasks are all running in Actions:
 
 - Data refresh (download play data and store in BigQuery)
     - Spotify
@@ -146,7 +148,7 @@ So that’s how I’m using GitHub actions, as of today.
 
 I plan to use it more since it’s free and seems to be pretty reliable.
 
-**Why not use k8s?** Can’t really be bothered maintaining things that I want to ‘just-work’ on my pi cluster that sometimes gets dripped on. My new rule is if it’s used by anyone other than me, it runs on someone else’s platform - not in my house, GitHub Actions has been a big part of that.
+**Why not use k8s?** Can’t really be bothered maintaining things that I want to ‘just-work’ on my pi cluster that sometimes gets dripped on and breaks. My new rule is if it’s used by anyone other than me, then I run it on someone else’s cloud - not the little one in my house, GitHub Actions has been a big part of that shift.
 
 **Why not run these on [insert cloud here]?** Actions is free, and integrated with git.
 
