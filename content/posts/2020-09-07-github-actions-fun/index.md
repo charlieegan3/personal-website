@@ -3,7 +3,7 @@ title: Fun things I’m doing with GitHub Actions
 date: 2020-09-07 07:00:00 +0000
 ---
 
-Two years ago, GitHub announced *Actions,* their repo-integrated, workflow automation product. It took me ages to get access, then when I finally did, it seemed to get a bit of a bad review for being rough around the edges. Roll on 6 months and I’m having a great time with it. This posts is a list of the fun things I’m doing with GitHub Actions - spoiler alert, not many really seem to fit the intended use case... 
+Two years ago, GitHub announced *Actions,* their repo-integrated, workflow automation product. It took me ages to get access, then when I finally did, it seemed to get a bit of a bad review for being rough around the edges. Roll on 6 months and I’m having a great time with it. This posts is a list of the fun things I’m doing with GitHub Actions - spoiler alert, not many really seem to fit the intended use case...
 
 ## charlieegan3/charlieegan3
 
@@ -27,7 +27,7 @@ This one makes use of git/GitHub as the storage too and shares the generated JSO
 
 My personal website is now, once again, back on GitHub. I use actions to build the site with [Hugo](https://gohugo.io/) and to commit the result to a `netlify` branch. This is then picked up and deployed to Netlify. I don’t use pages for my personal site to keep [charlieegan3.github.io](http://charlieegan3.github.io) simple and my other Pages sites working.
 
-This is pretty boring, everyone and their mum has a Hugo site these days... what makes this interesting? 
+This is pretty boring, everyone and their mum has a Hugo site these days... what makes this interesting?
 
 So glad you asked. I’ve also got a script that can import page content and posts from [Notion](https://notion.so). I [make use of the export functionality](https://github.com/charlieegan3/personal-website/blob/master/bin/export_notion.rb) to get a zip of the page called ‘*Website*’ and all it’s children pages. Using this data, I then have a script to [import](https://github.com/charlieegan3/personal-website/blob/master/bin/import_notion.rb) this into the existing Hugo site.
 

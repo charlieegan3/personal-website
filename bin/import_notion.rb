@@ -66,7 +66,9 @@ posts.each do |post|
   end
 
   # drop the first 6 lines
-  content = content.split("\n")[6..-1].join("\n")
+  content = content.split("\n")[6..-1].
+    map { |l| l.gsub(/\s+$/, "") }.
+    join("\n")
 
   # write the file to the content dir
   post_dir = "content/posts/#{slug}"
@@ -103,7 +105,9 @@ pages.each do |page|
   summary = content_lines.find { |e| e.start_with? "summary: " }.gsub("summary:", "").strip
   type = content_lines.find { |e| e.start_with? "type: " }.gsub("type:", "").strip
 
-  content = content_lines[5..-1].join
+  content = content_lines[5..-1].
+    map { |l| l.gsub(/\s+$/, "") }.
+    join("\n")
 
   markdown_content = <<-EOF
 ---
