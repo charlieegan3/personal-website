@@ -7,6 +7,7 @@ pygmentsCodeFences: true
 
 params:
   twitter: "charlieegan3"
+  name: Charlie Egan
 
 outputFormats:
   SearchIndex:
