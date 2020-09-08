@@ -36,6 +36,9 @@
 .post-content li {
   margin-bottom: 0.3rem;
 }
+.post-content li ul {
+  padding-left: 1.5rem;
+}
 .post-content pre {
   background-color: #151515;
   border-color: #181818;
