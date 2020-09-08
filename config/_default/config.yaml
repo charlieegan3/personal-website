@@ -5,6 +5,9 @@ summaryLength: 25
 taxonomies: {}
 pygmentsCodeFences: true
 
+params:
+  twitter: "charlieegan3"
+
 outputFormats:
   SearchIndex:
     mediaType: "application/json"

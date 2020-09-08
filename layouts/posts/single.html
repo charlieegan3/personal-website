@@ -1,9 +1,9 @@
 {{ define "title" }}
-	{{- htmlUnescape .Params.title -}} - {{- $.Site.Title -}}
+	{{- htmlUnescape .Params.title }} - {{ $.Site.Title -}}
 {{ end }}
 
-{{ define "description" }}
-	{{ .Summary }}
+{{ define "og_title" }}
+	{{- htmlUnescape .Params.title -}}
 {{ end }}
 
 {{ define "main" }}

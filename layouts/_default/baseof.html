@@ -6,37 +6,53 @@
 				{{- $.Site.Title -}}
 			{{- end -}}
 		</title>
-		<meta name="Description" content="{{- block "description" . -}}charlieegan3's personal website{{- end }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		{{ $cssFiles := slice }}
-		{{ $cssFiles = $cssFiles | append (resources.Get "css/tachyons.css") }}
-		{{ $cssFiles = $cssFiles | append (resources.Get "css/styles.css") }}
-		{{ $cssFiles = $cssFiles | append (resources.Get "css/post.css") }}
-		{{ $css := $cssFiles | resources.Concat "css/bundle.css" }}
-		{{ if isset $.Site.Params "minify" }}
-			{{ $css = $css | resources.Minify }}
-		{{ end }}
-		{{ $css = $css | resources.Fingerprint }}
+		<meta name="description" content="{{ .Summary }}">
+		<meta name="twitter:card" content="{{ .Summary }}" />
+		<meta name="twitter:site" content="@{{ $.Site.Params.twitter }}" />
+		<meta name="twitter:creator" content="@{{ $.Site.Params.twitter }}" />
+		<meta property="og:url" content="{{ .Permalink }}" />
+		<meta property="og:title" content="{{- block "og_title" . -}}charlieegan3{{- end }}" />
+		<meta property="og:description" content="{{ .Summary }}" />
+		{{ $resourceMap := slice }}
+		{{- range .Resources }}
+			{{- if or (strings.HasSuffix . "jpg") (strings.HasSuffix . "png") }}
+				{{- $resourceMap = $resourceMap | append (slice .) }}
+			{{- end }}
+		{{- end }}
+		{{- if gt (len $resourceMap) 0 -}}
+		<meta property="og:image" content="{{ .Permalink }}{{ index $resourceMap 0}}" />
+		{{- end }}
+
+		{{- $cssFiles := slice }}
+		{{- $cssFiles = $cssFiles | append (resources.Get "css/tachyons.css") }}
+		{{- $cssFiles = $cssFiles | append (resources.Get "css/styles.css") }}
+		{{- $cssFiles = $cssFiles | append (resources.Get "css/post.css") }}
+		{{- $css := $cssFiles | resources.Concat "css/bundle.css" }}
+		{{- if isset $.Site.Params "minify" }}
+			{{- $css = $css | resources.Minify }}
+		{{- end }}
+		{{- $css = $css | resources.Fingerprint }}
 		<link rel="stylesheet" type="text/css" href="{{ $css.RelPermalink }}" />
 
-		{{ $jsFiles := slice }}
-		{{ if isset $.Site.Params "turbolinks" }}
-			{{ $jsFiles = $jsFiles | append (resources.Get "js/turbolinks.js") }}
-		{{ end }}
-		{{ if isset $.Site.Params "google_analytics" }}
-			{{ $jsFiles = $jsFiles | append (resources.Get "js/pageviews.js") }}
-		{{ end }}
-		{{ $jsFiles = $jsFiles | append (resources.Get "js/welcome_message.js") }}
-		{{ $jsFiles = $jsFiles | append (resources.Get "js/live_feed.js") }}
-		{{ $jsFiles = $jsFiles | append (resources.Get "js/elasticlunr.js") }}
-		{{ $jsFiles = $jsFiles | append (resources.Get "js/search.js") }}
+		{{- $jsFiles := slice }}
+		{{- if isset $.Site.Params "turbolinks" }}
+			{{- $jsFiles = $jsFiles | append (resources.Get "js/turbolinks.js") }}
+		{{- end }}
+		{{- if isset $.Site.Params "google_analytics" }}
+			{{- $jsFiles = $jsFiles | append (resources.Get "js/pageviews.js") }}
+		{{- end }}
+		{{- $jsFiles = $jsFiles | append (resources.Get "js/welcome_message.js") }}
+		{{- $jsFiles = $jsFiles | append (resources.Get "js/live_feed.js") }}
+		{{- $jsFiles = $jsFiles | append (resources.Get "js/elasticlunr.js") }}
+		{{- $jsFiles = $jsFiles | append (resources.Get "js/search.js") }}
 
-		{{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
-		{{ if isset $.Site.Params "minify" }}
-			{{ $js = $js | resources.Minify }}
-		{{ end }}
-		{{ $js = $js | resources.Fingerprint }}
+		{{- $js := $jsFiles | resources.Concat "js/bundle.js" }}
+		{{- if isset $.Site.Params "minify" }}
+			{{- $js = $js | resources.Minify }}
+		{{- end }}
+		{{- $js = $js | resources.Fingerprint }}
 		<script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 	</head>
 	<body class="bg-darker-gray light-silver">
