@@ -15,6 +15,8 @@
 		<meta property="og:url" content="{{ .Permalink }}" />
 		<meta property="og:title" content="{{- block "og_title" . -}}charlieegan3{{- end }}" />
 		<meta property="og:description" content="{{ .Summary }}" />
+		<meta property="og:type" content="{{ block "og_type" . }}website{{ end }}" />
+		{{ block "og_fields" . }}{{ end }}
 		{{ $resourceMap := slice }}
 		{{- range .Resources }}
 			{{- if or (strings.HasSuffix . "jpg") (strings.HasSuffix . "png") }}
