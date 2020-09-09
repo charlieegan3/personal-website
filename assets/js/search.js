@@ -37,7 +37,7 @@ var search = {
   },
 
   init: function() {
-    if (window.location.pathname != "/search/")
+    if (window.location.pathname.match(/\/search\/?/) == null)
       return
     if (search.loaded == true)
       return
