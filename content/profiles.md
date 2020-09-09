@@ -1,5 +1,5 @@
 ---
-title: Profiles
+title: profiles
 type: profiles
 profiles:
 - name: Social

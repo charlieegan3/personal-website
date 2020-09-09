@@ -1,15 +1,18 @@
 {{- $.Scratch.Add "searchindex" slice -}}
-{{- range $index, $element := (where .Site.Pages "Kind" "page") -}}
-    {{ range $line := (split $element.Plain "\n") }}
-		{{ $type := "page" }}
-		{{ if eq $element.Type "posts" }}
-			{{ $type = "blog post"}}
-		{{ end }}
-		{{ $date := "" }}
-		{{ if not $element.Date.IsZero }}
-			{{ $date = dateFormat "Jan 2 2006" $element.Date }}
-		{{ end }}
-        {{- $.Scratch.Add "searchindex" (dict "id" $index "title" $element.Title "uri" $element.Permalink "type" $type "date" $date "body" $line) -}}
-    {{ end }}
+{{- range $index, $element := (where .Site.Pages "Kind" "page").Reverse -}}
+	{{ $type := "page" }}
+	{{ $url := "" }}
+	{{ if eq $element.Type "posts" }}
+		{{ $type = "blog post"}}
+	{{ end }}
+	{{ if $element.Params.external_url }}
+		{{ $type = "external blog post"}}
+		{{ $url = $element.Params.external_url }}
+	{{ end }}
+	{{ $date := "" }}
+	{{ if not $element.Date.IsZero }}
+		{{ $date = dateFormat "Jan 2 2006" $element.Date }}
+	{{ end }}
+	{{- $.Scratch.Add "searchindex" (dict "id" $index "title" $element.Title "url" $url "type" $type "date" $date "body" $element.Plain) -}}
 {{- end -}}
 {{- $.Scratch.Get "searchindex" | jsonify -}}

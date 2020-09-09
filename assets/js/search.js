@@ -2,23 +2,44 @@ var search = {
   loaded: false,
   index: null,
   data: null,
+  docs: {},
 
   run: function() {
-    var term = document.getElementById("search").value;
-    var results = search.index.search(term, {
-      bool: "AND"
+    var terms = document.getElementById("search").value.trim().split(" ");
+
+    var results = search.index.query(function(q) {
+        if (terms.length == 1) {
+          // if there is a single term, find a partial or complete match
+          q.term(terms[0] + "*", {
+            presence: lunr.Query.presence.OPTIONAL
+          })
+          q.term(terms[0], {
+            presence: lunr.Query.presence.OPTIONAL
+          })
+        } else {
+          // otherwise, only the last term can be partial or complete match
+          for (var i = 0; i < terms.length-1; i++) {
+            q.term(terms[i], {
+              presence: lunr.Query.presence.REQUIRED
+            })
+          }
+          q.term(terms[terms.length-1]+"*", {
+            presence: lunr.Query.presence.REQUIRED
+          })
+        }
     });
     var resultsList = document.getElementById("results");
     resultsList.innerHTML = "";
 
     for (var i = 0; i < results.length; i++) {
       var result = results[i];
+      var doc = search.docs[result.ref]
       var item = document.createElement("div");
       var itemMeta = document.createElement("p");
-      itemMeta.innerHTML = result.doc.type;
-      if (result.doc.date != "") {
+      itemMeta.innerHTML = doc.type;
+      if (doc.date != "") {
         var itemMetaDate = document.createElement("span");
-        itemMetaDate.innerHTML = result.doc.date;
+        itemMetaDate.innerHTML = doc.date;
         itemMetaDate.classList = "fr silver";
         itemMeta.appendChild(itemMetaDate);
       }
@@ -29,8 +50,8 @@ var search = {
         item.classList = "pb3 bb bw1 b--dark-gray";
       }
       var itemAnchor = document.createElement("a");
-      itemAnchor.innerHTML = result.doc.title;
-      itemAnchor.href = result.doc.uri;
+      itemAnchor.innerHTML = doc.title;
+      itemAnchor.href = doc.url;
       item.appendChild(itemAnchor);
       resultsList.appendChild(item);
     }
@@ -65,17 +86,21 @@ var search = {
   },
 
   createIndex: function() {
-    search.index = elasticlunr(function() {
-      this.addField('title');
-      this.addField('url');
-      this.addField('body');
-      this.addField('type');
-      this.addField('date');
-      this.setRef('id');
+    search.index = lunr(function() {
+      // remove stopword filter, so about page shows in results
+      this.pipeline.remove(this.pipeline._stack[1])
+
+      this.field('title');
+      this.field('body');
+      this.field('url');
+      this.field('date');
+      this.metadataWhitelist = ['position']
+      for (var i = 0; i < search.data.length; i++) {
+        var doc = search.data[i];
+        this.add(doc);
+        search.docs[doc.id] = doc;
+      }
     });
-    for (var i = 0; i < search.data.length; i++) {
-      search.index.addDoc(search.data[i]);
-    }
     search.run();
   }
 }

@@ -1,335 +1,494 @@
 /**
- * elasticlunr - http://weixsong.github.io
- * Lightweight full-text search engine in Javascript for browser search and offline search. - 0.9.5
- *
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
- * MIT Licensed
- * @license
+ * lunr - http://lunrjs.com - A bit like Solr, but much smaller and not as bright - 2.3.9
+ * Copyright (C) 2020 Oliver Nightingale
+ * @license MIT
  */
 
-(function(){
+;(function(){
 
+/**
+ * A convenience function for configuring and constructing
+ * a new lunr Index.
+ *
+ * A lunr.Builder instance is created and the pipeline setup
+ * with a trimmer, stop word filter and stemmer.
+ *
+ * This builder object is yielded to the configuration function
+ * that is passed as a parameter, allowing the list of fields
+ * and other builder parameters to be customised.
+ *
+ * All documents _must_ be added within the passed config function.
+ *
+ * @example
+ * var idx = lunr(function () {
+ *   this.field('title')
+ *   this.field('body')
+ *   this.ref('id')
+ *
+ *   documents.forEach(function (doc) {
+ *     this.add(doc)
+ *   }, this)
+ * })
+ *
+ * @see {@link lunr.Builder}
+ * @see {@link lunr.Pipeline}
+ * @see {@link lunr.trimmer}
+ * @see {@link lunr.stopWordFilter}
+ * @see {@link lunr.stemmer}
+ * @namespace {function} lunr
+ */
+var lunr = function (config) {
+  var builder = new lunr.Builder
+
+  builder.pipeline.add(
+    lunr.trimmer,
+    lunr.stopWordFilter,
+    lunr.stemmer
+  )
+
+  builder.searchPipeline.add(
+    lunr.stemmer
+  )
+
+  config.call(builder, builder)
+  return builder.build()
+}
+
+lunr.version = "2.3.9"
 /*!
- * elasticlunr.js
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
+ * lunr.utils
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * Convenience function for instantiating a new elasticlunr index and configuring it
- * with the default pipeline functions and the passed config function.
- *
- * When using this convenience function a new index will be created with the
- * following functions already in the pipeline:
- * 
- * 1. elasticlunr.trimmer - trim non-word character
- * 2. elasticlunr.StopWordFilter - filters out any stop words before they enter the
- * index
- * 3. elasticlunr.stemmer - stems the tokens before entering the index.
- *
- *
- * Example:
- *
- *     var idx = elasticlunr(function () {
- *       this.addField('id');
- *       this.addField('title');
- *       this.addField('body');
- *       
- *       //this.setRef('id'); // default ref is 'id'
- *
- *       this.pipeline.add(function () {
- *         // some custom pipeline function
- *       });
- *     });
- * 
- *    idx.addDoc({
- *      id: 1, 
- *      title: 'Oracle released database 12g',
- *      body: 'Yestaday, Oracle has released their latest database, named 12g, more robust. this product will increase Oracle profit.'
- *    });
- * 
- *    idx.addDoc({
- *      id: 2, 
- *      title: 'Oracle released annual profit report',
- *      body: 'Yestaday, Oracle has released their annual profit report of 2015, total profit is 12.5 Billion.'
- *    });
- * 
- *    # simple search
- *    idx.search('oracle database');
- * 
- *    # search with query-time boosting
- *    idx.search('oracle database', {fields: {title: {boost: 2}, body: {boost: 1}}});
- *
- * @param {Function} config A function that will be called with the new instance
- * of the elasticlunr.Index as both its context and first parameter. It can be used to
- * customize the instance of new elasticlunr.Index.
- * @namespace
- * @module
- * @return {elasticlunr.Index}
- *
+ * A namespace containing utils for the rest of the lunr library
+ * @namespace lunr.utils
  */
-var elasticlunr = function (config) {
-  var idx = new elasticlunr.Index;
-
-  idx.pipeline.add(
-    elasticlunr.trimmer,
-    elasticlunr.stopWordFilter,
-    elasticlunr.stemmer
-  );
-
-  if (config) config.call(idx, idx);
-
-  return idx;
-};
-
-elasticlunr.version = "0.9.5";
-
-// only used this to make elasticlunr.js compatible with lunr-languages
-// this is a trick to define a global alias of elasticlunr
-lunr = elasticlunr;
-
-/*!
- * elasticlunr.utils
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
- */
-
-/**
- * A namespace containing utils for the rest of the elasticlunr library
- */
-elasticlunr.utils = {};
+lunr.utils = {}
 
 /**
  * Print a warning message to the console.
  *
  * @param {String} message The message to be printed.
- * @memberOf Utils
+ * @memberOf lunr.utils
+ * @function
  */
-elasticlunr.utils.warn = (function (global) {
+lunr.utils.warn = (function (global) {
+  /* eslint-disable no-console */
   return function (message) {
     if (global.console && console.warn) {
-      console.warn(message);
+      console.warn(message)
     }
-  };
-})(this);
+  }
+  /* eslint-enable no-console */
+})(this)
 
 /**
- * Convert an object to string.
+ * Convert an object to a string.
  *
  * In the case of `null` and `undefined` the function returns
- * an empty string, in all other cases the result of calling
+ * the empty string, in all other cases the result of calling
  * `toString` on the passed object is returned.
  *
- * @param {object} obj The object to convert to a string.
+ * @param {Any} obj The object to convert to a string.
  * @return {String} string representation of the passed object.
+ * @memberOf lunr.utils
+ */
+lunr.utils.asString = function (obj) {
+  if (obj === void 0 || obj === null) {
+    return ""
+  } else {
+    return obj.toString()
+  }
+}
+
+/**
+ * Clones an object.
+ *
+ * Will create a copy of an existing object such that any mutations
+ * on the copy cannot affect the original.
+ *
+ * Only shallow objects are supported, passing a nested object to this
+ * function will cause a TypeError.
+ *
+ * Objects with primitives, and arrays of primitives are supported.
+ *
+ * @param {Object} obj The object to clone.
+ * @return {Object} a clone of the passed object.
+ * @throws {TypeError} when a nested object is passed.
  * @memberOf Utils
  */
-elasticlunr.utils.toString = function (obj) {
-  if (obj === void 0 || obj === null) {
-    return "";
+lunr.utils.clone = function (obj) {
+  if (obj === null || obj === undefined) {
+    return obj
   }
 
-  return obj.toString();
-};
+  var clone = Object.create(null),
+      keys = Object.keys(obj)
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i],
+        val = obj[key]
+
+    if (Array.isArray(val)) {
+      clone[key] = val.slice()
+      continue
+    }
+
+    if (typeof val === 'string' ||
+        typeof val === 'number' ||
+        typeof val === 'boolean') {
+      clone[key] = val
+      continue
+    }
+
+    throw new TypeError("clone is not deep and does not support nested objects")
+  }
+
+  return clone
+}
+lunr.FieldRef = function (docRef, fieldName, stringValue) {
+  this.docRef = docRef
+  this.fieldName = fieldName
+  this._stringValue = stringValue
+}
+
+lunr.FieldRef.joiner = "/"
+
+lunr.FieldRef.fromString = function (s) {
+  var n = s.indexOf(lunr.FieldRef.joiner)
+
+  if (n === -1) {
+    throw "malformed field ref string"
+  }
+
+  var fieldRef = s.slice(0, n),
+      docRef = s.slice(n + 1)
+
+  return new lunr.FieldRef (docRef, fieldRef, s)
+}
+
+lunr.FieldRef.prototype.toString = function () {
+  if (this._stringValue == undefined) {
+    this._stringValue = this.fieldName + lunr.FieldRef.joiner + this.docRef
+  }
+
+  return this._stringValue
+}
 /*!
- * elasticlunr.EventEmitter
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
+ * lunr.Set
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * elasticlunr.EventEmitter is an event emitter for elasticlunr.
- * It manages adding and removing event handlers and triggering events and their handlers.
+ * A lunr set.
  *
- * Each event could has multiple corresponding functions,
- * these functions will be called as the sequence that they are added into the event.
- * 
  * @constructor
  */
-elasticlunr.EventEmitter = function () {
-  this.events = {};
-};
+lunr.Set = function (elements) {
+  this.elements = Object.create(null)
 
-/**
- * Binds a handler function to a specific event(s).
- *
- * Can bind a single function to many different events in one call.
- *
- * @param {String} [eventName] The name(s) of events to bind this function to.
- * @param {Function} fn The function to call when an event is fired.
- * @memberOf EventEmitter
- */
-elasticlunr.EventEmitter.prototype.addListener = function () {
-  var args = Array.prototype.slice.call(arguments),
-      fn = args.pop(),
-      names = args;
+  if (elements) {
+    this.length = elements.length
 
-  if (typeof fn !== "function") throw new TypeError ("last argument must be a function");
-
-  names.forEach(function (name) {
-    if (!this.hasHandler(name)) this.events[name] = [];
-    this.events[name].push(fn);
-  }, this);
-};
-
-/**
- * Removes a handler function from a specific event.
- *
- * @param {String} eventName The name of the event to remove this function from.
- * @param {Function} fn The function to remove from an event.
- * @memberOf EventEmitter
- */
-elasticlunr.EventEmitter.prototype.removeListener = function (name, fn) {
-  if (!this.hasHandler(name)) return;
-
-  var fnIndex = this.events[name].indexOf(fn);
-  if (fnIndex === -1) return;
-
-  this.events[name].splice(fnIndex, 1);
-
-  if (this.events[name].length == 0) delete this.events[name];
-};
-
-/**
- * Call all functions that bounded to the given event.
- *
- * Additional data can be passed to the event handler as arguments to `emit`
- * after the event name.
- *
- * @param {String} eventName The name of the event to emit.
- * @memberOf EventEmitter
- */
-elasticlunr.EventEmitter.prototype.emit = function (name) {
-  if (!this.hasHandler(name)) return;
-
-  var args = Array.prototype.slice.call(arguments, 1);
-
-  this.events[name].forEach(function (fn) {
-    fn.apply(undefined, args);
-  }, this);
-};
-
-/**
- * Checks whether a handler has ever been stored against an event.
- *
- * @param {String} eventName The name of the event to check.
- * @private
- * @memberOf EventEmitter
- */
-elasticlunr.EventEmitter.prototype.hasHandler = function (name) {
-  return name in this.events;
-};
-/*!
- * elasticlunr.tokenizer
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
- */
-
-/**
- * A function for splitting a string into tokens.
- * Currently English is supported as default.
- * Uses `elasticlunr.tokenizer.seperator` to split strings, you could change
- * the value of this property to set how you want strings are split into tokens.
- * IMPORTANT: use elasticlunr.tokenizer.seperator carefully, if you are not familiar with
- * text process, then you'd better not change it.
- *
- * @module
- * @param {String} str The string that you want to tokenize.
- * @see elasticlunr.tokenizer.seperator
- * @return {Array}
- */
-elasticlunr.tokenizer = function (str) {
-  if (!arguments.length || str === null || str === undefined) return [];
-  if (Array.isArray(str)) {
-    var arr = str.filter(function(token) {
-      if (token === null || token === undefined) {
-        return false;
-      }
-
-      return true;
-    });
-
-    arr = arr.map(function (t) {
-      return elasticlunr.utils.toString(t).toLowerCase();
-    });
-
-    var out = [];
-    arr.forEach(function(item) {
-      var tokens = item.split(elasticlunr.tokenizer.seperator);
-      out = out.concat(tokens);
-    }, this);
-
-    return out;
+    for (var i = 0; i < this.length; i++) {
+      this.elements[elements[i]] = true
+    }
+  } else {
+    this.length = 0
   }
-
-  return str.toString().trim().toLowerCase().split(elasticlunr.tokenizer.seperator);
-};
+}
 
 /**
- * Default string seperator.
- */
-elasticlunr.tokenizer.defaultSeperator = /[\s\-]+/;
-
-/**
- * The sperator used to split a string into tokens. Override this property to change the behaviour of
- * `elasticlunr.tokenizer` behaviour when tokenizing strings. By default this splits on whitespace and hyphens.
+ * A complete set that contains all elements.
  *
  * @static
- * @see elasticlunr.tokenizer
+ * @readonly
+ * @type {lunr.Set}
  */
-elasticlunr.tokenizer.seperator = elasticlunr.tokenizer.defaultSeperator;
+lunr.Set.complete = {
+  intersect: function (other) {
+    return other
+  },
+
+  union: function () {
+    return this
+  },
+
+  contains: function () {
+    return true
+  }
+}
 
 /**
- * Set up customized string seperator
+ * An empty set that contains no elements.
  *
- * @param {Object} sep The customized seperator that you want to use to tokenize a string.
+ * @static
+ * @readonly
+ * @type {lunr.Set}
  */
-elasticlunr.tokenizer.setSeperator = function(sep) {
-    if (sep !== null && sep !== undefined && typeof(sep) === 'object') {
-        elasticlunr.tokenizer.seperator = sep;
+lunr.Set.empty = {
+  intersect: function () {
+    return this
+  },
+
+  union: function (other) {
+    return other
+  },
+
+  contains: function () {
+    return false
+  }
+}
+
+/**
+ * Returns true if this set contains the specified object.
+ *
+ * @param {object} object - Object whose presence in this set is to be tested.
+ * @returns {boolean} - True if this set contains the specified object.
+ */
+lunr.Set.prototype.contains = function (object) {
+  return !!this.elements[object]
+}
+
+/**
+ * Returns a new set containing only the elements that are present in both
+ * this set and the specified set.
+ *
+ * @param {lunr.Set} other - set to intersect with this set.
+ * @returns {lunr.Set} a new set that is the intersection of this and the specified set.
+ */
+
+lunr.Set.prototype.intersect = function (other) {
+  var a, b, elements, intersection = []
+
+  if (other === lunr.Set.complete) {
+    return this
+  }
+
+  if (other === lunr.Set.empty) {
+    return other
+  }
+
+  if (this.length < other.length) {
+    a = this
+    b = other
+  } else {
+    a = other
+    b = this
+  }
+
+  elements = Object.keys(a.elements)
+
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i]
+    if (element in b.elements) {
+      intersection.push(element)
     }
+  }
+
+  return new lunr.Set (intersection)
 }
 
 /**
- * Reset string seperator
+ * Returns a new set combining the elements of this and the specified set.
  *
+ * @param {lunr.Set} other - set to union with this set.
+ * @return {lunr.Set} a new set that is the union of this and the specified set.
  */
-elasticlunr.tokenizer.resetSeperator = function() {
-    elasticlunr.tokenizer.seperator = elasticlunr.tokenizer.defaultSeperator;
+
+lunr.Set.prototype.union = function (other) {
+  if (other === lunr.Set.complete) {
+    return lunr.Set.complete
+  }
+
+  if (other === lunr.Set.empty) {
+    return this
+  }
+
+  return new lunr.Set(Object.keys(this.elements).concat(Object.keys(other.elements)))
+}
+/**
+ * A function to calculate the inverse document frequency for
+ * a posting. This is shared between the builder and the index
+ *
+ * @private
+ * @param {object} posting - The posting for a given term
+ * @param {number} documentCount - The total number of documents.
+ */
+lunr.idf = function (posting, documentCount) {
+  var documentsWithTerm = 0
+
+  for (var fieldName in posting) {
+    if (fieldName == '_index') continue // Ignore the term index, its not a field
+    documentsWithTerm += Object.keys(posting[fieldName]).length
+  }
+
+  var x = (documentCount - documentsWithTerm + 0.5) / (documentsWithTerm + 0.5)
+
+  return Math.log(1 + Math.abs(x))
 }
 
 /**
- * Get string seperator
+ * A token wraps a string representation of a token
+ * as it is passed through the text processing pipeline.
  *
+ * @constructor
+ * @param {string} [str=''] - The string token being wrapped.
+ * @param {object} [metadata={}] - Metadata associated with this token.
  */
-elasticlunr.tokenizer.getSeperator = function() {
-    return elasticlunr.tokenizer.seperator;
+lunr.Token = function (str, metadata) {
+  this.str = str || ""
+  this.metadata = metadata || {}
+}
+
+/**
+ * Returns the token string that is being wrapped by this object.
+ *
+ * @returns {string}
+ */
+lunr.Token.prototype.toString = function () {
+  return this.str
+}
+
+/**
+ * A token update function is used when updating or optionally
+ * when cloning a token.
+ *
+ * @callback lunr.Token~updateFunction
+ * @param {string} str - The string representation of the token.
+ * @param {Object} metadata - All metadata associated with this token.
+ */
+
+/**
+ * Applies the given function to the wrapped string token.
+ *
+ * @example
+ * token.update(function (str, metadata) {
+ *   return str.toUpperCase()
+ * })
+ *
+ * @param {lunr.Token~updateFunction} fn - A function to apply to the token string.
+ * @returns {lunr.Token}
+ */
+lunr.Token.prototype.update = function (fn) {
+  this.str = fn(this.str, this.metadata)
+  return this
+}
+
+/**
+ * Creates a clone of this token. Optionally a function can be
+ * applied to the cloned token.
+ *
+ * @param {lunr.Token~updateFunction} [fn] - An optional function to apply to the cloned token.
+ * @returns {lunr.Token}
+ */
+lunr.Token.prototype.clone = function (fn) {
+  fn = fn || function (s) { return s }
+  return new lunr.Token (fn(this.str, this.metadata), this.metadata)
 }
 /*!
- * elasticlunr.Pipeline
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
+ * lunr.tokenizer
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * elasticlunr.Pipelines maintain an ordered list of functions to be applied to 
- * both documents tokens and query tokens.
+ * A function for splitting a string into tokens ready to be inserted into
+ * the search index. Uses `lunr.tokenizer.separator` to split strings, change
+ * the value of this property to change how strings are split into tokens.
  *
- * An instance of elasticlunr.Index will contain a pipeline
- * with a trimmer, a stop word filter, an English stemmer. Extra
+ * This tokenizer will convert its parameter to a string by calling `toString` and
+ * then will split this string on the character in `lunr.tokenizer.separator`.
+ * Arrays will have their elements converted to strings and wrapped in a lunr.Token.
+ *
+ * Optional metadata can be passed to the tokenizer, this metadata will be cloned and
+ * added as metadata to every token that is created from the object to be tokenized.
+ *
+ * @static
+ * @param {?(string|object|object[])} obj - The object to convert into tokens
+ * @param {?object} metadata - Optional metadata to associate with every token
+ * @returns {lunr.Token[]}
+ * @see {@link lunr.Pipeline}
+ */
+lunr.tokenizer = function (obj, metadata) {
+  if (obj == null || obj == undefined) {
+    return []
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(function (t) {
+      return new lunr.Token(
+        lunr.utils.asString(t).toLowerCase(),
+        lunr.utils.clone(metadata)
+      )
+    })
+  }
+
+  var str = obj.toString().toLowerCase(),
+      len = str.length,
+      tokens = []
+
+  for (var sliceEnd = 0, sliceStart = 0; sliceEnd <= len; sliceEnd++) {
+    var char = str.charAt(sliceEnd),
+        sliceLength = sliceEnd - sliceStart
+
+    if ((char.match(lunr.tokenizer.separator) || sliceEnd == len)) {
+
+      if (sliceLength > 0) {
+        var tokenMetadata = lunr.utils.clone(metadata) || {}
+        tokenMetadata["position"] = [sliceStart, sliceLength]
+        tokenMetadata["index"] = tokens.length
+
+        tokens.push(
+          new lunr.Token (
+            str.slice(sliceStart, sliceEnd),
+            tokenMetadata
+          )
+        )
+      }
+
+      sliceStart = sliceEnd + 1
+    }
+
+  }
+
+  return tokens
+}
+
+/**
+ * The separator used to split a string into tokens. Override this property to change the behaviour of
+ * `lunr.tokenizer` behaviour when tokenizing strings. By default this splits on whitespace and hyphens.
+ *
+ * @static
+ * @see lunr.tokenizer
+ */
+lunr.tokenizer.separator = /[\s\-]+/
+/*!
+ * lunr.Pipeline
+ * Copyright (C) 2020 Oliver Nightingale
+ */
+
+/**
+ * lunr.Pipelines maintain an ordered list of functions to be applied to all
+ * tokens in documents entering the search index and queries being ran against
+ * the index.
+ *
+ * An instance of lunr.Index created with the lunr shortcut will contain a
+ * pipeline with a stop word filter and an English language stemmer. Extra
  * functions can be added before or after either of these functions or these
  * default functions can be removed.
  *
- * When run the pipeline, it will call each function in turn.
+ * When run the pipeline will call each function in turn, passing a token, the
+ * index of that token in the original list of all tokens and finally a list of
+ * all the original tokens.
  *
- * The output of the functions in the pipeline will be passed to the next function
+ * The output of functions in the pipeline will be passed to the next function
  * in the pipeline. To exclude a token from entering the index the function
  * should return undefined, the rest of the pipeline will not be called with
  * this token.
  *
  * For serialisation of pipelines to work, all functions used in an instance of
- * a pipeline should be registered with elasticlunr.Pipeline. Registered functions can
+ * a pipeline should be registered with lunr.Pipeline. Registered functions can
  * then be loaded. If trying to load a serialised pipeline that uses functions
  * that are not registered an error will be thrown.
  *
@@ -338,14 +497,35 @@ elasticlunr.tokenizer.getSeperator = function() {
  *
  * @constructor
  */
-elasticlunr.Pipeline = function () {
-  this._queue = [];
-};
+lunr.Pipeline = function () {
+  this._stack = []
+}
 
-elasticlunr.Pipeline.registeredFunctions = {};
+lunr.Pipeline.registeredFunctions = Object.create(null)
 
 /**
- * Register a function in the pipeline.
+ * A pipeline function maps lunr.Token to lunr.Token. A lunr.Token contains the token
+ * string as well as all known metadata. A pipeline function can mutate the token string
+ * or mutate (or add) metadata for a given token.
+ *
+ * A pipeline function can indicate that the passed token should be discarded by returning
+ * null, undefined or an empty string. This token will not be passed to any downstream pipeline
+ * functions and will not be added to the index.
+ *
+ * Multiple tokens can be returned by returning an array of tokens. Each token will be passed
+ * to any downstream pipeline functions and all will returned tokens will be added to the index.
+ *
+ * Any number of pipeline functions may be chained together using a lunr.Pipeline.
+ *
+ * @interface lunr.PipelineFunction
+ * @param {lunr.Token} token - A token from the document being processed.
+ * @param {number} i - The index of this token in the complete list of tokens for this document/field.
+ * @param {lunr.Token[]} tokens - All tokens for this document/field.
+ * @returns {(?lunr.Token|lunr.Token[])}
+ */
+
+/**
+ * Register a function with the pipeline.
  *
  * Functions that are used in the pipeline should be registered if the pipeline
  * needs to be serialised, or a serialised pipeline needs to be loaded.
@@ -353,1042 +533,418 @@ elasticlunr.Pipeline.registeredFunctions = {};
  * Registering a function does not add it to a pipeline, functions must still be
  * added to instances of the pipeline for them to be used when running a pipeline.
  *
- * @param {Function} fn The function to register.
- * @param {String} label The label to register this function with
- * @memberOf Pipeline
+ * @param {lunr.PipelineFunction} fn - The function to check for.
+ * @param {String} label - The label to register this function with
  */
-elasticlunr.Pipeline.registerFunction = function (fn, label) {
-  if (label in elasticlunr.Pipeline.registeredFunctions) {
-    elasticlunr.utils.warn('Overwriting existing registered function: ' + label);
+lunr.Pipeline.registerFunction = function (fn, label) {
+  if (label in this.registeredFunctions) {
+    lunr.utils.warn('Overwriting existing registered function: ' + label)
   }
 
-  fn.label = label;
-  elasticlunr.Pipeline.registeredFunctions[label] = fn;
-};
-
-/**
- * Get a registered function in the pipeline.
- *
- * @param {String} label The label of registered function.
- * @return {Function}
- * @memberOf Pipeline
- */
-elasticlunr.Pipeline.getRegisteredFunction = function (label) {
-  if ((label in elasticlunr.Pipeline.registeredFunctions) !== true) {
-    return null;
-  }
-
-  return elasticlunr.Pipeline.registeredFunctions[label];
-};
+  fn.label = label
+  lunr.Pipeline.registeredFunctions[fn.label] = fn
+}
 
 /**
  * Warns if the function is not registered as a Pipeline function.
  *
- * @param {Function} fn The function to check for.
+ * @param {lunr.PipelineFunction} fn - The function to check for.
  * @private
- * @memberOf Pipeline
  */
-elasticlunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
-  var isRegistered = fn.label && (fn.label in this.registeredFunctions);
+lunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
+  var isRegistered = fn.label && (fn.label in this.registeredFunctions)
 
   if (!isRegistered) {
-    elasticlunr.utils.warn('Function is not registered with pipeline. This may cause problems when serialising the index.\n', fn);
+    lunr.utils.warn('Function is not registered with pipeline. This may cause problems when serialising the index.\n', fn)
   }
-};
+}
 
 /**
  * Loads a previously serialised pipeline.
  *
- * All functions to be loaded must already be registered with elasticlunr.Pipeline.
+ * All functions to be loaded must already be registered with lunr.Pipeline.
  * If any function from the serialised data has not been registered then an
  * error will be thrown.
  *
- * @param {Object} serialised The serialised pipeline to load.
- * @return {elasticlunr.Pipeline}
- * @memberOf Pipeline
+ * @param {Object} serialised - The serialised pipeline to load.
+ * @returns {lunr.Pipeline}
  */
-elasticlunr.Pipeline.load = function (serialised) {
-  var pipeline = new elasticlunr.Pipeline;
+lunr.Pipeline.load = function (serialised) {
+  var pipeline = new lunr.Pipeline
 
   serialised.forEach(function (fnName) {
-    var fn = elasticlunr.Pipeline.getRegisteredFunction(fnName);
+    var fn = lunr.Pipeline.registeredFunctions[fnName]
 
     if (fn) {
-      pipeline.add(fn);
+      pipeline.add(fn)
     } else {
-      throw new Error('Cannot load un-registered function: ' + fnName);
+      throw new Error('Cannot load unregistered function: ' + fnName)
     }
-  });
+  })
 
-  return pipeline;
-};
+  return pipeline
+}
 
 /**
  * Adds new functions to the end of the pipeline.
  *
  * Logs a warning if the function has not been registered.
  *
- * @param {Function} functions Any number of functions to add to the pipeline.
- * @memberOf Pipeline
+ * @param {lunr.PipelineFunction[]} functions - Any number of functions to add to the pipeline.
  */
-elasticlunr.Pipeline.prototype.add = function () {
-  var fns = Array.prototype.slice.call(arguments);
+lunr.Pipeline.prototype.add = function () {
+  var fns = Array.prototype.slice.call(arguments)
 
   fns.forEach(function (fn) {
-    elasticlunr.Pipeline.warnIfFunctionNotRegistered(fn);
-    this._queue.push(fn);
-  }, this);
-};
+    lunr.Pipeline.warnIfFunctionNotRegistered(fn)
+    this._stack.push(fn)
+  }, this)
+}
 
 /**
  * Adds a single function after a function that already exists in the
  * pipeline.
  *
  * Logs a warning if the function has not been registered.
- * If existingFn is not found, throw an Exception.
  *
- * @param {Function} existingFn A function that already exists in the pipeline.
- * @param {Function} newFn The new function to add to the pipeline.
- * @memberOf Pipeline
+ * @param {lunr.PipelineFunction} existingFn - A function that already exists in the pipeline.
+ * @param {lunr.PipelineFunction} newFn - The new function to add to the pipeline.
  */
-elasticlunr.Pipeline.prototype.after = function (existingFn, newFn) {
-  elasticlunr.Pipeline.warnIfFunctionNotRegistered(newFn);
+lunr.Pipeline.prototype.after = function (existingFn, newFn) {
+  lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
 
-  var pos = this._queue.indexOf(existingFn);
-  if (pos === -1) {
-    throw new Error('Cannot find existingFn');
+  var pos = this._stack.indexOf(existingFn)
+  if (pos == -1) {
+    throw new Error('Cannot find existingFn')
   }
 
-  this._queue.splice(pos + 1, 0, newFn);
-};
+  pos = pos + 1
+  this._stack.splice(pos, 0, newFn)
+}
 
 /**
  * Adds a single function before a function that already exists in the
  * pipeline.
  *
  * Logs a warning if the function has not been registered.
- * If existingFn is not found, throw an Exception.
  *
- * @param {Function} existingFn A function that already exists in the pipeline.
- * @param {Function} newFn The new function to add to the pipeline.
- * @memberOf Pipeline
+ * @param {lunr.PipelineFunction} existingFn - A function that already exists in the pipeline.
+ * @param {lunr.PipelineFunction} newFn - The new function to add to the pipeline.
  */
-elasticlunr.Pipeline.prototype.before = function (existingFn, newFn) {
-  elasticlunr.Pipeline.warnIfFunctionNotRegistered(newFn);
+lunr.Pipeline.prototype.before = function (existingFn, newFn) {
+  lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
 
-  var pos = this._queue.indexOf(existingFn);
-  if (pos === -1) {
-    throw new Error('Cannot find existingFn');
+  var pos = this._stack.indexOf(existingFn)
+  if (pos == -1) {
+    throw new Error('Cannot find existingFn')
   }
 
-  this._queue.splice(pos, 0, newFn);
-};
+  this._stack.splice(pos, 0, newFn)
+}
 
 /**
  * Removes a function from the pipeline.
  *
- * @param {Function} fn The function to remove from the pipeline.
- * @memberOf Pipeline
+ * @param {lunr.PipelineFunction} fn The function to remove from the pipeline.
  */
-elasticlunr.Pipeline.prototype.remove = function (fn) {
-  var pos = this._queue.indexOf(fn);
-  if (pos === -1) {
-    return;
+lunr.Pipeline.prototype.remove = function (fn) {
+  var pos = this._stack.indexOf(fn)
+  if (pos == -1) {
+    return
   }
 
-  this._queue.splice(pos, 1);
-};
+  this._stack.splice(pos, 1)
+}
 
 /**
- * Runs the current list of functions that registered in the pipeline against the
- * input tokens.
+ * Runs the current list of functions that make up the pipeline against the
+ * passed tokens.
  *
  * @param {Array} tokens The tokens to run through the pipeline.
- * @return {Array}
- * @memberOf Pipeline
+ * @returns {Array}
  */
-elasticlunr.Pipeline.prototype.run = function (tokens) {
-  var out = [],
-      tokenLength = tokens.length,
-      pipelineLength = this._queue.length;
+lunr.Pipeline.prototype.run = function (tokens) {
+  var stackLength = this._stack.length
 
-  for (var i = 0; i < tokenLength; i++) {
-    var token = tokens[i];
+  for (var i = 0; i < stackLength; i++) {
+    var fn = this._stack[i]
+    var memo = []
 
-    for (var j = 0; j < pipelineLength; j++) {
-      token = this._queue[j](token, i, tokens);
-      if (token === void 0 || token === null) break;
-    };
+    for (var j = 0; j < tokens.length; j++) {
+      var result = fn(tokens[j], j, tokens)
 
-    if (token !== void 0 && token !== null) out.push(token);
-  };
+      if (result === null || result === void 0 || result === '') continue
 
-  return out;
-};
+      if (Array.isArray(result)) {
+        for (var k = 0; k < result.length; k++) {
+          memo.push(result[k])
+        }
+      } else {
+        memo.push(result)
+      }
+    }
+
+    tokens = memo
+  }
+
+  return tokens
+}
+
+/**
+ * Convenience method for passing a string through a pipeline and getting
+ * strings out. This method takes care of wrapping the passed string in a
+ * token and mapping the resulting tokens back to strings.
+ *
+ * @param {string} str - The string to pass through the pipeline.
+ * @param {?object} metadata - Optional metadata to associate with the token
+ * passed to the pipeline.
+ * @returns {string[]}
+ */
+lunr.Pipeline.prototype.runString = function (str, metadata) {
+  var token = new lunr.Token (str, metadata)
+
+  return this.run([token]).map(function (t) {
+    return t.toString()
+  })
+}
 
 /**
  * Resets the pipeline by removing any existing processors.
  *
- * @memberOf Pipeline
  */
-elasticlunr.Pipeline.prototype.reset = function () {
-  this._queue = [];
-};
-
- /**
-  * Get the pipeline if user want to check the pipeline.
-  *
-  * @memberOf Pipeline
-  */
- elasticlunr.Pipeline.prototype.get = function () {
-   return this._queue;
- };
+lunr.Pipeline.prototype.reset = function () {
+  this._stack = []
+}
 
 /**
  * Returns a representation of the pipeline ready for serialisation.
- * Only serialize pipeline function's name. Not storing function, so when
- * loading the archived JSON index file, corresponding pipeline function is 
- * added by registered function of elasticlunr.Pipeline.registeredFunctions
  *
  * Logs a warning if the function has not been registered.
  *
- * @return {Array}
- * @memberOf Pipeline
+ * @returns {Array}
  */
-elasticlunr.Pipeline.prototype.toJSON = function () {
-  return this._queue.map(function (fn) {
-    elasticlunr.Pipeline.warnIfFunctionNotRegistered(fn);
-    return fn.label;
-  });
-};
-/*!
- * elasticlunr.Index
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
- */
-
-/**
- * elasticlunr.Index is object that manages a search index.  It contains the indexes
- * and stores all the tokens and document lookups.  It also provides the main
- * user facing API for the library.
- *
- * @constructor
- */
-elasticlunr.Index = function () {
-  this._fields = [];
-  this._ref = 'id';
-  this.pipeline = new elasticlunr.Pipeline;
-  this.documentStore = new elasticlunr.DocumentStore;
-  this.index = {};
-  this.eventEmitter = new elasticlunr.EventEmitter;
-  this._idfCache = {};
-
-  this.on('add', 'remove', 'update', (function () {
-    this._idfCache = {};
-  }).bind(this));
-};
-
-/**
- * Bind a handler to events being emitted by the index.
- *
- * The handler can be bound to many events at the same time.
- *
- * @param {String} [eventName] The name(s) of events to bind the function to.
- * @param {Function} fn The serialised set to load.
- * @memberOf Index
- */
-elasticlunr.Index.prototype.on = function () {
-  var args = Array.prototype.slice.call(arguments);
-  return this.eventEmitter.addListener.apply(this.eventEmitter, args);
-};
-
-/**
- * Removes a handler from an event being emitted by the index.
- *
- * @param {String} eventName The name of events to remove the function from.
- * @param {Function} fn The serialised set to load.
- * @memberOf Index
- */
-elasticlunr.Index.prototype.off = function (name, fn) {
-  return this.eventEmitter.removeListener(name, fn);
-};
-
-/**
- * Loads a previously serialised index.
- *
- * Issues a warning if the index being imported was serialised
- * by a different version of elasticlunr.
- *
- * @param {Object} serialisedData The serialised set to load.
- * @return {elasticlunr.Index}
- * @memberOf Index
- */
-elasticlunr.Index.load = function (serialisedData) {
-  if (serialisedData.version !== elasticlunr.version) {
-    elasticlunr.utils.warn('version mismatch: current '
-                    + elasticlunr.version + ' importing ' + serialisedData.version);
-  }
-
-  var idx = new this;
-
-  idx._fields = serialisedData.fields;
-  idx._ref = serialisedData.ref;
-  idx.documentStore = elasticlunr.DocumentStore.load(serialisedData.documentStore);
-  idx.pipeline = elasticlunr.Pipeline.load(serialisedData.pipeline);
-  idx.index = {};
-  for (var field in serialisedData.index) {
-    idx.index[field] = elasticlunr.InvertedIndex.load(serialisedData.index[field]);
-  }
-
-  return idx;
-};
-
-/**
- * Adds a field to the list of fields that will be searchable within documents in the index.
- *
- * Remember that inner index is build based on field, which means each field has one inverted index.
- *
- * Fields should be added before any documents are added to the index, fields
- * that are added after documents are added to the index will only apply to new
- * documents added to the index.
- *
- * @param {String} fieldName The name of the field within the document that should be indexed
- * @return {elasticlunr.Index}
- * @memberOf Index
- */
-elasticlunr.Index.prototype.addField = function (fieldName) {
-  this._fields.push(fieldName);
-  this.index[fieldName] = new elasticlunr.InvertedIndex;
-  return this;
-};
-
-/**
- * Sets the property used to uniquely identify documents added to the index,
- * by default this property is 'id'.
- *
- * This should only be changed before adding documents to the index, changing
- * the ref property without resetting the index can lead to unexpected results.
- *
- * @param {String} refName The property to use to uniquely identify the
- * documents in the index.
- * @param {Boolean} emitEvent Whether to emit add events, defaults to true
- * @return {elasticlunr.Index}
- * @memberOf Index
- */
-elasticlunr.Index.prototype.setRef = function (refName) {
-  this._ref = refName;
-  return this;
-};
-
-/**
- *
- * Set if the JSON format original documents are save into elasticlunr.DocumentStore
- *
- * Defaultly save all the original JSON documents.
- *
- * @param {Boolean} save Whether to save the original JSON documents.
- * @return {elasticlunr.Index}
- * @memberOf Index
- */
-elasticlunr.Index.prototype.saveDocument = function (save) {
-  this.documentStore = new elasticlunr.DocumentStore(save);
-  return this;
-};
-
-/**
- * Add a JSON format document to the index.
- *
- * This is the way new documents enter the index, this function will run the
- * fields from the document through the index's pipeline and then add it to
- * the index, it will then show up in search results.
- *
- * An 'add' event is emitted with the document that has been added and the index
- * the document has been added to. This event can be silenced by passing false
- * as the second argument to add.
- *
- * @param {Object} doc The JSON format document to add to the index.
- * @param {Boolean} emitEvent Whether or not to emit events, default true.
- * @memberOf Index
- */
-elasticlunr.Index.prototype.addDoc = function (doc, emitEvent) {
-  if (!doc) return;
-  var emitEvent = emitEvent === undefined ? true : emitEvent;
-
-  var docRef = doc[this._ref];
-
-  this.documentStore.addDoc(docRef, doc);
-  this._fields.forEach(function (field) {
-    var fieldTokens = this.pipeline.run(elasticlunr.tokenizer(doc[field]));
-    this.documentStore.addFieldLength(docRef, field, fieldTokens.length);
-
-    var tokenCount = {};
-    fieldTokens.forEach(function (token) {
-      if (token in tokenCount) tokenCount[token] += 1;
-      else tokenCount[token] = 1;
-    }, this);
-
-    for (var token in tokenCount) {
-      var termFrequency = tokenCount[token];
-      termFrequency = Math.sqrt(termFrequency);
-      this.index[field].addToken(token, { ref: docRef, tf: termFrequency });
-    }
-  }, this);
-
-  if (emitEvent) this.eventEmitter.emit('add', doc, this);
-};
-
-/**
- * Removes a document from the index by doc ref.
- *
- * To make sure documents no longer show up in search results they can be
- * removed from the index using this method.
- *
- * A 'remove' event is emitted with the document that has been removed and the index
- * the document has been removed from. This event can be silenced by passing false
- * as the second argument to remove.
- *
- * If user setting DocumentStore not storing the documents, then remove doc by docRef is not allowed.
- *
- * @param {String|Integer} docRef The document ref to remove from the index.
- * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
- * @memberOf Index
- */
-elasticlunr.Index.prototype.removeDocByRef = function (docRef, emitEvent) {
-  if (!docRef) return;
-  if (this.documentStore.isDocStored() === false) {
-    return;
-  }
-
-  if (!this.documentStore.hasDoc(docRef)) return;
-  var doc = this.documentStore.getDoc(docRef);
-  this.removeDoc(doc, false);
-};
-
-/**
- * Removes a document from the index.
- * This remove operation could work even the original doc is not store in the DocumentStore.
- *
- * To make sure documents no longer show up in search results they can be
- * removed from the index using this method.
- *
- * A 'remove' event is emitted with the document that has been removed and the index
- * the document has been removed from. This event can be silenced by passing false
- * as the second argument to remove.
- *
- *
- * @param {Object} doc The document ref to remove from the index.
- * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
- * @memberOf Index
- */
-elasticlunr.Index.prototype.removeDoc = function (doc, emitEvent) {
-  if (!doc) return;
-
-  var emitEvent = emitEvent === undefined ? true : emitEvent;
-
-  var docRef = doc[this._ref];
-  if (!this.documentStore.hasDoc(docRef)) return;
-
-  this.documentStore.removeDoc(docRef);
-
-  this._fields.forEach(function (field) {
-    var fieldTokens = this.pipeline.run(elasticlunr.tokenizer(doc[field]));
-    fieldTokens.forEach(function (token) {
-      this.index[field].removeToken(token, docRef);
-    }, this);
-  }, this);
-
-  if (emitEvent) this.eventEmitter.emit('remove', doc, this);
-};
-
-/**
- * Updates a document in the index.
- *
- * When a document contained within the index gets updated, fields changed,
- * added or removed, to make sure it correctly matched against search queries,
- * it should be updated in the index.
- *
- * This method is just a wrapper around `remove` and `add`
- *
- * An 'update' event is emitted with the document that has been updated and the index.
- * This event can be silenced by passing false as the second argument to update. Only
- * an update event will be fired, the 'add' and 'remove' events of the underlying calls
- * are silenced.
- *
- * @param {Object} doc The document to update in the index.
- * @param {Boolean} emitEvent Whether to emit update events, defaults to true
- * @see Index.prototype.remove
- * @see Index.prototype.add
- * @memberOf Index
- */
-elasticlunr.Index.prototype.updateDoc = function (doc, emitEvent) {
-  var emitEvent = emitEvent === undefined ? true : emitEvent;
-
-  this.removeDocByRef(doc[this._ref], false);
-  this.addDoc(doc, false);
-
-  if (emitEvent) this.eventEmitter.emit('update', doc, this);
-};
-
-/**
- * Calculates the inverse document frequency for a token within the index of a field.
- *
- * @param {String} token The token to calculate the idf of.
- * @param {String} field The field to compute idf.
- * @see Index.prototype.idf
- * @private
- * @memberOf Index
- */
-elasticlunr.Index.prototype.idf = function (term, field) {
-  var cacheKey = "@" + field + '/' + term;
-  if (Object.prototype.hasOwnProperty.call(this._idfCache, cacheKey)) return this._idfCache[cacheKey];
-
-  var df = this.index[field].getDocFreq(term);
-  var idf = 1 + Math.log(this.documentStore.length / (df + 1));
-  this._idfCache[cacheKey] = idf;
-
-  return idf;
-};
-
-/**
- * get fields of current index instance
- *
- * @return {Array}
- */
-elasticlunr.Index.prototype.getFields = function () {
-  return this._fields.slice();
-};
-
-/**
- * Searches the index using the passed query.
- * Queries should be a string, multiple words are allowed.
- *
- * If config is null, will search all fields defaultly, and lead to OR based query.
- * If config is specified, will search specified with query time boosting.
- *
- * All query tokens are passed through the same pipeline that document tokens
- * are passed through, so any language processing involved will be run on every
- * query term.
- *
- * Each query term is expanded, so that the term 'he' might be expanded to
- * 'hello' and 'help' if those terms were already included in the index.
- *
- * Matching documents are returned as an array of objects, each object contains
- * the matching document ref, as set for this index, and the similarity score
- * for this document against the query.
- *
- * @param {String} query The query to search the index with.
- * @param {JSON} userConfig The user query config, JSON format.
- * @return {Object}
- * @see Index.prototype.idf
- * @see Index.prototype.documentVector
- * @memberOf Index
- */
-elasticlunr.Index.prototype.search = function (query, userConfig) {
-  if (!query) return [];
-  if (typeof query === 'string') {
-    query = {any: query};
-  } else {
-    query = JSON.parse(JSON.stringify(query));
-  }
-
-  var configStr = null;
-  if (userConfig != null) {
-    configStr = JSON.stringify(userConfig);
-  }
-
-  var config = new elasticlunr.Configuration(configStr, this.getFields()).get();
-
-  var queryTokens = {};
-  var queryFields = Object.keys(query);
-
-  for (var i = 0; i < queryFields.length; i++) {
-    var key = queryFields[i];
-
-    queryTokens[key] = this.pipeline.run(elasticlunr.tokenizer(query[key]));
-  }
-
-  var queryResults = {};
-
-  for (var field in config) {
-    var tokens = queryTokens[field] || queryTokens.any;
-    if (!tokens) {
-      continue;
-    }
-
-    var fieldSearchResults = this.fieldSearch(tokens, field, config);
-    var fieldBoost = config[field].boost;
-
-    for (var docRef in fieldSearchResults) {
-      fieldSearchResults[docRef] = fieldSearchResults[docRef] * fieldBoost;
-    }
-
-    for (var docRef in fieldSearchResults) {
-      if (docRef in queryResults) {
-        queryResults[docRef] += fieldSearchResults[docRef];
-      } else {
-        queryResults[docRef] = fieldSearchResults[docRef];
-      }
-    }
-  }
-
-  var results = [];
-  var result;
-  for (var docRef in queryResults) {
-    result = {ref: docRef, score: queryResults[docRef]};
-    if (this.documentStore.hasDoc(docRef)) {
-      result.doc = this.documentStore.getDoc(docRef);
-    }
-    results.push(result);
-  }
-
-  results.sort(function (a, b) { return b.score - a.score; });
-  return results;
-};
-
-/**
- * search queryTokens in specified field.
- *
- * @param {Array} queryTokens The query tokens to query in this field.
- * @param {String} field Field to query in.
- * @param {elasticlunr.Configuration} config The user query config, JSON format.
- * @return {Object}
- */
-elasticlunr.Index.prototype.fieldSearch = function (queryTokens, fieldName, config) {
-  var booleanType = config[fieldName].bool;
-  var expand = config[fieldName].expand;
-  var boost = config[fieldName].boost;
-  var scores = null;
-  var docTokens = {};
-
-  // Do nothing if the boost is 0
-  if (boost === 0) {
-    return;
-  }
-
-  queryTokens.forEach(function (token) {
-    var tokens = [token];
-    if (expand == true) {
-      tokens = this.index[fieldName].expandToken(token);
-    }
-    // Consider every query token in turn. If expanded, each query token
-    // corresponds to a set of tokens, which is all tokens in the
-    // index matching the pattern queryToken* .
-    // For the set of tokens corresponding to a query token, find and score
-    // all matching documents. Store those scores in queryTokenScores,
-    // keyed by docRef.
-    // Then, depending on the value of booleanType, combine the scores
-    // for this query token with previous scores.  If booleanType is OR,
-    // then merge the scores by summing into the accumulated total, adding
-    // new document scores are required (effectively a union operator).
-    // If booleanType is AND, accumulate scores only if the document
-    // has previously been scored by another query token (an intersection
-    // operation0.
-    // Furthermore, since when booleanType is AND, additional
-    // query tokens can't add new documents to the result set, use the
-    // current document set to limit the processing of each new query
-    // token for efficiency (i.e., incremental intersection).
-
-    var queryTokenScores = {};
-    tokens.forEach(function (key) {
-      var docs = this.index[fieldName].getDocs(key);
-      var idf = this.idf(key, fieldName);
-
-      if (scores && booleanType == 'AND') {
-          // special case, we can rule out documents that have been
-          // already been filtered out because they weren't scored
-          // by previous query token passes.
-          var filteredDocs = {};
-          for (var docRef in scores) {
-              if (docRef in docs) {
-                  filteredDocs[docRef] = docs[docRef];
-              }
-          }
-          docs = filteredDocs;
-      }
-      // only record appeared token for retrieved documents for the
-      // original token, not for expaned token.
-      // beause for doing coordNorm for a retrieved document, coordNorm only care how many
-      // query token appear in that document.
-      // so expanded token should not be added into docTokens, if added, this will pollute the
-      // coordNorm
-      if (key == token) {
-        this.fieldSearchStats(docTokens, key, docs);
-      }
-
-      for (var docRef in docs) {
-        var tf = this.index[fieldName].getTermFrequency(key, docRef);
-        var fieldLength = this.documentStore.getFieldLength(docRef, fieldName);
-        var fieldLengthNorm = 1;
-        if (fieldLength != 0) {
-          fieldLengthNorm = 1 / Math.sqrt(fieldLength);
-        }
-
-        var penality = 1;
-        if (key != token) {
-          // currently I'm not sure if this penality is enough,
-          // need to do verification
-          penality = (1 - (key.length - token.length) / key.length) * 0.15;
-        }
-
-        var score = tf * idf * fieldLengthNorm * penality;
-
-        if (docRef in queryTokenScores) {
-          queryTokenScores[docRef] += score;
-        } else {
-          queryTokenScores[docRef] = score;
-        }
-      }
-    }, this);
-
-    scores = this.mergeScores(scores, queryTokenScores, booleanType);
-  }, this);
-
-  scores = this.coordNorm(scores, docTokens, queryTokens.length);
-  return scores;
-};
-
-/**
- * Merge the scores from one set of tokens into an accumulated score table.
- * Exact operation depends on the op parameter. If op is 'AND', then only the
- * intersection of the two score lists is retained. Otherwise, the union of
- * the two score lists is returned. For internal use only.
- *
- * @param {Object} bool accumulated scores. Should be null on first call.
- * @param {String} scores new scores to merge into accumScores.
- * @param {Object} op merge operation (should be 'AND' or 'OR').
- *
- */
-
-elasticlunr.Index.prototype.mergeScores = function (accumScores, scores, op) {
-    if (!accumScores) {
-        return scores;
-    }
-    if (op == 'AND') {
-        var intersection = {};
-        for (var docRef in scores) {
-            if (docRef in accumScores) {
-                intersection[docRef] = accumScores[docRef] + scores[docRef];
-            }
-        }
-        return intersection;
-    } else {
-        for (var docRef in scores) {
-            if (docRef in accumScores) {
-                accumScores[docRef] += scores[docRef];
-            } else {
-                accumScores[docRef] = scores[docRef];
-            }
-        }
-        return accumScores;
-    }
-};
-
-
-/**
- * Record the occuring query token of retrieved doc specified by doc field.
- * Only for inner user.
- *
- * @param {Object} docTokens a data structure stores which token appears in the retrieved doc.
- * @param {String} token query token
- * @param {Object} docs the retrieved documents of the query token
- *
- */
-elasticlunr.Index.prototype.fieldSearchStats = function (docTokens, token, docs) {
-  for (var doc in docs) {
-    if (doc in docTokens) {
-      docTokens[doc].push(token);
-    } else {
-      docTokens[doc] = [token];
-    }
-  }
-};
-
-/**
- * coord norm the score of a doc.
- * if a doc contain more query tokens, then the score will larger than the doc
- * contains less query tokens.
- *
- * only for inner use.
- *
- * @param {Object} results first results
- * @param {Object} docs field search results of a token
- * @param {Integer} n query token number
- * @return {Object}
- */
-elasticlunr.Index.prototype.coordNorm = function (scores, docTokens, n) {
-  for (var doc in scores) {
-    if (!(doc in docTokens)) continue;
-    var tokens = docTokens[doc].length;
-    scores[doc] = scores[doc] * tokens / n;
-  }
-
-  return scores;
-};
-
-/**
- * Returns a representation of the index ready for serialisation.
- *
- * @return {Object}
- * @memberOf Index
- */
-elasticlunr.Index.prototype.toJSON = function () {
-  var indexJson = {};
-  this._fields.forEach(function (field) {
-    indexJson[field] = this.index[field].toJSON();
-  }, this);
-
-  return {
-    version: elasticlunr.version,
-    fields: this._fields,
-    ref: this._ref,
-    documentStore: this.documentStore.toJSON(),
-    index: indexJson,
-    pipeline: this.pipeline.toJSON()
-  };
-};
-
-/**
- * Applies a plugin to the current index.
- *
- * A plugin is a function that is called with the index as its context.
- * Plugins can be used to customise or extend the behaviour the index
- * in some way. A plugin is just a function, that encapsulated the custom
- * behaviour that should be applied to the index.
- *
- * The plugin function will be called with the index as its argument, additional
- * arguments can also be passed when calling use. The function will be called
- * with the index as its context.
- *
- * Example:
- *
- *     var myPlugin = function (idx, arg1, arg2) {
- *       // `this` is the index to be extended
- *       // apply any extensions etc here.
- *     }
- *
- *     var idx = elasticlunr(function () {
- *       this.use(myPlugin, 'arg1', 'arg2')
- *     })
- *
- * @param {Function} plugin The plugin to apply.
- * @memberOf Index
- */
-elasticlunr.Index.prototype.use = function (plugin) {
-  var args = Array.prototype.slice.call(arguments, 1);
-  args.unshift(this);
-  plugin.apply(this, args);
-};
-/*!
- * elasticlunr.DocumentStore
- * Copyright (C) 2017 Wei Song
- */
-
-/**
- * elasticlunr.DocumentStore is a simple key-value document store used for storing sets of tokens for
- * documents stored in index.
- *
- * elasticlunr.DocumentStore store original JSON format documents that you could build search snippet by this original JSON document.
- *
- * user could choose whether original JSON format document should be store, if no configuration then document will be stored defaultly.
- * If user care more about the index size, user could select not store JSON documents, then this will has some defects, such as user
- * could not use JSON document to generate snippets of search results.
- *
- * @param {Boolean} save If the original JSON document should be stored.
- * @constructor
- * @module
- */
-elasticlunr.DocumentStore = function (save) {
-  if (save === null || save === undefined) {
-    this._save = true;
-  } else {
-    this._save = save;
-  }
-
-  this.docs = {};
-  this.docInfo = {};
-  this.length = 0;
-};
-
-/**
- * Loads a previously serialised document store
- *
- * @param {Object} serialisedData The serialised document store to load.
- * @return {elasticlunr.DocumentStore}
- */
-elasticlunr.DocumentStore.load = function (serialisedData) {
-  var store = new this;
-
-  store.length = serialisedData.length;
-  store.docs = serialisedData.docs;
-  store.docInfo = serialisedData.docInfo;
-  store._save = serialisedData.save;
-
-  return store;
-};
-
-/**
- * check if current instance store the original doc
- *
- * @return {Boolean}
- */
-elasticlunr.DocumentStore.prototype.isDocStored = function () {
-  return this._save;
-};
-
-/**
- * Stores the given doc in the document store against the given id.
- * If docRef already exist, then update doc.
- *
- * Document is store by original JSON format, then you could use original document to generate search snippets.
- *
- * @param {Integer|String} docRef The key used to store the JSON format doc.
- * @param {Object} doc The JSON format doc.
- */
-elasticlunr.DocumentStore.prototype.addDoc = function (docRef, doc) {
-  if (!this.hasDoc(docRef)) this.length++;
-
-  if (this._save === true) {
-    this.docs[docRef] = clone(doc);
-  } else {
-    this.docs[docRef] = null;
-  }
-};
-
-/**
- * Retrieves the JSON doc from the document store for a given key.
- *
- * If docRef not found, return null.
- * If user set not storing the documents, return null.
- *
- * @param {Integer|String} docRef The key to lookup and retrieve from the document store.
- * @return {Object}
- * @memberOf DocumentStore
- */
-elasticlunr.DocumentStore.prototype.getDoc = function (docRef) {
-  if (this.hasDoc(docRef) === false) return null;
-  return this.docs[docRef];
-};
-
-/**
- * Checks whether the document store contains a key (docRef).
- *
- * @param {Integer|String} docRef The id to look up in the document store.
- * @return {Boolean}
- * @memberOf DocumentStore
- */
-elasticlunr.DocumentStore.prototype.hasDoc = function (docRef) {
-  return docRef in this.docs;
-};
-
-/**
- * Removes the value for a key in the document store.
- *
- * @param {Integer|String} docRef The id to remove from the document store.
- * @memberOf DocumentStore
- */
-elasticlunr.DocumentStore.prototype.removeDoc = function (docRef) {
-  if (!this.hasDoc(docRef)) return;
-
-  delete this.docs[docRef];
-  delete this.docInfo[docRef];
-  this.length--;
-};
-
-/**
- * Add field length of a document's field tokens from pipeline results.
- * The field length of a document is used to do field length normalization even without the original JSON document stored.
- *
- * @param {Integer|String} docRef document's id or reference
- * @param {String} fieldName field name
- * @param {Integer} length field length
- */
-elasticlunr.DocumentStore.prototype.addFieldLength = function (docRef, fieldName, length) {
-  if (docRef === null || docRef === undefined) return;
-  if (this.hasDoc(docRef) == false) return;
-
-  if (!this.docInfo[docRef]) this.docInfo[docRef] = {};
-  this.docInfo[docRef][fieldName] = length;
-};
-
-/**
- * Update field length of a document's field tokens from pipeline results.
- * The field length of a document is used to do field length normalization even without the original JSON document stored.
- *
- * @param {Integer|String} docRef document's id or reference
- * @param {String} fieldName field name
- * @param {Integer} length field length
- */
-elasticlunr.DocumentStore.prototype.updateFieldLength = function (docRef, fieldName, length) {
-  if (docRef === null || docRef === undefined) return;
-  if (this.hasDoc(docRef) == false) return;
-
-  this.addFieldLength(docRef, fieldName, length);
-};
-
-/**
- * get field length of a document by docRef
- *
- * @param {Integer|String} docRef document id or reference
- * @param {String} fieldName field name
- * @return {Integer} field length
- */
-elasticlunr.DocumentStore.prototype.getFieldLength = function (docRef, fieldName) {
-  if (docRef === null || docRef === undefined) return 0;
-
-  if (!(docRef in this.docs)) return 0;
-  if (!(fieldName in this.docInfo[docRef])) return 0;
-  return this.docInfo[docRef][fieldName];
-};
-
-/**
- * Returns a JSON representation of the document store used for serialisation.
- *
- * @return {Object} JSON format
- * @memberOf DocumentStore
- */
-elasticlunr.DocumentStore.prototype.toJSON = function () {
-  return {
-    docs: this.docs,
-    docInfo: this.docInfo,
-    length: this.length,
-    save: this._save
-  };
-};
-
-/**
- * Cloning object
- *
- * @param {Object} object in JSON format
- * @return {Object} copied object
- */
-function clone(obj) {
-  if (null === obj || "object" !== typeof obj) return obj;
-
-  var copy = obj.constructor();
-
-  for (var attr in obj) {
-    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-  }
-
-  return copy;
+lunr.Pipeline.prototype.toJSON = function () {
+  return this._stack.map(function (fn) {
+    lunr.Pipeline.warnIfFunctionNotRegistered(fn)
+
+    return fn.label
+  })
 }
 /*!
- * elasticlunr.stemmer
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
+ * lunr.Vector
+ * Copyright (C) 2020 Oliver Nightingale
+ */
+
+/**
+ * A vector is used to construct the vector space of documents and queries. These
+ * vectors support operations to determine the similarity between two documents or
+ * a document and a query.
+ *
+ * Normally no parameters are required for initializing a vector, but in the case of
+ * loading a previously dumped vector the raw elements can be provided to the constructor.
+ *
+ * For performance reasons vectors are implemented with a flat array, where an elements
+ * index is immediately followed by its value. E.g. [index, value, index, value]. This
+ * allows the underlying array to be as sparse as possible and still offer decent
+ * performance when being used for vector calculations.
+ *
+ * @constructor
+ * @param {Number[]} [elements] - The flat list of element index and element value pairs.
+ */
+lunr.Vector = function (elements) {
+  this._magnitude = 0
+  this.elements = elements || []
+}
+
+
+/**
+ * Calculates the position within the vector to insert a given index.
+ *
+ * This is used internally by insert and upsert. If there are duplicate indexes then
+ * the position is returned as if the value for that index were to be updated, but it
+ * is the callers responsibility to check whether there is a duplicate at that index
+ *
+ * @param {Number} insertIdx - The index at which the element should be inserted.
+ * @returns {Number}
+ */
+lunr.Vector.prototype.positionForIndex = function (index) {
+  // For an empty vector the tuple can be inserted at the beginning
+  if (this.elements.length == 0) {
+    return 0
+  }
+
+  var start = 0,
+      end = this.elements.length / 2,
+      sliceLength = end - start,
+      pivotPoint = Math.floor(sliceLength / 2),
+      pivotIndex = this.elements[pivotPoint * 2]
+
+  while (sliceLength > 1) {
+    if (pivotIndex < index) {
+      start = pivotPoint
+    }
+
+    if (pivotIndex > index) {
+      end = pivotPoint
+    }
+
+    if (pivotIndex == index) {
+      break
+    }
+
+    sliceLength = end - start
+    pivotPoint = start + Math.floor(sliceLength / 2)
+    pivotIndex = this.elements[pivotPoint * 2]
+  }
+
+  if (pivotIndex == index) {
+    return pivotPoint * 2
+  }
+
+  if (pivotIndex > index) {
+    return pivotPoint * 2
+  }
+
+  if (pivotIndex < index) {
+    return (pivotPoint + 1) * 2
+  }
+}
+
+/**
+ * Inserts an element at an index within the vector.
+ *
+ * Does not allow duplicates, will throw an error if there is already an entry
+ * for this index.
+ *
+ * @param {Number} insertIdx - The index at which the element should be inserted.
+ * @param {Number} val - The value to be inserted into the vector.
+ */
+lunr.Vector.prototype.insert = function (insertIdx, val) {
+  this.upsert(insertIdx, val, function () {
+    throw "duplicate index"
+  })
+}
+
+/**
+ * Inserts or updates an existing index within the vector.
+ *
+ * @param {Number} insertIdx - The index at which the element should be inserted.
+ * @param {Number} val - The value to be inserted into the vector.
+ * @param {function} fn - A function that is called for updates, the existing value and the
+ * requested value are passed as arguments
+ */
+lunr.Vector.prototype.upsert = function (insertIdx, val, fn) {
+  this._magnitude = 0
+  var position = this.positionForIndex(insertIdx)
+
+  if (this.elements[position] == insertIdx) {
+    this.elements[position + 1] = fn(this.elements[position + 1], val)
+  } else {
+    this.elements.splice(position, 0, insertIdx, val)
+  }
+}
+
+/**
+ * Calculates the magnitude of this vector.
+ *
+ * @returns {Number}
+ */
+lunr.Vector.prototype.magnitude = function () {
+  if (this._magnitude) return this._magnitude
+
+  var sumOfSquares = 0,
+      elementsLength = this.elements.length
+
+  for (var i = 1; i < elementsLength; i += 2) {
+    var val = this.elements[i]
+    sumOfSquares += val * val
+  }
+
+  return this._magnitude = Math.sqrt(sumOfSquares)
+}
+
+/**
+ * Calculates the dot product of this vector and another vector.
+ *
+ * @param {lunr.Vector} otherVector - The vector to compute the dot product with.
+ * @returns {Number}
+ */
+lunr.Vector.prototype.dot = function (otherVector) {
+  var dotProduct = 0,
+      a = this.elements, b = otherVector.elements,
+      aLen = a.length, bLen = b.length,
+      aVal = 0, bVal = 0,
+      i = 0, j = 0
+
+  while (i < aLen && j < bLen) {
+    aVal = a[i], bVal = b[j]
+    if (aVal < bVal) {
+      i += 2
+    } else if (aVal > bVal) {
+      j += 2
+    } else if (aVal == bVal) {
+      dotProduct += a[i + 1] * b[j + 1]
+      i += 2
+      j += 2
+    }
+  }
+
+  return dotProduct
+}
+
+/**
+ * Calculates the similarity between this vector and another vector.
+ *
+ * @param {lunr.Vector} otherVector - The other vector to calculate the
+ * similarity with.
+ * @returns {Number}
+ */
+lunr.Vector.prototype.similarity = function (otherVector) {
+  return this.dot(otherVector) / this.magnitude() || 0
+}
+
+/**
+ * Converts the vector to an array of the elements within the vector.
+ *
+ * @returns {Number[]}
+ */
+lunr.Vector.prototype.toArray = function () {
+  var output = new Array (this.elements.length / 2)
+
+  for (var i = 1, j = 0; i < this.elements.length; i += 2, j++) {
+    output[j] = this.elements[i]
+  }
+
+  return output
+}
+
+/**
+ * A JSON serializable representation of the vector.
+ *
+ * @returns {Number[]}
+ */
+lunr.Vector.prototype.toJSON = function () {
+  return this.elements
+}
+/* eslint-disable */
+/*!
+ * lunr.stemmer
+ * Copyright (C) 2020 Oliver Nightingale
  * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
  */
 
 /**
- * elasticlunr.stemmer is an english language stemmer, this is a JavaScript
+ * lunr.stemmer is an english language stemmer, this is a JavaScript
  * implementation of the PorterStemmer taken from http://tartarus.org/~martin
  *
- * @module
- * @param {String} str The string to stem
- * @return {String}
- * @see elasticlunr.Pipeline
+ * @static
+ * @implements {lunr.PipelineFunction}
+ * @param {lunr.Token} token - The string to stem
+ * @returns {lunr.Token}
+ * @see {@link lunr.Pipeline}
+ * @function
  */
-elasticlunr.stemmer = (function(){
+lunr.stemmer = (function(){
   var step2list = {
       "ational" : "ate",
       "tional" : "tion",
@@ -1460,7 +1016,7 @@ elasticlunr.stemmer = (function(){
   var re3_5 = new RegExp("^" + C + v + "[^aeiouwxy]$");
 
   var porterStemmer = function porterStemmer(w) {
-    var   stem,
+    var stem,
       suffix,
       firstch,
       re,
@@ -1501,7 +1057,7 @@ elasticlunr.stemmer = (function(){
         re2 = re2_1b_2;
         re3 = re3_1b_2;
         re4 = re4_1b_2;
-        if (re2.test(w)) {  w = w + "e"; }
+        if (re2.test(w)) { w = w + "e"; }
         else if (re3.test(w)) { re = re_1b_2; w = w.replace(re,""); }
         else if (re4.test(w)) { w = w + "e"; }
       }
@@ -1587,896 +1143,2308 @@ elasticlunr.stemmer = (function(){
     return w;
   };
 
-  return porterStemmer;
+  return function (token) {
+    return token.update(porterStemmer);
+  }
 })();
 
-elasticlunr.Pipeline.registerFunction(elasticlunr.stemmer, 'stemmer');
+lunr.Pipeline.registerFunction(lunr.stemmer, 'stemmer')
 /*!
- * elasticlunr.stopWordFilter
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
+ * lunr.stopWordFilter
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * elasticlunr.stopWordFilter is an English language stop words filter, any words
- * contained in the stop word list will not be passed through the filter.
+ * lunr.generateStopWordFilter builds a stopWordFilter function from the provided
+ * list of stop words.
+ *
+ * The built in lunr.stopWordFilter is built using this generator and can be used
+ * to generate custom stopWordFilters for applications or non English languages.
+ *
+ * @function
+ * @param {Array} token The token to pass through the filter
+ * @returns {lunr.PipelineFunction}
+ * @see lunr.Pipeline
+ * @see lunr.stopWordFilter
+ */
+lunr.generateStopWordFilter = function (stopWords) {
+  var words = stopWords.reduce(function (memo, stopWord) {
+    memo[stopWord] = stopWord
+    return memo
+  }, {})
+
+  return function (token) {
+    if (token && words[token.toString()] !== token.toString()) return token
+  }
+}
+
+/**
+ * lunr.stopWordFilter is an English language stop word list filter, any words
+ * contained in the list will not be passed through the filter.
  *
  * This is intended to be used in the Pipeline. If the token does not pass the
  * filter then undefined will be returned.
- * Currently this StopwordFilter using dictionary to do O(1) time complexity stop word filtering.
  *
- * @module
- * @param {String} token The token to pass through the filter
- * @return {String}
- * @see elasticlunr.Pipeline
+ * @function
+ * @implements {lunr.PipelineFunction}
+ * @params {lunr.Token} token - A token to check for being a stop word.
+ * @returns {lunr.Token}
+ * @see {@link lunr.Pipeline}
  */
-elasticlunr.stopWordFilter = function (token) {
-  if (token && elasticlunr.stopWordFilter.stopWords[token] !== true) {
-    return token;
-  }
-};
+lunr.stopWordFilter = lunr.generateStopWordFilter([
+  'a',
+  'able',
+  'about',
+  'across',
+  'after',
+  'all',
+  'almost',
+  'also',
+  'am',
+  'among',
+  'an',
+  'and',
+  'any',
+  'are',
+  'as',
+  'at',
+  'be',
+  'because',
+  'been',
+  'but',
+  'by',
+  'can',
+  'cannot',
+  'could',
+  'dear',
+  'did',
+  'do',
+  'does',
+  'either',
+  'else',
+  'ever',
+  'every',
+  'for',
+  'from',
+  'get',
+  'got',
+  'had',
+  'has',
+  'have',
+  'he',
+  'her',
+  'hers',
+  'him',
+  'his',
+  'how',
+  'however',
+  'i',
+  'if',
+  'in',
+  'into',
+  'is',
+  'it',
+  'its',
+  'just',
+  'least',
+  'let',
+  'like',
+  'likely',
+  'may',
+  'me',
+  'might',
+  'most',
+  'must',
+  'my',
+  'neither',
+  'no',
+  'nor',
+  'not',
+  'of',
+  'off',
+  'often',
+  'on',
+  'only',
+  'or',
+  'other',
+  'our',
+  'own',
+  'rather',
+  'said',
+  'say',
+  'says',
+  'she',
+  'should',
+  'since',
+  'so',
+  'some',
+  'than',
+  'that',
+  'the',
+  'their',
+  'them',
+  'then',
+  'there',
+  'these',
+  'they',
+  'this',
+  'tis',
+  'to',
+  'too',
+  'twas',
+  'us',
+  'wants',
+  'was',
+  'we',
+  'were',
+  'what',
+  'when',
+  'where',
+  'which',
+  'while',
+  'who',
+  'whom',
+  'why',
+  'will',
+  'with',
+  'would',
+  'yet',
+  'you',
+  'your'
+])
 
-/**
- * Remove predefined stop words
- * if user want to use customized stop words, user could use this function to delete
- * all predefined stopwords.
- *
- * @return {null}
- */
-elasticlunr.clearStopWords = function () {
-  elasticlunr.stopWordFilter.stopWords = {};
-};
-
-/**
- * Add customized stop words
- * user could use this function to add customized stop words
- * 
- * @params {Array} words customized stop words
- * @return {null}
- */
-elasticlunr.addStopWords = function (words) {
-  if (words == null || Array.isArray(words) === false) return;
-
-  words.forEach(function (word) {
-    elasticlunr.stopWordFilter.stopWords[word] = true;
-  }, this);
-};
-
-/**
- * Reset to default stop words
- * user could use this function to restore default stop words
- *
- * @return {null}
- */
-elasticlunr.resetStopWords = function () {
-  elasticlunr.stopWordFilter.stopWords = elasticlunr.defaultStopWords;
-};
-
-elasticlunr.defaultStopWords = {
-  "": true,
-  "a": true,
-  "able": true,
-  "about": true,
-  "across": true,
-  "after": true,
-  "all": true,
-  "almost": true,
-  "also": true,
-  "am": true,
-  "among": true,
-  "an": true,
-  "and": true,
-  "any": true,
-  "are": true,
-  "as": true,
-  "at": true,
-  "be": true,
-  "because": true,
-  "been": true,
-  "but": true,
-  "by": true,
-  "can": true,
-  "cannot": true,
-  "could": true,
-  "dear": true,
-  "did": true,
-  "do": true,
-  "does": true,
-  "either": true,
-  "else": true,
-  "ever": true,
-  "every": true,
-  "for": true,
-  "from": true,
-  "get": true,
-  "got": true,
-  "had": true,
-  "has": true,
-  "have": true,
-  "he": true,
-  "her": true,
-  "hers": true,
-  "him": true,
-  "his": true,
-  "how": true,
-  "however": true,
-  "i": true,
-  "if": true,
-  "in": true,
-  "into": true,
-  "is": true,
-  "it": true,
-  "its": true,
-  "just": true,
-  "least": true,
-  "let": true,
-  "like": true,
-  "likely": true,
-  "may": true,
-  "me": true,
-  "might": true,
-  "most": true,
-  "must": true,
-  "my": true,
-  "neither": true,
-  "no": true,
-  "nor": true,
-  "not": true,
-  "of": true,
-  "off": true,
-  "often": true,
-  "on": true,
-  "only": true,
-  "or": true,
-  "other": true,
-  "our": true,
-  "own": true,
-  "rather": true,
-  "said": true,
-  "say": true,
-  "says": true,
-  "she": true,
-  "should": true,
-  "since": true,
-  "so": true,
-  "some": true,
-  "than": true,
-  "that": true,
-  "the": true,
-  "their": true,
-  "them": true,
-  "then": true,
-  "there": true,
-  "these": true,
-  "they": true,
-  "this": true,
-  "tis": true,
-  "to": true,
-  "too": true,
-  "twas": true,
-  "us": true,
-  "wants": true,
-  "was": true,
-  "we": true,
-  "were": true,
-  "what": true,
-  "when": true,
-  "where": true,
-  "which": true,
-  "while": true,
-  "who": true,
-  "whom": true,
-  "why": true,
-  "will": true,
-  "with": true,
-  "would": true,
-  "yet": true,
-  "you": true,
-  "your": true
-};
-
-elasticlunr.stopWordFilter.stopWords = elasticlunr.defaultStopWords;
-
-elasticlunr.Pipeline.registerFunction(elasticlunr.stopWordFilter, 'stopWordFilter');
+lunr.Pipeline.registerFunction(lunr.stopWordFilter, 'stopWordFilter')
 /*!
- * elasticlunr.trimmer
- * Copyright (C) 2017 Oliver Nightingale
- * Copyright (C) 2017 Wei Song
+ * lunr.trimmer
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * elasticlunr.trimmer is a pipeline function for trimming non word
- * characters from the begining and end of tokens before they
+ * lunr.trimmer is a pipeline function for trimming non word
+ * characters from the beginning and end of tokens before they
  * enter the index.
  *
  * This implementation may not work correctly for non latin
  * characters and should either be removed or adapted for use
  * with languages with non-latin characters.
  *
- * @module
- * @param {String} token The token to pass through the filter
- * @return {String}
- * @see elasticlunr.Pipeline
+ * @static
+ * @implements {lunr.PipelineFunction}
+ * @param {lunr.Token} token The token to pass through the filter
+ * @returns {lunr.Token}
+ * @see lunr.Pipeline
  */
-elasticlunr.trimmer = function (token) {
-  if (token === null || token === undefined) {
-    throw new Error('token should not be undefined');
-  }
+lunr.trimmer = function (token) {
+  return token.update(function (s) {
+    return s.replace(/^\W+/, '').replace(/\W+$/, '')
+  })
+}
 
-  return token
-    .replace(/^\W+/, '')
-    .replace(/\W+$/, '');
-};
-
-elasticlunr.Pipeline.registerFunction(elasticlunr.trimmer, 'trimmer');
+lunr.Pipeline.registerFunction(lunr.trimmer, 'trimmer')
 /*!
- * elasticlunr.InvertedIndex
- * Copyright (C) 2017 Wei Song
- * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
+ * lunr.TokenSet
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * elasticlunr.InvertedIndex is used for efficiently storing and
- * lookup of documents that contain a given token.
+ * A token set is used to store the unique list of all tokens
+ * within an index. Token sets are also used to represent an
+ * incoming query to the index, this query token set and index
+ * token set are then intersected to find which tokens to look
+ * up in the inverted index.
+ *
+ * A token set can hold multiple tokens, as in the case of the
+ * index token set, or it can hold a single token as in the
+ * case of a simple query token set.
+ *
+ * Additionally token sets are used to perform wildcard matching.
+ * Leading, contained and trailing wildcards are supported, and
+ * from this edit distance matching can also be provided.
+ *
+ * Token sets are implemented as a minimal finite state automata,
+ * where both common prefixes and suffixes are shared between tokens.
+ * This helps to reduce the space used for storing the token set.
  *
  * @constructor
  */
-elasticlunr.InvertedIndex = function () {
-  this.root = { docs: {}, df: 0 };
-};
+lunr.TokenSet = function () {
+  this.final = false
+  this.edges = {}
+  this.id = lunr.TokenSet._nextId
+  lunr.TokenSet._nextId += 1
+}
 
 /**
- * Loads a previously serialised inverted index.
+ * Keeps track of the next, auto increment, identifier to assign
+ * to a new tokenSet.
  *
- * @param {Object} serialisedData The serialised inverted index to load.
- * @return {elasticlunr.InvertedIndex}
+ * TokenSets require a unique identifier to be correctly minimised.
+ *
+ * @private
  */
-elasticlunr.InvertedIndex.load = function (serialisedData) {
-  var idx = new this;
-  idx.root = serialisedData.root;
-
-  return idx;
-};
+lunr.TokenSet._nextId = 1
 
 /**
- * Adds a {token: tokenInfo} pair to the inverted index.
- * If the token already exist, then update the tokenInfo.
+ * Creates a TokenSet instance from the given sorted array of words.
  *
- * tokenInfo format: { ref: 1, tf: 2}
- * tokenInfor should contains the document's ref and the tf(token frequency) of that token in
- * the document.
- *
- * By default this function starts at the root of the current inverted index, however
- * it can start at any node of the inverted index if required.
- *
- * @param {String} token 
- * @param {Object} tokenInfo format: { ref: 1, tf: 2}
- * @param {Object} root An optional node at which to start looking for the
- * correct place to enter the doc, by default the root of this elasticlunr.InvertedIndex
- * is used.
- * @memberOf InvertedIndex
+ * @param {String[]} arr - A sorted array of strings to create the set from.
+ * @returns {lunr.TokenSet}
+ * @throws Will throw an error if the input array is not sorted.
  */
-elasticlunr.InvertedIndex.prototype.addToken = function (token, tokenInfo, root) {
-  var root = root || this.root,
-      idx = 0;
+lunr.TokenSet.fromArray = function (arr) {
+  var builder = new lunr.TokenSet.Builder
 
-  while (idx <= token.length - 1) {
-    var key = token[idx];
-
-    if (!(key in root)) root[key] = {docs: {}, df: 0};
-    idx += 1;
-    root = root[key];
+  for (var i = 0, len = arr.length; i < len; i++) {
+    builder.insert(arr[i])
   }
 
-  var docRef = tokenInfo.ref;
-  if (!root.docs[docRef]) {
-    // if this doc not exist, then add this doc
-    root.docs[docRef] = {tf: tokenInfo.tf};
-    root.df += 1;
+  builder.finish()
+  return builder.root
+}
+
+/**
+ * Creates a token set from a query clause.
+ *
+ * @private
+ * @param {Object} clause - A single clause from lunr.Query.
+ * @param {string} clause.term - The query clause term.
+ * @param {number} [clause.editDistance] - The optional edit distance for the term.
+ * @returns {lunr.TokenSet}
+ */
+lunr.TokenSet.fromClause = function (clause) {
+  if ('editDistance' in clause) {
+    return lunr.TokenSet.fromFuzzyString(clause.term, clause.editDistance)
   } else {
-    // if this doc already exist, then update tokenInfo
-    root.docs[docRef] = {tf: tokenInfo.tf};
+    return lunr.TokenSet.fromString(clause.term)
   }
-};
+}
 
 /**
- * Checks whether a token is in this elasticlunr.InvertedIndex.
- * 
+ * Creates a token set representing a single string with a specified
+ * edit distance.
  *
- * @param {String} token The token to be checked
- * @return {Boolean}
- * @memberOf InvertedIndex
+ * Insertions, deletions, substitutions and transpositions are each
+ * treated as an edit distance of 1.
+ *
+ * Increasing the allowed edit distance will have a dramatic impact
+ * on the performance of both creating and intersecting these TokenSets.
+ * It is advised to keep the edit distance less than 3.
+ *
+ * @param {string} str - The string to create the token set from.
+ * @param {number} editDistance - The allowed edit distance to match.
+ * @returns {lunr.Vector}
  */
-elasticlunr.InvertedIndex.prototype.hasToken = function (token) {
-  if (!token) return false;
+lunr.TokenSet.fromFuzzyString = function (str, editDistance) {
+  var root = new lunr.TokenSet
 
-  var node = this.root;
+  var stack = [{
+    node: root,
+    editsRemaining: editDistance,
+    str: str
+  }]
 
-  for (var i = 0; i < token.length; i++) {
-    if (!node[token[i]]) return false;
-    node = node[token[i]];
-  }
+  while (stack.length) {
+    var frame = stack.pop()
 
-  return true;
-};
+    // no edit
+    if (frame.str.length > 0) {
+      var char = frame.str.charAt(0),
+          noEditNode
 
-/**
- * Retrieve a node from the inverted index for a given token.
- * If token not found in this InvertedIndex, return null.
- * 
- *
- * @param {String} token The token to get the node for.
- * @return {Object}
- * @see InvertedIndex.prototype.get
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.getNode = function (token) {
-  if (!token) return null;
-
-  var node = this.root;
-
-  for (var i = 0; i < token.length; i++) {
-    if (!node[token[i]]) return null;
-    node = node[token[i]];
-  }
-
-  return node;
-};
-
-/**
- * Retrieve the documents of a given token.
- * If token not found, return {}.
- *
- *
- * @param {String} token The token to get the documents for.
- * @return {Object}
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.getDocs = function (token) {
-  var node = this.getNode(token);
-  if (node == null) {
-    return {};
-  }
-
-  return node.docs;
-};
-
-/**
- * Retrieve term frequency of given token in given docRef.
- * If token or docRef not found, return 0.
- *
- *
- * @param {String} token The token to get the documents for.
- * @param {String|Integer} docRef
- * @return {Integer}
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.getTermFrequency = function (token, docRef) {
-  var node = this.getNode(token);
-
-  if (node == null) {
-    return 0;
-  }
-
-  if (!(docRef in node.docs)) {
-    return 0;
-  }
-
-  return node.docs[docRef].tf;
-};
-
-/**
- * Retrieve the document frequency of given token.
- * If token not found, return 0.
- *
- *
- * @param {String} token The token to get the documents for.
- * @return {Object}
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.getDocFreq = function (token) {
-  var node = this.getNode(token);
-
-  if (node == null) {
-    return 0;
-  }
-
-  return node.df;
-};
-
-/**
- * Remove the document identified by document's ref from the token in the inverted index.
- *
- *
- * @param {String} token Remove the document from which token.
- * @param {String} ref The ref of the document to remove from given token.
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.removeToken = function (token, ref) {
-  if (!token) return;
-  var node = this.getNode(token);
-
-  if (node == null) return;
-
-  if (ref in node.docs) {
-    delete node.docs[ref];
-    node.df -= 1;
-  }
-};
-
-/**
- * Find all the possible suffixes of given token using tokens currently in the inverted index.
- * If token not found, return empty Array.
- *
- * @param {String} token The token to expand.
- * @return {Array}
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.expandToken = function (token, memo, root) {
-  if (token == null || token == '') return [];
-  var memo = memo || [];
-
-  if (root == void 0) {
-    root = this.getNode(token);
-    if (root == null) return memo;
-  }
-
-  if (root.df > 0) memo.push(token);
-
-  for (var key in root) {
-    if (key === 'docs') continue;
-    if (key === 'df') continue;
-    this.expandToken(token + key, memo, root[key]);
-  }
-
-  return memo;
-};
-
-/**
- * Returns a representation of the inverted index ready for serialisation.
- *
- * @return {Object}
- * @memberOf InvertedIndex
- */
-elasticlunr.InvertedIndex.prototype.toJSON = function () {
-  return {
-    root: this.root
-  };
-};
-
-/*!
- * elasticlunr.Configuration
- * Copyright (C) 2017 Wei Song
- */
- 
- /** 
-  * elasticlunr.Configuration is used to analyze the user search configuration.
-  * 
-  * By elasticlunr.Configuration user could set query-time boosting, boolean model in each field.
-  * 
-  * Currently configuration supports:
-  * 1. query-time boosting, user could set how to boost each field.
-  * 2. boolean model chosing, user could choose which boolean model to use for each field.
-  * 3. token expandation, user could set token expand to True to improve Recall. Default is False.
-  * 
-  * Query time boosting must be configured by field category, "boolean" model could be configured 
-  * by both field category or globally as the following example. Field configuration for "boolean"
-  * will overwrite global configuration.
-  * Token expand could be configured both by field category or golbally. Local field configuration will
-  * overwrite global configuration.
-  * 
-  * configuration example:
-  * {
-  *   fields:{ 
-  *     title: {boost: 2},
-  *     body: {boost: 1}
-  *   },
-  *   bool: "OR"
-  * }
-  * 
-  * "bool" field configuation overwrite global configuation example:
-  * {
-  *   fields:{ 
-  *     title: {boost: 2, bool: "AND"},
-  *     body: {boost: 1}
-  *   },
-  *   bool: "OR"
-  * }
-  * 
-  * "expand" example:
-  * {
-  *   fields:{ 
-  *     title: {boost: 2, bool: "AND"},
-  *     body: {boost: 1}
-  *   },
-  *   bool: "OR",
-  *   expand: true
-  * }
-  * 
-  * "expand" example for field category:
-  * {
-  *   fields:{ 
-  *     title: {boost: 2, bool: "AND", expand: true},
-  *     body: {boost: 1}
-  *   },
-  *   bool: "OR"
-  * }
-  * 
-  * setting the boost to 0 ignores the field (this will only search the title):
-  * {
-  *   fields:{
-  *     title: {boost: 1},
-  *     body: {boost: 0}
-  *   }
-  * }
-  *
-  * then, user could search with configuration to do query-time boosting.
-  * idx.search('oracle database', {fields: {title: {boost: 2}, body: {boost: 1}}});
-  * 
-  * 
-  * @constructor
-  * 
-  * @param {String} config user configuration
-  * @param {Array} fields fields of index instance
-  * @module
-  */
-elasticlunr.Configuration = function (config, fields) {
-  var config = config || '';
-
-  if (fields == undefined || fields == null) {
-    throw new Error('fields should not be null');
-  }
-
-  this.config = {};
-
-  var userConfig;
-  try {
-    userConfig = JSON.parse(config);
-    this.buildUserConfig(userConfig, fields);
-  } catch (error) {
-    elasticlunr.utils.warn('user configuration parse failed, will use default configuration');
-    this.buildDefaultConfig(fields);
-  }
-};
-
-/**
- * Build default search configuration.
- * 
- * @param {Array} fields fields of index instance
- */
-elasticlunr.Configuration.prototype.buildDefaultConfig = function (fields) {
-  this.reset();
-  fields.forEach(function (field) {
-    this.config[field] = {
-      boost: 1,
-      bool: "OR",
-      expand: false
-    };
-  }, this);
-};
-
-/**
- * Build user configuration.
- * 
- * @param {JSON} config User JSON configuratoin
- * @param {Array} fields fields of index instance
- */
-elasticlunr.Configuration.prototype.buildUserConfig = function (config, fields) {
-  var global_bool = "OR";
-  var global_expand = false;
-
-  this.reset();
-  if ('bool' in config) {
-    global_bool = config['bool'] || global_bool;
-  }
-
-  if ('expand' in config) {
-    global_expand = config['expand'] || global_expand;
-  }
-
-  if ('fields' in config) {
-    for (var field in config['fields']) {
-      if (fields.indexOf(field) > -1) {
-        var field_config = config['fields'][field];
-        var field_expand = global_expand;
-        if (field_config.expand != undefined) {
-          field_expand = field_config.expand;
-        }
-
-        this.config[field] = {
-          boost: (field_config.boost || field_config.boost === 0) ? field_config.boost : 1,
-          bool: field_config.bool || global_bool,
-          expand: field_expand
-        };
+      if (char in frame.node.edges) {
+        noEditNode = frame.node.edges[char]
       } else {
-        elasticlunr.utils.warn('field name in user configuration not found in index instance fields');
+        noEditNode = new lunr.TokenSet
+        frame.node.edges[char] = noEditNode
+      }
+
+      if (frame.str.length == 1) {
+        noEditNode.final = true
+      }
+
+      stack.push({
+        node: noEditNode,
+        editsRemaining: frame.editsRemaining,
+        str: frame.str.slice(1)
+      })
+    }
+
+    if (frame.editsRemaining == 0) {
+      continue
+    }
+
+    // insertion
+    if ("*" in frame.node.edges) {
+      var insertionNode = frame.node.edges["*"]
+    } else {
+      var insertionNode = new lunr.TokenSet
+      frame.node.edges["*"] = insertionNode
+    }
+
+    if (frame.str.length == 0) {
+      insertionNode.final = true
+    }
+
+    stack.push({
+      node: insertionNode,
+      editsRemaining: frame.editsRemaining - 1,
+      str: frame.str
+    })
+
+    // deletion
+    // can only do a deletion if we have enough edits remaining
+    // and if there are characters left to delete in the string
+    if (frame.str.length > 1) {
+      stack.push({
+        node: frame.node,
+        editsRemaining: frame.editsRemaining - 1,
+        str: frame.str.slice(1)
+      })
+    }
+
+    // deletion
+    // just removing the last character from the str
+    if (frame.str.length == 1) {
+      frame.node.final = true
+    }
+
+    // substitution
+    // can only do a substitution if we have enough edits remaining
+    // and if there are characters left to substitute
+    if (frame.str.length >= 1) {
+      if ("*" in frame.node.edges) {
+        var substitutionNode = frame.node.edges["*"]
+      } else {
+        var substitutionNode = new lunr.TokenSet
+        frame.node.edges["*"] = substitutionNode
+      }
+
+      if (frame.str.length == 1) {
+        substitutionNode.final = true
+      }
+
+      stack.push({
+        node: substitutionNode,
+        editsRemaining: frame.editsRemaining - 1,
+        str: frame.str.slice(1)
+      })
+    }
+
+    // transposition
+    // can only do a transposition if there are edits remaining
+    // and there are enough characters to transpose
+    if (frame.str.length > 1) {
+      var charA = frame.str.charAt(0),
+          charB = frame.str.charAt(1),
+          transposeNode
+
+      if (charB in frame.node.edges) {
+        transposeNode = frame.node.edges[charB]
+      } else {
+        transposeNode = new lunr.TokenSet
+        frame.node.edges[charB] = transposeNode
+      }
+
+      if (frame.str.length == 1) {
+        transposeNode.final = true
+      }
+
+      stack.push({
+        node: transposeNode,
+        editsRemaining: frame.editsRemaining - 1,
+        str: charA + frame.str.slice(2)
+      })
+    }
+  }
+
+  return root
+}
+
+/**
+ * Creates a TokenSet from a string.
+ *
+ * The string may contain one or more wildcard characters (*)
+ * that will allow wildcard matching when intersecting with
+ * another TokenSet.
+ *
+ * @param {string} str - The string to create a TokenSet from.
+ * @returns {lunr.TokenSet}
+ */
+lunr.TokenSet.fromString = function (str) {
+  var node = new lunr.TokenSet,
+      root = node
+
+  /*
+   * Iterates through all characters within the passed string
+   * appending a node for each character.
+   *
+   * When a wildcard character is found then a self
+   * referencing edge is introduced to continually match
+   * any number of any characters.
+   */
+  for (var i = 0, len = str.length; i < len; i++) {
+    var char = str[i],
+        final = (i == len - 1)
+
+    if (char == "*") {
+      node.edges[char] = node
+      node.final = final
+
+    } else {
+      var next = new lunr.TokenSet
+      next.final = final
+
+      node.edges[char] = next
+      node = next
+    }
+  }
+
+  return root
+}
+
+/**
+ * Converts this TokenSet into an array of strings
+ * contained within the TokenSet.
+ *
+ * This is not intended to be used on a TokenSet that
+ * contains wildcards, in these cases the results are
+ * undefined and are likely to cause an infinite loop.
+ *
+ * @returns {string[]}
+ */
+lunr.TokenSet.prototype.toArray = function () {
+  var words = []
+
+  var stack = [{
+    prefix: "",
+    node: this
+  }]
+
+  while (stack.length) {
+    var frame = stack.pop(),
+        edges = Object.keys(frame.node.edges),
+        len = edges.length
+
+    if (frame.node.final) {
+      /* In Safari, at this point the prefix is sometimes corrupted, see:
+       * https://github.com/olivernn/lunr.js/issues/279 Calling any
+       * String.prototype method forces Safari to "cast" this string to what
+       * it's supposed to be, fixing the bug. */
+      frame.prefix.charAt(0)
+      words.push(frame.prefix)
+    }
+
+    for (var i = 0; i < len; i++) {
+      var edge = edges[i]
+
+      stack.push({
+        prefix: frame.prefix.concat(edge),
+        node: frame.node.edges[edge]
+      })
+    }
+  }
+
+  return words
+}
+
+/**
+ * Generates a string representation of a TokenSet.
+ *
+ * This is intended to allow TokenSets to be used as keys
+ * in objects, largely to aid the construction and minimisation
+ * of a TokenSet. As such it is not designed to be a human
+ * friendly representation of the TokenSet.
+ *
+ * @returns {string}
+ */
+lunr.TokenSet.prototype.toString = function () {
+  // NOTE: Using Object.keys here as this.edges is very likely
+  // to enter 'hash-mode' with many keys being added
+  //
+  // avoiding a for-in loop here as it leads to the function
+  // being de-optimised (at least in V8). From some simple
+  // benchmarks the performance is comparable, but allowing
+  // V8 to optimize may mean easy performance wins in the future.
+
+  if (this._str) {
+    return this._str
+  }
+
+  var str = this.final ? '1' : '0',
+      labels = Object.keys(this.edges).sort(),
+      len = labels.length
+
+  for (var i = 0; i < len; i++) {
+    var label = labels[i],
+        node = this.edges[label]
+
+    str = str + label + node.id
+  }
+
+  return str
+}
+
+/**
+ * Returns a new TokenSet that is the intersection of
+ * this TokenSet and the passed TokenSet.
+ *
+ * This intersection will take into account any wildcards
+ * contained within the TokenSet.
+ *
+ * @param {lunr.TokenSet} b - An other TokenSet to intersect with.
+ * @returns {lunr.TokenSet}
+ */
+lunr.TokenSet.prototype.intersect = function (b) {
+  var output = new lunr.TokenSet,
+      frame = undefined
+
+  var stack = [{
+    qNode: b,
+    output: output,
+    node: this
+  }]
+
+  while (stack.length) {
+    frame = stack.pop()
+
+    // NOTE: As with the #toString method, we are using
+    // Object.keys and a for loop instead of a for-in loop
+    // as both of these objects enter 'hash' mode, causing
+    // the function to be de-optimised in V8
+    var qEdges = Object.keys(frame.qNode.edges),
+        qLen = qEdges.length,
+        nEdges = Object.keys(frame.node.edges),
+        nLen = nEdges.length
+
+    for (var q = 0; q < qLen; q++) {
+      var qEdge = qEdges[q]
+
+      for (var n = 0; n < nLen; n++) {
+        var nEdge = nEdges[n]
+
+        if (nEdge == qEdge || qEdge == '*') {
+          var node = frame.node.edges[nEdge],
+              qNode = frame.qNode.edges[qEdge],
+              final = node.final && qNode.final,
+              next = undefined
+
+          if (nEdge in frame.output.edges) {
+            // an edge already exists for this character
+            // no need to create a new node, just set the finality
+            // bit unless this node is already final
+            next = frame.output.edges[nEdge]
+            next.final = next.final || final
+
+          } else {
+            // no edge exists yet, must create one
+            // set the finality bit and insert it
+            // into the output
+            next = new lunr.TokenSet
+            next.final = final
+            frame.output.edges[nEdge] = next
+          }
+
+          stack.push({
+            qNode: qNode,
+            output: next,
+            node: node
+          })
+        }
       }
     }
-  } else {
-    this.addAllFields2UserConfig(global_bool, global_expand, fields);
   }
-};
 
-/**
- * Add all fields to user search configuration.
- * 
- * @param {String} bool Boolean model
- * @param {String} expand Expand model
- * @param {Array} fields fields of index instance
- */
-elasticlunr.Configuration.prototype.addAllFields2UserConfig = function (bool, expand, fields) {
-  fields.forEach(function (field) {
-    this.config[field] = {
-      boost: 1,
-      bool: bool,
-      expand: expand
-    };
-  }, this);
-};
+  return output
+}
+lunr.TokenSet.Builder = function () {
+  this.previousWord = ""
+  this.root = new lunr.TokenSet
+  this.uncheckedNodes = []
+  this.minimizedNodes = {}
+}
 
-/**
- * get current user configuration
- */
-elasticlunr.Configuration.prototype.get = function () {
-  return this.config;
-};
+lunr.TokenSet.Builder.prototype.insert = function (word) {
+  var node,
+      commonPrefix = 0
 
-/**
- * reset user search configuration.
- */
-elasticlunr.Configuration.prototype.reset = function () {
-  this.config = {};
-};
-/**
- * sorted_set.js is added only to make elasticlunr.js compatible with lunr-languages.
- * if elasticlunr.js support different languages by default, this will make elasticlunr.js
- * much bigger that not good for browser usage.
- *
- */
+  if (word < this.previousWord) {
+    throw new Error ("Out of order word insertion")
+  }
 
+  for (var i = 0; i < word.length && i < this.previousWord.length; i++) {
+    if (word[i] != this.previousWord[i]) break
+    commonPrefix++
+  }
 
+  this.minimize(commonPrefix)
+
+  if (this.uncheckedNodes.length == 0) {
+    node = this.root
+  } else {
+    node = this.uncheckedNodes[this.uncheckedNodes.length - 1].child
+  }
+
+  for (var i = commonPrefix; i < word.length; i++) {
+    var nextNode = new lunr.TokenSet,
+        char = word[i]
+
+    node.edges[char] = nextNode
+
+    this.uncheckedNodes.push({
+      parent: node,
+      char: char,
+      child: nextNode
+    })
+
+    node = nextNode
+  }
+
+  node.final = true
+  this.previousWord = word
+}
+
+lunr.TokenSet.Builder.prototype.finish = function () {
+  this.minimize(0)
+}
+
+lunr.TokenSet.Builder.prototype.minimize = function (downTo) {
+  for (var i = this.uncheckedNodes.length - 1; i >= downTo; i--) {
+    var node = this.uncheckedNodes[i],
+        childKey = node.child.toString()
+
+    if (childKey in this.minimizedNodes) {
+      node.parent.edges[node.char] = this.minimizedNodes[childKey]
+    } else {
+      // Cache the key for this node since
+      // we know it can't change anymore
+      node.child._str = childKey
+
+      this.minimizedNodes[childKey] = node.child
+    }
+
+    this.uncheckedNodes.pop()
+  }
+}
 /*!
- * lunr.SortedSet
- * Copyright (C) 2017 Oliver Nightingale
+ * lunr.Index
+ * Copyright (C) 2020 Oliver Nightingale
  */
 
 /**
- * lunr.SortedSets are used to maintain an array of uniq values in a sorted
- * order.
+ * An index contains the built index of all documents and provides a query interface
+ * to the index.
+ *
+ * Usually instances of lunr.Index will not be created using this constructor, instead
+ * lunr.Builder should be used to construct new indexes, or lunr.Index.load should be
+ * used to load previously built and serialized indexes.
  *
  * @constructor
+ * @param {Object} attrs - The attributes of the built search index.
+ * @param {Object} attrs.invertedIndex - An index of term/field to document reference.
+ * @param {Object<string, lunr.Vector>} attrs.fieldVectors - Field vectors
+ * @param {lunr.TokenSet} attrs.tokenSet - An set of all corpus tokens.
+ * @param {string[]} attrs.fields - The names of indexed document fields.
+ * @param {lunr.Pipeline} attrs.pipeline - The pipeline to use for search terms.
  */
-lunr.SortedSet = function () {
-  this.length = 0
-  this.elements = []
+lunr.Index = function (attrs) {
+  this.invertedIndex = attrs.invertedIndex
+  this.fieldVectors = attrs.fieldVectors
+  this.tokenSet = attrs.tokenSet
+  this.fields = attrs.fields
+  this.pipeline = attrs.pipeline
 }
 
 /**
- * Loads a previously serialised sorted set.
- *
- * @param {Array} serialisedData The serialised set to load.
- * @returns {lunr.SortedSet}
- * @memberOf SortedSet
+ * A result contains details of a document matching a search query.
+ * @typedef {Object} lunr.Index~Result
+ * @property {string} ref - The reference of the document this result represents.
+ * @property {number} score - A number between 0 and 1 representing how similar this document is to the query.
+ * @property {lunr.MatchData} matchData - Contains metadata about this match including which term(s) caused the match.
  */
-lunr.SortedSet.load = function (serialisedData) {
-  var set = new this
 
-  set.elements = serialisedData
-  set.length = serialisedData.length
+/**
+ * Although lunr provides the ability to create queries using lunr.Query, it also provides a simple
+ * query language which itself is parsed into an instance of lunr.Query.
+ *
+ * For programmatically building queries it is advised to directly use lunr.Query, the query language
+ * is best used for human entered text rather than program generated text.
+ *
+ * At its simplest queries can just be a single term, e.g. `hello`, multiple terms are also supported
+ * and will be combined with OR, e.g `hello world` will match documents that contain either 'hello'
+ * or 'world', though those that contain both will rank higher in the results.
+ *
+ * Wildcards can be included in terms to match one or more unspecified characters, these wildcards can
+ * be inserted anywhere within the term, and more than one wildcard can exist in a single term. Adding
+ * wildcards will increase the number of documents that will be found but can also have a negative
+ * impact on query performance, especially with wildcards at the beginning of a term.
+ *
+ * Terms can be restricted to specific fields, e.g. `title:hello`, only documents with the term
+ * hello in the title field will match this query. Using a field not present in the index will lead
+ * to an error being thrown.
+ *
+ * Modifiers can also be added to terms, lunr supports edit distance and boost modifiers on terms. A term
+ * boost will make documents matching that term score higher, e.g. `foo^5`. Edit distance is also supported
+ * to provide fuzzy matching, e.g. 'hello~2' will match documents with hello with an edit distance of 2.
+ * Avoid large values for edit distance to improve query performance.
+ *
+ * Each term also supports a presence modifier. By default a term's presence in document is optional, however
+ * this can be changed to either required or prohibited. For a term's presence to be required in a document the
+ * term should be prefixed with a '+', e.g. `+foo bar` is a search for documents that must contain 'foo' and
+ * optionally contain 'bar'. Conversely a leading '-' sets the terms presence to prohibited, i.e. it must not
+ * appear in a document, e.g. `-foo bar` is a search for documents that do not contain 'foo' but may contain 'bar'.
+ *
+ * To escape special characters the backslash character '\' can be used, this allows searches to include
+ * characters that would normally be considered modifiers, e.g. `foo\~2` will search for a term "foo~2" instead
+ * of attempting to apply a boost of 2 to the search term "foo".
+ *
+ * @typedef {string} lunr.Index~QueryString
+ * @example <caption>Simple single term query</caption>
+ * hello
+ * @example <caption>Multiple term query</caption>
+ * hello world
+ * @example <caption>term scoped to a field</caption>
+ * title:hello
+ * @example <caption>term with a boost of 10</caption>
+ * hello^10
+ * @example <caption>term with an edit distance of 2</caption>
+ * hello~2
+ * @example <caption>terms with presence modifiers</caption>
+ * -foo +bar baz
+ */
 
-  return set
+/**
+ * Performs a search against the index using lunr query syntax.
+ *
+ * Results will be returned sorted by their score, the most relevant results
+ * will be returned first.  For details on how the score is calculated, please see
+ * the {@link https://lunrjs.com/guides/searching.html#scoring|guide}.
+ *
+ * For more programmatic querying use lunr.Index#query.
+ *
+ * @param {lunr.Index~QueryString} queryString - A string containing a lunr query.
+ * @throws {lunr.QueryParseError} If the passed query string cannot be parsed.
+ * @returns {lunr.Index~Result[]}
+ */
+lunr.Index.prototype.search = function (queryString) {
+  return this.query(function (query) {
+    var parser = new lunr.QueryParser(queryString, query)
+    parser.parse()
+  })
 }
 
 /**
- * Inserts new items into the set in the correct position to maintain the
- * order.
+ * A query builder callback provides a query object to be used to express
+ * the query to perform on the index.
  *
- * @param {Object} The objects to add to this set.
- * @memberOf SortedSet
+ * @callback lunr.Index~queryBuilder
+ * @param {lunr.Query} query - The query object to build up.
+ * @this lunr.Query
  */
-lunr.SortedSet.prototype.add = function () {
-  var i, element
 
-  for (i = 0; i < arguments.length; i++) {
-    element = arguments[i]
-    if (~this.indexOf(element)) continue
-    this.elements.splice(this.locationFor(element), 0, element)
+/**
+ * Performs a query against the index using the yielded lunr.Query object.
+ *
+ * If performing programmatic queries against the index, this method is preferred
+ * over lunr.Index#search so as to avoid the additional query parsing overhead.
+ *
+ * A query object is yielded to the supplied function which should be used to
+ * express the query to be run against the index.
+ *
+ * Note that although this function takes a callback parameter it is _not_ an
+ * asynchronous operation, the callback is just yielded a query object to be
+ * customized.
+ *
+ * @param {lunr.Index~queryBuilder} fn - A function that is used to build the query.
+ * @returns {lunr.Index~Result[]}
+ */
+lunr.Index.prototype.query = function (fn) {
+  // for each query clause
+  // * process terms
+  // * expand terms from token set
+  // * find matching documents and metadata
+  // * get document vectors
+  // * score documents
+
+  var query = new lunr.Query(this.fields),
+      matchingFields = Object.create(null),
+      queryVectors = Object.create(null),
+      termFieldCache = Object.create(null),
+      requiredMatches = Object.create(null),
+      prohibitedMatches = Object.create(null)
+
+  /*
+   * To support field level boosts a query vector is created per
+   * field. An empty vector is eagerly created to support negated
+   * queries.
+   */
+  for (var i = 0; i < this.fields.length; i++) {
+    queryVectors[this.fields[i]] = new lunr.Vector
   }
 
-  this.length = this.elements.length
-}
+  fn.call(query, query)
 
-/**
- * Converts this sorted set into an array.
- *
- * @returns {Array}
- * @memberOf SortedSet
- */
-lunr.SortedSet.prototype.toArray = function () {
-  return this.elements.slice()
-}
+  for (var i = 0; i < query.clauses.length; i++) {
+    /*
+     * Unless the pipeline has been disabled for this term, which is
+     * the case for terms with wildcards, we need to pass the clause
+     * term through the search pipeline. A pipeline returns an array
+     * of processed terms. Pipeline functions may expand the passed
+     * term, which means we may end up performing multiple index lookups
+     * for a single query term.
+     */
+    var clause = query.clauses[i],
+        terms = null,
+        clauseMatches = lunr.Set.empty
 
-/**
- * Creates a new array with the results of calling a provided function on every
- * element in this sorted set.
- *
- * Delegates to Array.prototype.map and has the same signature.
- *
- * @param {Function} fn The function that is called on each element of the
- * set.
- * @param {Object} ctx An optional object that can be used as the context
- * for the function fn.
- * @returns {Array}
- * @memberOf SortedSet
- */
-lunr.SortedSet.prototype.map = function (fn, ctx) {
-  return this.elements.map(fn, ctx)
-}
+    if (clause.usePipeline) {
+      terms = this.pipeline.runString(clause.term, {
+        fields: clause.fields
+      })
+    } else {
+      terms = [clause.term]
+    }
 
-/**
- * Executes a provided function once per sorted set element.
- *
- * Delegates to Array.prototype.forEach and has the same signature.
- *
- * @param {Function} fn The function that is called on each element of the
- * set.
- * @param {Object} ctx An optional object that can be used as the context
- * @memberOf SortedSet
- * for the function fn.
- */
-lunr.SortedSet.prototype.forEach = function (fn, ctx) {
-  return this.elements.forEach(fn, ctx)
-}
+    for (var m = 0; m < terms.length; m++) {
+      var term = terms[m]
 
-/**
- * Returns the index at which a given element can be found in the
- * sorted set, or -1 if it is not present.
- *
- * @param {Object} elem The object to locate in the sorted set.
- * @returns {Number}
- * @memberOf SortedSet
- */
-lunr.SortedSet.prototype.indexOf = function (elem) {
-  var start = 0,
-      end = this.elements.length,
-      sectionLength = end - start,
-      pivot = start + Math.floor(sectionLength / 2),
-      pivotElem = this.elements[pivot]
+      /*
+       * Each term returned from the pipeline needs to use the same query
+       * clause object, e.g. the same boost and or edit distance. The
+       * simplest way to do this is to re-use the clause object but mutate
+       * its term property.
+       */
+      clause.term = term
 
-  while (sectionLength > 1) {
-    if (pivotElem === elem) return pivot
+      /*
+       * From the term in the clause we create a token set which will then
+       * be used to intersect the indexes token set to get a list of terms
+       * to lookup in the inverted index
+       */
+      var termTokenSet = lunr.TokenSet.fromClause(clause),
+          expandedTerms = this.tokenSet.intersect(termTokenSet).toArray()
 
-    if (pivotElem < elem) start = pivot
-    if (pivotElem > elem) end = pivot
+      /*
+       * If a term marked as required does not exist in the tokenSet it is
+       * impossible for the search to return any matches. We set all the field
+       * scoped required matches set to empty and stop examining any further
+       * clauses.
+       */
+      if (expandedTerms.length === 0 && clause.presence === lunr.Query.presence.REQUIRED) {
+        for (var k = 0; k < clause.fields.length; k++) {
+          var field = clause.fields[k]
+          requiredMatches[field] = lunr.Set.empty
+        }
 
-    sectionLength = end - start
-    pivot = start + Math.floor(sectionLength / 2)
-    pivotElem = this.elements[pivot]
+        break
+      }
+
+      for (var j = 0; j < expandedTerms.length; j++) {
+        /*
+         * For each term get the posting and termIndex, this is required for
+         * building the query vector.
+         */
+        var expandedTerm = expandedTerms[j],
+            posting = this.invertedIndex[expandedTerm],
+            termIndex = posting._index
+
+        for (var k = 0; k < clause.fields.length; k++) {
+          /*
+           * For each field that this query term is scoped by (by default
+           * all fields are in scope) we need to get all the document refs
+           * that have this term in that field.
+           *
+           * The posting is the entry in the invertedIndex for the matching
+           * term from above.
+           */
+          var field = clause.fields[k],
+              fieldPosting = posting[field],
+              matchingDocumentRefs = Object.keys(fieldPosting),
+              termField = expandedTerm + "/" + field,
+              matchingDocumentsSet = new lunr.Set(matchingDocumentRefs)
+
+          /*
+           * if the presence of this term is required ensure that the matching
+           * documents are added to the set of required matches for this clause.
+           *
+           */
+          if (clause.presence == lunr.Query.presence.REQUIRED) {
+            clauseMatches = clauseMatches.union(matchingDocumentsSet)
+
+            if (requiredMatches[field] === undefined) {
+              requiredMatches[field] = lunr.Set.complete
+            }
+          }
+
+          /*
+           * if the presence of this term is prohibited ensure that the matching
+           * documents are added to the set of prohibited matches for this field,
+           * creating that set if it does not yet exist.
+           */
+          if (clause.presence == lunr.Query.presence.PROHIBITED) {
+            if (prohibitedMatches[field] === undefined) {
+              prohibitedMatches[field] = lunr.Set.empty
+            }
+
+            prohibitedMatches[field] = prohibitedMatches[field].union(matchingDocumentsSet)
+
+            /*
+             * Prohibited matches should not be part of the query vector used for
+             * similarity scoring and no metadata should be extracted so we continue
+             * to the next field
+             */
+            continue
+          }
+
+          /*
+           * The query field vector is populated using the termIndex found for
+           * the term and a unit value with the appropriate boost applied.
+           * Using upsert because there could already be an entry in the vector
+           * for the term we are working with. In that case we just add the scores
+           * together.
+           */
+          queryVectors[field].upsert(termIndex, clause.boost, function (a, b) { return a + b })
+
+          /**
+           * If we've already seen this term, field combo then we've already collected
+           * the matching documents and metadata, no need to go through all that again
+           */
+          if (termFieldCache[termField]) {
+            continue
+          }
+
+          for (var l = 0; l < matchingDocumentRefs.length; l++) {
+            /*
+             * All metadata for this term/field/document triple
+             * are then extracted and collected into an instance
+             * of lunr.MatchData ready to be returned in the query
+             * results
+             */
+            var matchingDocumentRef = matchingDocumentRefs[l],
+                matchingFieldRef = new lunr.FieldRef (matchingDocumentRef, field),
+                metadata = fieldPosting[matchingDocumentRef],
+                fieldMatch
+
+            if ((fieldMatch = matchingFields[matchingFieldRef]) === undefined) {
+              matchingFields[matchingFieldRef] = new lunr.MatchData (expandedTerm, field, metadata)
+            } else {
+              fieldMatch.add(expandedTerm, field, metadata)
+            }
+
+          }
+
+          termFieldCache[termField] = true
+        }
+      }
+    }
+
+    /**
+     * If the presence was required we need to update the requiredMatches field sets.
+     * We do this after all fields for the term have collected their matches because
+     * the clause terms presence is required in _any_ of the fields not _all_ of the
+     * fields.
+     */
+    if (clause.presence === lunr.Query.presence.REQUIRED) {
+      for (var k = 0; k < clause.fields.length; k++) {
+        var field = clause.fields[k]
+        requiredMatches[field] = requiredMatches[field].intersect(clauseMatches)
+      }
+    }
   }
 
-  if (pivotElem === elem) return pivot
+  /**
+   * Need to combine the field scoped required and prohibited
+   * matching documents into a global set of required and prohibited
+   * matches
+   */
+  var allRequiredMatches = lunr.Set.complete,
+      allProhibitedMatches = lunr.Set.empty
 
-  return -1
-}
+  for (var i = 0; i < this.fields.length; i++) {
+    var field = this.fields[i]
 
-/**
- * Returns the position within the sorted set that an element should be
- * inserted at to maintain the current order of the set.
- *
- * This function assumes that the element to search for does not already exist
- * in the sorted set.
- *
- * @param {Object} elem The elem to find the position for in the set
- * @returns {Number}
- * @memberOf SortedSet
- */
-lunr.SortedSet.prototype.locationFor = function (elem) {
-  var start = 0,
-      end = this.elements.length,
-      sectionLength = end - start,
-      pivot = start + Math.floor(sectionLength / 2),
-      pivotElem = this.elements[pivot]
+    if (requiredMatches[field]) {
+      allRequiredMatches = allRequiredMatches.intersect(requiredMatches[field])
+    }
 
-  while (sectionLength > 1) {
-    if (pivotElem < elem) start = pivot
-    if (pivotElem > elem) end = pivot
-
-    sectionLength = end - start
-    pivot = start + Math.floor(sectionLength / 2)
-    pivotElem = this.elements[pivot]
+    if (prohibitedMatches[field]) {
+      allProhibitedMatches = allProhibitedMatches.union(prohibitedMatches[field])
+    }
   }
 
-  if (pivotElem > elem) return pivot
-  if (pivotElem < elem) return pivot + 1
-}
+  var matchingFieldRefs = Object.keys(matchingFields),
+      results = [],
+      matches = Object.create(null)
 
-/**
- * Creates a new lunr.SortedSet that contains the elements in the intersection
- * of this set and the passed set.
- *
- * @param {lunr.SortedSet} otherSet The set to intersect with this set.
- * @returns {lunr.SortedSet}
- * @memberOf SortedSet
- */
-lunr.SortedSet.prototype.intersect = function (otherSet) {
-  var intersectSet = new lunr.SortedSet,
-      i = 0, j = 0,
-      a_len = this.length, b_len = otherSet.length,
-      a = this.elements, b = otherSet.elements
+  /*
+   * If the query is negated (contains only prohibited terms)
+   * we need to get _all_ fieldRefs currently existing in the
+   * index. This is only done when we know that the query is
+   * entirely prohibited terms to avoid any cost of getting all
+   * fieldRefs unnecessarily.
+   *
+   * Additionally, blank MatchData must be created to correctly
+   * populate the results.
+   */
+  if (query.isNegated()) {
+    matchingFieldRefs = Object.keys(this.fieldVectors)
 
-  while (true) {
-    if (i > a_len - 1 || j > b_len - 1) break
+    for (var i = 0; i < matchingFieldRefs.length; i++) {
+      var matchingFieldRef = matchingFieldRefs[i]
+      var fieldRef = lunr.FieldRef.fromString(matchingFieldRef)
+      matchingFields[matchingFieldRef] = new lunr.MatchData
+    }
+  }
 
-    if (a[i] === b[j]) {
-      intersectSet.add(a[i])
-      i++, j++
+  for (var i = 0; i < matchingFieldRefs.length; i++) {
+    /*
+     * Currently we have document fields that match the query, but we
+     * need to return documents. The matchData and scores are combined
+     * from multiple fields belonging to the same document.
+     *
+     * Scores are calculated by field, using the query vectors created
+     * above, and combined into a final document score using addition.
+     */
+    var fieldRef = lunr.FieldRef.fromString(matchingFieldRefs[i]),
+        docRef = fieldRef.docRef
+
+    if (!allRequiredMatches.contains(docRef)) {
       continue
     }
 
-    if (a[i] < b[j]) {
-      i++
+    if (allProhibitedMatches.contains(docRef)) {
       continue
     }
 
-    if (a[i] > b[j]) {
-      j++
-      continue
+    var fieldVector = this.fieldVectors[fieldRef],
+        score = queryVectors[fieldRef.fieldName].similarity(fieldVector),
+        docMatch
+
+    if ((docMatch = matches[docRef]) !== undefined) {
+      docMatch.score += score
+      docMatch.matchData.combine(matchingFields[fieldRef])
+    } else {
+      var match = {
+        ref: docRef,
+        score: score,
+        matchData: matchingFields[fieldRef]
+      }
+      matches[docRef] = match
+      results.push(match)
     }
-  };
+  }
 
-  return intersectSet
+  /*
+   * Sort the results objects by score, highest first.
+   */
+  return results.sort(function (a, b) {
+    return b.score - a.score
+  })
 }
 
 /**
- * Makes a copy of this set
+ * Prepares the index for JSON serialization.
  *
- * @returns {lunr.SortedSet}
- * @memberOf SortedSet
+ * The schema for this JSON blob will be described in a
+ * separate JSON schema file.
+ *
+ * @returns {Object}
  */
-lunr.SortedSet.prototype.clone = function () {
-  var clone = new lunr.SortedSet
+lunr.Index.prototype.toJSON = function () {
+  var invertedIndex = Object.keys(this.invertedIndex)
+    .sort()
+    .map(function (term) {
+      return [term, this.invertedIndex[term]]
+    }, this)
 
-  clone.elements = this.toArray()
-  clone.length = clone.elements.length
+  var fieldVectors = Object.keys(this.fieldVectors)
+    .map(function (ref) {
+      return [ref, this.fieldVectors[ref].toJSON()]
+    }, this)
 
-  return clone
+  return {
+    version: lunr.version,
+    fields: this.fields,
+    fieldVectors: fieldVectors,
+    invertedIndex: invertedIndex,
+    pipeline: this.pipeline.toJSON()
+  }
 }
 
 /**
- * Creates a new lunr.SortedSet that contains the elements in the union
- * of this set and the passed set.
+ * Loads a previously serialized lunr.Index
  *
- * @param {lunr.SortedSet} otherSet The set to union with this set.
- * @returns {lunr.SortedSet}
- * @memberOf SortedSet
+ * @param {Object} serializedIndex - A previously serialized lunr.Index
+ * @returns {lunr.Index}
  */
-lunr.SortedSet.prototype.union = function (otherSet) {
-  var longSet, shortSet, unionSet
+lunr.Index.load = function (serializedIndex) {
+  var attrs = {},
+      fieldVectors = {},
+      serializedVectors = serializedIndex.fieldVectors,
+      invertedIndex = Object.create(null),
+      serializedInvertedIndex = serializedIndex.invertedIndex,
+      tokenSetBuilder = new lunr.TokenSet.Builder,
+      pipeline = lunr.Pipeline.load(serializedIndex.pipeline)
 
-  if (this.length >= otherSet.length) {
-    longSet = this, shortSet = otherSet
+  if (serializedIndex.version != lunr.version) {
+    lunr.utils.warn("Version mismatch when loading serialised index. Current version of lunr '" + lunr.version + "' does not match serialized index '" + serializedIndex.version + "'")
+  }
+
+  for (var i = 0; i < serializedVectors.length; i++) {
+    var tuple = serializedVectors[i],
+        ref = tuple[0],
+        elements = tuple[1]
+
+    fieldVectors[ref] = new lunr.Vector(elements)
+  }
+
+  for (var i = 0; i < serializedInvertedIndex.length; i++) {
+    var tuple = serializedInvertedIndex[i],
+        term = tuple[0],
+        posting = tuple[1]
+
+    tokenSetBuilder.insert(term)
+    invertedIndex[term] = posting
+  }
+
+  tokenSetBuilder.finish()
+
+  attrs.fields = serializedIndex.fields
+
+  attrs.fieldVectors = fieldVectors
+  attrs.invertedIndex = invertedIndex
+  attrs.tokenSet = tokenSetBuilder.root
+  attrs.pipeline = pipeline
+
+  return new lunr.Index(attrs)
+}
+/*!
+ * lunr.Builder
+ * Copyright (C) 2020 Oliver Nightingale
+ */
+
+/**
+ * lunr.Builder performs indexing on a set of documents and
+ * returns instances of lunr.Index ready for querying.
+ *
+ * All configuration of the index is done via the builder, the
+ * fields to index, the document reference, the text processing
+ * pipeline and document scoring parameters are all set on the
+ * builder before indexing.
+ *
+ * @constructor
+ * @property {string} _ref - Internal reference to the document reference field.
+ * @property {string[]} _fields - Internal reference to the document fields to index.
+ * @property {object} invertedIndex - The inverted index maps terms to document fields.
+ * @property {object} documentTermFrequencies - Keeps track of document term frequencies.
+ * @property {object} documentLengths - Keeps track of the length of documents added to the index.
+ * @property {lunr.tokenizer} tokenizer - Function for splitting strings into tokens for indexing.
+ * @property {lunr.Pipeline} pipeline - The pipeline performs text processing on tokens before indexing.
+ * @property {lunr.Pipeline} searchPipeline - A pipeline for processing search terms before querying the index.
+ * @property {number} documentCount - Keeps track of the total number of documents indexed.
+ * @property {number} _b - A parameter to control field length normalization, setting this to 0 disabled normalization, 1 fully normalizes field lengths, the default value is 0.75.
+ * @property {number} _k1 - A parameter to control how quickly an increase in term frequency results in term frequency saturation, the default value is 1.2.
+ * @property {number} termIndex - A counter incremented for each unique term, used to identify a terms position in the vector space.
+ * @property {array} metadataWhitelist - A list of metadata keys that have been whitelisted for entry in the index.
+ */
+lunr.Builder = function () {
+  this._ref = "id"
+  this._fields = Object.create(null)
+  this._documents = Object.create(null)
+  this.invertedIndex = Object.create(null)
+  this.fieldTermFrequencies = {}
+  this.fieldLengths = {}
+  this.tokenizer = lunr.tokenizer
+  this.pipeline = new lunr.Pipeline
+  this.searchPipeline = new lunr.Pipeline
+  this.documentCount = 0
+  this._b = 0.75
+  this._k1 = 1.2
+  this.termIndex = 0
+  this.metadataWhitelist = []
+}
+
+/**
+ * Sets the document field used as the document reference. Every document must have this field.
+ * The type of this field in the document should be a string, if it is not a string it will be
+ * coerced into a string by calling toString.
+ *
+ * The default ref is 'id'.
+ *
+ * The ref should _not_ be changed during indexing, it should be set before any documents are
+ * added to the index. Changing it during indexing can lead to inconsistent results.
+ *
+ * @param {string} ref - The name of the reference field in the document.
+ */
+lunr.Builder.prototype.ref = function (ref) {
+  this._ref = ref
+}
+
+/**
+ * A function that is used to extract a field from a document.
+ *
+ * Lunr expects a field to be at the top level of a document, if however the field
+ * is deeply nested within a document an extractor function can be used to extract
+ * the right field for indexing.
+ *
+ * @callback fieldExtractor
+ * @param {object} doc - The document being added to the index.
+ * @returns {?(string|object|object[])} obj - The object that will be indexed for this field.
+ * @example <caption>Extracting a nested field</caption>
+ * function (doc) { return doc.nested.field }
+ */
+
+/**
+ * Adds a field to the list of document fields that will be indexed. Every document being
+ * indexed should have this field. Null values for this field in indexed documents will
+ * not cause errors but will limit the chance of that document being retrieved by searches.
+ *
+ * All fields should be added before adding documents to the index. Adding fields after
+ * a document has been indexed will have no effect on already indexed documents.
+ *
+ * Fields can be boosted at build time. This allows terms within that field to have more
+ * importance when ranking search results. Use a field boost to specify that matches within
+ * one field are more important than other fields.
+ *
+ * @param {string} fieldName - The name of a field to index in all documents.
+ * @param {object} attributes - Optional attributes associated with this field.
+ * @param {number} [attributes.boost=1] - Boost applied to all terms within this field.
+ * @param {fieldExtractor} [attributes.extractor] - Function to extract a field from a document.
+ * @throws {RangeError} fieldName cannot contain unsupported characters '/'
+ */
+lunr.Builder.prototype.field = function (fieldName, attributes) {
+  if (/\//.test(fieldName)) {
+    throw new RangeError ("Field '" + fieldName + "' contains illegal character '/'")
+  }
+
+  this._fields[fieldName] = attributes || {}
+}
+
+/**
+ * A parameter to tune the amount of field length normalisation that is applied when
+ * calculating relevance scores. A value of 0 will completely disable any normalisation
+ * and a value of 1 will fully normalise field lengths. The default is 0.75. Values of b
+ * will be clamped to the range 0 - 1.
+ *
+ * @param {number} number - The value to set for this tuning parameter.
+ */
+lunr.Builder.prototype.b = function (number) {
+  if (number < 0) {
+    this._b = 0
+  } else if (number > 1) {
+    this._b = 1
   } else {
-    longSet = otherSet, shortSet = this
+    this._b = number
   }
-
-  unionSet = longSet.clone()
-
-  for(var i = 0, shortSetElements = shortSet.toArray(); i < shortSetElements.length; i++){
-    unionSet.add(shortSetElements[i])
-  }
-
-  return unionSet
 }
 
 /**
- * Returns a representation of the sorted set ready for serialisation.
+ * A parameter that controls the speed at which a rise in term frequency results in term
+ * frequency saturation. The default value is 1.2. Setting this to a higher value will give
+ * slower saturation levels, a lower value will result in quicker saturation.
  *
- * @returns {Array}
- * @memberOf SortedSet
+ * @param {number} number - The value to set for this tuning parameter.
  */
-lunr.SortedSet.prototype.toJSON = function () {
-  return this.toArray()
+lunr.Builder.prototype.k1 = function (number) {
+  this._k1 = number
 }
+
+/**
+ * Adds a document to the index.
+ *
+ * Before adding fields to the index the index should have been fully setup, with the document
+ * ref and all fields to index already having been specified.
+ *
+ * The document must have a field name as specified by the ref (by default this is 'id') and
+ * it should have all fields defined for indexing, though null or undefined values will not
+ * cause errors.
+ *
+ * Entire documents can be boosted at build time. Applying a boost to a document indicates that
+ * this document should rank higher in search results than other documents.
+ *
+ * @param {object} doc - The document to add to the index.
+ * @param {object} attributes - Optional attributes associated with this document.
+ * @param {number} [attributes.boost=1] - Boost applied to all terms within this document.
+ */
+lunr.Builder.prototype.add = function (doc, attributes) {
+  var docRef = doc[this._ref],
+      fields = Object.keys(this._fields)
+
+  this._documents[docRef] = attributes || {}
+  this.documentCount += 1
+
+  for (var i = 0; i < fields.length; i++) {
+    var fieldName = fields[i],
+        extractor = this._fields[fieldName].extractor,
+        field = extractor ? extractor(doc) : doc[fieldName],
+        tokens = this.tokenizer(field, {
+          fields: [fieldName]
+        }),
+        terms = this.pipeline.run(tokens),
+        fieldRef = new lunr.FieldRef (docRef, fieldName),
+        fieldTerms = Object.create(null)
+
+    this.fieldTermFrequencies[fieldRef] = fieldTerms
+    this.fieldLengths[fieldRef] = 0
+
+    // store the length of this field for this document
+    this.fieldLengths[fieldRef] += terms.length
+
+    // calculate term frequencies for this field
+    for (var j = 0; j < terms.length; j++) {
+      var term = terms[j]
+
+      if (fieldTerms[term] == undefined) {
+        fieldTerms[term] = 0
+      }
+
+      fieldTerms[term] += 1
+
+      // add to inverted index
+      // create an initial posting if one doesn't exist
+      if (this.invertedIndex[term] == undefined) {
+        var posting = Object.create(null)
+        posting["_index"] = this.termIndex
+        this.termIndex += 1
+
+        for (var k = 0; k < fields.length; k++) {
+          posting[fields[k]] = Object.create(null)
+        }
+
+        this.invertedIndex[term] = posting
+      }
+
+      // add an entry for this term/fieldName/docRef to the invertedIndex
+      if (this.invertedIndex[term][fieldName][docRef] == undefined) {
+        this.invertedIndex[term][fieldName][docRef] = Object.create(null)
+      }
+
+      // store all whitelisted metadata about this token in the
+      // inverted index
+      for (var l = 0; l < this.metadataWhitelist.length; l++) {
+        var metadataKey = this.metadataWhitelist[l],
+            metadata = term.metadata[metadataKey]
+
+        if (this.invertedIndex[term][fieldName][docRef][metadataKey] == undefined) {
+          this.invertedIndex[term][fieldName][docRef][metadataKey] = []
+        }
+
+        this.invertedIndex[term][fieldName][docRef][metadataKey].push(metadata)
+      }
+    }
+
+  }
+}
+
+/**
+ * Calculates the average document length for this index
+ *
+ * @private
+ */
+lunr.Builder.prototype.calculateAverageFieldLengths = function () {
+
+  var fieldRefs = Object.keys(this.fieldLengths),
+      numberOfFields = fieldRefs.length,
+      accumulator = {},
+      documentsWithField = {}
+
+  for (var i = 0; i < numberOfFields; i++) {
+    var fieldRef = lunr.FieldRef.fromString(fieldRefs[i]),
+        field = fieldRef.fieldName
+
+    documentsWithField[field] || (documentsWithField[field] = 0)
+    documentsWithField[field] += 1
+
+    accumulator[field] || (accumulator[field] = 0)
+    accumulator[field] += this.fieldLengths[fieldRef]
+  }
+
+  var fields = Object.keys(this._fields)
+
+  for (var i = 0; i < fields.length; i++) {
+    var fieldName = fields[i]
+    accumulator[fieldName] = accumulator[fieldName] / documentsWithField[fieldName]
+  }
+
+  this.averageFieldLength = accumulator
+}
+
+/**
+ * Builds a vector space model of every document using lunr.Vector
+ *
+ * @private
+ */
+lunr.Builder.prototype.createFieldVectors = function () {
+  var fieldVectors = {},
+      fieldRefs = Object.keys(this.fieldTermFrequencies),
+      fieldRefsLength = fieldRefs.length,
+      termIdfCache = Object.create(null)
+
+  for (var i = 0; i < fieldRefsLength; i++) {
+    var fieldRef = lunr.FieldRef.fromString(fieldRefs[i]),
+        fieldName = fieldRef.fieldName,
+        fieldLength = this.fieldLengths[fieldRef],
+        fieldVector = new lunr.Vector,
+        termFrequencies = this.fieldTermFrequencies[fieldRef],
+        terms = Object.keys(termFrequencies),
+        termsLength = terms.length
+
+
+    var fieldBoost = this._fields[fieldName].boost || 1,
+        docBoost = this._documents[fieldRef.docRef].boost || 1
+
+    for (var j = 0; j < termsLength; j++) {
+      var term = terms[j],
+          tf = termFrequencies[term],
+          termIndex = this.invertedIndex[term]._index,
+          idf, score, scoreWithPrecision
+
+      if (termIdfCache[term] === undefined) {
+        idf = lunr.idf(this.invertedIndex[term], this.documentCount)
+        termIdfCache[term] = idf
+      } else {
+        idf = termIdfCache[term]
+      }
+
+      score = idf * ((this._k1 + 1) * tf) / (this._k1 * (1 - this._b + this._b * (fieldLength / this.averageFieldLength[fieldName])) + tf)
+      score *= fieldBoost
+      score *= docBoost
+      scoreWithPrecision = Math.round(score * 1000) / 1000
+      // Converts 1.23456789 to 1.234.
+      // Reducing the precision so that the vectors take up less
+      // space when serialised. Doing it now so that they behave
+      // the same before and after serialisation. Also, this is
+      // the fastest approach to reducing a number's precision in
+      // JavaScript.
+
+      fieldVector.insert(termIndex, scoreWithPrecision)
+    }
+
+    fieldVectors[fieldRef] = fieldVector
+  }
+
+  this.fieldVectors = fieldVectors
+}
+
+/**
+ * Creates a token set of all tokens in the index using lunr.TokenSet
+ *
+ * @private
+ */
+lunr.Builder.prototype.createTokenSet = function () {
+  this.tokenSet = lunr.TokenSet.fromArray(
+    Object.keys(this.invertedIndex).sort()
+  )
+}
+
+/**
+ * Builds the index, creating an instance of lunr.Index.
+ *
+ * This completes the indexing process and should only be called
+ * once all documents have been added to the index.
+ *
+ * @returns {lunr.Index}
+ */
+lunr.Builder.prototype.build = function () {
+  this.calculateAverageFieldLengths()
+  this.createFieldVectors()
+  this.createTokenSet()
+
+  return new lunr.Index({
+    invertedIndex: this.invertedIndex,
+    fieldVectors: this.fieldVectors,
+    tokenSet: this.tokenSet,
+    fields: Object.keys(this._fields),
+    pipeline: this.searchPipeline
+  })
+}
+
+/**
+ * Applies a plugin to the index builder.
+ *
+ * A plugin is a function that is called with the index builder as its context.
+ * Plugins can be used to customise or extend the behaviour of the index
+ * in some way. A plugin is just a function, that encapsulated the custom
+ * behaviour that should be applied when building the index.
+ *
+ * The plugin function will be called with the index builder as its argument, additional
+ * arguments can also be passed when calling use. The function will be called
+ * with the index builder as its context.
+ *
+ * @param {Function} plugin The plugin to apply.
+ */
+lunr.Builder.prototype.use = function (fn) {
+  var args = Array.prototype.slice.call(arguments, 1)
+  args.unshift(this)
+  fn.apply(this, args)
+}
+/**
+ * Contains and collects metadata about a matching document.
+ * A single instance of lunr.MatchData is returned as part of every
+ * lunr.Index~Result.
+ *
+ * @constructor
+ * @param {string} term - The term this match data is associated with
+ * @param {string} field - The field in which the term was found
+ * @param {object} metadata - The metadata recorded about this term in this field
+ * @property {object} metadata - A cloned collection of metadata associated with this document.
+ * @see {@link lunr.Index~Result}
+ */
+lunr.MatchData = function (term, field, metadata) {
+  var clonedMetadata = Object.create(null),
+      metadataKeys = Object.keys(metadata || {})
+
+  // Cloning the metadata to prevent the original
+  // being mutated during match data combination.
+  // Metadata is kept in an array within the inverted
+  // index so cloning the data can be done with
+  // Array#slice
+  for (var i = 0; i < metadataKeys.length; i++) {
+    var key = metadataKeys[i]
+    clonedMetadata[key] = metadata[key].slice()
+  }
+
+  this.metadata = Object.create(null)
+
+  if (term !== undefined) {
+    this.metadata[term] = Object.create(null)
+    this.metadata[term][field] = clonedMetadata
+  }
+}
+
+/**
+ * An instance of lunr.MatchData will be created for every term that matches a
+ * document. However only one instance is required in a lunr.Index~Result. This
+ * method combines metadata from another instance of lunr.MatchData with this
+ * objects metadata.
+ *
+ * @param {lunr.MatchData} otherMatchData - Another instance of match data to merge with this one.
+ * @see {@link lunr.Index~Result}
+ */
+lunr.MatchData.prototype.combine = function (otherMatchData) {
+  var terms = Object.keys(otherMatchData.metadata)
+
+  for (var i = 0; i < terms.length; i++) {
+    var term = terms[i],
+        fields = Object.keys(otherMatchData.metadata[term])
+
+    if (this.metadata[term] == undefined) {
+      this.metadata[term] = Object.create(null)
+    }
+
+    for (var j = 0; j < fields.length; j++) {
+      var field = fields[j],
+          keys = Object.keys(otherMatchData.metadata[term][field])
+
+      if (this.metadata[term][field] == undefined) {
+        this.metadata[term][field] = Object.create(null)
+      }
+
+      for (var k = 0; k < keys.length; k++) {
+        var key = keys[k]
+
+        if (this.metadata[term][field][key] == undefined) {
+          this.metadata[term][field][key] = otherMatchData.metadata[term][field][key]
+        } else {
+          this.metadata[term][field][key] = this.metadata[term][field][key].concat(otherMatchData.metadata[term][field][key])
+        }
+
+      }
+    }
+  }
+}
+
+/**
+ * Add metadata for a term/field pair to this instance of match data.
+ *
+ * @param {string} term - The term this match data is associated with
+ * @param {string} field - The field in which the term was found
+ * @param {object} metadata - The metadata recorded about this term in this field
+ */
+lunr.MatchData.prototype.add = function (term, field, metadata) {
+  if (!(term in this.metadata)) {
+    this.metadata[term] = Object.create(null)
+    this.metadata[term][field] = metadata
+    return
+  }
+
+  if (!(field in this.metadata[term])) {
+    this.metadata[term][field] = metadata
+    return
+  }
+
+  var metadataKeys = Object.keys(metadata)
+
+  for (var i = 0; i < metadataKeys.length; i++) {
+    var key = metadataKeys[i]
+
+    if (key in this.metadata[term][field]) {
+      this.metadata[term][field][key] = this.metadata[term][field][key].concat(metadata[key])
+    } else {
+      this.metadata[term][field][key] = metadata[key]
+    }
+  }
+}
+/**
+ * A lunr.Query provides a programmatic way of defining queries to be performed
+ * against a {@link lunr.Index}.
+ *
+ * Prefer constructing a lunr.Query using the {@link lunr.Index#query} method
+ * so the query object is pre-initialized with the right index fields.
+ *
+ * @constructor
+ * @property {lunr.Query~Clause[]} clauses - An array of query clauses.
+ * @property {string[]} allFields - An array of all available fields in a lunr.Index.
+ */
+lunr.Query = function (allFields) {
+  this.clauses = []
+  this.allFields = allFields
+}
+
+/**
+ * Constants for indicating what kind of automatic wildcard insertion will be used when constructing a query clause.
+ *
+ * This allows wildcards to be added to the beginning and end of a term without having to manually do any string
+ * concatenation.
+ *
+ * The wildcard constants can be bitwise combined to select both leading and trailing wildcards.
+ *
+ * @constant
+ * @default
+ * @property {number} wildcard.NONE - The term will have no wildcards inserted, this is the default behaviour
+ * @property {number} wildcard.LEADING - Prepend the term with a wildcard, unless a leading wildcard already exists
+ * @property {number} wildcard.TRAILING - Append a wildcard to the term, unless a trailing wildcard already exists
+ * @see lunr.Query~Clause
+ * @see lunr.Query#clause
+ * @see lunr.Query#term
+ * @example <caption>query term with trailing wildcard</caption>
+ * query.term('foo', { wildcard: lunr.Query.wildcard.TRAILING })
+ * @example <caption>query term with leading and trailing wildcard</caption>
+ * query.term('foo', {
+ *   wildcard: lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING
+ * })
+ */
+
+lunr.Query.wildcard = new String ("*")
+lunr.Query.wildcard.NONE = 0
+lunr.Query.wildcard.LEADING = 1
+lunr.Query.wildcard.TRAILING = 2
+
+/**
+ * Constants for indicating what kind of presence a term must have in matching documents.
+ *
+ * @constant
+ * @enum {number}
+ * @see lunr.Query~Clause
+ * @see lunr.Query#clause
+ * @see lunr.Query#term
+ * @example <caption>query term with required presence</caption>
+ * query.term('foo', { presence: lunr.Query.presence.REQUIRED })
+ */
+lunr.Query.presence = {
+  /**
+   * Term's presence in a document is optional, this is the default value.
+   */
+  OPTIONAL: 1,
+
+  /**
+   * Term's presence in a document is required, documents that do not contain
+   * this term will not be returned.
+   */
+  REQUIRED: 2,
+
+  /**
+   * Term's presence in a document is prohibited, documents that do contain
+   * this term will not be returned.
+   */
+  PROHIBITED: 3
+}
+
+/**
+ * A single clause in a {@link lunr.Query} contains a term and details on how to
+ * match that term against a {@link lunr.Index}.
+ *
+ * @typedef {Object} lunr.Query~Clause
+ * @property {string[]} fields - The fields in an index this clause should be matched against.
+ * @property {number} [boost=1] - Any boost that should be applied when matching this clause.
+ * @property {number} [editDistance] - Whether the term should have fuzzy matching applied, and how fuzzy the match should be.
+ * @property {boolean} [usePipeline] - Whether the term should be passed through the search pipeline.
+ * @property {number} [wildcard=lunr.Query.wildcard.NONE] - Whether the term should have wildcards appended or prepended.
+ * @property {number} [presence=lunr.Query.presence.OPTIONAL] - The terms presence in any matching documents.
+ */
+
+/**
+ * Adds a {@link lunr.Query~Clause} to this query.
+ *
+ * Unless the clause contains the fields to be matched all fields will be matched. In addition
+ * a default boost of 1 is applied to the clause.
+ *
+ * @param {lunr.Query~Clause} clause - The clause to add to this query.
+ * @see lunr.Query~Clause
+ * @returns {lunr.Query}
+ */
+lunr.Query.prototype.clause = function (clause) {
+  if (!('fields' in clause)) {
+    clause.fields = this.allFields
+  }
+
+  if (!('boost' in clause)) {
+    clause.boost = 1
+  }
+
+  if (!('usePipeline' in clause)) {
+    clause.usePipeline = true
+  }
+
+  if (!('wildcard' in clause)) {
+    clause.wildcard = lunr.Query.wildcard.NONE
+  }
+
+  if ((clause.wildcard & lunr.Query.wildcard.LEADING) && (clause.term.charAt(0) != lunr.Query.wildcard)) {
+    clause.term = "*" + clause.term
+  }
+
+  if ((clause.wildcard & lunr.Query.wildcard.TRAILING) && (clause.term.slice(-1) != lunr.Query.wildcard)) {
+    clause.term = "" + clause.term + "*"
+  }
+
+  if (!('presence' in clause)) {
+    clause.presence = lunr.Query.presence.OPTIONAL
+  }
+
+  this.clauses.push(clause)
+
+  return this
+}
+
+/**
+ * A negated query is one in which every clause has a presence of
+ * prohibited. These queries require some special processing to return
+ * the expected results.
+ *
+ * @returns boolean
+ */
+lunr.Query.prototype.isNegated = function () {
+  for (var i = 0; i < this.clauses.length; i++) {
+    if (this.clauses[i].presence != lunr.Query.presence.PROHIBITED) {
+      return false
+    }
+  }
+
+  return true
+}
+
+/**
+ * Adds a term to the current query, under the covers this will create a {@link lunr.Query~Clause}
+ * to the list of clauses that make up this query.
+ *
+ * The term is used as is, i.e. no tokenization will be performed by this method. Instead conversion
+ * to a token or token-like string should be done before calling this method.
+ *
+ * The term will be converted to a string by calling `toString`. Multiple terms can be passed as an
+ * array, each term in the array will share the same options.
+ *
+ * @param {object|object[]} term - The term(s) to add to the query.
+ * @param {object} [options] - Any additional properties to add to the query clause.
+ * @returns {lunr.Query}
+ * @see lunr.Query#clause
+ * @see lunr.Query~Clause
+ * @example <caption>adding a single term to a query</caption>
+ * query.term("foo")
+ * @example <caption>adding a single term to a query and specifying search fields, term boost and automatic trailing wildcard</caption>
+ * query.term("foo", {
+ *   fields: ["title"],
+ *   boost: 10,
+ *   wildcard: lunr.Query.wildcard.TRAILING
+ * })
+ * @example <caption>using lunr.tokenizer to convert a string to tokens before using them as terms</caption>
+ * query.term(lunr.tokenizer("foo bar"))
+ */
+lunr.Query.prototype.term = function (term, options) {
+  if (Array.isArray(term)) {
+    term.forEach(function (t) { this.term(t, lunr.utils.clone(options)) }, this)
+    return this
+  }
+
+  var clause = options || {}
+  clause.term = term.toString()
+
+  this.clause(clause)
+
+  return this
+}
+lunr.QueryParseError = function (message, start, end) {
+  this.name = "QueryParseError"
+  this.message = message
+  this.start = start
+  this.end = end
+}
+
+lunr.QueryParseError.prototype = new Error
+lunr.QueryLexer = function (str) {
+  this.lexemes = []
+  this.str = str
+  this.length = str.length
+  this.pos = 0
+  this.start = 0
+  this.escapeCharPositions = []
+}
+
+lunr.QueryLexer.prototype.run = function () {
+  var state = lunr.QueryLexer.lexText
+
+  while (state) {
+    state = state(this)
+  }
+}
+
+lunr.QueryLexer.prototype.sliceString = function () {
+  var subSlices = [],
+      sliceStart = this.start,
+      sliceEnd = this.pos
+
+  for (var i = 0; i < this.escapeCharPositions.length; i++) {
+    sliceEnd = this.escapeCharPositions[i]
+    subSlices.push(this.str.slice(sliceStart, sliceEnd))
+    sliceStart = sliceEnd + 1
+  }
+
+  subSlices.push(this.str.slice(sliceStart, this.pos))
+  this.escapeCharPositions.length = 0
+
+  return subSlices.join('')
+}
+
+lunr.QueryLexer.prototype.emit = function (type) {
+  this.lexemes.push({
+    type: type,
+    str: this.sliceString(),
+    start: this.start,
+    end: this.pos
+  })
+
+  this.start = this.pos
+}
+
+lunr.QueryLexer.prototype.escapeCharacter = function () {
+  this.escapeCharPositions.push(this.pos - 1)
+  this.pos += 1
+}
+
+lunr.QueryLexer.prototype.next = function () {
+  if (this.pos >= this.length) {
+    return lunr.QueryLexer.EOS
+  }
+
+  var char = this.str.charAt(this.pos)
+  this.pos += 1
+  return char
+}
+
+lunr.QueryLexer.prototype.width = function () {
+  return this.pos - this.start
+}
+
+lunr.QueryLexer.prototype.ignore = function () {
+  if (this.start == this.pos) {
+    this.pos += 1
+  }
+
+  this.start = this.pos
+}
+
+lunr.QueryLexer.prototype.backup = function () {
+  this.pos -= 1
+}
+
+lunr.QueryLexer.prototype.acceptDigitRun = function () {
+  var char, charCode
+
+  do {
+    char = this.next()
+    charCode = char.charCodeAt(0)
+  } while (charCode > 47 && charCode < 58)
+
+  if (char != lunr.QueryLexer.EOS) {
+    this.backup()
+  }
+}
+
+lunr.QueryLexer.prototype.more = function () {
+  return this.pos < this.length
+}
+
+lunr.QueryLexer.EOS = 'EOS'
+lunr.QueryLexer.FIELD = 'FIELD'
+lunr.QueryLexer.TERM = 'TERM'
+lunr.QueryLexer.EDIT_DISTANCE = 'EDIT_DISTANCE'
+lunr.QueryLexer.BOOST = 'BOOST'
+lunr.QueryLexer.PRESENCE = 'PRESENCE'
+
+lunr.QueryLexer.lexField = function (lexer) {
+  lexer.backup()
+  lexer.emit(lunr.QueryLexer.FIELD)
+  lexer.ignore()
+  return lunr.QueryLexer.lexText
+}
+
+lunr.QueryLexer.lexTerm = function (lexer) {
+  if (lexer.width() > 1) {
+    lexer.backup()
+    lexer.emit(lunr.QueryLexer.TERM)
+  }
+
+  lexer.ignore()
+
+  if (lexer.more()) {
+    return lunr.QueryLexer.lexText
+  }
+}
+
+lunr.QueryLexer.lexEditDistance = function (lexer) {
+  lexer.ignore()
+  lexer.acceptDigitRun()
+  lexer.emit(lunr.QueryLexer.EDIT_DISTANCE)
+  return lunr.QueryLexer.lexText
+}
+
+lunr.QueryLexer.lexBoost = function (lexer) {
+  lexer.ignore()
+  lexer.acceptDigitRun()
+  lexer.emit(lunr.QueryLexer.BOOST)
+  return lunr.QueryLexer.lexText
+}
+
+lunr.QueryLexer.lexEOS = function (lexer) {
+  if (lexer.width() > 0) {
+    lexer.emit(lunr.QueryLexer.TERM)
+  }
+}
+
+// This matches the separator used when tokenising fields
+// within a document. These should match otherwise it is
+// not possible to search for some tokens within a document.
+//
+// It is possible for the user to change the separator on the
+// tokenizer so it _might_ clash with any other of the special
+// characters already used within the search string, e.g. :.
+//
+// This means that it is possible to change the separator in
+// such a way that makes some words unsearchable using a search
+// string.
+lunr.QueryLexer.termSeparator = lunr.tokenizer.separator
+
+lunr.QueryLexer.lexText = function (lexer) {
+  while (true) {
+    var char = lexer.next()
+
+    if (char == lunr.QueryLexer.EOS) {
+      return lunr.QueryLexer.lexEOS
+    }
+
+    // Escape character is '\'
+    if (char.charCodeAt(0) == 92) {
+      lexer.escapeCharacter()
+      continue
+    }
+
+    if (char == ":") {
+      return lunr.QueryLexer.lexField
+    }
+
+    if (char == "~") {
+      lexer.backup()
+      if (lexer.width() > 0) {
+        lexer.emit(lunr.QueryLexer.TERM)
+      }
+      return lunr.QueryLexer.lexEditDistance
+    }
+
+    if (char == "^") {
+      lexer.backup()
+      if (lexer.width() > 0) {
+        lexer.emit(lunr.QueryLexer.TERM)
+      }
+      return lunr.QueryLexer.lexBoost
+    }
+
+    // "+" indicates term presence is required
+    // checking for length to ensure that only
+    // leading "+" are considered
+    if (char == "+" && lexer.width() === 1) {
+      lexer.emit(lunr.QueryLexer.PRESENCE)
+      return lunr.QueryLexer.lexText
+    }
+
+    // "-" indicates term presence is prohibited
+    // checking for length to ensure that only
+    // leading "-" are considered
+    if (char == "-" && lexer.width() === 1) {
+      lexer.emit(lunr.QueryLexer.PRESENCE)
+      return lunr.QueryLexer.lexText
+    }
+
+    if (char.match(lunr.QueryLexer.termSeparator)) {
+      return lunr.QueryLexer.lexTerm
+    }
+  }
+}
+
+lunr.QueryParser = function (str, query) {
+  this.lexer = new lunr.QueryLexer (str)
+  this.query = query
+  this.currentClause = {}
+  this.lexemeIdx = 0
+}
+
+lunr.QueryParser.prototype.parse = function () {
+  this.lexer.run()
+  this.lexemes = this.lexer.lexemes
+
+  var state = lunr.QueryParser.parseClause
+
+  while (state) {
+    state = state(this)
+  }
+
+  return this.query
+}
+
+lunr.QueryParser.prototype.peekLexeme = function () {
+  return this.lexemes[this.lexemeIdx]
+}
+
+lunr.QueryParser.prototype.consumeLexeme = function () {
+  var lexeme = this.peekLexeme()
+  this.lexemeIdx += 1
+  return lexeme
+}
+
+lunr.QueryParser.prototype.nextClause = function () {
+  var completedClause = this.currentClause
+  this.query.clause(completedClause)
+  this.currentClause = {}
+}
+
+lunr.QueryParser.parseClause = function (parser) {
+  var lexeme = parser.peekLexeme()
+
+  if (lexeme == undefined) {
+    return
+  }
+
+  switch (lexeme.type) {
+    case lunr.QueryLexer.PRESENCE:
+      return lunr.QueryParser.parsePresence
+    case lunr.QueryLexer.FIELD:
+      return lunr.QueryParser.parseField
+    case lunr.QueryLexer.TERM:
+      return lunr.QueryParser.parseTerm
+    default:
+      var errorMessage = "expected either a field or a term, found " + lexeme.type
+
+      if (lexeme.str.length >= 1) {
+        errorMessage += " with value '" + lexeme.str + "'"
+      }
+
+      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+}
+
+lunr.QueryParser.parsePresence = function (parser) {
+  var lexeme = parser.consumeLexeme()
+
+  if (lexeme == undefined) {
+    return
+  }
+
+  switch (lexeme.str) {
+    case "-":
+      parser.currentClause.presence = lunr.Query.presence.PROHIBITED
+      break
+    case "+":
+      parser.currentClause.presence = lunr.Query.presence.REQUIRED
+      break
+    default:
+      var errorMessage = "unrecognised presence operator'" + lexeme.str + "'"
+      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+
+  var nextLexeme = parser.peekLexeme()
+
+  if (nextLexeme == undefined) {
+    var errorMessage = "expecting term or field, found nothing"
+    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+
+  switch (nextLexeme.type) {
+    case lunr.QueryLexer.FIELD:
+      return lunr.QueryParser.parseField
+    case lunr.QueryLexer.TERM:
+      return lunr.QueryParser.parseTerm
+    default:
+      var errorMessage = "expecting term or field, found '" + nextLexeme.type + "'"
+      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+  }
+}
+
+lunr.QueryParser.parseField = function (parser) {
+  var lexeme = parser.consumeLexeme()
+
+  if (lexeme == undefined) {
+    return
+  }
+
+  if (parser.query.allFields.indexOf(lexeme.str) == -1) {
+    var possibleFields = parser.query.allFields.map(function (f) { return "'" + f + "'" }).join(', '),
+        errorMessage = "unrecognised field '" + lexeme.str + "', possible fields: " + possibleFields
+
+    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+
+  parser.currentClause.fields = [lexeme.str]
+
+  var nextLexeme = parser.peekLexeme()
+
+  if (nextLexeme == undefined) {
+    var errorMessage = "expecting term, found nothing"
+    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+
+  switch (nextLexeme.type) {
+    case lunr.QueryLexer.TERM:
+      return lunr.QueryParser.parseTerm
+    default:
+      var errorMessage = "expecting term, found '" + nextLexeme.type + "'"
+      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+  }
+}
+
+lunr.QueryParser.parseTerm = function (parser) {
+  var lexeme = parser.consumeLexeme()
+
+  if (lexeme == undefined) {
+    return
+  }
+
+  parser.currentClause.term = lexeme.str.toLowerCase()
+
+  if (lexeme.str.indexOf("*") != -1) {
+    parser.currentClause.usePipeline = false
+  }
+
+  var nextLexeme = parser.peekLexeme()
+
+  if (nextLexeme == undefined) {
+    parser.nextClause()
+    return
+  }
+
+  switch (nextLexeme.type) {
+    case lunr.QueryLexer.TERM:
+      parser.nextClause()
+      return lunr.QueryParser.parseTerm
+    case lunr.QueryLexer.FIELD:
+      parser.nextClause()
+      return lunr.QueryParser.parseField
+    case lunr.QueryLexer.EDIT_DISTANCE:
+      return lunr.QueryParser.parseEditDistance
+    case lunr.QueryLexer.BOOST:
+      return lunr.QueryParser.parseBoost
+    case lunr.QueryLexer.PRESENCE:
+      parser.nextClause()
+      return lunr.QueryParser.parsePresence
+    default:
+      var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
+      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+  }
+}
+
+lunr.QueryParser.parseEditDistance = function (parser) {
+  var lexeme = parser.consumeLexeme()
+
+  if (lexeme == undefined) {
+    return
+  }
+
+  var editDistance = parseInt(lexeme.str, 10)
+
+  if (isNaN(editDistance)) {
+    var errorMessage = "edit distance must be numeric"
+    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+
+  parser.currentClause.editDistance = editDistance
+
+  var nextLexeme = parser.peekLexeme()
+
+  if (nextLexeme == undefined) {
+    parser.nextClause()
+    return
+  }
+
+  switch (nextLexeme.type) {
+    case lunr.QueryLexer.TERM:
+      parser.nextClause()
+      return lunr.QueryParser.parseTerm
+    case lunr.QueryLexer.FIELD:
+      parser.nextClause()
+      return lunr.QueryParser.parseField
+    case lunr.QueryLexer.EDIT_DISTANCE:
+      return lunr.QueryParser.parseEditDistance
+    case lunr.QueryLexer.BOOST:
+      return lunr.QueryParser.parseBoost
+    case lunr.QueryLexer.PRESENCE:
+      parser.nextClause()
+      return lunr.QueryParser.parsePresence
+    default:
+      var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
+      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+  }
+}
+
+lunr.QueryParser.parseBoost = function (parser) {
+  var lexeme = parser.consumeLexeme()
+
+  if (lexeme == undefined) {
+    return
+  }
+
+  var boost = parseInt(lexeme.str, 10)
+
+  if (isNaN(boost)) {
+    var errorMessage = "boost must be numeric"
+    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+  }
+
+  parser.currentClause.boost = boost
+
+  var nextLexeme = parser.peekLexeme()
+
+  if (nextLexeme == undefined) {
+    parser.nextClause()
+    return
+  }
+
+  switch (nextLexeme.type) {
+    case lunr.QueryLexer.TERM:
+      parser.nextClause()
+      return lunr.QueryParser.parseTerm
+    case lunr.QueryLexer.FIELD:
+      parser.nextClause()
+      return lunr.QueryParser.parseField
+    case lunr.QueryLexer.EDIT_DISTANCE:
+      return lunr.QueryParser.parseEditDistance
+    case lunr.QueryLexer.BOOST:
+      return lunr.QueryParser.parseBoost
+    case lunr.QueryLexer.PRESENCE:
+      parser.nextClause()
+      return lunr.QueryParser.parsePresence
+    default:
+      var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
+      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+  }
+}
+
   /**
    * export the module via AMD, CommonJS or as a browser global
    * Export code from https://github.com/umdjs/umd/blob/master/returnExports.js
@@ -2494,7 +3462,7 @@ lunr.SortedSet.prototype.toJSON = function () {
       module.exports = factory()
     } else {
       // Browser globals (root is window)
-      root.elasticlunr = factory()
+      root.lunr = factory()
     }
   }(this, function () {
     /**
@@ -2502,6 +3470,6 @@ lunr.SortedSet.prototype.toJSON = function () {
      * This example returns an object, but the module
      * can return a function as the exported value.
      */
-    return elasticlunr
+    return lunr
   }))
 })();
