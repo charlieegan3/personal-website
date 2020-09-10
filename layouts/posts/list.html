@@ -30,6 +30,10 @@
 		</div>
 	{{ end }}
 
+	{{ if gt .Paginator.PageNumber 1 }}
+	<p class="f6 gray">Looking for something? try <a href="/search">search</a></p>
+	{{ end }}
+
 	{{ if gt .Paginator.TotalPages 1 }}
 		{{ if .Paginator.HasPrev }}
 			<a href="{{ .Paginator.Prev.URL }}" aria-label="Previous">previous</a>
