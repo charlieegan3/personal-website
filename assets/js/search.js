@@ -5,7 +5,7 @@ var search = {
   docs: {},
 
   run: function() {
-    var terms = document.getElementById("search").value.trim().split(" ");
+    var terms = document.getElementById("search").value.toLowerCase().trim().split(" ");
 
     var results = search.index.query(function(q) {
         if (terms.length == 1) {
