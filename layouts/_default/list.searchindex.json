@@ -1,7 +1,7 @@
 {{- $.Scratch.Add "searchindex" slice -}}
 {{- range $index, $element := (where .Site.Pages "Kind" "page").Reverse -}}
 	{{ $type := "page" }}
-	{{ $url := "" }}
+	{{ $url := .RelPermalink }}
 	{{ if eq $element.Type "posts" }}
 		{{ $type = "blog post"}}
 	{{ end }}
@@ -13,6 +13,6 @@
 	{{ if not $element.Date.IsZero }}
 		{{ $date = dateFormat "Jan 2 2006" $element.Date }}
 	{{ end }}
-	{{- $.Scratch.Add "searchindex" (dict "id" $index "title" $element.Title "url" $url "type" $type "date" $date "body" $element.Plain) -}}
+	{{- $.Scratch.Add "searchindex" (dict "id" $index "title" $element.Title "url" $url "type" $type "date" $date "body" $element.RawContent) -}}
 {{- end -}}
 {{- $.Scratch.Get "searchindex" | jsonify -}}
