@@ -91,7 +91,14 @@ var search = {
       // build the result to add to the list
       var item = document.createElement("div");
       var itemMeta = document.createElement("p");
-      itemMeta.innerHTML = doc.type;
+      itemMeta.innerHTML = doc.type + " ";
+      if (doc.type == "external blog post") {
+        var url = new URL(doc.url);
+        var hostNameSpan = document.createElement("span")
+        hostNameSpan.innerHTML = url.hostname;
+        hostNameSpan.classList = "mid-gray"
+        itemMeta.appendChild(hostNameSpan)
+      }
       if (doc.date != "") {
         var itemMetaDate = document.createElement("span");
         itemMetaDate.innerHTML = doc.date;
