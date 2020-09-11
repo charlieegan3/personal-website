@@ -1,5 +1,5 @@
 ---
-title: Projects
+title: projects
 type: projects
 
 type_colors:
