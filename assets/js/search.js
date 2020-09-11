@@ -4,7 +4,7 @@ var search = {
   data: null,
   docs: {},
   highlightClass: "ph1 br1",
-  highlightStyle: "background-color: rgba(255, 255, 255, 0.2)",
+  highlightStyle: "background-color: #3a3a3a",
 
   run: function() {
     // reset the list of results on the page
