@@ -18,25 +18,25 @@ var search = {
 
     // get the results from the index for the terms
     var results = search.index.query(function(q) {
-        if (terms.length == 1) {
-          // if there is a single term, find a partial or complete match
-          q.term(terms[0] + "*", {
-            presence: lunr.Query.presence.OPTIONAL
-          })
-          q.term(terms[0], {
-            presence: lunr.Query.presence.OPTIONAL
-          })
-        } else {
-          // otherwise, only the last term can be partial or complete match
-          for (var i = 0; i < terms.length-1; i++) {
-            q.term(terms[i], {
-              presence: lunr.Query.presence.REQUIRED
-            })
-          }
-          q.term(terms[terms.length-1]+"*", {
+      if (terms.length == 1) {
+        // if there is a single term, find a partial or complete match
+        q.term(terms[0] + "*", {
+          presence: lunr.Query.presence.OPTIONAL
+        })
+        q.term(terms[0], {
+          presence: lunr.Query.presence.OPTIONAL
+        })
+      } else {
+        // otherwise, only the last term can be partial or complete match
+        for (var i = 0; i < terms.length-1; i++) {
+          q.term(terms[i], {
             presence: lunr.Query.presence.REQUIRED
           })
         }
+        q.term(terms[terms.length-1]+"*", {
+          presence: lunr.Query.presence.REQUIRED
+        })
+      }
     });
 
     // render each result
