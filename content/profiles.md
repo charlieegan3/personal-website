@@ -16,6 +16,9 @@ profiles:
     icon: instagram.jpg
     featured: true
     title: Instagram
+  - url: https://unsplash.com/@charlieegan3
+    icon: unsplash.png
+    title: Unsplash
   - url: https://news.ycombinator.com/item?id=9045677
     icon: notlinked.jpg
     title: LinkedIn
