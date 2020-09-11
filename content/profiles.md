@@ -40,14 +40,12 @@ profiles:
     icon: letterboxd.jpg
 - name: Gaming
   list:
+  - url: https://halo.bungie.net/stats/reach/default.aspx?player=tartan%20turtle
+    icon: bungie.jpg
   - url: http://steamcommunity.com/id/charlieegan3
     icon: steam.jpg
   - url: http://eu.battle.net/sc2/en/profile/5512289/1/TartanTurtle/
     icon: sc2.jpg
-  - url: https://my.playstation.com/TartanTurtle
-    icon: ps.jpg
-  - url: https://halo.bungie.net/stats/reach/default.aspx?player=tartan%20turtle
-    icon: bungie.jpg
 - name: Academic
   list:
   - url: https://scholar.google.co.uk/citations?user=pqb-ZNAAAAAJ&amp;hl=en
