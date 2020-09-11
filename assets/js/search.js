@@ -118,10 +118,17 @@ var search = {
       itemTitle.appendChild(itemAnchor);
       item.appendChild(itemTitle);
 
-      if (body != "..." && doc.type != "external blog post") {
+      var pagesPostTypes = ["page", "blog post"];
+      if (body != "..." && pagesPostTypes.includes(doc.type)) {
         var itemBody = document.createElement("p");
         itemBody.classList = "f7"
         itemBody.innerHTML = body;
+        item.appendChild(itemBody);
+      } else if (doc.type != "external blog post" && doc.body != "") {
+        // then is a project
+        var itemBody = document.createElement("p");
+        itemBody.classList = "f7"
+        itemBody.innerHTML = doc.body;
         item.appendChild(itemBody);
       }
 

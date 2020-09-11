@@ -6,6 +6,10 @@
 		{{- $.Scratch.Add "searchindex" (dict "id" ($.Scratch.Get "count") "title" $profile.title "url" $profile.url "type" "profile" "date" "" "body" "") -}}
 	{{- end -}}
 {{- end -}}
+{{- range $i, $project := (.Site.GetPage "/projects").Params.projects -}}
+		{{- $.Scratch.Set "count" (add ($.Scratch.Get "count") 1) -}}
+		{{- $.Scratch.Add "searchindex" (dict "id" ($.Scratch.Get "count") "title" $project.title "url" (index $project $project.search_result_url) "type" $project.type "date" "" "body" $project.comment) -}}
+{{- end -}}
 {{- range $i, $element := (where .Site.Pages "Kind" "page").Reverse -}}
 	{{- $.Scratch.Set "count" (add ($.Scratch.Get "count") 1) -}}
 	{{ $type := "page" }}
