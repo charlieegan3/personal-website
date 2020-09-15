@@ -1,0 +1,16 @@
+{{ define "title" }}
+	404 - {{ $.Site.Title -}}
+{{ end }}
+
+{{ define "description" }}
+	{{ .Params.summary }}
+{{ end }}
+
+{{ define "main" }}
+	<h1 class="red">404... oh sheeet</h1>
+	<p><strong>You followed a link to something that doesn't exist...</strong></p>
+	<p>Perhaps you'd like to send me a message to explain what you were looking for?</p>
+	{{ partial "form.html" . }}
+	<p>Feeling shy? That's ok, here's a picture I took instead.</p>
+	<img class="ba bw1 b--silver" src="/landscape.jpg" alt="landscape image from lake district">
+{{ end }}
