@@ -1,5 +1,6 @@
 ---
-title: Teaching Rego to compare Semantic Versions
+title: |
+  Teaching Rego to compare Semantic Versions
 date: 2020-08-31 18:00:00 +0000
 ---
 

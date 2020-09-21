@@ -1,5 +1,6 @@
 ---
-title: Week Notes: 4
+title: |
+  Week Notes: 4
 date: 2020-09-20 00:00:00 +0000
 ---
 

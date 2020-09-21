@@ -1,5 +1,6 @@
 ---
-title: Fun things I’m doing with GitHub Actions
+title: |
+  Fun things I’m doing with GitHub Actions
 date: 2020-09-07 07:00:00 +0000
 ---
 

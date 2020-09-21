@@ -1,5 +1,6 @@
 ---
-title: SemVer comparisons with OPA
+title: |
+  SemVer comparisons with OPA
 date: 2020-05-08 11:29:00 +0000
 ---
 
