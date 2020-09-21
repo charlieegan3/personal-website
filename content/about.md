@@ -1,6 +1,8 @@
 ---
-title: about
-summary: Hello, my name is Charlie - nice to meet you.
+title: |
+  about
+summary: |
+  Hello, my name is Charlie - nice to meet you.
 type: about
 ---
 
