@@ -70,6 +70,28 @@ posts.each do |post|
     map { |l| l.gsub(/\s+$/, "") }.
     join("\n")
 
+  # format nested lists correctly
+  lines = content.split("\n")
+  content = ""
+  in_list = false
+  lines.each do |line|
+    if line.match(/^[\*\-] /)
+      in_list = true
+    end
+
+    if line.match(/^[\w\[\!`]/) && in_list
+      content += "\n"
+      in_list = false
+    end
+
+    if in_list
+      content += line + "\n" unless line == ""
+    else
+      content += line + "\n"
+    end
+  end
+  content.strip!
+
   # write the file to the content dir
   post_dir = "content/posts/#{slug}"
   fail "clean old dir" unless system("rm -rf #{post_dir}")

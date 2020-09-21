@@ -10,5 +10,4 @@ date: 2020-09-06 00:00:00 +0000
 - I continue to struggle with the new words on Codenames at [netgames.io](http://netgames.io). The original wordlist seems to be reserved for [codenames.game](https://codenames.game/), which doesn't appear to be as reliable.
 - I bought, waited for and wore [my new wetsuit](https://uk.roka.com/collections/mens-wetsuits/products/mens-maverick-comp-ii-wetsuit?variant=13603914809455) for a swim session at the lido. Would recommend for fellow skinny people, very cosy.
 - I met Lewis for a [ride on Zwift](https://www.strava.com/activities/4009210358/overview). I made the mistake of thinking that the route would be 'presumably undulating'... I almost missed a meeting.
-
     ![Screenshot_from_2020-09-05_10-59-35.png](Screenshot_from_2020-09-05_10-59-35.png)

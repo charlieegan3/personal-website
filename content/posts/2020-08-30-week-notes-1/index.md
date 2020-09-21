@@ -16,7 +16,5 @@ date: 2020-08-30 00:00:00 +0000
 
 - I’ve booked my trains home for Christmas. Booked to visit my granny for the first time this year. And tried to book a trip to Edinburgh but LNER said not yet.
 - We’ve been playing Sea of Thieves. We all find the controls infinitely frustrating and still can’t seem to beat any other ships with real players in them. That said, we still seem to enjoy it, firing people out of canons and drinking grog is fun too.
-
     ![Screenshot_from_2020-08-31_18-12-11.png](Screenshot_from_2020-08-31_18-12-11.png)
-
 - On Sunday, I was meant to have a run+bike brick session but ended up [running with Luke](https://www.strava.com/activities/3987602822) so decided to [double](https://www.strava.com/activities/3985526181) [up](https://www.strava.com/activities/3985795212) on the bike while I waited 🥵
