@@ -111,8 +111,10 @@ pages.each do |page|
 
   markdown_content = <<-EOF
 ---
-title: #{title}
-summary: #{summary}
+title: |
+  #{title}
+summary: |
+  #{summary}
 type: #{type}
 ---
 
