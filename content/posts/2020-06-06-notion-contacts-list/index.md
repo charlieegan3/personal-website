@@ -9,12 +9,9 @@ to do this because I was lacking the following features in Outlook to
 effectively manage my contacts:
 
 - Syncing delays and inconsistencies with Exchange for contacts
-- Not being able to have nicknames work in the way that I want (e.g. only on my
-phone / WhatsApp)
+- Not being able to have nicknames work in the way that I want (e.g. only on my phone / WhatsApp)
 - A means of archiving contacts, without deleting them
-- ...and the straw that broke the camels back: being able to store birthdays and
-have a birthday calendar (this is something that is meant to be supported but
-it just doesn't work at all)
+- ...and the straw that broke the camels back: being able to store birthdays and have a birthday calendar (this is something that is meant to be supported but it just doesn't work at all)
 
 I've had a lot of fun in putting Notion to work for me over the last 6 months
 and thought it was worth a shot for this too. A few years ago I was set on
