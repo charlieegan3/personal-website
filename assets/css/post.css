@@ -90,6 +90,8 @@
   border-color: #ccc;
   max-width: 100%;
   box-sizing: border-box;
+  /* this is needed for inline images in li tags, other images are in p tags from md processor */
+  display: block;
 }
 .post-content blockquote {
   font-size: 0.9em;
