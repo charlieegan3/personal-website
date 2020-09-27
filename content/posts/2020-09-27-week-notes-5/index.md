@@ -16,7 +16,7 @@ date: 2020-09-27 00:00:00 +0000
     ![5E5C2292-42B7-4962-A2E5-98B7C6FA1AE4.jpeg](5E5C2292-42B7-4962-A2E5-98B7C6FA1AE4.jpeg)
 - I experienced the privilege of being a renter while I waited outside in the pouring rain to allow multiple happy couples look around my house. Some didn't realise that there was only a train line, no garden at the back.
     ![8493F87B-1483-41C4-BD6B-9CB5CDB5A8DA.jpeg](8493F87B-1483-41C4-BD6B-9CB5CDB5A8DA.jpeg)
-- I won my first game of Call of Duty Warzone. I didn't kill anyone, did **100 points** of damage though so watch out. Here I am in the credits screen with a gun I stole from another player I didn't even kill.
+- I won my first game of Call of Duty Warzone. I didn't kill anyone, did **100 points** of damage though so watch out. Here I am in the credits screen with a gun I stole from another player my team mate killed for me.
     ![View_recent_photos.png](View_recent_photos.png)
 - I hauled a suitcase of my flatmates stuff eastwards and got lunch at a [place](https://www.loveshackldn.com/) which sold mushroom drinks bought for me in return. I did not have any of the mushroom drinks.
 - If you're reading this while waiting for a bus, it's probably here.
