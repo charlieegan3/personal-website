@@ -36,7 +36,7 @@
 			{{- $css = $css | resources.Minify }}
 		{{- end }}
 		{{- $css = $css | resources.Fingerprint }}
-		<link rel="stylesheet" type="text/css" href="{{ $css.RelPermalink }}" />
+		<link rel="stylesheet" type="text/css" crossorigin="anonymous" href="{{ $css.RelPermalink }}" />
 
 		{{- $jsFiles := slice }}
 		{{- if isset $.Site.Params "turbolinks" }}
@@ -55,7 +55,7 @@
 			{{- $js = $js | resources.Minify }}
 		{{- end }}
 		{{- $js = $js | resources.Fingerprint }}
-		<script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+		<script type="text/javascript" crossorigin="anonymous" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 	</head>
 	<body class="bg-darker-gray light-silver">
 		<section class="{{- block "width" . -}}mw7{{- end }} center pa3 ph5-ns pb5">
