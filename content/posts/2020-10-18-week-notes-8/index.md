@@ -4,7 +4,7 @@ title: |
 date: 2020-10-18 00:00:00 +0000
 ---
 
-- This week at work I've been setting up a new service that takes events from Google Cloud PubSub. There is a [local emulator](https://cloud.google.com/pubsub/docs/emulator) for the service - but when I tried using it it appeared to create real messages in my project, hmm. Anyway, this is something new and it seems to be a pretty simple API to build against with all the features we needed anyway (dead letter topic, long Ack deadline among others).
+- This week at work I've been setting up a new service that takes events from [Google Cloud PubSub](https://cloud.google.com/pubsub/docs/overview). There is a [local emulator](https://cloud.google.com/pubsub/docs/emulator) for the service - but when I tried using it it appeared to create real messages in my project, hmm. Anyway, this is something new and it seems to be a pretty simple API to build against with all the features we needed anyway (dead letter topic, long Ack deadline among others).
 - Having had nearly two weeks off running (at least a week longer than I should have taken) I went for a [rather feeble](https://www.strava.com/activities/4210043978) 20 minute potter round the 'race track' where I'd been running pretty heavy intervals just a month or so ago... Sad times but it was a nice reminder of how much I enjoy running and that it's important, when reducing training intensity, to go close to zero, but not to stop completely for very long.
 
 I managed to go for [my weekly swim](https://www.strava.com/activities/4205351355), even colder, but felt more manageable. Thankfully the pool seems to be pretty quiet now.
