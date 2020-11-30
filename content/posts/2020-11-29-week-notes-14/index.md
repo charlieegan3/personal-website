@@ -4,7 +4,7 @@ title: |
 date: 2020-11-29 00:00:00 +0000
 ---
 
-- At work I'm working on something to process a list of related Kubernetes objects into a graph structure. The edges in the graph need to be described in a flexible way. For example, use value `foo` in field`metadata.name` to find a resource of kind `Secret` called `foo`and so on. I've been making heavy use of [gabs](https://github.com/Jeffail/gabs) to pluck one or more matching values from the resource data and it's working really nicely.
+- At work I'm working on something to process a list of related Kubernetes objects into a graph structure. The edges in the graph need to be described in a flexible way. For example, use value `foo` in field `metadata.name` to find a resource of kind `Secret` called `foo` and so on. I've been making heavy use of [gabs](https://github.com/Jeffail/gabs) to pluck one or more matching values from the resource data and it's working really nicely.
 - I played a fun 'mode' on Among Us called [hide and seek](https://www.hitc.com/en-gb/2020/11/03/among-us-how-do-you-play-hide-and-seek-setting-rules/). It seems to be hard to balance, but it's a fun way to start/end an evening of playing with friends.
 - I learned the hard way that when you spot a fraying gear cable, and give it a vigorous test, sometimes it breaks and gets stuck in the shifter. Removing this little blighter from a modern Shimano shifter was a nightmare.
     ![9CDCB89E-D1B5-4653-8547-276F99F4FA67.jpeg](9CDCB89E-D1B5-4653-8547-276F99F4FA67.jpeg)
