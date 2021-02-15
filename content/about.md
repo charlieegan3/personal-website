@@ -28,7 +28,7 @@ Other things I do:
 
 - 👨‍🍳 cook vegetarian food
 - 🎶 [track](https://music.charlieegan3.com/) all the music I listen to
-- 🧻 keep a [blog](https://www.notion.so/posts) & write a journal
+- 🧻 keep a [blog](https://charlieegan3.com/posts/) & write a journal
 - 🎽 [run](https://www.strava.com/athletes/1238371), bike, swim - but not all three at once just yet!
 
 I work at [Jetstack](https://jetstack.io/) 💼.
