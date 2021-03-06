@@ -109,7 +109,7 @@ Throughout the process I took some notes about things I noticed and how I felt a
 ## Day 7
 - Being keen to wrap this up, I opted to cut the scope and fetch the data using curl (and commit the updated README file using my existing Ruby script).
 - I ended up using [Gregor](https://docs.racket-lang.org/gregor/index.html) to parse and compare my datetime data. It was a shame that this wasn't in the standard library as it's my only dependency.
-- '() caught me out again here (I *think...*)
+- '() caught me out again here ([I *think...*](https://stackoverflow.com/questions/66505664/can-range-x-y-be-used-in-a-racket-dispatch-case))
     ```scheme
     > (case 2
         [(1 2 3) "matched"]
