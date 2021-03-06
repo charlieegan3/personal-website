@@ -14,8 +14,7 @@ Throughout the process I took some notes about things I noticed and how I felt a
 
 ## Day 1
 
-- I started with trying to work out how to parse command line options. I think this was too soon and having never written any Racket before I found the docs for `[command-line](https://docs.racket-lang.org/reference/Command-Line_Parsing.html#%28form._%28%28lib._racket%2Fcmdline..rkt%29._command-line%29%29)` a little overwhelming.
-- I learned that ``(1)` and `'(1)` are `equal?` but not `eq?` and not `eqv?`.
+- I started with trying to work out how to parse command line options. I think this was too soon and having never written any Racket before I found the [docs](https://docs.racket-lang.org/reference/Command-Line_Parsing.html#%28form._%28%28lib._racket%2Fcmdline..rkt%29._command-line%29%29) for  `command-line` a little overwhelming.
 - `go fmt` has made me lazy - and, at this point - I felt I was missing this in Racket. I soon changed my mind on this (Day 4).
 - I completed the images example in DrRacket which was quite fun.
 ## Day 2
