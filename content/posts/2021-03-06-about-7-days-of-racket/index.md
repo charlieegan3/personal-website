@@ -9,8 +9,10 @@ date: 2021-03-06 00:00:00 +0000
 I decided to spend a few hours over the course of about 2 weeks playing with [Racket](https://racket-lang.org/). I suppose these were my reasons for doing this:
 
 - I've been interested in [Datalog](https://en.wikipedia.org/wiki/Datalog) since I learned it was [inspiration](https://www.openpolicyagent.org/docs/latest/policy-language/#what-is-rego) for OPA's Rego (it's possible to run Datalog as [a Racket language](https://docs.racket-lang.org/datalog/Tutorial.html)).
-- I never got the chance to use a Lisp/Scheme at university.
+- I watched this [talk](https://www.infoq.com/presentations/Simple-Made-Easy/) and liked some of the ideas. This sent me on a Lispy Wikipedia journey.
+- I also never got the chance to use a Lisp/Scheme at university.
 - I wanted to do something different from work, and my previous side projects had all also been in Go - and I wasn't really enjoying one of them any more.
+- The simplicity of `(response/xexpr ...)` for expressing HTML in the [servlet documentation](https://docs.racket-lang.org/web-server/run.html#%28part._servlet-env%29) really appealed to me. I dreamed of server generated pages that night.
 
 Throughout the process I took some notes about things I noticed and how I felt about them at that point in my little (bracket (heavy adventure)).
 
