@@ -4,6 +4,8 @@ title: |
 date: 2021-03-06 00:00:00 +0000
 ---
 
+![screenshot-2021-03-06_12-36-44.png](screenshot-2021-03-06_12-36-44.png)
+
 I decided to spend a few hours over the course of about 2 weeks playing with [Racket](https://racket-lang.org/). I suppose these were my reasons for doing this:
 
 - I've been interested in [Datalog](https://en.wikipedia.org/wiki/Datalog) since I learned it was [inspiration](https://www.openpolicyagent.org/docs/latest/policy-language/#what-is-rego) for OPA's Rego (it's possible to run Datalog as [a Racket language](https://docs.racket-lang.org/datalog/Tutorial.html)).
