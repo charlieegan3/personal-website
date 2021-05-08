@@ -1,0 +1,15 @@
+<!doctype html><html><head><title>Remove Dupes from the 'Open With' Menu - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="A problem that I’ve had since upgrading to 10.8 Mountain Lion has been with the Open With menu. I find that over time there is a build up of duplicates."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2013-02-26-remove-dupes-from-the-open-with-menu/"><meta property="og:title" content="Remove Dupes from the 'Open With' Menu"><meta property="og:description" content="A problem that I’ve had since upgrading to 10.8 Mountain Lion has been with the Open With menu. I find that over time there is a build up of duplicates."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2013-02-26T00:30:00"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Remove Dupes from the 'Open With' Menu</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Feb 26 2013</div><div class=post-content><p>A problem that I’ve had since upgrading to 10.8 Mountain Lion has been with the
+Open With menu. I find that over time there is a build up of duplicates.
+Primary offenders seem to be: Pixelmator and Evernote. This seems to solve the
+problem:</p><pre><code>/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain user
+killall Finder
+echo &quot;Open With has been rebuilt, Finder will relaunch&quot;
+</code></pre><p>Then Relaunching the Finder with ⎇+cmd+esc should solve the
+problem. However I found that the issue kept coming back. I just decided to
+remove all the apps and assign apps manually. You can do the same by following
+this guide <a href=http://osxdaily.com/2011/02/03/clear-open-with-menu-mac/>here</a>.</p></div></section></body></html>

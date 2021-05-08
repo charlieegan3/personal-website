@@ -1,0 +1,69 @@
+<!doctype html><html><head><title>Bringing Photoshop image-stacking to mobile with FFmpeg, Hugin, ImageMagick & Hyper.sh - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Update You can try the project here. Code available here.
+Update 2 I have taken down the live demo - there are now many apps that make this easy on phones."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/"><meta property="og:title" content="Bringing Photoshop image-stacking to mobile with FFmpeg, Hugin, ImageMagick & Hyper.sh"><meta property="og:description" content="Update You can try the project here. Code available here.
+Update 2 I have taken down the live demo - there are now many apps that make this easy on phones."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2018-04-22T22:50:55"><meta property="og:image" content="https://charlieegan3.com/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/4k.jpg"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Bringing Photoshop image-stacking to mobile with FFmpeg, Hugin, ImageMagick & Hyper.sh</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Apr 22 2018</div><div class=post-content><p><strong>Update</strong> <em>You can try the project <a href=https://charlieegan3-stackr.herokuapp.com/>here</a>. Code available <a href=https://github.com/charlieegan3/stackr>here</a>.</em></p><p><strong>Update 2</strong> I have taken down the live demo - there are now many apps that make this easy on phones.</p><h2 id=intro>Intro</h2><p>At the end of last year I started paying for a Creative Cloud subscription so
+that I could use the <a href=https://helpx.adobe.com/photoshop/using/adaptive-wide-angle-filter.html>Adaptive Wide-Angle Filter</a>
+to correct distorted images taken with my <a href=https://www.shopmoment.com/shop/new-superfish-lens>Moment Superfish Lens</a>
+and play with <a href=https://helpx.adobe.com/photoshop/using/image-stacks.html>image stacking</a>
+to take more interesting night-time shots.</p><p>While the Adaptive Wide-Angle in Photoshop is really well implemented, (Example
+<a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/lens_distorted.jpg>before</a>
+and
+<a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/lens_corrected.jpg>after</a>)
+I found that with the
+<a href=http://www.skrwt.com/>SKRWT</a> &lsquo;suite&rsquo; of apps I could get much the same result
+from using just my phone.</p><p>However, I&rsquo;ve been unable to find an app that does image stacking on Android.
+This is a stacked-edit from Photoshop using photos taken on my phone over
+Christmas. Note the stars and roads in the distance.</p><p><a href=https://photos.charlieegan3.com/photos/2017-12-29-1680667219972842009/><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/photoshop_stacked.jpg alt="stacked image from photoshop"></a></p><p>I&rsquo;d love to be able to create images like this without needing to sit down and
+wait for Photoshop as well as various uploads and downloads to Dropbox in
+between.</p><p>I&rsquo;m opposed to using Photoshop in my &lsquo;workflow&rsquo; for the following reasons:</p><ul><li>I need to use my laptop, often this means uploading many photos and loading
+them into a stack takes ages.</li><li>It is not free</li><li>Pouring over Photoshop for hours on your laptop is hardly in the spirit of
+&ldquo;the best camera is the one you have with you&rdquo;</li></ul><p>So with SKRWT covering my Adaptive Wide-angle needs I set out to create a
+tool for image stacking I could use from my phone.</p><h2 id=fundamentals>Fundamentals</h2><p>At the most basic level I need to be able to turn videos into stacked stills
+with the option of tuning various parameters (I can turn sets of images into
+videos on my phone if need be - Google Photos to create an Animation, then GIF
+to MP4).</p><p>You can do this with the following commands:</p><pre><code>ffmpeg -i video.mp4 -r $FPS -f image2 frame_%07d.png
+convert frame_* -evaluate-sequence mean stacked.jpg
+</code></pre><p>Sometimes I also need to align the stills picked from the video:</p><pre><code>ffmpeg -i video.mp4 -r $FPS -f image2 frame_%07d.png
+
+if [ &quot;$ALIGN&quot; = true ] ; then
+	align_image_stack -m -a aligned_ frame_*
+	convert aligned_* -evaluate-sequence mean stacked.jpg
+else
+	convert frame_* -evaluate-sequence mean stacked.jpg
+fi
+</code></pre><p>It&rsquo;d also be nice to use more of the evaluate-sequence modes:</p><pre><code>MODE=median
+MODE=min
+MODE=max
+convert frame_* -evaluate-sequence $MODE stacked.jpg
+</code></pre><p>I tested this out on my laptop and it worked well enough. Aligning the images
+was slow but it takes forever in Photoshop too.</p><p>This is the easy bit though. Next I needed to work out how to run this from my
+phone.</p><h2 id=i-called-my-thing-stackr>I called my thing stackr</h2><p>From the commands above I knew I needed FFmpeg, Hugin and ImageMagick. I also
+knew that I couldn&rsquo;t run this on Heroku because of timeouts. Similarly, it&rsquo;s
+awkward to run on Lambda as sometimes a job might take over 5 minutes to
+complete.</p><p>What I needed was to be able to run an arbitrary container with some params.
+Hyper.sh to the rescue!</p><p>I&rsquo;d recently enjoyed using Hyper.sh to <a href=/posts/2018-04-07-i-made-an-interactive-portfolio-site-with-hugo>automate my photo
+website</a>
+and thought it&rsquo;d work well here too - mainly because containers can run for as
+long as required.</p><p>I also needed to run a frontend that could handle the video uploads and present
+the options form. I decided to just run this as a sinatra app on Heroku - using
+what I knew best in the hope of just getting something working.</p><p>This is what it looked like by the time I had an MVP. First upload a video with
+frames to use in the stack. Choosing the mode, whether to auto align images and
+FPS at the same time.</p><p><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/form.png alt=form></p><p>Next, something like this happens:</p><p><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/diagram.png alt="system diagram"></p><p>Using a bucket to store the video, the Heroku app spawns a container to
+generate the stacked image. When it&rsquo;s done, it sends me a notification with
+<a href=https://pushover.net/>Pushover</a>.</p><p>With this I can quite easily experiment with different stack modes from my phone</p><ul><li>and with minimal battery impact too.</li></ul><h2 id=some-examples>Some Examples</h2><p>I&rsquo;ve been inside all weekend so I&rsquo;ve got to draw from my past videos for this
+bit. I only keep the stacked image - not the all the source images.</p><p>Standard blurring out the motion of the waves example:</p><p><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/gun.jpg alt=gun>
+<a href=https://photos.charlieegan3.com/photos/2016-05-29-1261099882943047095/>Source Video</a></p><p>Stacking is also good for removing people from busy shots:</p><p><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/crowd.jpg alt=crowd>
+<a href=https://photos.charlieegan3.com/photos/2014-10-22-836785782090590192/>Source Video</a></p><p>These are both pretty poor quality videos taken on a Galaxy Note II. Here&rsquo;s one
+of a plane coming in to land at Heathrow this afternoon. No tripod, 4k, pixel 2.
+(Click for full-size)</p><p><a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/4k.jpg><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/4k.jpg alt=4k></a>
+<a href=https://photos.app.goo.gl/9tvOK7kZRoKtke9p1>Source Video</a></p><p>Or one from a video I took on the way to work:</p><p><a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/church.jpg><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/church.jpg alt=4k></a>
+<a href=https://photos.app.goo.gl/jl985Kju1IuqPtX32>Source Video</a></p><p>This one&rsquo;s based of a short video waiting for the lights in putney, just
+holding it in my hand.</p><p><a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/putney.jpg><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/putney.jpg alt=4k></a>
+<a href=https://photos.app.goo.gl/yEZkWcx0NK2VgXIs2>Source Video</a></p><p>You can also create some more unusual ones:</p><p><a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/trainblur.jpg><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/trainblur.jpg alt=4k></a>
+<a href=https://photos.app.goo.gl/zTSZhgbvMN90K02c2>Source Video</a></p><p>Sometimes it&rsquo;s not always best to attempt to align the shots!</p><p><a href=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/art.jpg><img src=/posts/2018-04-22-bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh/art.jpg alt=4k></a>
+<a href=https://photos.app.goo.gl/zTSZhgbvMN90K02c2>Source Video</a></p><h2 id=how-can-i-get-it>How can I get it?</h2><p>If you&rsquo;re interested to try this out let me know and I can let you in. I&rsquo;m
+keeping the site private as each upload as the potential to incur a cost.</p><p>I expect to post the code on GitHub in the next day or so.</p></div></section></body></html>

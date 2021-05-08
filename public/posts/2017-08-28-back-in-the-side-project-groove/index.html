@@ -1,0 +1,54 @@
+<!doctype html><html><head><title>Back in the side-project groove - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Since starting work full-time I&rsquo;ve been lacking the energy and time for side projects. Recently I&rsquo;ve had a few free weekends and have completed initial versions of two new projects."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2017-08-28-back-in-the-side-project-groove/"><meta property="og:title" content="Back in the side-project groove"><meta property="og:description" content="Since starting work full-time I&rsquo;ve been lacking the energy and time for side projects. Recently I&rsquo;ve had a few free weekends and have completed initial versions of two new projects."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2017-08-28T16:25:45"><meta property="og:image" content="https://charlieegan3.com/posts/2017-08-28-back-in-the-side-project-groove/borked.png"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Back in the side-project groove</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Aug 28 2017</div><div class=post-content><p>Since starting work full-time I&rsquo;ve been lacking the energy and time for side
+projects. Recently I&rsquo;ve had a few free weekends and have completed initial
+versions of two new projects.</p><p>I&rsquo;ve been trying to write more in the Go language as well as experimenting with
+new AWS products. The first project came out of a way to experiment with these.
+I generally like to learn new things as part of a project that does something -
+this time <em>Borked</em> was what I made.</p><p>I had the idea while I was working on charlieegan3.com. I&rsquo;d introduced a few
+broken links as I&rsquo;d migrated the site to different setups over the years. I&rsquo;d
+scanned the site with
+<a href=https://github.com/stevenvachon/broken-link-checker>BLS</a> in a docker
+container and fixed the links. I also added
+<a href=https://github.com/gjtorikian/html-proofer>HTMLProofer</a> to my site to help
+stop me introducing any more.</p><p>With that completed, I was on the look out for another project. A concurrent
+broken link scanner seemed like a good Go starter project - BLS was quite slow.
+The very first version of Borked was a dead simple tool to scan sites for broken
+links.</p><p>I came back to it sometime later to build v2.0 - the web version. I&rsquo;d learned
+about Go <a href=https://golang.org/pkg/context/>context</a> in the meantime and was also
+keen to try out AWS Lambda.</p><p><a href=https://borked.charlieegan3.com><img src=/posts/2017-08-28-back-in-the-side-project-groove/borked.png alt=borked></a>
+<em>Borked v2.0</em></p><p>I built Borked with the <a href=https://github.com/eawsy/aws-lambda-go-net>eawsy Go lambda
+shim</a> - behind an API
+Gateway. The web client is hosted on S3 and cloudfront - I&rsquo;d enabled CORS on the
+function endpoint.</p><p>The client makes requests to the function with a root URL. The function must
+respond within 30 seconds when behind an API Gateway. I have it configured to
+return the results after 10 seconds. The function returns a list of scanned as
+well as incomplete links. The web client then sends subsequent requests to
+complete all the site&rsquo;s internal links - the function doesn&rsquo;t really have any
+representation of a &lsquo;job&rsquo;.</p><p>Storing the progress of the scanning job on the client allows the function to be
+quite simple. It&rsquo;s not ideal but it works and seems to work reasonably quickly
+too.</p><p>I&rsquo;d like to add some extra features to Borked - I&rsquo;d like to allow for
+customisations like exclude patterns or User-Agent settings.</p><p>Based on the structure for Borked this weekend I was able to assemble RSSMerge
+pretty quickly.</p><p><a href=https://rssmerge.charlieegan3.com><img src=/posts/2017-08-28-back-in-the-side-project-groove/rssmerge.png alt=rssmerge></a>
+<em>RSSMerge Homepage</em></p><p>I&rsquo;ve been using <a href=https://feedbin.com/>Feedbin</a> as an RSS reader for about 6
+months - it&rsquo;s got some good features but I&rsquo;m really looking for a different
+setup. I&rsquo;m no longer commuting by train and would rather have a regular roundup
+of my followed feeds than trying to keep up with every item in each.</p><p>Creating a merged RSS feed would allow me to get all my feeds as a single
+roundup email from IFTTT.</p><p>RSSMerge will take a list of RSS feeds; fetch them; interleave them in order;
+remove the content (leaving only the title and link) and return a new RSS feed.
+Feeds are again fetched concurrently so it&rsquo;s quite quick (even a list of about
+50 feeds only takes a few seconds).</p><p>The list of feeds is passed to the API as a link to a raw Gist. This is a bit of
+a hack but it means that RSSMerge doesn&rsquo;t require any state at all. The feed URL
+of the RSSMerge feed is just the endpoint + raw feed list parameter. E.g.</p><pre><code>https://rssmerge.cluster.charlieegan3.com/build?source=...
+</code></pre><p>(<a href="https://rssmerge.cluster.charlieegan3.com/build?source=https://gist.githubusercontent.com/charlieegan3/9190409c458bc4aa17ef52a8b682aba4/raw/60043038a1c8f668acddb506db58bdc049f144bd/rssmerge_sample">Example link</a>)</p><p>This can be used by IFTTT to create roundups like this:</p><p><img src=/posts/2017-08-28-back-in-the-side-project-groove/roundup.png alt=roundup>
+<em>IFTTT Roundup - note multiple feed sources</em></p><p>I have a history of not sticking to a news consumption strategy for more than a
+year but we&rsquo;ll see how this goes.</p><p>I think for my next project I&rsquo;m going to make it something longer term. I might
+even deliberately avoid projects that could be immediately useful for me. I&rsquo;ve
+found that having something I can <em>almost</em> use a little stressful and I&rsquo;ll spend
+too many late nights trying to get it working. I&rsquo;m not sure that&rsquo;s particularly
+healthy or productive. Having a project that that was more complicated and
+longer term might help keep things more manageable while being a more valuable
+learning experience.</p></div></section></body></html>

@@ -1,0 +1,64 @@
+<!doctype html><html><head><title>What to do with all these cluster updates... - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="This year at work I&rsquo;ve been building out a platform on Google&rsquo;s managed Kubernetes offering GKE. While GKE makes it easier to automate the provisioning and management of clusters - managing updates of anything more than a handful of clusters can quickly becomes painful without the right tools."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2019-11-06-all-these-clusters/"><meta property="og:title" content="What to do with all these cluster updates..."><meta property="og:description" content="This year at work I&rsquo;ve been building out a platform on Google&rsquo;s managed Kubernetes offering GKE. While GKE makes it easier to automate the provisioning and management of clusters - managing updates of anything more than a handful of clusters can quickly becomes painful without the right tools."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2019-11-06T19:51:40"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">What to do with all these cluster updates...</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Nov 6 2019</div><div class=post-content><p>This year at work I&rsquo;ve been building out a platform on Google&rsquo;s managed
+Kubernetes offering GKE. While GKE makes it easier to automate the provisioning
+and management of clusters - managing updates of anything more than a handful of
+clusters can quickly becomes painful without the right tools.</p><p>This post outlines some features I&rsquo;ve either come to value or will prioritize in
+future when faced with cluster sprawl. I limit these features to the practical
+management of clusters updates so as to keep the scope of the post small.
+Monitoring & alerting would be another interesting list but you won&rsquo;t find that
+here&mldr;</p><h2 id=where-did-all-these-clusters-come-from-anyway>Where did all these clusters come from anyway?</h2><p>It&rsquo;s easy to underestimate the number of clusters you&rsquo;ll end up managing. Sure
+you&rsquo;ll maybe have one for each environment. Usually that&rsquo;d be three at a
+minimum, for me this number was five.</p><p>This isn&rsquo;t a post about managing five clusters though. There are lots of
+dimensions that have a multiplicative effect. These will be different for each
+of us. My other dimensions were separate hardware for data processing reasons;
+long term migrations to and from different cloud accounts and deployments in
+different regions.</p><p>The obvious one is different teams or groups. However, I didn&rsquo;t find myself in
+this situation.</p><p>All in all, in the end I found myself managing a fleet of around 30 clusters.</p><p>I&rsquo;m of the view that the best way to create and update GKE clusters right now is
+using Terraform. Where I work at Jetstack we have a <a href=https://github.com/jetstack/terraform-google-gke-cluster>Terraform
+module</a> for this job
+if you&rsquo;ve not started yet. This post will make some references to Terraform use.</p><h2 id=multi-dimensional-cluster-deployments>Multi-dimensional cluster deployments</h2><p>With my environments multiplied by my other dimensions I found myself with N
+development, N stage and N production (etc. etc.) clusters. This quickly grew to
+a number that made it impossible to complete a master+node pool upgrade within a
+working day when deploying updates in series.</p><p>I want a means of controlling which clusters can be updated in parallel and
+which can&rsquo;t. For example, I might want to roll out all my dev clusters at the
+same time.</p><p>Many continuous deployment tooling is not set up in this way and as more cluster
+configs land it can quickly get out of hand if they&rsquo;re run in series. I suppose
+cluster upgrades are likely to be the longest deployments in the whole business
+(and perhaps by some margin too).</p><p>This raises the question - are synchronous pipelines really the best way to roll
+out cluster updates? In the long term, with things like Cluster API perhaps
+not&mldr;</p><h2 id=one-plan-to-rule-them-all>One plan to rule them all</h2><p>When you&rsquo;re sitting in front of a multi-hour pipeline run, it&rsquo;s nice to know
+what&rsquo;s coming up next. With Terraform version prefixes or GKE alias versions
+it&rsquo;s possible to find that you&rsquo;re actually about to roll out a minor update to
+all your clusters.</p><p>I guess this comes down in part to one&rsquo;s use of Auto-upgrade. I was not using
+this feature in this case.</p><p>Terraform <code>plan</code> you might say. Perhaps, but I think there&rsquo;s a benefit to
+keeping the Terraform stacks small to reduce the blast radius and enable the
+above feature of concurrent cluster deployments.</p><p>In the end this was a script for me. It parsed our cluster manifests and made
+calls against the GKE APIs to check the master and node versions against the
+values we had in config. This allowed me to warn of inconsistencies from missed
+runs and any unexpected updates.</p><p>I suppose that ideally these might be better implemented as a Prometheus
+exporter that alerts when config falls behind the available GKE version for that
+prefix in that location.</p><h2 id=terraform-version_prefix-and-timeouts>Terraform <code>version_prefix</code> and <code>timeouts</code></h2><p>There&rsquo;s a data resource in Terraform called <code>google_container_engine_versions</code>.
+This enables the selection of cluster versions from the available versions in
+that location in a predictable manner.</p><p>This can be used to give a similar behaviour to the <a href=https://cloud.google.com/kubernetes-engine/versioning-and-upgrades#specifying_cluster_version>GKE alias
+version</a>
+feature - however that can lead to version mismatches when deploying in
+different regions due to differences in availability. With this feature it&rsquo;s
+possible to use a prefix (read GKE alias) but also drop down to a fixed version
+if required. There&rsquo;s an example of this in my <a href=https://github.com/charlieegan3/infrastructure/blob/3fa0a3da49ba06b5f63edf5fa62e66ba0acd0436/gcp/charlieegan3-cluster/cluster.tf#L1-L13>personal infrastructure
+repo</a>.</p><p><a href=https://www.terraform.io/docs/configuration/resources.html#operation-timeouts><code>timeouts</code></a>
+are probably part of your config already but they deserve a mention. Set these
+allowing for 30 mins for a regional master upgrade and 12 mins for a node
+upgrade if you want to be safe. Those are around the maximums I&rsquo;ve seen this
+year anyway.</p><h2 id=pesky-pdbs>Pesky PDBs</h2><p><code>PodDisruptionBudget</code>s can easily be misconfigured by tenants and can delay node
+upgrades to their maximum deadlines. Something I&rsquo;d to play with is an OPA policy
+to block PDB resources where minAvailable is set to an inappropriate value for
+the desired replicas of that deployment.</p><p>That&rsquo;s my half wish list, half brain dump of GKE cluster upgrade tools.</p><p>Once feature that would make a lot of this less painful would be be some dials
+to tune on the rate at which GKE cycles nodes. Something like a deployment with
+maxSurge and maxUnavailable would be nice but on a basic level a feature
+comparable to AWS CodeDeploy&rsquo;s AllAtOnce would be good to have for some pre
+production environments. GKE Product team if you&rsquo;re listening&mldr;</p><p>I was working with relatively small clusters of big nodes, thoughts and prayers
+for those with more nodes&mldr; hope you found an entertaining book to read&mldr;</p></div></section></body></html>

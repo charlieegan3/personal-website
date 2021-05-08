@@ -1,0 +1,32 @@
+<!doctype html><html><head><title>Querying dependency graphs with Cypher and Neo4j - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="As part of my honours project I need to query dependency graphs. A dependency graph is a directed graph where edges represent grammatical relations and nodes are tokens."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/"><meta property="og:title" content="Querying dependency graphs with Cypher and Neo4j"><meta property="og:description" content="As part of my honours project I need to query dependency graphs. A dependency graph is a directed graph where edges represent grammatical relations and nodes are tokens."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2016-03-03T11:51:00"><meta property="og:image" content="https://charlieegan3.com/posts/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph.jpg"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Querying dependency graphs with Cypher and Neo4j</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Mar 3 2016</div><div class=post-content><p>As part of my honours project I need to query dependency graphs. A dependency graph is a directed graph where edges represent grammatical relations and nodes are tokens. I use CoreNLP and it gives a nice visualisation:</p><p><img src=/posts/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph.jpg alt=dep_graph></p><p>So I&rsquo;m using CoreNLP, why not use tregex to query the dependency parse? Short answer I couldn&rsquo;t get it working for my questions. Longer answer, tregex and semgrex documentation wasn&rsquo;t great, I started playing around with Neo4j in a container and found it could do what I wanted. It also offered a means to persist graphs for many texts that I could query collectively at a later date.</p><p>My queries needed to extract a verb and it&rsquo;s arguments. Arguments need to be labelled correctly, this is dependent on the relation to the verb (or another one of it&rsquo;s arguments). For example, if we have the query <code>nounPhrase verb prep nounPhrase</code> then the <code>prep</code> is not linked directly to the verb but rather the second noun phrase, often the sentence object. Cypher implements an accessible syntax for expressing such patterns, this the query I used for the <code>np v prep np</code> pattern above:</p><pre><code>MATCH (verb:Node)
+MATCH (verb)-[rel_nsubj:REL]-&gt;(nsubj:Node)
+MATCH (verb)-[rel_dobj:REL]-&gt;(dobj:Node)
+MATCH (dobj)-[rel_prep:REL]-&gt;(prep:Node)
+WHERE verb.part_of_speech =~ 'VB.?'
+AND rel_nsubj.label = &quot;nsubj&quot;
+AND rel_dobj.label =~ 'nmod.*'
+AND rel_prep.label = &quot;case&quot;
+RETURN nsubj, verb, prep, dobj;
+</code></pre><p>(My real query is a little different to limit the verb to a set of allowed verbs)</p><p>This, Cypher syntax, is the nicest way I&rsquo;ve seen so far to express patterns of this form. It also works well for more intricate queries such as this one:</p><pre><code>MATCH (verb:Node)
+MATCH (verb)-[rel_nsubj:REL]-&gt;(nsubj:Node)
+MATCH (verb)-[rel_nmod:REL]-&gt;(nmod:Node)
+MATCH (nmod)-[rel_prep:REL]-&gt;(prep:Node)
+MATCH (verb2:Node)-[rel_advcl:REL]-(verb)
+MATCH (verb2)-[rel_prep2:REL]-(prep2:Node)
+
+WHERE verb.part_of_speech =~ 'VB.?'
+AND rel_nsubj.label = &quot;nsubj&quot;
+AND rel_nmod.label =~ 'nmod.*'
+AND rel_prep.label = &quot;case&quot;
+AND rel_advcl.label =~ 'advcl|ccomp'
+AND verb2.part_of_speech =~ 'VB.?'
+AND rel_prep2.label =~ 'mark|case'
+RETURN nsubj, verb, prep, nmod, prep2, verb2;
+</code></pre><p>This allows sentences like this one to be matched:
+<img src=/posts/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/graph2.jpg alt=dep_graph2></p><p>All this is in the interest of information extraction, getting these &lsquo;points&rsquo; extracted correctly is a key part of my project. I&rsquo;m only just starting to move onto the next step which is using the extracted information for summarization tasks. I&rsquo;m specifically interested in investigating the relationships between things that people say, for example, those who talk about X are also likely to talk about Y, but not Z. Below is the kind of graph I&rsquo;m working with at the moment (abortion is one of my sample debate corpora), more fine-grained summaries including information about who talks about what comes next.</p><p><img src=/posts/2016-03-03-querying-dependency-graphs-with-cypher-and-neo4j/summary.jpg alt=summary_graph>
+(I think this last one&rsquo;s quite interesting)</p></div></section></body></html>

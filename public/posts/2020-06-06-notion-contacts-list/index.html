@@ -1,0 +1,113 @@
+<!doctype html><html><head><title>Building a contact list in Notion that works for me
+- charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Earlier this week I found myself migrating my contact list to Notion. I decided to do this because I was lacking the following features in Outlook to effectively manage my contacts:"><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2020-06-06-notion-contacts-list/"><meta property="og:title" content="Building a contact list in Notion that works for me"><meta property="og:description" content="Earlier this week I found myself migrating my contact list to Notion. I decided to do this because I was lacking the following features in Outlook to effectively manage my contacts:"><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2020-06-06T15:00:00"><meta property="og:image" content="https://charlieegan3.com/posts/2020-06-06-notion-contacts-list/export.png"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Building a contact list in Notion that works for me</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Jun 6 2020</div><div class=post-content><p>Earlier this week I found myself migrating my contact list to Notion. I decided
+to do this because I was lacking the following features in Outlook to
+effectively manage my contacts:</p><ul><li>Syncing delays and inconsistencies with Exchange for contacts</li><li>Not being able to have nicknames work in the way that I want (e.g. only on my phone / WhatsApp)</li><li>A means of archiving contacts, without deleting them</li><li>&mldr;and the straw that broke the camels back: being able to store birthdays and have a birthday calendar (this is something that is meant to be supported but it just doesn&rsquo;t work at all)</li></ul><p>I&rsquo;ve had a lot of fun in putting Notion to work for me over the last 6 months
+and thought it was worth a shot for this too. A few years ago I was set on
+self-hosting things, now I think I&rsquo;m more interested in trying to make sure that
+there are paths between my cloud accounts for my data and that the data works
+for me as I need it to. I think this is a good example of that &lsquo;philosophy&rsquo;.</p><h2 id=what-counted-as-minimum-and-viable>What counted as minimum and viable?</h2><p>The requirements were pretty simple. I need to have a contact list in Notion
+that tracked birthdays, supported nicknames and archiving. This needed to be
+simple to sync to my phone - even if it were to be a manual task (I don&rsquo;t update
+my contacts much and can still update in Notion from anywhere).</p><p>I decided to use iCloud to get the contacts to my phone. On
+<a href=http://icloud.com/>iCloud.com</a> it&rsquo;s possible to upload a vcard with many
+contacts. It&rsquo;s also possible to delete all your contacts easily when uploading a
+new list (not possible on Outlook). If I ever find myself in the situation where
+I have an Android phone again I&rsquo;ll find some way to go via Google or similar.</p><p>The other nice thing about iCloud and vcards is that they support base64 encoded
+JPEGs for profile pictures. This means I can manage pictures in Notion too and
+format when syncing.</p><h2 id=from-notion-to-disk-to-icloud---with-the-help-of-some-ruby>From Notion, to disk, to iCloud - with the help of some Ruby</h2><p>While I was happy for the process to be manually run, I wanted to automate what
+was easy. This is what I ended up with.</p><p>I have a database in Notion that I can export (with subpages to get pictures)</p><p><img src=export.png alt=export.png></p><p>The table has the following properties:</p><p><img src=properties.png alt=properties.png></p><p>The computed fields are included in the export. <code>Display Name</code> is set to the
+nickname if present and otherwise both First and Last names. This is the value
+that I want to use in the contacts app on my phone.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=color:#66d9ef>if</span>(
+  prop(<span style=color:#e6db74>&#34;Nickname&#34;</span>) <span style=color:#f92672>!=</span> <span style=color:#e6db74>&#34;&#34;</span>,
+  prop(<span style=color:#e6db74>&#34;Nickname&#34;</span>),
+  concat(prop(<span style=color:#e6db74>&#34;First Name&#34;</span>), <span style=color:#e6db74>&#34; &#34;</span>, prop(<span style=color:#e6db74>&#34;Last Name&#34;</span>))
+)
+</code></pre></div><p><code>Days Until Birthday</code> is set by the following Notion formula and is used to sort
+on a different birthday view of the data.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>dateBetween(
+  dateAdd(
+    prop(<span style=color:#e6db74>&#34;Birthday&#34;</span>),
+    dateBetween(
+      now(),
+      prop(<span style=color:#e6db74>&#34;Birthday&#34;</span>),
+      <span style=color:#e6db74>&#34;years&#34;</span>
+    ) <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>,
+    <span style=color:#e6db74>&#34;years&#34;</span>
+  ),
+  now(),
+  <span style=color:#e6db74>&#34;days&#34;</span>
+)
+</code></pre></div><p>With the data in this format, it was relatively simple to write a script that converted the exported Notion data (CSV and image files) into a single vcard file.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=color:#75715e>#!/usr/bin/env ruby</span>
+
+require <span style=color:#e6db74>&#34;csv&#34;</span>
+require <span style=color:#e6db74>&#34;base64&#34;</span>
+require <span style=color:#e6db74>&#34;rmagick&#34;</span>
+require <span style=color:#e6db74>&#34;vcardigan&#34;</span>
+
+input <span style=color:#f92672>=</span> <span style=color:#66d9ef>Dir</span><span style=color:#f92672>.</span>glob(<span style=color:#e6db74>&#34;Index*.csv&#34;</span>)
+fail <span style=color:#e6db74>&#34;uncertain input, expected single CSV file&#34;</span> <span style=color:#66d9ef>if</span> input<span style=color:#f92672>.</span>size <span style=color:#f92672>!=</span> <span style=color:#ae81ff>1</span>
+table <span style=color:#f92672>=</span> <span style=color:#66d9ef>CSV</span><span style=color:#f92672>.</span>parse(<span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>read(input<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>]</span>), <span style=color:#e6db74>headers</span>: <span style=color:#66d9ef>true</span>)
+
+vcards <span style=color:#f92672>=</span> <span style=color:#f92672>[]</span>
+table<span style=color:#f92672>.</span>each <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>c<span style=color:#f92672>|</span>
+  <span style=color:#75715e># if the contact has been archived, skip during export</span>
+  <span style=color:#66d9ef>next</span> <span style=color:#66d9ef>if</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Archived&#34;</span><span style=color:#f92672>]</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;Yes&#34;</span>
+
+  name <span style=color:#f92672>=</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Display Name&#34;</span><span style=color:#f92672>]</span>
+
+  vcard <span style=color:#f92672>=</span> <span style=color:#66d9ef>VCardigan</span><span style=color:#f92672>.</span>create
+  vcard<span style=color:#f92672>.</span>name(<span style=color:#f92672>*</span>name<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34; &#34;</span>)<span style=color:#f92672>.</span>reverse)
+  vcard<span style=color:#f92672>.</span>fullname name
+
+  <span style=color:#75715e># I don&#39;t really use &#39;work&#39; and &#39;home&#39; emails much, so I just</span>
+  <span style=color:#75715e># have a plain email for each and store them as a single field</span>
+  c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Emails&#34;</span><span style=color:#f92672>].</span>to_s<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)<span style=color:#f92672>.</span>map(<span style=color:#f92672>&amp;</span><span style=color:#e6db74>:chomp</span>)<span style=color:#f92672>.</span>each <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>email<span style=color:#f92672>|</span>
+    vcard<span style=color:#f92672>.</span>email email
+  <span style=color:#66d9ef>end</span>
+
+  <span style=color:#66d9ef>unless</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Home Phone&#34;</span><span style=color:#f92672>].</span>nil?
+    vcard<span style=color:#f92672>[</span><span style=color:#e6db74>&#39;item0&#39;</span><span style=color:#f92672>].</span>add(<span style=color:#e6db74>&#39;tel&#39;</span>, c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Home Phone&#34;</span><span style=color:#f92672>]</span>)
+    vcard<span style=color:#f92672>[</span><span style=color:#e6db74>&#39;item0&#39;</span><span style=color:#f92672>].</span>add(<span style=color:#e6db74>&#39;x-ablabel&#39;</span>, <span style=color:#e6db74>&#39;Home&#39;</span>)
+  <span style=color:#66d9ef>end</span>
+
+  <span style=color:#66d9ef>unless</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Mobile Phone&#34;</span><span style=color:#f92672>].</span>nil?
+    vcard<span style=color:#f92672>[</span><span style=color:#e6db74>&#39;item1&#39;</span><span style=color:#f92672>].</span>add(<span style=color:#e6db74>&#39;tel&#39;</span>, c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Mobile Phone&#34;</span><span style=color:#f92672>]</span>)
+    vcard<span style=color:#f92672>[</span><span style=color:#e6db74>&#39;item1&#39;</span><span style=color:#f92672>].</span>add(<span style=color:#e6db74>&#39;x-ablabel&#39;</span>, <span style=color:#e6db74>&#39;Mobile&#39;</span>)
+  <span style=color:#66d9ef>end</span>
+
+  <span style=color:#66d9ef>unless</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Note&#34;</span><span style=color:#f92672>].</span>nil?
+    vcard<span style=color:#f92672>.</span>note <span style=color:#f92672>=</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Note&#34;</span><span style=color:#f92672>].</span>gsub(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#e6db74>&#39;\n&#39;</span>)
+  <span style=color:#66d9ef>end</span>
+
+  <span style=color:#66d9ef>unless</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Company&#34;</span><span style=color:#f92672>].</span>nil?
+    vcard<span style=color:#f92672>.</span>org <span style=color:#f92672>=</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Company&#34;</span><span style=color:#f92672>].</span>to_s
+  <span style=color:#66d9ef>end</span>
+
+  <span style=color:#75715e># pictures need to be quite small, if they&#39;re too large icloud</span>
+  <span style=color:#75715e># will fail to import that contact.</span>
+  <span style=color:#66d9ef>unless</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Profile Picture&#34;</span><span style=color:#f92672>].</span>nil?
+    path <span style=color:#f92672>=</span> c<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;Profile Picture&#34;</span><span style=color:#f92672>].</span>gsub(<span style=color:#e6db74>&#34;%20&#34;</span>, <span style=color:#e6db74>&#34; &#34;</span>)
+    image <span style=color:#f92672>=</span> <span style=color:#66d9ef>Magick</span><span style=color:#f92672>::</span><span style=color:#66d9ef>Image</span><span style=color:#f92672>.</span>read(path)<span style=color:#f92672>.</span>first
+    image<span style=color:#f92672>.</span>change_geometry!(<span style=color:#e6db74>&#34;200x200&#34;</span>) { <span style=color:#f92672>|</span>cols, rows, img<span style=color:#f92672>|</span>
+        newimg <span style=color:#f92672>=</span> img<span style=color:#f92672>.</span>resize(cols, rows)
+        newimg<span style=color:#f92672>.</span>write(path <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;.small&#34;</span>)
+    }
+    b64 <span style=color:#f92672>=</span> <span style=color:#66d9ef>Base64</span><span style=color:#f92672>.</span>strict_encode64(<span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>read(path <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;.small&#34;</span>))
+    vcard<span style=color:#f92672>.</span>photo b64, <span style=color:#e6db74>:encoding</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#34;b&#34;</span>, <span style=color:#e6db74>:type</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#34;JPEG&#34;</span>
+  <span style=color:#66d9ef>end</span>
+
+  vcards <span style=color:#f92672>&lt;&lt;</span> vcard<span style=color:#f92672>.</span>to_s
+<span style=color:#66d9ef>end</span>
+
+<span style=color:#75715e># contacts.vcard is the file to upload to icloud</span>
+<span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#34;contacts.vcard&#34;</span>, vcards<span style=color:#f92672>.</span>join)
+puts <span style=color:#e6db74>&#34;done&#34;</span>
+</code></pre></div><p>Once that&rsquo;s run, I open <a href=http://icloud.com/>iCloud.com</a>, delete all the contacts
+(ctrl+A, delete) and upload the file. It&rsquo;s a very quick process and they&rsquo;re on
+my phone instantly.</p><h2 id=what-was-this-all-about-really-and-why-did-you-write-a-post-about-it>What was this all about really and why did you write a post about it?</h2><p>It&rsquo;s not the most exciting topic but it&rsquo;s something that&rsquo;s made me happy this
+week. I feel like scratched an itch and it paid off with minimal effort. I think
+I spent longer writing this post than the script.</p></div></section></body></html>

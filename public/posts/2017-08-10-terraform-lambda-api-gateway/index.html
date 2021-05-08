@@ -1,0 +1,222 @@
+<!doctype html><html><head><title>Terraform adventures: Deploy a serverless microservice ~2 mins - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="terraform destroy has been a game changer for my public cloud toy projects. Building up a reproduceable config that can brought straight back the next time you come to work on the project is invaluable."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2017-08-10-terraform-lambda-api-gateway/"><meta property="og:title" content="Terraform adventures: Deploy a serverless microservice ~2 mins"><meta property="og:description" content="terraform destroy has been a game changer for my public cloud toy projects. Building up a reproduceable config that can brought straight back the next time you come to work on the project is invaluable."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2017-08-10T22:18:40"><meta property="og:image" content="https://charlieegan3.com/posts/2017-08-10-terraform-lambda-api-gateway/lambda-in-2.png"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Terraform adventures: Deploy a serverless microservice ~2 mins</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Aug 10 2017</div><div class=post-content><p><code>terraform destroy</code> has been a game changer for my public cloud toy projects.
+Building up a reproduceable config that can brought straight back the next time
+you come to work on the project is invaluable.</p><p>Quite coincidentally, after my <a href=/posts/2017-07-16-host-a-static-website-5-minutes>last
+post</a> about migrating my
+personal site to AWS I found myself grappling with another X minute getting
+started tutorial in Terraform. I&rsquo;ve had this idea for a web app that scans
+websites for broken links that isn&rsquo;t generally terrible and might even be
+considered fast. The idea was that the work would be done on Lambda and the
+results returned to a largely simple S3 hosted site (now that I know how to do
+that!).</p><p>This took me a week of evenings and a weekend to get working. The main reason
+that it took so long was that I didn&rsquo;t really have any idea what API gateway
+even was beforehand. API Gateway also has <em>a lot</em> to configure - which makes it
+a little overwhelming to configure - even for the basic case.</p><p><img src=/posts/2017-08-10-terraform-lambda-api-gateway/lambda-in-2.png alt="Deploy AWS lambda and API gateway with terraform"></p><h2 id=things-i-tried>Things I tried</h2><p>I started out doing my usual trick of copying the Terraform docs. There&rsquo;s an
+example on there that appears to cover this very topic - <a href=https://www.terraform.io/docs/providers/aws/r/api_gateway_integration.html#lambda-integration>this
+one</a>.
+I followed that but found that I my requests weren&rsquo;t getting into the function
+at all. This example also doesn&rsquo;t have logging configured so it&rsquo;s hard to work
+out exactly what&rsquo;s going wrong.</p><p>I also looked <a href=https://andydote.co.uk/2017/03/17/terraform-aws-lambda-api-gateway/>at this
+post</a> but
+found that it was missing some config for the integration responses.</p><p>I found the <a href=https://github.com/TailorDev/hello-lambda>hello-lambda repo</a>
+useful but in the end opted for a more minimal API gateway config using a
+PROXY. I opted to do this since it meant fewer resources to match up for
+integration and method responses.</p><h2 id=the-method>The Method</h2><p>Unless you&rsquo;re very familiar with API Gateway this likely isn&rsquo;t going to work
+first time. I learned the hard way: set up Cloudwatch for the function and API
+gateway before doing anything else.</p><p>Note: I&rsquo;ll try and explain all the components in here but my final version&rsquo;s
+also here on
+<a href=https://github.com/charlieegan3/borked/tree/b70ddcd141fe4fd2a8d3cf669f044d55ccbb4a7d/terraform>GitHub</a></p><p>This is my Lambda config. It describes a function with an attached policy for
+logging to Cloudwatch.</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_lambda_function&quot; &quot;lambda&quot; {
+  filename         = &quot;../handler.zip&quot;
+  function_name    = &quot;${var.project}&quot;
+  role             = &quot;${aws_iam_role.lambda.arn}&quot;
+  handler          = &quot;handler.Handle&quot;
+  runtime          = &quot;python2.7&quot;
+  timeout          = &quot;30&quot;
+  source_code_hash = &quot;${base64sha256(file(&quot;../handler.zip&quot;))}&quot;
+  memory_size      = &quot;512&quot;
+}
+
+resource &quot;aws_iam_role&quot; &quot;lambda&quot; {
+  name = &quot;${var.project}-lambda-role&quot;
+
+  assume_role_policy = &lt;&lt;POLICY
+{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
+      &quot;Principal&quot;: {
+        &quot;Service&quot;: &quot;lambda.amazonaws.com&quot;
+      },
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Sid&quot;: &quot;&quot;
+    }
+  ]
+}
+POLICY
+}
+
+resource &quot;aws_iam_role_policy&quot; &quot;logging&quot; {
+  name = &quot;${var.project}-lambda-logging-policy&quot;
+  role = &quot;${aws_iam_role.lambda.id}&quot;
+
+  policy = &lt;&lt;EOF
+{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Action&quot;: [
+        &quot;cloudwatch:*&quot;,
+        &quot;logs:*&quot;
+      ],
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Resource&quot;: &quot;*&quot;
+    }
+  ]
+}
+EOF
+}
+</code></pre><p>While we&rsquo;re on the topic of logging I think it&rsquo;s also worth explaining how to
+add it to your API Gateway account. <strong>Note</strong> this isn&rsquo;t attached to your
+Gateway but rather your &lsquo;Gateway Account&rsquo; - you don&rsquo;t need Gateway resource
+yet. (but there is a little extra config to make sure the API Gateway logging
+is all setup - this comes later)</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_account&quot; &quot;default&quot; {
+  cloudwatch_role_arn = &quot;${aws_iam_role.apigw.arn}&quot;
+}
+
+resource &quot;aws_iam_role&quot; &quot;apigw&quot; {
+  name = &quot;${var.project}-apigw-role&quot;
+
+  assume_role_policy = &lt;&lt;EOF
+{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Sid&quot;: &quot;&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Principal&quot;: {
+        &quot;Service&quot;: &quot;apigateway.amazonaws.com&quot;
+      },
+      &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+    }
+  ]
+}
+EOF
+}
+
+resource &quot;aws_iam_role_policy&quot; &quot;cloudwatch&quot; {
+  name = &quot;${var.project}-apigw-cloudwatch-policy&quot;
+  role = &quot;${aws_iam_role.apigw.id}&quot;
+
+  policy = &lt;&lt;EOF
+{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;logs:CreateLogGroup&quot;,
+                &quot;logs:CreateLogStream&quot;,
+                &quot;logs:DescribeLogGroups&quot;,
+                &quot;logs:DescribeLogStreams&quot;,
+                &quot;logs:PutLogEvents&quot;,
+                &quot;logs:GetLogEvents&quot;,
+                &quot;logs:FilterLogEvents&quot;
+            ],
+            &quot;Resource&quot;: &quot;*&quot;
+        }
+    ]
+}
+EOF
+}
+</code></pre><p>Now for the tricky part - creating the API Gateway. I&rsquo;ll break this down. First
+create the Gateway &lsquo;REST API&rsquo;:</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_rest_api&quot; &quot;default&quot; {
+  name        = &quot;${var.project}&quot;
+  description = &quot;API for the ${var.project} lambda function&quot;
+}
+</code></pre><p>Now create a resource for it. This is a resource in the API route sense rather
+than the Terraform one.</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_resource&quot; &quot;default&quot; {
+  rest_api_id = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  parent_id   = &quot;${aws_api_gateway_rest_api.default.root_resource_id}&quot;
+  path_part   = &quot;process&quot;
+}
+</code></pre><p>With a resource and API we can configure the resource with methods and
+integrations. How I understand it, a <em>Method</em> is a type of request into an API
+Gateway resource that is matched to an <em>Integration</em>. The Integration is
+responsible for interacting with the backend - in our case a Lambda function.</p><p>Below I create a GET method on our resource that has no authentication. This
+backs onto an Integration that POSTs to the function (Lambda functions can only
+accept POSTs as a trigger).</p><p>I use an AWS_PROXY integration as it seemed to be the easiest way to just pass
+the request down the stack.</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_method&quot; &quot;default&quot; {
+  rest_api_id   = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  resource_id   = &quot;${aws_api_gateway_resource.default.id}&quot;
+  http_method   = &quot;GET&quot;
+  authorization = &quot;NONE&quot;
+}
+
+resource &quot;aws_api_gateway_integration&quot; &quot;default&quot; {
+  rest_api_id             = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  resource_id             = &quot;${aws_api_gateway_resource.default.id}&quot;
+  http_method             = &quot;${aws_api_gateway_method.default.http_method}&quot;
+  type                    = &quot;AWS_PROXY&quot;
+  uri                     = &quot;arn:aws:apigateway:${var.region}:lambda:path/2015-03-31/functions/${aws_lambda_function.lambda.arn}/invocations&quot;
+  integration_http_method = &quot;POST&quot;
+}
+</code></pre><p>So far all we can do is call the function, we can&rsquo;t get anything back out of
+the Gateway. This was the most minimal config I could find to get the responses
+back out:</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_method_response&quot; &quot;response_method&quot; {
+  rest_api_id = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  resource_id = &quot;${aws_api_gateway_resource.default.id}&quot;
+  http_method = &quot;${aws_api_gateway_integration.default.http_method}&quot;
+  status_code = &quot;200&quot;
+}
+
+resource &quot;aws_api_gateway_integration_response&quot; &quot;response_method_integration&quot; {
+  rest_api_id = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  resource_id = &quot;${aws_api_gateway_resource.default.id}&quot;
+  http_method = &quot;${aws_api_gateway_method_response.response_method.http_method}&quot;
+  status_code = &quot;${aws_api_gateway_method_response.response_method.status_code}&quot;
+}
+</code></pre><p>Next create a &lsquo;stage&rsquo;. Many of the other getting started examples have multiple
+stages but this was only supposed to take two minutes so I only have one -
+sorry. The stage is going to be attached to the other API Gateway resources and
+allows us to avoid some extra resources and stages.</p><pre><code class=language-conf data-lang=conf>variable &quot;api_gateway_stage&quot; {
+  default = &quot;production&quot;
+}
+</code></pre><p>Finally we tie our config to a deployed &lsquo;stage&rsquo;, exposing it to the world.</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_deployment&quot; &quot;default&quot; {
+  depends_on  = [&quot;aws_api_gateway_integration.default&quot;]
+  rest_api_id = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  stage_name  = &quot;${var.api_gateway_stage}&quot;
+}
+</code></pre><p>But wait, it&rsquo;s not over yet. This final settings resource is required to enable
+API Gateway logging - told you there was an extra bit, this is it:</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_api_gateway_method_settings&quot; &quot;default&quot; {
+  rest_api_id = &quot;${aws_api_gateway_rest_api.default.id}&quot;
+  stage_name  = &quot;${var.api_gateway_stage}&quot;
+  method_path = &quot;${aws_api_gateway_resource.default.path_part}/*&quot;
+
+  settings {
+    metrics_enabled = true
+    logging_level   = &quot;INFO&quot;
+  }
+
+  depends_on = [&quot;aws_api_gateway_deployment.default&quot;]
+}
+</code></pre><p>So far we&rsquo;ve creatd the function, setup it&rsquo;s logging and configured a minimal
+API Gateway. The final step is to allow the two to communicate. This permission
+resource lets that happen.</p><pre><code class=language-conf data-lang=conf>resource &quot;aws_lambda_permission&quot; &quot;apigw_lambda&quot; {
+  statement_id  = &quot;AllowExecutionFromAPIGateway&quot;
+  action        = &quot;lambda:InvokeFunction&quot;
+  function_name = &quot;${aws_lambda_function.lambda.arn}&quot;
+  principal     = &quot;apigateway.amazonaws.com&quot;
+
+  source_arn = &quot;arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.default.id}/*/*/*&quot;
+}
+</code></pre><p>But&mldr; that won&rsquo;t work without this Terraform data object to get the current
+AWS account info.</p><pre><code>data &quot;aws_caller_identity&quot; &quot;current&quot; {}
+</code></pre><p>As I mentioned before, all the config is in the <a href=https://github.com/charlieegan3/borked/tree/b70ddcd141fe4fd2a8d3cf669f044d55ccbb4a7d/terraform>project&rsquo;s GitHub
+Repo</a>
+if you&rsquo;d rather see it all together.</p></div></section></body></html>

@@ -1,0 +1,123 @@
+<!doctype html><html><head><title>Running a cheap GKE cluster with public ingress & zero load balancers - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Update: I&rsquo;ve posted about a small refinement here.
+Joining Jetstack earlier this year finally convinced me that I needed a side-project cluster. All the cool kids had one and I wanted one too."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2018-08-15-cheap-gke-cluster-zero-loadbalancers/"><meta property="og:title" content="Running a cheap GKE cluster with public ingress & zero load balancers"><meta property="og:description" content="Update: I&rsquo;ve posted about a small refinement here.
+Joining Jetstack earlier this year finally convinced me that I needed a side-project cluster. All the cool kids had one and I wanted one too."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2018-08-15T21:53:39"><meta property="og:image" content="https://charlieegan3.com/posts/2018-08-15-cheap-gke-cluster-zero-loadbalancers/containers.jpg"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Running a cheap GKE cluster with public ingress & zero load balancers</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Aug 15 2018</div><div class=post-content><p><strong>Update</strong>: I&rsquo;ve posted about a small refinement
+<a href=/posts/2019-03-02-running-a-cheap-gke-cluster-revisted/>here</a>.</p><p>Joining Jetstack earlier this year finally convinced me that I needed a
+side-project cluster. All the cool kids had one and I wanted one too.</p><p>I didn&rsquo;t want to spend any money though, or at least I wanted to do this on the
+cheap. I also didn&rsquo;t want to run a real node in my flat.</p><p>What I really wanted was a GKE cluster. I needed to just focus on getting things
+running. Eventually, I want to run all my side-projects on Kubernetes - 5
+year plan!</p><p>There were some problems with the money though. I was doing this on the cheap.</p><p>I could get nodes on Digital Ocean really cheap. I also liked the idea of running
+a cluster on Scaleway. I just didn&rsquo;t really want to deal with the actual
+managing the cluster - hmm.</p><p>I looked into the <a href=https://github.com/kelseyhightower/kubeadm-single-node-cluster>Single Node Kubernetes Cluster</a>
+guides a bit. I tried the one for <a href=https://github.com/julianvmodesto/kubeadm-single-node-cluster-digitalocean>Digtal Ocean</a>.</p><p>I didn&rsquo;t want to bother with the upgrades & faff. In the end I came
+up with a better idea.</p><p>One of the main reasons I&rsquo;d been avoiding using GKE was the load balancer
+pricing. I was down to get setup with a single node cluster on there - I just
+didn&rsquo;t want a load balancer (I didn&rsquo;t want the cost of running one for my
+ingress controller service).</p><p>I don&rsquo;t have remotely enough traffic to my side projects to even come close to
+<em>needing</em> a load balancer and I only have one node anyway&mldr; At the same time I
+wanted public ingress - obvs.</p><p>Then I had my idea. Why not give my free-tier f1-micro a static IP and have it
+run my ingress controller? Taint it stop other pods running there and run
+everything else on a preemptible node?</p><p>Happy to take the (pretty short) downtime hit each day, this is what I went for.</p><p>Here&rsquo;s how it&rsquo;s setup in Terraform. Note the &lsquo;ingress&rsquo; node pool, machine type &
+taints.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-hcl data-lang=hcl><span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;google_container_cluster&#34; &#34;main&#34;</span> {
+  name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;main&#34;</span>
+  zone <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;${var.cluster_zone}&#34;</span>
+
+  <span style=color:#66d9ef>lifecycle</span> {
+    ignore_changes <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;node_pool&#34;</span>]
+  }
+
+  <span style=color:#66d9ef>node_pool</span> {
+    name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;default-pool&#34;</span>
+  }
+}
+
+<span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;google_container_node_pool&#34; &#34;ingress&#34;</span> {
+  name       <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ingress&#34;</span>
+  zone       <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;${var.cluster_zone}&#34;</span>
+  cluster    <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;${google_container_cluster.main.name}&#34;</span>
+  node_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+
+  management <span style=color:#f92672>=</span> {
+    auto_repair  <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>
+    auto_upgrade <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
+  }
+
+  <span style=color:#66d9ef>node_config</span> {
+    preemptible  <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
+    machine_type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;f1-micro&#34;</span>
+    disk_size_gb <span style=color:#f92672>=</span> <span style=color:#ae81ff>20</span>
+
+    taint <span style=color:#f92672>=</span> {
+      key    <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ingress&#34;</span>
+      value  <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;true&#34;</span>
+      effect <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;NO_EXECUTE&#34;</span>
+    }
+
+    labels <span style=color:#f92672>=</span> {
+      ingress <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;true&#34;</span>
+    }
+
+    oauth_scopes <span style=color:#f92672>=</span> [
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/compute&#34;</span>,
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/devstorage.read_only&#34;</span>,
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/logging.write&#34;</span>,
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/monitoring&#34;</span>,
+    ]
+  }
+}
+
+<span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;google_container_node_pool&#34; &#34;main&#34;</span> {
+  name       <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;main&#34;</span>
+  zone       <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;${var.cluster_zone}&#34;</span>
+  cluster    <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;${google_container_cluster.main.name}&#34;</span>
+  node_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+
+  management <span style=color:#f92672>=</span> {
+    auto_repair  <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>
+    auto_upgrade <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>
+  }
+
+  <span style=color:#66d9ef>node_config</span> {
+    preemptible  <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>
+    machine_type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;n1-standard-2&#34;</span>
+
+    oauth_scopes <span style=color:#f92672>=</span> [
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/compute&#34;</span>,
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/devstorage.read_only&#34;</span>,
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/logging.write&#34;</span>,
+      <span style=color:#e6db74>&#34;https://www.googleapis.com/auth/monitoring&#34;</span>,
+    ]
+  }
+}
+</code></pre></div><p>There is one more thing - that static IP.</p><p>I created a static IP (<a href=https://cloud.google.com/network-tiers/docs/using-network-service-tiers#creating_static_external_addresses>see
+here</a>)
+and manually edited the network interfaces on the f1-micro vm in GCE :O</p><p>Don&rsquo;t judge, I wasn&rsquo;t able to find a way to do this in Terraform and figured
+this was &lsquo;good enough&rsquo; for a side project cluster.</p><p>Finally, I needed to make sure that the ingress controller landed on that node.
+Here&rsquo;s a simplified snippet from my ingress controller deployment. Note the
+tolerations and nodeSelector.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#66d9ef>apiVersion</span>: extensions/v1beta1
+<span style=color:#66d9ef>kind</span>: Deployment
+<span style=color:#66d9ef>metadata</span>:
+  <span style=color:#66d9ef>name</span>: ingress-nginx
+<span style=color:#66d9ef>spec</span>:
+  <span style=color:#66d9ef>template</span>:
+    <span style=color:#66d9ef>spec</span>:
+      <span style=color:#66d9ef>tolerations</span>:
+      - <span style=color:#66d9ef>key</span>: ingress
+        <span style=color:#66d9ef>value</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+        <span style=color:#66d9ef>effect</span>: NoExecute
+      <span style=color:#66d9ef>nodeSelector</span>:
+        <span style=color:#66d9ef>ingress</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+...
+</code></pre></div><p>Finally finally, I point my DNS at the static IP and I&rsquo;m done.</p><pre><code>$ dig cluster.charlieegan3.com
+
+...
+
+;; ANSWER SECTION:
+cluster.charlieegan3.com. 300   IN      A       35.197.243.26
+</code></pre><p>So there you have it. If I need to run more stuff I can just use a bigger
+preemptible node or add another. They&rsquo;re cheap enough for me at the moment and
+worth it for the convenience of GKE - imo.</p></div></section></body></html>

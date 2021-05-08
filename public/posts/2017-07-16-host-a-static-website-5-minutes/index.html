@@ -1,0 +1,72 @@
+<!doctype html><html><head><title>Terraform adventures: Host a static website ~5 minutes - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="I was in the market for a project to spend some more time with Terraform when I saw this prompt in the AWS console. Terraform can do all those things & I have a static site (this site) that I could use to test it out."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2017-07-16-host-a-static-website-5-minutes/"><meta property="og:title" content="Terraform adventures: Host a static website ~5 minutes"><meta property="og:description" content="I was in the market for a project to spend some more time with Terraform when I saw this prompt in the AWS console. Terraform can do all those things & I have a static site (this site) that I could use to test it out."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2017-07-16T14:47:53"><meta property="og:image" content="https://charlieegan3.com/posts/2017-07-16-host-a-static-website-5-minutes/misleading.jpg"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Terraform adventures: Host a static website ~5 minutes</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Jul 16 2017</div><div class=post-content><p><img src=/posts/2017-07-16-host-a-static-website-5-minutes/misleading.jpg alt="Host a static site"></p><p>I was in the market for a project to spend some more time with Terraform when I
+saw this prompt in the AWS console. Terraform can do all those things & I have
+a static site (this site) that I could use to test it out. As usual, it took a
+little longer than expected. This post is a list of mistakes I made and
+problems encountered.</p><h2 id=bucket-urls>Bucket URLs</h2><p>As far as I can tell there are up to three URLs for a given bucket:</p><pre><code>s3.amazonaws.com/BUCKET_NAME
+BUCKET_NAME.s3.amazonaws.com
+BUCKET_NAME.s3-website-REGION.amazonaws.com
+</code></pre><p>The difference between the final two forms confused me - only the s3-website
+endpoint will perform static hosting features such as redirects but the <code>.s3.</code>
+endpoints (bucket domain name) still return files with the correct content
+types. In Terraform you&rsquo;re after the <code>website_endpoint</code> rather than the
+<code>bucket_domain_name</code>.</p><h2 id=subdomain-redirects>Subdomain Redirects</h2><p>(<code>*</code> Sorry, the &lsquo;to-or-not-to redirect www to the apex domain&rsquo; debate is out of
+scope!)</p><p>There is an S3 website hosting feature to redirect all requests to another
+hostname. The bucket will return a redirect status.</p><p>This seemed ideal - point my <code>www</code> subdomain to a bucket in Route53 and have it
+redirect everything to the apex domain.</p><p>I had this all wired up with an Alias record pointing to the redirect bucket&rsquo;s
+s3-website endpoint. Sadly this doesn&rsquo;t work. Turns out that since the website
+endpoints don&rsquo;t serve certificates other than those for the S3 <code>amazonaws.com</code>
+subdomains. This means that <em>HTTPS</em> redirects don&rsquo;t work.</p><p>Instead - you need to create an separate Cloudfront distribution for the
+redirect bucket. I had an ACM certificate for both domains and had this served
+by the redirect Cloudfront distribution as well as the main site distribution.
+This isn&rsquo;t really ideal but it does work.</p><h2 id=acm-region>ACM region</h2><p>I was able to request ACM certificates in various regions for my domains
+(charlieegan3.com & <a href=http://www.charlieegan3.com>www.charlieegan3.com</a>) via the UI. For some reason;
+Terraform was only able to find certificates in <code>us-east-1</code>. I wasn&rsquo;t able to
+point it at any other region. I requested a new certificate in that region and
+actually moved the project default to that region too for the sake of
+simplicity.</p><h2 id=all-i-want-is-a-redirect>All I want is a redirect</h2><p>This is the fun bit. Imagine you have the following files in your static site:</p><pre><code>/index.html
+/subdir/index.html
+</code></pre><p>Now imagine that you&rsquo;d like to have the following paths and redirects:</p><pre><code>/
+/subdir
+
+/index.html        -&gt; /
+/subdir.html       -&gt; /subdir
+/subdir/index.html -&gt; /subdir
+/subdir/           -&gt; /subdir
+</code></pre><p>This is actually a bit of a fiddle to set up in S3.</p><p>First to the get <code>/</code> path you need to tell S3 that <code>/index.html</code> is your index
+document. Easy, this can be done in Terraform bucket config.</p><p>Getting the <code>/subdir/</code> path is also easy as it works by default with S3 static
+web hosting enabled. <code>/subdir</code> without the trailing slash is harder - to get
+this you need to create a file called <code>subdir</code> with an HTML content type. I use
+the AWS CLI to do this in my deploy script:</p><pre><code>aws s3 cp s3://#{S3_BUCKET}/subdir/index.html s3://#{S3_BUCKET}/subdir --content-type text/html
+</code></pre><p>Unlike Unix, in S3 it&rsquo;s possible to have a file and a folder with in the same
+&lsquo;directory&rsquo; with the same name.</p><p>To get <code>/subdir/index.html</code> to redirect to <code>/subdir</code> (our new file) we need to
+set a property (<code>website-redirect-location</code>) on the &lsquo;file&rsquo;.</p><pre><code>aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/subdir/index.html --key /subdir/index.html --website-redirect-location /subdir
+</code></pre><p>Still a little way to go yet. Next up: <code>/subdir.html -> subdir</code>. This one&rsquo;s
+pretty similar, spot the difference in <code>--key</code>:</p><pre><code>aws s3api copy-object --bucket #{S3_BUCKET} --copy-source #{S3_BUCKET}/subdir/index.html --key /subdir.html --website-redirect-location /subdir
+</code></pre><p>The following redirections remain:</p><pre><code>/index.html -&gt; /
+/subdir/    -&gt; /subdir
+</code></pre><p><strong>Warning:</strong> If you don&rsquo;t like the sound of Javascript &lsquo;redirects&rsquo; stop here.</p><p>You can&rsquo;t set a website-redirect-location on <code>index.html</code> since it&rsquo;ll created a
+redirect loop back to itself when it&rsquo;s served on <code>/</code>. In my JS I&rsquo;m checking the
+path and cleaning it up as required.</p><p>Using the same mega hack; I&rsquo;m stripping trailing &lsquo;/&lsquo;s from not root paths.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>path</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;/index.html&#34;</span>) {
+  window.<span style=color:#a6e22e>location</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/&#34;</span>
+} <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>path</span>.<span style=color:#a6e22e>length</span> <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>path</span>.<span style=color:#a6e22e>slice</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;/&#34;</span>) {
+  window.<span style=color:#a6e22e>location</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>path</span>.<span style=color:#a6e22e>substring</span>(<span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>path</span>.<span style=color:#a6e22e>length</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>);
+}
+</code></pre></div><p><em>Disclaimer:</em> Some of these redirects can be configured using the bucket redirect
+config. I opted to use object properties since the bucket list is limited to 50
+rules which is less than I required.</p><h2 id=terraform-chicken--egg>Terraform Chicken & Egg</h2><p>I also ran into an issue when provisioning the site from scratch. The redirect
+Cloudfront distribution wouldn&rsquo;t create because the &lsquo;origin&rsquo; was down. The
+redirect bucket had been created but since it redirected to my domain, and the
+other distribution for the apex domain wasn&rsquo;t yet active, it failed.</p><p>I just ran parts of the Terraform config in different orders but I wonder if
+I might be able to create a tag on the redirect distribution with the apex
+Cloudfront distribution ARN to make sure it works out the order correctly. One
+for another day.</p><p>So that&rsquo;s how to &lsquo;Host a static website ~1 weekend&rsquo;. I&rsquo;m not sure how to do
+it in 5 mins yet.</p><p>I&rsquo;ve yet to move this under charlieegan3.com (currently it&rsquo;s on
+charlieegan.com) while I test it out. Currently
+&lsquo;production&rsquo; is running for free on App Engine so I&rsquo;m interested to compare the
+costs before switching. Renewing Lets Encrypt on GAE is a pain so this
+solution with ACM is likely to win anyway. CDN&rsquo;s are also &lsquo;cool&rsquo;.</p></div></section></body></html>

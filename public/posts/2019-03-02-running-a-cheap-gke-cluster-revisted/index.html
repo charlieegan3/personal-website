@@ -1,0 +1,20 @@
+<!doctype html><html><head><title>Running a cheap GKE cluster: Revisted - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Last year I wrote a post about how I run my personal cluster in a cost-effective way on GKE. I&rsquo;ve since been able to automate the main manual step and thought I&rsquo;d post a short update."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2019-03-02-running-a-cheap-gke-cluster-revisted/"><meta property="og:title" content="Running a cheap GKE cluster: Revisted"><meta property="og:description" content="Last year I wrote a post about how I run my personal cluster in a cost-effective way on GKE. I&rsquo;ve since been able to automate the main manual step and thought I&rsquo;d post a short update."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2019-03-02T20:30:39"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Running a cheap GKE cluster: Revisted</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Mar 2 2019</div><div class=post-content><p>Last year I wrote a
+<a href=/posts/2018-08-15-cheap-gke-cluster-zero-loadbalancers/>post</a> about how I run
+my personal cluster in a cost-effective way on GKE. I&rsquo;ve since been able to
+automate the main manual step and thought I&rsquo;d post a short update.</p><h2 id=recap>Recap</h2><p>This is what I used to do:</p><ol><li>Deploy cluster with Terraform</li><li>Connect a reserved static IP manually to the single node in the ingress node
+pool where NGINX runs.</li><li>Update the <code>externalIPs</code> of the NGINX ingress controller service to the
+internal IP of the node.</li></ol><p>This has two manual steps and they caused some pain recently.</p><h2 id=v2>V2</h2><p>I knew I could use <code>hostNetwork: true</code> on the NGINX deployment instead (I&rsquo;m just
+running a single pod - personal cluster etc.). So that&rsquo;d save the pain of
+updating the internal IP.</p><p>I needed a solution for the external IP though where I point
+<code>*.charlieegan3.com</code>. I did some digging and came across
+<a href=https://github.com/doitintl/kubeip>kubeip</a>.</p><p>kubeip&rsquo;s intended use is for assigning static IPs from a pool to nodes in a GKE
+cluster so traffic comes from a known set of IPs. This isn&rsquo;t what I&rsquo;m trying to
+do but it works for me, I have one IP and want to assign it to nodes in my
+ingress node pool of size 1.</p><p>With this running in the cluster it watches for instances in the given pool
+without a label and assigns a labeled IP addresses to the node.</p><p>So that&rsquo;s it really - just a short update on how I made my cluster slightly
+easier to run. No load balancers needed!</p></div></section></body></html>

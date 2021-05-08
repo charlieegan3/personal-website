@@ -1,0 +1,52 @@
+{
+  "tweet": {
+    "text": "Yeah, that scene is good.",
+    "link": "https://twitter.com/charlieegan3/status/1082977032097746944",
+    "location": "Camberwell",
+    "created_at": "2019-01-09T12:26:59Z",
+    "created_at_string": "6d ago"
+  },
+  "post": {
+    "url": "https://instagram.com/p/BsnhCB2AKcx",
+    "location": "Blavatnik Building",
+    "type": "photo",
+    "created_at": "2019-01-14T13:56:36Z",
+    "created_at_string": "1d ago"
+  },
+  "activity": {
+    "average_heartrate": 0,
+    "url": "https://www.strava.com/activities/2080935526",
+    "distance": 13858.4,
+    "moving_time": 2165,
+    "name": "Busy today at Westminster",
+    "type": "Ride",
+    "created_at": "2019-01-15T18:39:08Z",
+    "created_at_string": "1h ago"
+  },
+  "film": {
+    "title": "Happy People: A Year in the Taiga",
+    "link": "https://letterboxd.com/charlieegan3/film/happy-people-a-year-in-the-taiga/",
+    "rating": "★★★½",
+    "year": "2010",
+    "created_at": "2019-01-06T21:54:55+13:00",
+    "created_at_string": "1w ago"
+  },
+  "commit": {
+    "message": "Add play downloader",
+    "url": "https://api.github.com/repos/charlieegan3/json-charlieegan3/commits/fcbf38586aa4d66c020e175bb14b7ac2f05c69fd",
+    "repo": {
+      "name": "charlieegan3/json-charlieegan3",
+      "url": "https://api.github.com/repos/charlieegan3/json-charlieegan3"
+    },
+    "created_at": "2019-01-15T20:14:48Z",
+    "created_at_string": "10m ago"
+  },
+  "play": {
+    "album": "Graffiti Brain / Found You",
+    "artist": "Redpark",
+    "artwork": "https://i.scdn.co/image/9535cfac0ae6c5cc81ba302c32b67a1ea09ba5e3",
+    "track": "Graffiti Brain (In My Head)",
+    "created_at": "2019-01-15T19:58:55Z",
+    "created_at_string": "26m ago"
+  }
+}

@@ -1,0 +1,31 @@
+<!doctype html><html><head><title>Introducing charlieegan3/infrastructure - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Since starting at Jetstack I&rsquo;ve spent much time building a personal Kubernetes cluster to run my various side projects. I no longer run anything on Heroku, Lamdba, App Engine or Netlify."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2019-12-08-charlieegan3-infra/"><meta property="og:title" content="Introducing charlieegan3/infrastructure"><meta property="og:description" content="Since starting at Jetstack I&rsquo;ve spent much time building a personal Kubernetes cluster to run my various side projects. I no longer run anything on Heroku, Lamdba, App Engine or Netlify."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2019-12-08T05:53:39"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Introducing charlieegan3/infrastructure</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Dec 8 2019</div><div class=post-content><p>Since starting at Jetstack I&rsquo;ve spent much time building a personal Kubernetes
+cluster to run my various side projects. I no longer run anything on Heroku,
+Lamdba, App Engine or Netlify. With Ingress, Cronjobs and Knative I&rsquo;m able to
+replicate all the features of these platforms I valued on Kubernetes.</p><p>Having a single platform has really reduced the time involved in deploying side
+projects. I&rsquo;m a big fan of side projects being more than a GitHub repo - part of
+the fun is making a usable thing or something I can use. Scale to zero really
+helps pack things in here - something I&rsquo;ve been making much more use of recently
+(<a href=https://github.com/charlieegan3/borked>borked</a>,
+<a href=https://github.com/charlieegan3/mycriticmatch>mycriticmatch</a>,
+<a href=https://github.com/charlieegan3/rssmerge>rssmerge</a>,
+<a href=https://github.com/charlieegan3/policing-christmas-trees>xmas-trees</a> and
+various other personal tools run on Knative and scale to zero).</p><p>This post was mostly just to introduce this repo:
+<a href=https://github.com/charlieegan3/infrastructure>charlieegan3/infrastructure</a></p><p>I had to spend quite a bit of time getting all the secrets out of the repo. I
+took the opportunity to deploy <a href=https://www.vaultproject.io/>vault</a> and <a href=https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity>GKE
+workload
+identity</a>
+rather than use something like <a href=https://github.com/AGWA/git-crypt>gitcrypt</a> or
+<a href=https://github.com/bitnami-labs/sealed-secrets>sealed secrets</a>. In the end
+this was more of a tongue twister than anything particularly good but I do
+appreciate how transparent the public repo can be.</p><p>In the repo there are two &lsquo;projects&rsquo;; GCP & K8s. GCP is a relatively simple
+Terraform stack to deploy a GKE cluster, DNS configuration, object storage
+resources, KMS etc. K8s is a collection of folders, one for each namespace in
+the cluster (which map approximately to side projects). Most of these are raw
+YAMLs but there are also some of my (signature?) Docker Helm template projects
+too.</p><p>I was keen to make this public so it was easier to share my config more easily
+with others - in particular with customers while working on site.</p></div></section></body></html>

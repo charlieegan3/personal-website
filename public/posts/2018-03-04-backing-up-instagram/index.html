@@ -1,0 +1,125 @@
+<!doctype html><html><head><title>Backing up Instagram - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="I enjoy using Instagram to share my photos. The restricted feature-set; public-by-default; similarities to Twitter & (original) square format constraint all appeal.
+Last year I completed a #365photochallenge on Instagram."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2018-03-04-backing-up-instagram/"><meta property="og:title" content="Backing up Instagram"><meta property="og:description" content="I enjoy using Instagram to share my photos. The restricted feature-set; public-by-default; similarities to Twitter & (original) square format constraint all appeal.
+Last year I completed a #365photochallenge on Instagram."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2018-03-04T17:23:43"><meta property="og:image" content="https://charlieegan3.com/posts/2018-03-04-backing-up-instagram/jul_17th.jpg"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Backing up Instagram</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Mar 4 2018</div><div class=post-content><p>I enjoy using Instagram to share my photos. The restricted feature-set;
+public-by-default; similarities to Twitter & (original) square format
+constraint all appeal.</p><p>Last year I completed a <a href=https://www.instagram.com/p/BdX-nBXnuks/><em>#365photochallenge</em> on
+Instagram</a>. Over the year, this took
+quite a lot of effort. As I switched to posting photos on the day they were
+taken it became clear to me that this was a valuable record of my activities
+for years to come.</p><p>This prompted me to find a way to extract a copy of the data I was creating and
+managing via Instagram. It turns out this is surprisingly hard.</p><p>I originally started using Zapier/IFTTT to save photos, as they were taken,
+into my Dropbox. Sadly, these services stopped saving the full-res images and
+sometimes missed posts(?). This also only saved new images - really I wanted my
+entire catalogue including all images and metadata.</p><p>I tried using Airtable and Zapier for the metadata but found the Zapier free
+tier too limited and their plans too expensive. This also only worked new
+posts.</p><p>I tried various Instagram media downloader extensions for Chrome; these save
+the images but not the data. I also wanted the process to be largely automated
+which this wasn&rsquo;t.</p><p>I found a project called <a href=https://github.com/althonos/InstaLooter>InstaLooter</a>
+and opted to use that when I saw it was also able to save json post data.</p><p>This is the process: first, download the json post data in instaLooter to a
+<code>looted_json</code> folder.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>instaLooter USERNAME looted_json -v -D -T <span style=color:#f92672>{</span>date<span style=color:#f92672>}</span>-<span style=color:#f92672>{</span>id<span style=color:#f92672>}</span> --new --time thisyear
+<span style=color:#75715e># or in docker</span>
+docker run -v <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>pwd<span style=color:#66d9ef>)</span><span style=color:#e6db74>/looted_json:/out&#34;</span> -it python:alpine3.6 sh -c <span style=color:#e6db74>&#34;pip install instaLooter &amp;&amp; ls /out &amp;&amp; instaLooter USERNAME /out -v -D -T {date}-{id} --new --time thisyear&#34;</span>
+</code></pre></div><p>Next, fill out the data by visiting each post&rsquo;s public page. Save the completed
+data in <code>completed_json</code>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=color:#75715e>#!/usr/bin/env ruby</span>
+
+require <span style=color:#e6db74>&#34;json&#34;</span>
+require <span style=color:#e6db74>&#34;date&#34;</span>
+require <span style=color:#e6db74>&#34;open-uri&#34;</span>
+
+<span style=color:#66d9ef>Dir</span><span style=color:#f92672>.</span>glob(<span style=color:#e6db74>&#34;looted_json/*&#34;</span>)<span style=color:#f92672>.</span>shuffle<span style=color:#f92672>.</span>map <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>file<span style=color:#f92672>|</span>
+  completed_file_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;completed_json/</span><span style=color:#e6db74>#{</span>file<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;/&#34;</span>)<span style=color:#f92672>.</span>last<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+
+  <span style=color:#66d9ef>next</span> <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>exists?(completed_file_name)
+  puts file
+
+  raw_data <span style=color:#f92672>=</span> <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>parse(<span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>read(file))
+
+  doc <span style=color:#f92672>=</span> open(<span style=color:#e6db74>&#34;https://www.instagram.com/p/</span><span style=color:#e6db74>#{</span>raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;code&#34;</span><span style=color:#f92672>]</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)<span style=color:#f92672>.</span>read
+  page_data <span style=color:#f92672>=</span> doc<span style=color:#f92672>.</span>scan(<span style=color:#e6db74>/\{[^\n]+\}/</span>)<span style=color:#f92672>.</span>map { <span style=color:#f92672>|</span>r<span style=color:#f92672>|</span> <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>parse(r) <span style=color:#66d9ef>rescue</span> <span style=color:#66d9ef>nil</span> }<span style=color:#f92672>.</span>compact<span style=color:#f92672>.</span>first
+  graph_image <span style=color:#f92672>=</span> page_data<span style=color:#f92672>.</span>dig(<span style=color:#f92672>*</span><span style=color:#e6db74>%w(entry_data PostPage)</span>)<span style=color:#f92672>.</span>first<span style=color:#f92672>.</span>dig(<span style=color:#f92672>*</span><span style=color:#e6db74>%w(graphql shortcode_media)</span>)
+
+  caption <span style=color:#f92672>=</span> graph_image<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;edge_media_to_caption&#34;</span><span style=color:#f92672>][</span><span style=color:#e6db74>&#34;edges&#34;</span><span style=color:#f92672>].</span>first<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;node&#34;</span><span style=color:#f92672>][</span><span style=color:#e6db74>&#34;text&#34;</span><span style=color:#f92672>]</span> <span style=color:#66d9ef>rescue</span> <span style=color:#e6db74>&#34;&#34;</span>
+  tags <span style=color:#f92672>=</span> caption<span style=color:#f92672>.</span>scan(<span style=color:#e6db74>/#\w+/</span>)<span style=color:#f92672>.</span>uniq
+
+  completed_data <span style=color:#f92672>=</span> {
+    id: raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;id&#34;</span><span style=color:#f92672>]</span>,
+    <span style=color:#e6db74>code</span>: raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;code&#34;</span><span style=color:#f92672>]</span>,
+    <span style=color:#e6db74>display_url</span>: graph_image<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;display_url&#34;</span><span style=color:#f92672>]</span>,
+    <span style=color:#e6db74>media_url</span>: raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;is_video&#34;</span><span style=color:#f92672>]</span> ? graph_image<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;video_url&#34;</span><span style=color:#f92672>]</span> : graph_image<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;display_url&#34;</span><span style=color:#f92672>]</span>,
+    <span style=color:#e6db74>post_url</span>: <span style=color:#e6db74>&#34;https://www.instagram.com/p/</span><span style=color:#e6db74>#{</span>raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;code&#34;</span><span style=color:#f92672>]</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>,
+    <span style=color:#e6db74>is_video</span>: raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;is_video&#34;</span><span style=color:#f92672>]</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>true</span>,
+    <span style=color:#e6db74>caption</span>: caption,
+    <span style=color:#e6db74>location</span>: graph_image<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;location&#34;</span><span style=color:#f92672>]</span>,
+    <span style=color:#e6db74>tags</span>: tags,
+    <span style=color:#e6db74>timestamp</span>: raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;date&#34;</span><span style=color:#f92672>]</span>,
+    <span style=color:#e6db74>dimensions</span>: raw_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;dimensions&#34;</span><span style=color:#f92672>]</span>
+  }
+
+  <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>write(completed_file_name, <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>pretty_generate(completed_data))
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>I have an optional step here to download the location data. Using the location
+data from each post, I can get a list of all the locations used and visit each
+page on the Instagram site to get it&rsquo;s coordinates. All the locations are saved
+as their own json file in a <code>locations</code> folder.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=color:#75715e>#!/usr/bin/env ruby</span>
+
+require <span style=color:#e6db74>&#34;json&#34;</span>
+require <span style=color:#e6db74>&#34;open-uri&#34;</span>
+
+<span style=color:#66d9ef>Dir</span><span style=color:#f92672>.</span>glob(<span style=color:#e6db74>&#34;completed_json/*&#34;</span>)<span style=color:#f92672>.</span>map <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>file<span style=color:#f92672>|</span>
+  <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>parse(<span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>read(file))<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;location&#34;</span><span style=color:#f92672>]</span>
+<span style=color:#66d9ef>end</span><span style=color:#f92672>.</span>uniq<span style=color:#f92672>.</span>compact<span style=color:#f92672>.</span>each <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>location<span style=color:#f92672>|</span>
+  puts location<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>]</span>
+
+  location_file_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;locations/</span><span style=color:#e6db74>#{</span>location<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;id&#34;</span><span style=color:#f92672>]</span><span style=color:#e6db74>}</span><span style=color:#e6db74>.json&#34;</span>
+
+  <span style=color:#66d9ef>next</span> <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>exists?(location_file_name)
+
+  html <span style=color:#f92672>=</span> open(<span style=color:#e6db74>&#34;https://www.instagram.com/explore/locations/</span><span style=color:#e6db74>#{</span>location<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;id&#34;</span><span style=color:#f92672>]</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)<span style=color:#f92672>.</span>read
+  page_data <span style=color:#f92672>=</span> html<span style=color:#f92672>.</span>scan(<span style=color:#e6db74>/\{[^\n]+\}/</span>)<span style=color:#f92672>.</span>map { <span style=color:#f92672>|</span>r<span style=color:#f92672>|</span> <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>parse(r) <span style=color:#66d9ef>rescue</span> <span style=color:#66d9ef>nil</span> }<span style=color:#f92672>.</span>compact<span style=color:#f92672>.</span>first
+  location_data <span style=color:#f92672>=</span> page_data<span style=color:#f92672>.</span>dig(<span style=color:#f92672>*</span><span style=color:#e6db74>%w(entry_data LocationsPage)</span>)<span style=color:#f92672>.</span>first<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;location&#34;</span><span style=color:#f92672>]</span>
+
+  location<span style=color:#f92672>.</span>merge!(<span style=color:#e6db74>lat</span>: location_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;lat&#34;</span><span style=color:#f92672>]</span>, <span style=color:#e6db74>long</span>: location_data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;lng&#34;</span><span style=color:#f92672>]</span>)
+  location<span style=color:#f92672>.</span>delete(<span style=color:#e6db74>&#34;has_public_page&#34;</span>)
+
+  <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>write(location_file_name, <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>pretty_generate(location))
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>Finally, all that&rsquo;s left to download is the media files (images and videos).
+Luckily, we have all the information we need in our <code>completed_json</code> files.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=color:#75715e>#!/usr/bin/env ruby</span>
+
+require <span style=color:#e6db74>&#34;json&#34;</span>
+require <span style=color:#e6db74>&#34;open-uri&#34;</span>
+require <span style=color:#e6db74>&#34;fileutils&#34;</span>
+
+<span style=color:#66d9ef>Dir</span><span style=color:#f92672>.</span>glob(<span style=color:#e6db74>&#34;completed_json/*&#34;</span>)<span style=color:#f92672>.</span>shuffle<span style=color:#f92672>.</span>map <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>file<span style=color:#f92672>|</span>
+  data <span style=color:#f92672>=</span> <span style=color:#66d9ef>JSON</span><span style=color:#f92672>.</span>parse(<span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>read(file))
+
+  format <span style=color:#f92672>=</span> data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;is_video&#34;</span><span style=color:#f92672>]</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>true</span> ? <span style=color:#e6db74>&#34;mp4&#34;</span> : <span style=color:#e6db74>&#34;jpg&#34;</span>
+
+  media_file_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;media/</span><span style=color:#e6db74>#{</span>file<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;/&#34;</span>)<span style=color:#f92672>.</span>last<span style=color:#f92672>.</span>gsub(<span style=color:#e6db74>&#34;json&#34;</span>, format)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+
+  <span style=color:#66d9ef>next</span> <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>exists?(media_file_name)
+  puts data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;post_url&#34;</span><span style=color:#f92672>]</span>
+
+  <span style=color:#66d9ef>begin</span>
+    <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>write(media_file_name, open(data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;media_url&#34;</span><span style=color:#f92672>]</span>)<span style=color:#f92672>.</span>read)
+    <span style=color:#66d9ef>FileUtils</span><span style=color:#f92672>.</span>touch media_file_name, <span style=color:#e6db74>mtime</span>: data<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;timestamp&#34;</span><span style=color:#f92672>]</span>
+  <span style=color:#66d9ef>rescue</span>
+    puts <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>#{</span>media_file_name<span style=color:#e6db74>}</span><span style=color:#e6db74> Failed&#34;</span>
+    <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>delete(media_file_name) <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>exists?(media_file_name)
+  <span style=color:#66d9ef>end</span>
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>Now you&rsquo;ll also have a media folder with all media in!</p><p>The &lsquo;posting experience&rsquo; on Instagram is the most satisfying I&rsquo;ve found, it&rsquo;s
+just a shame it&rsquo;s such a pain to get your data out. I&rsquo;d really love to see a
+&ldquo;Download my Instagram Archive&rdquo; feature like Twitter has.</p><p>Having access to the raw data is really fun. I was able to make a calendar for
+Mum this Christmas for example. When I added the location data download I also
+brought back a (rudimentary) version of the discontinued Instagram photo map.</p><p><img src=/posts/2018-03-04-backing-up-instagram/map.jpg alt="map of instagram posts"></p><p>This features all the countries I&rsquo;ve been to (didn&rsquo;t go abroad before getting
+my Instagram account). I wonder what this will look like after a few more
+years&mldr;</p><p>I do worry about depending on Instagram as a means of personal archive in this
+way. However, I feel like now I have this format for extracting my data, that I
+have some portability to continue this elsewhere if Instagram stops working for
+me.</p></div></section></body></html>

@@ -1,0 +1,330 @@
+<!doctype html><html><head><title>Authorizing requests with embeddable logic programming DSLs
+- charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="Over the past 18 months I&rsquo;ve become interested in the idea of standardizing authorization checks in software. This interest started when using Open Policy Agent (OPA) as an admission controller for Kubernetes environments at work two years ago."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2021-05-08-authorization-dsls-in-go/"><meta property="og:title" content="Authorizing requests with embeddable logic programming DSLs"><meta property="og:description" content="Over the past 18 months I&rsquo;ve become interested in the idea of standardizing authorization checks in software. This interest started when using Open Policy Agent (OPA) as an admission controller for Kubernetes environments at work two years ago."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2021-05-08T00:00:00"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Authorizing requests with embeddable logic programming DSLs</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted May 8 2021</div><div class=post-content><p><img src=2E599D01-66CE-45C1-9AAE-3306C48B19C6.jpeg alt=2E599D01-66CE-45C1-9AAE-3306C48B19C6.jpeg></p><p>Over the past 18 months I&rsquo;ve become interested in the idea of standardizing authorization checks in software. This interest started when using <a href=https://www.openpolicyagent.org/>Open Policy Agent</a> (OPA) as an admission controller for Kubernetes environments at work two years ago. I&rsquo;ve since used OPA&rsquo;s policy domain specific language (DSL) <a href=https://www.openpolicyagent.org/docs/latest/policy-language/>Rego</a> extensively within a Go application as part of <a href=https://www.jetstack.io/blog/jetstack-secure/>Jetstack Secure</a>.</p><p>We are using Rego to perform policy evaluation on Kubernetes resource data - rather than in the context of authorizing HTTP requests, the subject of this post and an area I&rsquo;m interested in exploring.</p><p>I&rsquo;ve also since learned about <a href=https://docs.osohq.com/go/getting-started/policies.html>Polar</a>, another authorization DSL from <a href=https://www.osohq.com/>Oso</a>, and <a href=https://cuelang.org/>CUE</a> which can both be <a href=https://pkg.go.dev/github.com/osohq/go-oso>embedded</a> in a Go application like Rego. I thought it would be interesting to compare them with a simple, fictional application with some example authorization requirements.</p><h2 id=example-1-dont-touch-my-stuff>Example 1: <em>Don&rsquo;t touch my stuff!</em></h2><p>For our first example, Alice and Bob each have a number of secret journal entries and should only be able to request their own from the <code>/entries/{id}</code> endpoint.</p><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/golang/get_entry.go>Golang Handler</a></strong></p><p>First, for comparison, we have a simple implementation in Go where we load a map of users and entries and process the request using the data from each. We only return ok if there&rsquo;s a matching entry for the ID and the user of that entry is the same as the requesting user.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// we&#39;re using a bearer token, we have a helper to look up the user
+</span><span style=color:#75715e>// from using the data in the headers
+</span><span style=color:#75715e></span><span style=color:#a6e22e>userName</span>, <span style=color:#a6e22e>responseCode</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>helpers</span>.<span style=color:#a6e22e>AuthnUser</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Header</span>, <span style=color:#a6e22e>users</span>)
+<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>responseCode</span> &gt; <span style=color:#ae81ff>0</span> {
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>responseCode</span>)
+    <span style=color:#66d9ef>return</span>
+}
+
+<span style=color:#75715e>// get the entryID from the request vars set for us by go mux
+</span><span style=color:#75715e></span><span style=color:#a6e22e>entryID</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>Vars</span>(<span style=color:#a6e22e>r</span>)[<span style=color:#e6db74>&#34;entryID&#34;</span>]
+<span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusBadRequest</span>)
+    <span style=color:#66d9ef>return</span>
+}
+
+<span style=color:#75715e>// check that the entry exists
+</span><span style=color:#75715e></span><span style=color:#a6e22e>entry</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>entries</span>)[<span style=color:#a6e22e>entryID</span>]
+<span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusNotFound</span>)
+    <span style=color:#66d9ef>return</span>
+}
+
+<span style=color:#75715e>// check that the existing entry has the same name as the current user
+</span><span style=color:#75715e></span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>entry</span>.<span style=color:#a6e22e>User</span> <span style=color:#f92672>!=</span> <span style=color:#a6e22e>userName</span> {
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusUnauthorized</span>)
+    <span style=color:#66d9ef>return</span>
+}
+</code></pre></div><p>We can see that the Go implementation is pretty simple in isolation.</p><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/rego/get_entry.go>Rego Hander</a></strong></p><p>Next we have a handler with the same functionality, but which uses Rego for the same check. The important part is really this bit, the Rego code. Everything else here is (rather a lot of) boilerplate needed to integrate with the OPA package and extract the results of the evaluation.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>package auth
+allow {
+    input<span style=color:#f92672>.</span>Entry<span style=color:#f92672>.</span>User <span style=color:#f92672>==</span> input<span style=color:#f92672>.</span>User
+}
+</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// create a rule which can be partially evaluated at boot time and reused
+</span><span style=color:#75715e>// in each call to the handler
+</span><span style=color:#75715e></span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>getEntryRule</span> <span style=color:#a6e22e>rego</span>.<span style=color:#a6e22e>PartialResult</span>
+<span style=color:#a6e22e>compiler</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>ast</span>.<span style=color:#a6e22e>CompileModules</span>(<span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>string</span>{
+    <span style=color:#75715e>// simple rego rule to check the data in the input conforms. i.e. that
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// the user and entry/user match
+</span><span style=color:#75715e></span>    <span style=color:#e6db74>&#34;get_entry.rego&#34;</span>: <span style=color:#e6db74>`
+</span><span style=color:#e6db74>    package auth
+</span><span style=color:#e6db74>    allow {
+</span><span style=color:#e6db74>        input.Entry.User == input.User
+</span><span style=color:#e6db74>    }`</span>,
+})
+<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+    <span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatalf</span>(<span style=color:#e6db74>&#34;rule failed to compile: %s&#34;</span>, <span style=color:#a6e22e>err</span>)
+}
+
+<span style=color:#a6e22e>getEntryRule</span>, <span style=color:#a6e22e>err</span> = <span style=color:#a6e22e>rego</span>.
+    <span style=color:#a6e22e>New</span>(<span style=color:#a6e22e>rego</span>.<span style=color:#a6e22e>Compiler</span>(<span style=color:#a6e22e>compiler</span>), <span style=color:#a6e22e>rego</span>.<span style=color:#a6e22e>Query</span>(<span style=color:#e6db74>&#34;data.auth.allow&#34;</span>)).
+    <span style=color:#a6e22e>PartialResult</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>())
+<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+    <span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatalf</span>(<span style=color:#e6db74>&#34;failed to compute partial result: %s&#34;</span>, <span style=color:#a6e22e>err</span>)
+}
+
+<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ResponseWriter</span>, <span style=color:#a6e22e>r</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>Request</span>) {
+    <span style=color:#75715e>// we&#39;re using a bearer token, we have a helper to look up the user
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// from using the data in the headers
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>userName</span>, <span style=color:#a6e22e>responseCode</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>helpers</span>.<span style=color:#a6e22e>AuthnUser</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Header</span>, <span style=color:#a6e22e>users</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>responseCode</span> &gt; <span style=color:#ae81ff>0</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>responseCode</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// get the entryID from the request vars set for us by go mux
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>entryID</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>Vars</span>(<span style=color:#a6e22e>r</span>)[<span style=color:#e6db74>&#34;entryID&#34;</span>]
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusBadRequest</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// check that the entry exists
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>entry</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>entries</span>)[<span style=color:#a6e22e>entryID</span>]
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusNotFound</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// build the input data for the Rego evaluation containing the entry
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// and the requesting user
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>authzInputData</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>struct</span> {
+        <span style=color:#a6e22e>User</span>  <span style=color:#66d9ef>string</span>
+        <span style=color:#a6e22e>Entry</span> <span style=color:#a6e22e>types</span>.<span style=color:#a6e22e>Entry</span>
+    }{
+        <span style=color:#a6e22e>User</span>:  <span style=color:#a6e22e>userName</span>,
+        <span style=color:#a6e22e>Entry</span>: <span style=color:#a6e22e>entry</span>,
+    }
+
+    <span style=color:#75715e>// get the results from the rego evaluation
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>resultSet</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>getEntryRule</span>.<span style=color:#a6e22e>Rego</span>(<span style=color:#a6e22e>rego</span>.<span style=color:#a6e22e>Input</span>(<span style=color:#a6e22e>authzInputData</span>)).<span style=color:#a6e22e>Eval</span>(<span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Context</span>())
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+    <span style=color:#75715e>// if there are no &#39;solutions&#39; then we can return unauthorized
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span> len(<span style=color:#a6e22e>resultSet</span>) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusUnauthorized</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// next we convert the output into JSON. This is a bit of a hack but it
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// allows us to use gabs to extracts data from the response more in a
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// terse manner
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>bytes</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>json</span>.<span style=color:#a6e22e>MarshalIndent</span>(<span style=color:#a6e22e>resultSet</span>, <span style=color:#e6db74>&#34;&#34;</span>, <span style=color:#e6db74>&#34;    &#34;</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#a6e22e>result</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>gabs</span>.<span style=color:#a6e22e>ParseJSON</span>(<span style=color:#a6e22e>bytes</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// use a gabs query to get the data we want and assert it&#39;s a boolean
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>allowed</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>result</span>.<span style=color:#a6e22e>Path</span>(<span style=color:#e6db74>&#34;0.expressions.0.value&#34;</span>).<span style=color:#a6e22e>Data</span>().(<span style=color:#66d9ef>bool</span>)
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>allowed</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusUnauthorized</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusOK</span>)
+    <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;%v&#34;</span>, <span style=color:#a6e22e>entry</span>.<span style=color:#a6e22e>Content</span>))
+}
+</code></pre></div><p>In comparison, this Rego handler without additional abstractions over the evaluation of policies is pretty verbose. I&rsquo;m not sure it&rsquo;s really a fair comparison since parts like the rule initialization and result parsing could be shared over many endpoints and authorization rules with the right abstraction.</p><p>I liked that it was possible to partially evaluate the rule and use it again and again in each call to the handler. I was most frustrated with extracting the data from the response and opted to use <a href=https://github.com/Jeffail/gabs>gabs</a> to make that easier.</p><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/cue/get_entry.go>CUE Handler</a></strong></p><p>Below is an equivalent handler in CUE. We have a document with some references we can populate and <code>allowed</code> based on the data we set to determine the result.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// config is our CUE &#39;policy&#39; code
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>config</span> = <span style=color:#e6db74>`
+</span><span style=color:#e6db74>entry: {
+</span><span style=color:#e6db74>    User: string
+</span><span style=color:#e6db74>}
+</span><span style=color:#e6db74>user: string
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>allowed: entry.User == user
+</span><span style=color:#e6db74>`</span>
+
+<span style=color:#75715e>// we&#39;re going to share the CUE runtime between requests
+</span><span style=color:#75715e></span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>rt</span> <span style=color:#a6e22e>cue</span>.<span style=color:#a6e22e>Runtime</span>
+
+<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ResponseWriter</span>, <span style=color:#a6e22e>r</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>Request</span>) {
+    <span style=color:#75715e>// we&#39;re using a bearer token, we have a helper to look up the user
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// from using the data in the headers
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>userName</span>, <span style=color:#a6e22e>responseCode</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>helpers</span>.<span style=color:#a6e22e>AuthnUser</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Header</span>, <span style=color:#a6e22e>users</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>responseCode</span> &gt; <span style=color:#ae81ff>0</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>responseCode</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// get the entryID from the request vars set for us by go mux
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>entryID</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>Vars</span>(<span style=color:#a6e22e>r</span>)[<span style=color:#e6db74>&#34;entryID&#34;</span>]
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusBadRequest</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// check that the entry exists
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>entry</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>entries</span>)[<span style=color:#a6e22e>entryID</span>]
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusNotFound</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// first compile the cue code to make sure it&#39;s valid
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>instance</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>rt</span>.<span style=color:#a6e22e>Compile</span>(<span style=color:#e6db74>&#34;get_entry&#34;</span>, <span style=color:#a6e22e>config</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// next, poplate the list of users and the headers from the request
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>instance</span>, <span style=color:#a6e22e>err</span> = <span style=color:#a6e22e>instance</span>.<span style=color:#a6e22e>Fill</span>(<span style=color:#a6e22e>userName</span>, <span style=color:#e6db74>&#34;user&#34;</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+    <span style=color:#a6e22e>instance</span>, <span style=color:#a6e22e>err</span> = <span style=color:#a6e22e>instance</span>.<span style=color:#a6e22e>Fill</span>(<span style=color:#a6e22e>entry</span>, <span style=color:#e6db74>&#34;entry&#34;</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// load the results from the instance
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>allowed</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>instance</span>.<span style=color:#a6e22e>Lookup</span>(<span style=color:#e6db74>&#34;allowed&#34;</span>).<span style=color:#a6e22e>Bool</span>()
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>err</span>)
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>allowed</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusUnauthorized</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusOK</span>)
+    <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;%v&#34;</span>, <span style=color:#a6e22e>entry</span>.<span style=color:#a6e22e>Content</span>))
+}
+</code></pre></div><p>While it&rsquo;s a little less verbose than the Rego handler, the &lsquo;policy&rsquo; feels less satisfactory or flexible. However, in this case, it works ok. I quite enjoyed the <code>instance.Fill</code> functionality as a means of supplying input.</p><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/polar/get_entry.go>Polar Handler</a></strong></p><p>Finally, we have an implementation in Polar. Where the important part is really this bit, we can see that it&rsquo;s very terse to express what we want (that the input userName and should match that in the Entry):</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>allow(userName, <span style=color:#e6db74>_</span>: <span style=color:#66d9ef>Entry</span> { <span style=color:#e6db74>User</span>: userName });
+</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>o</span> <span style=color:#a6e22e>oso</span>.<span style=color:#a6e22e>Oso</span>
+
+<span style=color:#75715e>// configure a new Oso instance
+</span><span style=color:#75715e></span><span style=color:#a6e22e>o</span>, <span style=color:#a6e22e>_</span> = <span style=color:#a6e22e>oso</span>.<span style=color:#a6e22e>NewOso</span>()
+
+<span style=color:#75715e>// make polar aware of our application types
+</span><span style=color:#75715e></span><span style=color:#a6e22e>o</span>.<span style=color:#a6e22e>RegisterClass</span>(<span style=color:#a6e22e>reflect</span>.<span style=color:#a6e22e>TypeOf</span>(<span style=color:#a6e22e>types</span>.<span style=color:#a6e22e>Entry</span>{}), <span style=color:#66d9ef>nil</span>)
+
+<span style=color:#75715e>// create a simple rule where the user and the entry name must match
+</span><span style=color:#75715e></span><span style=color:#a6e22e>o</span>.<span style=color:#a6e22e>LoadString</span>(<span style=color:#e6db74>`allow(userName, _: Entry { User: userName });`</span>)
+
+<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ResponseWriter</span>, <span style=color:#a6e22e>r</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>Request</span>) {
+    <span style=color:#75715e>// we&#39;re using a bearer token, we have a helper to look up the user
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// from using the data in the headers
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>userName</span>, <span style=color:#a6e22e>responseCode</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>helpers</span>.<span style=color:#a6e22e>AuthnUser</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Header</span>, <span style=color:#a6e22e>users</span>)
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>responseCode</span> &gt; <span style=color:#ae81ff>0</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>responseCode</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// get the entryID from the request vars set for us by go mux
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>entryID</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>Vars</span>(<span style=color:#a6e22e>r</span>)[<span style=color:#e6db74>&#34;entryID&#34;</span>]
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusBadRequest</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// check that the entry exists
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>entry</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>entries</span>)[<span style=color:#a6e22e>entryID</span>]
+    <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>ok</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusNotFound</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// submit the name and the entry requested to the policy
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>query</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>o</span>.<span style=color:#a6e22e>NewQueryFromRule</span>(
+        <span style=color:#e6db74>&#34;allow&#34;</span>,
+        <span style=color:#a6e22e>userName</span>,
+        <span style=color:#a6e22e>entry</span>,
+    )
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#a6e22e>results</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>query</span>.<span style=color:#a6e22e>GetAllResults</span>()
+    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusInternalServerError</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// if there are no results, then the request was not allowed
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span> len(<span style=color:#a6e22e>results</span>) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+        <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusUnauthorized</span>)
+        <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusOK</span>)
+    <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>entry</span>.<span style=color:#a6e22e>Content</span>)
+}
+</code></pre></div><p>I quite liked how terse the policy was. This was helped largely by being about to load in types from my Go app.</p><h2 id=example-2-network-effects>Example 2: <em>Network effects</em></h2><p>In our toy universe, we decide to !<em>PIVOT!</em> and introduce a social element to the app. Users will be able to send friend requests - for some reason. Our rule is that you can only send a request to another user when you have a mutual friend(s).</p><p>If Alice is friends with Bob, who is friends with Charlie, who is friends with Dennis - then Alice can send a friend request to Dennis.</p><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/golang/create_friend_request.go>Golang Handler</a></strong></p><p>This is a CS101-esque search of the social graph to find a path between the two users. I guess there&rsquo;s likely a shorter implementation, but this one is intended to be easy to skim. Right away, we can see this authorization check is more complex and involves a rather gnarly for loop and breadth first search.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// find path of mutual friends
+</span><span style=color:#75715e></span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>reachedFriends</span> []<span style=color:#66d9ef>string</span>
+<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>unexploredFriends</span> []<span style=color:#66d9ef>string</span>
+<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>existingFriend</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>requestingUser</span>.<span style=color:#a6e22e>Friends</span> {
+    <span style=color:#a6e22e>unexploredFriends</span> = append(<span style=color:#a6e22e>unexploredFriends</span>, <span style=color:#a6e22e>existingFriend</span>)
+}
+
+<span style=color:#75715e>// naive loop though all the friends aggregating potential new connections as we find them
+</span><span style=color:#75715e></span><span style=color:#66d9ef>for</span> {
+    <span style=color:#75715e>// no more work to do, a connection was not found :(
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span> len(<span style=color:#a6e22e>unexploredFriends</span>) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+        <span style=color:#66d9ef>break</span>
+    }
+
+    <span style=color:#a6e22e>currentFriend</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>unexploredFriends</span>[<span style=color:#ae81ff>0</span>]
+    <span style=color:#a6e22e>unexploredFriends</span> = <span style=color:#a6e22e>unexploredFriends</span>[<span style=color:#ae81ff>1</span>:]
+    <span style=color:#a6e22e>reachedFriends</span> = append(<span style=color:#a6e22e>reachedFriends</span>, <span style=color:#a6e22e>currentFriend</span>)
+
+    <span style=color:#a6e22e>currentFriendUser</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>users</span>)[<span style=color:#a6e22e>currentFriend</span>]
+    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>friend</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>currentFriendUser</span>.<span style=color:#a6e22e>Friends</span> {
+        <span style=color:#a6e22e>alreadyReached</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>false</span>
+        <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>reachedFriend</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>reachedFriends</span> {
+            <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>friend</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>reachedFriend</span> {
+                <span style=color:#a6e22e>alreadyReached</span> = <span style=color:#66d9ef>true</span>
+                <span style=color:#66d9ef>break</span>
+            }
+        }
+        <span style=color:#66d9ef>if</span> !<span style=color:#a6e22e>alreadyReached</span> {
+            <span style=color:#a6e22e>unexploredFriends</span> = append(<span style=color:#a6e22e>unexploredFriends</span>, <span style=color:#a6e22e>friend</span>)
+        }
+
+        <span style=color:#75715e>// if the friend was found, and matches the requested friend then we allow the request
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>friend</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>friendUsername</span> {
+            <span style=color:#75715e>// update the target user&#39;s list of FriendRequests
+</span><span style=color:#75715e></span>            <span style=color:#a6e22e>friendUser</span>.<span style=color:#a6e22e>FriendRequests</span> = append(<span style=color:#a6e22e>friendUser</span>.<span style=color:#a6e22e>FriendRequests</span>, <span style=color:#a6e22e>requestingUsername</span>)
+
+            <span style=color:#75715e>// just return 200 ok if allowed, don&#39;t bother to update the state
+</span><span style=color:#75715e></span>            <span style=color:#75715e>// since not a real application
+</span><span style=color:#75715e></span>            <span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>WriteHeader</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>StatusOK</span>)
+            <span style=color:#66d9ef>return</span>
+        }
+    }
+}
+</code></pre></div><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/rego/create_friend_request.go>Rego Handler</a></strong></p><p>At first, the Rego handler is miraculously short. However, <code>graph.reachable</code> <a href=https://github.com/open-policy-agent/opa/blob/27c8d75d3528dc8a04e716d5455f97ee7fb537bc/topdown/reachable.go#L21>under the hood</a> is doing much the same as our above implementation. While it&rsquo;s a <a href=https://github.com/open-policy-agent/opa/issues/947>good addition to the language</a>, it feels like cheating in this comparison.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>package authz
+user_graph<span style=color:#f92672>[</span>user<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> friends {
+  friends :<span style=color:#f92672>=</span> input<span style=color:#f92672>.</span>Users<span style=color:#f92672>[</span>user<span style=color:#f92672>].</span>Friends
+}
+default allow <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
+allow {
+  friends_of_friends :<span style=color:#f92672>=</span> graph<span style=color:#f92672>.</span>reachable(user_graph, {input<span style=color:#f92672>.</span>User})
+  friends_of_friends<span style=color:#f92672>[</span>input<span style=color:#f92672>.</span>RequestedFriend<span style=color:#f92672>]</span>
+}
+</code></pre></div><p><strong>CUE Handler</strong></p><p>😳 I wasn&rsquo;t able to implement this in CUE. Please let me know if you can think of a way to do this!</p><p><strong><a href=https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/polar/create_friend_request.go>Polar Handler</a></strong></p><p>I ran into a few issues when writing the polar handler. First, I found that I needed to generate the &lsquo;data&rsquo; used in evaluation on each call should it change. This meant generating polar code in my handler. Having done that, I found that I needed to make sure my friendship pairs were only listed &lsquo;one way&rsquo; to avoid cycles. I&rsquo;d hoped it&rsquo;s be possible to do things like this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>friends(<span style=color:#e6db74>&#34;Alice&#34;</span>, <span style=color:#e6db74>&#34;Charlie&#34;</span>)
+friends(<span style=color:#e6db74>&#34;Charlie&#34;</span>, <span style=color:#e6db74>&#34;Alice&#34;</span>);
+connected(x, y) <span style=color:#66d9ef>if</span> friends(x, y);
+connected(x, y) <span style=color:#66d9ef>if</span> x <span style=color:#f92672>!=</span> y <span style=color:#f92672>and</span> friends(x, p) <span style=color:#f92672>and</span> connected(p, y);
+
+allow(user, friend) <span style=color:#66d9ef>if</span> connected(user, friend);
+</code></pre></div><p>However, I seemed to get <code>RuntimeErrorStackOverflow{Msg:"Goal stack overflow! MAX_GOALS = 10000"}</code> and opted for the simple life in order to finish this post. This lead me to the final implementation:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>connected(x, y) <span style=color:#66d9ef>if</span> friends(x, y) <span style=color:#f92672>or</span> friends(y, x);
+connected(x, y) <span style=color:#66d9ef>if</span> friends(x, p) <span style=color:#f92672>and</span> connected(p, y);
+connected(x, y) <span style=color:#66d9ef>if</span> friends(y, p) <span style=color:#f92672>and</span> connected(p, x);
+allow(user, friend) <span style=color:#66d9ef>if</span> connected(user, friend);
+</code></pre></div><p>While shorter and more &lsquo;self sufficient&rsquo; that the others, I wasn&rsquo;t entirely happy with it. I felt like there ought to be a way to make it even more terse and easy to read to really deliver on the promise. I really struggled with the documentation and finding what was possible in Polar so I&rsquo;ve likely missed a few things.</p><h2 id=parting-thoughts>Parting thoughts&mldr;</h2><p>This post is really just an overview of a newbie&rsquo;s experience of authorizing requests with these tools - which are meant to help with just that. I think it&rsquo;d be easy to read this and think &ldquo;huh? I&rsquo;ll just use Go thanks&rdquo;, but that&rsquo;s not my takeaway. Here&rsquo;s what I think:</p><ul><li>It&rsquo;s challenging to separate the domain state from the authorization decision. Polar tries to bridge the gap, OPA makes the boundary clearer. I personally think there&rsquo;s value in keeping the two separate in order to make the authorization checks easier to test.</li><li>An interesting follow up would be a comparison of how each language could be hidden behind an abstraction and reused in multiple handlers with different policies and data.</li><li>Likely due to my personal experience, writing the checks in Polar and CUE felt like a real brain teaser vs Go and Rego.</li><li>Extracting results from Rego evaluation was more frustrating than the others however.</li><li>Does this logic belong in a middleware? Or in an external service. I&rsquo;m still not sure where to draw the boundaries and how to share the state needed to make decisions.</li></ul><p>In case you missed the earlier links, all the <a href=https://github.com/charlieegan3/logic-authz-dsl-playground>code is here</a>. Feel free to drop me a message from my homepage or tweet at me if you have an comments/questions.</p></div></section></body></html>

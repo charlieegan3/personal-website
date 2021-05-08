@@ -1,0 +1,69 @@
+<!doctype html><html><head><title>Fixing up my vimrc - charlieegan3</title><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=description content="After working closely with a proficient vim user on a summer internship; I started experimenting with vim during the summer of 2015. I made the usual mistakes of copying the other&rsquo;s vimrcs and installing too many plugins - I think everyone has to go though that phase though."><meta name=twitter:card content="summary"><meta name=twitter:site content="@charlieegan3"><meta name=twitter:creator content="@charlieegan3"><meta property="og:url" content="https://charlieegan3.com/posts/2017-03-26-vim/"><meta property="og:title" content="Fixing up my vimrc"><meta property="og:description" content="After working closely with a proficient vim user on a summer internship; I started experimenting with vim during the summer of 2015. I made the usual mistakes of copying the other&rsquo;s vimrcs and installing too many plugins - I think everyone has to go though that phase though."><meta property="og:type" content="article"><meta name=author content="Charlie Egan"><meta property="article:author" content="https://twitter.com/charlieegan3"><meta property="article:published_time" content="2017-03-26T00:48:53"><link rel=stylesheet type=text/css crossorigin=anonymous href=/css/bundle.min.4a9a0d630d935ff8828e15bb842457c2620ddfbdb73349035c9a57c6b04be112.css><script type=text/javascript crossorigin=anonymous src=/js/bundle.min.76c0ad1f61fe83a23628b79ecc5aa835224071f00c5f2a4fbbdf26765027d8e7.js integrity="sha256-dsCtH2H+g6I2KLeezFqoNSJAcfAMXypPu98mdlAn2Oc="></script></head><body class="bg-darker-gray light-silver"><section class="mw7 center pa3 ph5-ns pb5"><nav class=sidebar-nav><a href=/ title=homepage>home</a>
+<a href=/about/ title="read all about it">about</a>
+<a class="bb bw1 b--silver" href=/posts/ title="view my blog posts">posts</a>
+<a href=/projects/ title="view my projects">projects</a>
+<a href=/profiles/ title="find me elsewhere">profiles</a>
+<a href=/search><img class="fr grow" style=width:20px;filer:invert(.75);-webkit-filter:invert(.75) src=/search.svg></a></nav><h1 class="f3-ns f4">Fixing up my vimrc</h1><div class="f5-ns f6 gray bb bw1 pb2 b--dark-gray">Posted Mar 26 2017</div><div class=post-content><p>After working closely with a proficient vim user on a summer internship; I
+started experimenting with vim during the summer of 2015. I made the usual
+mistakes of copying the other&rsquo;s vimrcs and installing too many plugins - I
+think everyone has to go though that phase though. Eventually I settled; after
+much tinkering; on a configuration I could be productive in and left it largely
+unchanged for a year.</p><p>In the same way it&rsquo;s easy to procrastinate while refining the &lsquo;perfect&rsquo; vim
+config, it&rsquo;s also possible to let it stagnate and stop learning. With vim,
+there&rsquo;s usually something you could improve upon.</p><p>Recently, I&rsquo;ve been looking to minimize the areas of my development environment
+that require manual setup. I&rsquo;ve also been looking to reduce the difference
+between my Linux and macOS machines. While my vim journey started earlier,
+it&rsquo;s been key in making this possible.</p><p>I recently revisited my vim config and made some improvements.</p><h1 id=neovim--terminal-buffers>Neovim & terminal buffers</h1><p>I&rsquo;ve been using i3 and urxvt on my Linux machine. On macOS I use iTerm.
+This means the process for opening new editors windows and terminal sessions
+differs - something i&rsquo;m keen to avoid. I considered working at the various
+keyboard shortcuts to make the two comparable but in remembering that neovim
+adds terminal buffers I thought I&rsquo;d give that a shot. I&rsquo;d already got vim
+working consistently cross platform - using neovim makes terminal session
+usage consistent too.</p><p>I was able to port my vim config to nvim very easily. I had an addon that
+wouldn&rsquo;t work and added the following commands.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vim data-lang=vim><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>has</span>(<span style=color:#e6db74>&#39;nvim&#39;</span>)<span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>  <span style=color:#a6e22e>tnoremap</span> &lt;<span style=color:#a6e22e>esc</span>&gt; &lt;<span style=color:#a6e22e>C</span>-\&gt;&lt;<span style=color:#a6e22e>C</span>-<span style=color:#a6e22e>n</span>&gt;<span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>  <span style=color:#a6e22e>augroup</span> <span style=color:#a6e22e>terminal</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>    <span style=color:#a6e22e>autocmd</span> <span style=color:#a6e22e>TermOpen</span> * <span style=color:#a6e22e>set</span> <span style=color:#a6e22e>bufhidden</span>=<span style=color:#a6e22e>hide</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>    <span style=color:#a6e22e>autocmd</span> <span style=color:#a6e22e>TermOpen</span> * <span style=color:#a6e22e>setlocal</span> <span style=color:#a6e22e>nospell</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>  <span style=color:#a6e22e>augroup</span> <span style=color:#a6e22e>END</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#66d9ef>endif</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>I also added a script to link the nvim configs to the old vim ones. I might
+just move them all to nvim at a later date.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e>#!/bin/bash
+</span><span style=color:#75715e></span>
+ln -s ~/.vim ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+</code></pre></div><h1 id=the--buffer>The <code>"+</code> buffer</h1><p>I struggled along with a thoroughly inadequate and irregular system for
+pasting in and cutting out of vim for too long. I knew about the <code>"+</code>
+register but didn&rsquo;t make use of it.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vim data-lang=vim><span style=color:#a6e22e>vnoremap</span> &lt;<span style=color:#a6e22e>cr</span>&gt; <span style=color:#75715e>&#34;+y&lt;cr&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>vnoremap</span> &lt;<span style=color:#a6e22e>BS</span>&gt; <span style=color:#75715e>&#34;+p&lt;cr&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>The best this about this is that it makes it possible to copy to and from the
+clipboard on both Linux and macOS (in the same way).</p><h1 id=buftabline>buftabline</h1><p>I lived with a similarly awkward setup for managing open buffers. I have
+<code>&lt;tab></code> mapped to <code>:bn</code> in normal mode - as well as <code>leader w</code> to write
+and close the buffer. However I didn&rsquo;t have a means of tracking open files; I
+just used to cycle round until I got the one I wanted - or I&rsquo;d just use
+FZF (ctrl-p) again. <code>buftabline</code> simply shows a list of open buffers at the
+top edge of the window - like almost any other editor&mldr; Getting caught up.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vim data-lang=vim><span style=color:#a6e22e>Plug</span> <span style=color:#e6db74>&#39;ap/vim-buftabline&#39;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>highlight</span> <span style=color:#a6e22e>BufTabLineCurrent</span> <span style=color:#a6e22e>ctermbg</span>=<span style=color:#a6e22e>black</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>highlight</span> <span style=color:#a6e22e>BufTabLineActive</span> <span style=color:#a6e22e>ctermbg</span>=<span style=color:#a6e22e>white</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>highlight</span> <span style=color:#a6e22e>BufTabLineHidden</span> <span style=color:#a6e22e>ctermbg</span>=<span style=color:#a6e22e>darkgrey</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>highlight</span> <span style=color:#a6e22e>BufTabLineFill</span> <span style=color:#a6e22e>ctermbg</span>=<span style=color:#a6e22e>grey</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><h1 id=base16-colorscheme>base16 colorscheme</h1><p>I&rsquo;m fairly indifferent about color schemes - though I like them to be the
+same across my different computers. I came across
+<a href=https://github.com/chriskempson/base16>the base16 standard</a>
+and decided to use that as I was able to find <code>.Xresources</code>, <code>.terminal</code> and
+vim files for without needing to set my own values. I found a preset called
+London Tube (which seemed fitting) and have just committed that into my
+dotfile repo.</p><h1 id=autocmds-for-formatting>autocmds for formatting</h1><p>Whitespace trimming and tabs -> spaces had also been inconsistent in the old
+config. I had been using <code>vim-stripper</code> for trimming trailing whitespace but
+it turns out a simple regex does the job:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vim data-lang=vim><span style=color:#a6e22e>autocmd</span> <span style=color:#a6e22e>BufWritePre</span> * :%<span style=color:#a6e22e>s</span><span style=color:#e6db74>/\s\+$/</span>/<span style=color:#a6e22e>e</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>I also opted to use a plugin, <code>vim-super-retab</code>, to correct the tabs before
+save. This is in addition to a number of other settings available by default.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vim data-lang=vim><span style=color:#a6e22e>autocmd</span> <span style=color:#a6e22e>BufWritePre</span> * :<span style=color:#a6e22e>Tab2Space</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>set</span> <span style=color:#a6e22e>smarttab</span> <span style=color:#a6e22e>smartindent</span> <span style=color:#a6e22e>expandtab</span> <span style=color:#75715e>&#34; sane tab settings</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>set</span> <span style=color:#a6e22e>tabstop</span>=<span style=color:#ae81ff>8</span> <span style=color:#a6e22e>softtabstop</span>=<span style=color:#ae81ff>8</span> <span style=color:#a6e22e>shiftwidth</span>=<span style=color:#ae81ff>2</span> <span style=color:#75715e>&#34; indentation quantities</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>set</span> <span style=color:#a6e22e>backspace</span>=<span style=color:#a6e22e>indent</span>,<span style=color:#a6e22e>eol</span>,<span style=color:#a6e22e>start</span> <span style=color:#75715e>&#34; backspace behavior</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><hr><p>Those are just the vim ones; I&rsquo;ve also changed i3 around and dropped some
+things on macOS in the year long task of adopting a developer environment that&rsquo;s
+highly portable.</p></div></section></body></html>
