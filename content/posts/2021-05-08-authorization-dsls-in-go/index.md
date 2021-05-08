@@ -6,11 +6,11 @@ date: 2021-05-08 00:00:00 +0000
 
 ![2E599D01-66CE-45C1-9AAE-3306C48B19C6.jpeg](2E599D01-66CE-45C1-9AAE-3306C48B19C6.jpeg)
 
-Over the past 18 months I've becoming increasingly interested in the idea of standardizing authorization checks in software. This interest started when using [Open Policy Agent](https://www.openpolicyagent.org/) (OPA) as an admission controller for Kubernetes environments at work two years ago. I've since used OPA's policy domain specific language (DSL) [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) extensively within a Go application as part of [Jetstack Secure](https://www.jetstack.io/blog/jetstack-secure/).
+Over the past 18 months I've become interested in the idea of standardizing authorization checks in software. This interest started when using [Open Policy Agent](https://www.openpolicyagent.org/) (OPA) as an admission controller for Kubernetes environments at work two years ago. I've since used OPA's policy domain specific language (DSL) [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) extensively within a Go application as part of [Jetstack Secure](https://www.jetstack.io/blog/jetstack-secure/).
 
-We are using Rego to perform policy evaluation on Kubernetes resource data - rather than in the context of authorizing requests, the subject of this post and an area I'm interested in exploring.
+We are using Rego to perform policy evaluation on Kubernetes resource data - rather than in the context of authorizing HTTP requests, the subject of this post and an area I'm interested in exploring.
 
-I've since learned about [Polar](https://docs.osohq.com/go/getting-started/policies.html), another authorization DSL from [Oso](https://www.osohq.com/), and [CUE](https://cuelang.org/) which can both be [embedded](https://pkg.go.dev/github.com/osohq/go-oso) in a Go application like Rego. I thought it would be interesting to compare them with a simple application and fictional application with some example authz requirements.
+I've also since learned about [Polar](https://docs.osohq.com/go/getting-started/policies.html), another authorization DSL from [Oso](https://www.osohq.com/), and [CUE](https://cuelang.org/) which can both be [embedded](https://pkg.go.dev/github.com/osohq/go-oso) in a Go application like Rego. I thought it would be interesting to compare them with a simple, fictional application with some example authorization requirements.
 
 ## Example 1: *Don't touch my stuff!*
 
@@ -18,7 +18,7 @@ For our first example, Alice and Bob each have a number of secret journal entrie
 
 **[Golang Handler](https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/golang/get_entry.go)**
 
-First for comparison we have a simple implementation in Go where we load have a map of users and entries and process the request using the data from each. We only return ok if there's a matching entry for the ID and the user of that entry is the same as the requesting user.
+First, for comparison, we have a simple implementation in Go where we load a map of users and entries and process the request using the data from each. We only return ok if there's a matching entry for the ID and the user of that entry is the same as the requesting user.
 
 ```go
 // we're using a bearer token, we have a helper to look up the user
@@ -164,7 +164,7 @@ return func(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-In comparison, this Rego handler without additional abstractions over the evaluation of policies is pretty verbose. I'm not sure it's really a fair comparison since parts like the rule initialization and result parsing could be shared over many endpoints and authz rules with the right abstraction.
+In comparison, this Rego handler without additional abstractions over the evaluation of policies is pretty verbose. I'm not sure it's really a fair comparison since parts like the rule initialization and result parsing could be shared over many endpoints and authorization rules with the right abstraction.
 
 I liked that it was possible to partially evaluate the rule and use it again and again in each call to the handler. I was most frustrated with extracting the data from the response and opted to use [gabs](https://github.com/Jeffail/gabs) to make that easier.
 
@@ -250,7 +250,7 @@ While it's a little less verbose than the Rego handler, the 'policy' feels less 
 
 **[Polar Handler](https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/polar/get_entry.go)**
 
-Finally, we have an implementation in Polar. Where the important part is really this bit, we can see that it's very terse to express what we want:
+Finally, we have an implementation in Polar. Where the important part is really this bit, we can see that it's very terse to express what we want (that the input userName and should match that in the Entry):
 
 ```ruby
 allow(userName, _: Entry { User: userName });
@@ -329,7 +329,7 @@ If Alice is friends with Bob, who is friends with Charlie, who is friends with D
 
 **[Golang Handler](https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/golang/create_friend_request.go)**
 
-This is a CS101-esque search of the social graph to find a path between the two users. I guess there's likely a shorter implementation, but this one is intended to be easy to skim. Right away, we can see this authorization check is more complex.
+This is a CS101-esque search of the social graph to find a path between the two users. I guess there's likely a shorter implementation, but this one is intended to be easy to skim. Right away, we can see this authorization check is more complex and involves a rather gnarly for loop and breadth first search.
 
 ```go
 // find path of mutual friends
@@ -395,7 +395,7 @@ allow {
 
 **CUE Handler**
 
-😳 I wasn't able to implement this in CUE
+😳 I wasn't able to implement this in CUE. Please let me know if you can think of a way to do this!
 
 **[Polar Handler](https://github.com/charlieegan3/logic-authz-dsl-playground/blob/main/internal/handlers/polar/create_friend_request.go)**
 
@@ -410,7 +410,7 @@ connected(x, y) if x != y and friends(x, p) and connected(p, y);
 allow(user, friend) if connected(user, friend);
 ```
 
-However, I seemed to get `RuntimeErrorStackOverflow{Msg:"Goal stack overflow! MAX_GOALS = 10000"}` when doing this and opted for the simple life in order to finish this post. This lead me to the final implementation:
+However, I seemed to get `RuntimeErrorStackOverflow{Msg:"Goal stack overflow! MAX_GOALS = 10000"}` and opted for the simple life in order to finish this post. This lead me to the final implementation:
 
 ```ruby
 connected(x, y) if friends(x, y) or friends(y, x);
@@ -419,15 +419,15 @@ connected(x, y) if friends(y, p) and connected(p, x);
 allow(user, friend) if connected(user, friend);
 ```
 
-While more shorter and more self sufficient that the others, I wasn't entirely happy with it. I felt like there ought to be a way to make it even more terse and easy to read.
+While shorter and more 'self sufficient' that the others, I wasn't entirely happy with it. I felt like there ought to be a way to make it even more terse and easy to read to really deliver on the promise. I really struggled with the documentation and finding what was possible in Polar so I've likely missed a few things.
 
 ## Parting thoughts...
 
-This post is really just an overview of a newbies experience of authorizing requests with these tools which are meant to help with just that. I think it'd be easy to read this and think "huh? I'll just use Go thanks", but that's not my takeaway. Here's what I think:
+This post is really just an overview of a newbie's experience of authorizing requests with these tools - which are meant to help with just that. I think it'd be easy to read this and think "huh? I'll just use Go thanks", but that's not my takeaway. Here's what I think:
 
 - It's challenging to separate the domain state from the authorization decision. Polar tries to bridge the gap, OPA makes the boundary clearer. I personally think there's value in keeping the two separate in order to make the authorization checks easier to test.
 - An interesting follow up would be a comparison of how each language could be hidden behind an abstraction and reused in multiple handlers with different policies and data.
-- Likely due to my personal experience, but writing the checks in Polar and CUE felt like a real brain teaser vs Go and Rego.
+- Likely due to my personal experience, writing the checks in Polar and CUE felt like a real brain teaser vs Go and Rego.
 - Extracting results from Rego evaluation was more frustrating than the others however.
 - Does this logic belong in a middleware? Or in an external service. I'm still not sure where to draw the boundaries and how to share the state needed to make decisions.
 
