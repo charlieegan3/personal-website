@@ -10,4 +10,4 @@ CSS, Terraform, Cloudfront, Codebuild, Hugo etc.
 ---
 
 My username, `charlieegan3`, comes from my selection of a Gmail address in
-2005. _3_ was my primary-school lucky number.
+2005. _3_ was my primary school lucky number.

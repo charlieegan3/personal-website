@@ -5,7 +5,7 @@ def run(command)
   fail unless system(command)
 end
 
-HUGO_RELEASE = "https://github.com/gohugoio/hugo/releases/download/v0.69.2/hugo_0.69.2_Linux-64bit.tar.gz"
+HUGO_RELEASE = "https://github.com/gohugoio/hugo/releases/download/v0.101.0/hugo_0.101.0_Linux-64bit.tar.gz"
 
 # install hugo if missing
 unless File.exists?("hugo")
