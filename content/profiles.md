@@ -63,7 +63,7 @@ profiles:
     title: Product Hunt
 - name: Gaming
   list:
-  - url: https://halo.bungie.net/stats/reach/default.aspx?player=tartan%20turtle
+  - url: https://halotracker.com/halo-infinite/profile/xbl/Tartan%20Turtle/overview?experience=ranked&playlist=edfef3ac-9cbe-4fa2-b949-8f29deafd483
     icon: bungie.jpg
     title: Bungie
   - url: http://steamcommunity.com/id/charlieegan3

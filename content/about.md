@@ -1,32 +1,28 @@
 ---
-title: |
-  about
+type: about
+title: about
 summary: |
   Hello, my name is Charlie - nice to meet you.
-type: about
+intro: |
+  Hello, my name is Charlie - thanks for stopping by! Nice to meet you 👋. Here's a little bit about me.
 ---
 
 
-Hello, my name is Charlie - thanks for stopping by! Nice to meet you 👋. Here's a little bit about me.
 
-Before COVID-19 I used to go to:
-
-- 🏞️ [Parkrun](http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706)
-- & help organise this [book club](http://london.computation.club/) 📖
-- 🎲 board game nights
-- 🧘‍♂️ yoga (and spin classes with [scoreboards](https://www.strava.com/activities/2095479215))
 
 I'm interested in:
 
-- 📸 [photography](https://photos.charlieegan3.com/)
-- 📈 quantified self
+- 📸 taking [photos](https://photos.charlieegan3.com/)
 - 🌐 [Kubernetes](https://kubernetes.io/), [OPA](https://www.openpolicyagent.org/)
-- 💳 personal finance
 - 🚂 public transport systems and their usability
+- 💳 personal finance
+- 📈 quantified self
 
 Other things I do:
 
 - 👨‍🍳 cook vegetarian food
+- 🏞️ [Parkrun](http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706) & running
+- 🚴️ [cycle](https://www.strava.com/athletes/1238371) my bike
 - 🎶 [track](https://music.charlieegan3.com/) all the music I listen to
 - 🧻 keep a [blog](https://charlieegan3.com/posts/) & write a journal
 - 🎽 [run](https://www.strava.com/athletes/1238371), bike, swim - but not all three at once just yet!

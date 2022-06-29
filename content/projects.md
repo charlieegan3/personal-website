@@ -22,6 +22,31 @@ link_types:
   key: talk
 
 projects:
+- comment: |
+    Talk about using and adopting SPIFFE with my friend and colleague Jake. 
+  search_result_url: talk
+  talk: https://www.youtube.com/watch?v=vKRUq56xDiE
+  title: Multi-Cloud Workload Identity With SPIFFE - KubeCon Europe 2022
+  type: talk
+- blog: "/blog/2018/11/20/how-i-learned-to-stop-worrying-and-build-my-own-lastfm"
+  comment: A dashboard for my music play history.
+  demo: https://music.charlieegan3.com
+  github: https://github.com/charlieegan3/music/
+  search_result_url: demo
+  title: 'charlieegan3: Music'
+  type: side-project
+- blog: "/posts/2018-03-04-backing-up-instagram"
+  comment: A portfolio site for my photos
+  demo: https://photos.charlieegan3.com
+  github: https://github.com/charlieegan3/photos
+  search_result_url: demo
+  title: 'charlieegan3: Photos'
+  type: side-project
+- comment: A tool to sync an airtable contacts database to CardDAV and send birthday notifications
+  github: https://github.com/charlieegan3/airtable-contacts
+  search_result_url: github
+  title: 'airtable-contacts'
+  type: side-project
 - comment: Codified building of dev machine image for Hetzner Cloud VM. Used from
     iPad via Blink shell for development on the go.
   github: https://github.com/charlieegan3/dev-machine
@@ -50,20 +75,6 @@ projects:
   search_result_url: github
   title: kubectl vapply
   type: experiment
-- blog: "/blog/2018/11/20/how-i-learned-to-stop-worrying-and-build-my-own-lastfm"
-  comment: A dashboard for my music play history.
-  demo: https://music.charlieegan3.com
-  github: https://github.com/charlieegan3/music/
-  search_result_url: demo
-  title: 'charlieegan3: Music'
-  type: side-project
-- blog: "/posts/2018-03-04-backing-up-instagram"
-  comment: A portfolio site built from my Instagram posts with a map and calendar.
-  demo: https://photos.charlieegan3.com
-  github: https://github.com/charlieegan3/photos
-  search_result_url: demo
-  title: 'charlieegan3: Photos'
-  type: side-project
 - blog: "/blog/2018/04/22/bringing-photoshop-imagestacking-to-mobile-with-ffmpeg-hugin-imagemagick-hypersh"
   comment: Create long-exposure style stacked images from videos
   github: https://github.com/charlieegan3/stackr

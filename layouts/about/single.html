@@ -9,7 +9,18 @@
 {{ define "main" }}
 	<h1>{{ .Title }}</h1>
 	<div class="post-content">
-		<img class="mt1 fl mr3 w3 br-100 ba bw2 b--white" src="/face.jpg">
-		{{ .Content }}
+
+			<div class="flex flex-wrap items-center">
+				<div class="w-10-ns center mh0-ns">
+					<img class="w3 br-100 ba bw1 b--white" src="/face.jpg">
+				</div>
+				<div class="w-90-ns mt2 mt0-ns pl2-ns">
+					{{ .Params.intro }}
+				</div>
+			</div>
+
+		<div class="mt2">
+			{{ .Content }}
+		</div>
 	</div>
 {{ end }}
