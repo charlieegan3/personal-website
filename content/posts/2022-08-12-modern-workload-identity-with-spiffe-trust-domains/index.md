@@ -1,7 +1,7 @@
 ---
 title: "Modern workload identity with SPIFFE & Trust Domains"
 date: 2022-08-12 11:00:27 +0100
-external_url: https://www.jetstack.do/blog/workload-identity-with-spiffe-trust-domains/
+external_url: https://www.jetstack.io/blog/workload-identity-with-spiffe-trust-domains/
 ---
 
 A workload is a running instance of an application. Workload identities are how
