@@ -19,7 +19,7 @@ profiles:
   - url: https://unsplash.com/@charlieegan3
     icon: unsplash.jpg
     title: Unsplash
-  - url: https://news.ycombinator.com/item?id=9045677
+  - url: https://www.linkedin.com/in/Charlie Egan/
     icon: notlinked.jpg
     title: LinkedIn
 - name: Running
