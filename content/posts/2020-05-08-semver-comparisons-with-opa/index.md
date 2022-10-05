@@ -8,7 +8,7 @@ date: 2020-05-08 11:29:00 +0000
 
 ![versions.png](versions.png)
 
-I recently found myself faced with the task of writing [OPA](https://www.openpolicyagent.org/) policies that involved comparing [Semantic Versions](https://semver.org/). It seemed like an interesting challenge, and something more useful than [validating Christmas trees](https://www.notion.so/posts/2019-12-05-rego-fun/)...
+I recently found myself faced with the task of writing [OPA](https://www.openpolicyagent.org/) policies that involved comparing [Semantic Versions](https://semver.org/). It seemed like an interesting challenge, and something more useful than [validating Christmas trees](https://github.com/charlieegan3/policing-christmas-trees)...
 
 This was the end goal, a function that was able to compare two versions:
 
