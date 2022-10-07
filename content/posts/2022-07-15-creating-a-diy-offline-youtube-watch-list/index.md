@@ -3,8 +3,8 @@ title: "Creating a DIY offline YouTube watch list with Inoreader, yt-dlp, Zapier
 date: 2022-07-15 19:53:46 +0100
 ---
 
-Update: Zapier webhooks are now a premium integration, however I have been able
-to achieve the same thing with [pipedream.com](https://pipedream.com).
+Update: Zapier webhooks are now a premium integration, I have now built my own
+handler for this transformation [here](https://github.com/charlieegan3/tool-inoreader-github-actions-trigger)
 
 ![cover image showing connected services](./cover.png)
 
