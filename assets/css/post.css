@@ -6,7 +6,7 @@
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   vertical-align: bottom;
-  color: #99999;
+  color: #c9c9c9;
 }
 
 .post-content h1 { font-size: 1.5rem; }
@@ -47,7 +47,6 @@
   border-color: #181818;
   border-left-style: solid;
   border-left-width: 20px;
-  border-width: 1rem;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   padding: 1rem 0.25rem;
@@ -81,11 +80,9 @@
 .post-content hr {
   border: 0;
   height: 1px;
-  background-color: #ccc;
+  background-color: #787878;
   margin-left: 0;
-  opacity: 0.4;
-  margin: 20px auto;
-  max-width: 70%;
+  max-width: 100%;
 }
 .post-content img {
   border-style: solid;
@@ -100,4 +97,24 @@
   font-size: 0.9em;
   font-style: italic;
   padding-left: 2rem;
+}
+
+.post-content table {
+  font-size: 0.8rem;
+  border-collapse: collapse;
+}
+.post-content th {
+  border-color: #787878;
+  border-left: 1px solid;
+}
+.post-content th:first-child {
+  border-left: none;
+}
+.post-content td {
+  border-color: #787878;
+  border: 1px solid;
+}
+.post-content td,
+.post-content th {
+    padding: 0.3rem;
 }
