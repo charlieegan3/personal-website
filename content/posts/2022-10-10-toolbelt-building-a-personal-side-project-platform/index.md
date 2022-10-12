@@ -82,6 +82,8 @@ A toolbelt is intended to be co-located a collection of side projects (tools) ru
 
 ## Okay, but what do your tools do?
 
+**Edit:** please see the [toolbelt README](https://github.com/charlieegan3/toolbelt#tools) for an updated list of tools - there are some new ones!
+
 I currently have one 'platform tool' which is used by other tools.
 My idea is that some tools will be used by other tools as services to further accelerate
 my side project efforts with the platform.
