@@ -27,4 +27,4 @@ Other things I do:
 - 🧻 keep a [blog](https://charlieegan3.com/posts/) & write a journal
 - 🎽 [run](https://www.strava.com/athletes/1238371), bike, swim - but not all three at once just yet!
 
-I work at [Jetstack](https://jetstack.io/) 💼.
+I work at [Styra](https://www.styra.com) 💼.
