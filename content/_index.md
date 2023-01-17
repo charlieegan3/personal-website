@@ -1,1 +1,1 @@
-I build things on the internet. I like walking quickly.
+I build things on the internet. I work at [Styra](http://styra.com).

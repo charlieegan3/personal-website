@@ -8,6 +8,10 @@ profiles:
     icon: gh.jpg
     featured: true
     title: GitHub
+  - url: https://hachyderm.io/@charlieegan3
+    icon: mastodon.jpg
+    featured: true
+    title: Mastodon
   - url: http://twitter.com/charlieegan3
     icon: twitter.jpg
     featured: true
