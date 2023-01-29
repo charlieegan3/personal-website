@@ -4,10 +4,6 @@ type: profiles
 profiles:
 - name: Social
   list:
-  - url: http://github.com/charlieegan3
-    icon: gh.jpg
-    featured: true
-    title: GitHub
   - url: https://hachyderm.io/@charlieegan3
     icon: mastodon.jpg
     featured: true
@@ -18,20 +14,27 @@ profiles:
     title: Twitter
   - url: http://instagram.com/charlieegan3
     icon: instagram.jpg
-    featured: true
     title: Instagram
   - url: https://unsplash.com/@charlieegan3
     icon: unsplash.jpg
     title: Unsplash
+- name: Work
+  list:
+  - url: http://github.com/charlieegan3
+    icon: gh.jpg
+    featured: true
+    title: GitHub
   - url: https://www.linkedin.com/in/charlieegan3
     icon: notlinked.jpg
     title: LinkedIn
+  - url: http://stackoverflow.com/users/1510063/charlie-egan
+    icon: so.jpg
+    title: Stack Overflow
 - name: Running
   list:
   - url: https://www.strava.com/athletes/1238371
     icon: strava.jpg
     title: Strava
-    featured: true
   - url: http://www.parkrun.org.uk/results/athleteresultshistory/?athleteNumber=358706
     icon: parkrun.jpg
     title: Parkrun
@@ -53,9 +56,6 @@ profiles:
     title: Monzo
 - name: Forums
   list:
-  - url: http://stackoverflow.com/users/1510063/charlie-egan
-    icon: so.jpg
-    title: Stack Overflow
   - url: https://news.ycombinator.com/user?id=charlieegan3
     icon: hn.jpg
     title: Hacker News
@@ -78,7 +78,7 @@ profiles:
     title: Starcraft
 - name: Academic
   list:
-  - url: https://scholar.google.co.uk/citations?user=pqb-ZNAAAAAJ&amp;hl=en
+  - url: https://scholar.google.co.uk/citations?user=Vu_P_h8AAAAJ&hl=en
     icon: scholar.jpg
     title: Google Scholar
   - url: https://open.kattis.com/users/charlie
@@ -86,4 +86,4 @@ profiles:
     title: Kattis
 ---
 
-You can find me on the internet in these places
+You can also find me in these other places

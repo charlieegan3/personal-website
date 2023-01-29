@@ -32,9 +32,14 @@ menu:
     url: /about/
     weight: 2
   - identifier: posts
-    name: posts
+    name: blog
     title: view my blog posts
     url: /posts/
+    weight: 2
+  - identifier: week-notes
+    name: week notes
+    title: view my weekly notes
+    url: /week-notes/
     weight: 2
   - identifier: projects
     name: projects
