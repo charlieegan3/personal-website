@@ -36,6 +36,9 @@
 .post-content li {
   margin-bottom: 0.3rem;
 }
+.post-content.listicle li {
+  margin-bottom: 2rem;
+}
 .post-content li ul {
   padding-left: 1.5rem;
 }
