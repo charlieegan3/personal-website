@@ -36,6 +36,10 @@
 .post-content li {
   margin-bottom: 0.3rem;
 }
+.post-content li img {
+  margin-top: 0.5rem;
+  width: 100%;
+}
 .post-content.listicle li {
   margin-bottom: 2rem;
 }
