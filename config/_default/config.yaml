@@ -17,7 +17,7 @@ outputFormats:
     notAlternative: true
 
 outputs:
-  home: ["HTML", "SearchIndex"]
+  home: ["HTML", "SearchIndex", "RSS"]
 
 menu:
   main:

@@ -27,6 +27,10 @@
 		<meta property="og:image" content="{{ .Permalink }}{{ index $resourceMap 0}}" />
 		{{- end }}
 
+		{{ range .AlternativeOutputFormats -}}
+		{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+		{{ end -}}
+
 		{{- $cssFiles := slice }}
 		{{- $cssFiles = $cssFiles | append (resources.Get "css/tachyons.css") }}
 		{{- $cssFiles = $cssFiles | append (resources.Get "css/styles.css") }}
