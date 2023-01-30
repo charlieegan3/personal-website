@@ -58,19 +58,19 @@
 		<script type="text/javascript" crossorigin="anonymous" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 	</head>
 	<body class="bg-darker-gray light-silver">
+		<nav class="flex justify-between mw7 center mt2 ph3 ph5-ns">
+			{{ $currentPage := . }}
+			{{ range .Site.Menus.main }}
+			{{ $active := false }}
+			{{ if $.IsNode }}{{ if eq .URL $currentPage.RelPermalink }}{{ $active = true }}{{ end }}{{ end }}
+			{{ if $.IsPage }}{{ if eq .Identifier $.Type }}{{ $active = true }}{{ end }}{{ end }}
+			<a class="{{if $active }} bb bw1 b--silver{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
+			{{ end }}
+			<a href="/search">
+				<img class="fr grow" style="width: 20px; filer: invert(.75); -webkit-filter: invert(.75);" src="/search.svg"/>
+			</a>
+		</nav>
 		<section class="{{- block "width" . -}}mw7{{- end }} center pa3 ph5-ns pb5">
-			<nav class="sidebar-nav">
-				{{ $currentPage := . }}
-				{{ range .Site.Menus.main }}
-					{{ $active := false }}
-					{{ if $.IsNode }}{{ if eq .URL $currentPage.RelPermalink }}{{ $active = true }}{{ end }}{{ end }}
-					{{ if $.IsPage }}{{ if eq .Identifier $.Type }}{{ $active = true }}{{ end }}{{ end }}
-					<a class="{{if $active }} bb bw1 b--silver{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
-				{{ end }}
-				<a href="/search">
-					<img class="fr grow" style="width: 20px; filer: invert(.75); -webkit-filter: invert(.75);" src="/search.svg"/>
-				</a>
-			</nav>
 			{{- block "main" . -}}{{- end -}}
 		</section>
 	</body>
