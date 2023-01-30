@@ -19,6 +19,8 @@ outputFormats:
 outputs:
   home: ["HTML", "SearchIndex", "RSS"]
 
+rssLimit: 30
+
 menu:
   main:
   - identifier: home
