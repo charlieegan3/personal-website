@@ -72,7 +72,8 @@
   }
 
   .post-content p,
-  .post-content li {
+  .post-content li,
+  .post-content li code {
     font-size: 0.9rem;
   }
 }
