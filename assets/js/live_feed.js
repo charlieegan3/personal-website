@@ -3,7 +3,6 @@ var liveFeed = {};
   context.extractItems = function(data) {
     var items = [
       { type: "commit", data: data.commit },
-      { type: "tweet",  data: data.tweet },
       { type: "play",  data: data.play },
       { type: "post",  data: data.post },
       { type: "film",   data: data.film },
@@ -41,12 +40,6 @@ var liveFeed = {};
         var segments = data.url.split("/");
         var sha = segments[segments.length - 1];
         return "Committed \"" + context.linkedText(context.cleanLongWords(data.message), "https://github.com/" + data.repo.name + "/commit/" + sha, "") + "\"";
-      case "tweet":
-        if (data.location != null && data.location != "") {
-          return context.linkedText("Tweeted from " + data.location, data.link, "");
-        } else {
-          return "Posted a " + context.linkedText("tweet", data.link, "");
-        }
       case "play":
         return context.linkedText("Listened", "https://music.charlieegan3.com/recent", "") + " to " + data.track + " by " + data.artist;
       case "post":
