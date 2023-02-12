@@ -1,5 +1,5 @@
 ---
-title: "Week 21: Deep in the Jungle"  
+title: "Week 21: Making Plans"  
 date: 2023-02-12 05:48:04 +0000  
 ---
 * I have been writing some docs on OAuth 2.0 and Okta. The feature depends the [client credentials grant type](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/). I find it frustrating that while OAuth is meant to be a standard, tasks like getting a client credentials token are so variable. Despite the docs on the Okta sponsored OAuth 2.0 site saying otherwise, Okta require the use of a private key authentication type for client credential requests when accessing the management API.
@@ -9,3 +9,4 @@ date: 2023-02-12 05:48:04 +0000
 * I am enjoying trips to with [Govinda's](https://govindas.london) greatly.
   ![Govinda's](./IMG_3330.jpg)
 * It was nice to bump into an old [Computation Club](https://london.computation.club) friend in Hampstead Heath.
+* I went to a meme, battery hen, spin class at [Soul Cycle](https://www.soul-cycle.com/uk/). I'll stick to my own bike at home... Spin classes are terrible at not explaining how long the intervals are.
