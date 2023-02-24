@@ -1,0 +1,93 @@
+{{ define "title" }}
+{{- htmlUnescape .Params.title }} - {{ $.Site.Title -}}
+{{ end }}
+
+{{ define "og_title" }}
+{{- htmlUnescape .Params.title -}}
+{{ end }}
+
+{{ define "og_type" -}}
+article
+{{- end }}
+
+{{ define "og_fields" -}}
+<meta name="author" content="{{ $.Site.Params.name }}"/>
+<meta property="article:author" content="https://twitter.com/{{ $.Site.Params.twitter}}"/>
+{{- end }}
+
+{{ define "main" }}
+<h1 class="f3-ns f4">{{ .Title }}</h1>
+<table class="striped w-100">
+    <tbody>
+    {{ if .Params.slides }}
+    <tr>
+        <th>Slides</th>
+        <td>
+            <a href="{{ .Params.slides }}" target="_blank" rel="noopener noreferrer nofollow">Link (PDF)</a>
+        </td>
+    </tr>
+    {{ end }}
+    {{ if .Params.repo_url }}
+    <tr>
+        <th>Repo</th>
+        <td>
+            <a href="{{ .Params.repo_url }}">Link</a>
+        </td>
+    </tr>
+    {{ end }}
+    {{ if .Params.blog_url }}
+    <tr>
+        <th>Blog</th>
+        <td>
+            <a href="{{ .Params.blog_url }}">Link</a>
+        </td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
+
+{{ if .Params.events }}
+<h2>Events</h2>
+<table class="striped w-100">
+    <tbody>
+    {{ range .Params.events }}
+    <tr>
+        <th>{{ .name }}</th>
+        <td>
+            {{ .location }}
+            <br>
+            {{ time.Format "Jan 2 2006" .date }}
+            <br>
+            <ul>
+                {{ if .url }}
+                <li>
+                    <a href="{{ .url }}">Event Page</a>
+                </li>
+                {{ end }}
+                {{ if .video_url }}
+                <li>
+                    <a href="{{ .video_url }}">Video</a>
+                </li>
+                {{ end }}
+            </ul>
+            {{ if .copresenters }}
+            <strong>Copresenters</strong>
+            <ul>
+                {{ range .copresenters }}
+                <li>
+                    <a href="{{ .url }}">{{ .name }}</a>
+                </li>
+                {{ end }}
+            </ul>
+            {{ end }}
+        </td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
+{{ end }}
+
+<div class="post-content">
+    {{ .Content }}
+</div>
+{{ end }}
