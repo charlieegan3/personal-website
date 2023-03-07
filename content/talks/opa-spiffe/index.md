@@ -1,5 +1,5 @@
 ---
-title: Multi-Cloud Workload Identity With SPIFFE
+title: Using SPIFFE and OPA to Authenticate and Authorize Workloads
 slides: true
 repo_url: https://github.com/charlieegan3/talk-opa-spiffe
 events:
@@ -25,4 +25,6 @@ posture.
   * https://www.styra.com/styra-das/
   * https://www.styra.com/styra-load/
 
+## QR Code
 
+![QR Code](code.png)
