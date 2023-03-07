@@ -21,6 +21,7 @@ posture.
 
 ## Links
 
+* [Jetstack SPIFFE Blog](https://www.jetstack.io/blog/workload-identity-with-spiffe-trust-domains/)
 * Styra Products
   * https://www.styra.com/styra-das/
   * https://www.styra.com/styra-load/
