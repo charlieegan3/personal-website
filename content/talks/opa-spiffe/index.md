@@ -5,7 +5,7 @@ repo_url: https://github.com/charlieegan3/talk-opa-spiffe
 events:
 - name: "Cloud Native London March"
   url: "https://www.meetup.com/cloud-native-london/events/289518767/"
-  date: "2023-03-07"
+  date: "2023-03-08"
   location: "London, UK"
 ---
 
@@ -16,8 +16,6 @@ identity and policy controls. In this session, we will discuss desirable propert
 a modern architecture built on SPIFFE and cert-manager which uses Open Policy Agent (OPA) for policy decisions. This
 should leave you with actionable ideas to help you re-evaluate your workload identity functionality and security
 posture.
-
-
 
 ## Links
 
