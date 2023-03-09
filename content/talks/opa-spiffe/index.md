@@ -7,6 +7,7 @@ events:
   url: "https://www.meetup.com/cloud-native-london/events/289518767/"
   date: "2023-03-08"
   location: "London, UK"
+  video_url: https://www.youtube.com/live/Asw81cQag44?t=724
 ---
 
 ## Abstract
@@ -23,6 +24,10 @@ posture.
 * Styra Products
   * https://www.styra.com/styra-das/
   * https://www.styra.com/styra-load/
+
+## Photos
+
+![photo of myself ](photo.jpg)
 
 ## QR Code
 
