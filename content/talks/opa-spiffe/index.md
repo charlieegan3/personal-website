@@ -27,7 +27,13 @@ posture.
 
 ## Photos
 
-![photo of myself ](photo.jpg)
+![photo of myself giving the talk](photo.jpg)
+
+_photo credit: Greg Brown_
+
+![photo of myself giving the talk](photo2.jpg)
+
+_photo credit: Abdullah A. Mohammed_
 
 ## QR Code
 
