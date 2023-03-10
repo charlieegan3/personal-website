@@ -20,6 +20,9 @@ posture.
 
 ## Links
 
+* CNCF Tools
+  * [SPIFFE](https://spiffe.io/)
+  * [OPA](https://www.openpolicyagent.org/)
 * [Jetstack SPIFFE Blog](https://www.jetstack.io/blog/workload-identity-with-spiffe-trust-domains/)
 * Styra Products
   * https://www.styra.com/styra-das/
