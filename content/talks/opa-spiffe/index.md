@@ -4,7 +4,7 @@ slides: true
 repo_url: https://github.com/charlieegan3/talk-opa-spiffe
 events:
 - name: "Cloud Native London March"
-  url: "https://www.meetup.com/cloud-native-london/events/289518767/"
+  url: "https://www.oicheryl.com/2023/03/08/cloud-native-london-march-2023/"
   date: "2023-03-08"
   location: "London, UK"
   video_url: https://www.youtube.com/live/Asw81cQag44?t=724
