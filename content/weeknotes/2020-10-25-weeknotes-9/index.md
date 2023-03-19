@@ -18,5 +18,4 @@ aliases:
         ![210C5A08-468E-4388-8B29-F053712ABA2F.jpeg](210C5A08-468E-4388-8B29-F053712ABA2F.jpeg)
 - I went for a [single run](https://www.strava.com/activities/4227461397) during which my ankle felt much better than before... It was lovely to be able to get out onto the Heath so quickly from the new flat. Also managed to get out for a [decent ride](https://www.strava.com/activities/4236333297) that was long enough to feel like a training session but short enough to mean I didn’t need to have a nap afterwards! Sadly no time for a swim this weekend...
 - Been a bit of a quieter gaming week as I’ve been using a 4G connection since moving to a new flat (which worked much better than expected for gaming). We also had some fun playing Halo 3 - which is now 13 years old! 👴
-
-![3D906777-0E15-4301-8911-51157874FCA6.gif](3D906777-0E15-4301-8911-51157874FCA6.gif)
+  ![3D906777-0E15-4301-8911-51157874FCA6.gif](3D906777-0E15-4301-8911-51157874FCA6.gif)

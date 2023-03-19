@@ -13,7 +13,7 @@ aliases:
         Zoom is still relying on a GNOME hack involving screenshots, but Zoom web seems to work ok via Chromium.
         ![screenshot-2020-10-03_22-23-14.png](screenshot-2020-10-03_22-23-14.png)
     - Configured a base16-backed synchronized day/night mode. I have a button that toggles the setting of the theme for nvim and Alacritty using their hot reload & remote control features.
-        ![ezgif.com-video-to-gif.gif](Records/Weeknotes/2020-10-04-week-notes-6/ezgif.com-video-to-gif.gif)
+        ![ezgif.com-video-to-gif.gif](ezgif.com-video-to-gif.gif)
     - As mentioned last week, I added a [long script](https://github.com/charlieegan3/linux-environment/commit/14857b47128cd385fbda04ae1604f29a6cced894) to sync secrets between machines and instances using the [Bitwarden CLI](https://github.com/bitwarden/cli). It's not that swish, but it does the job better than my current lack of a system.
     - I also start sway in the recommended way, using [systemd-cat](https://github.com/charlieegan3/linux-environment/commit/12b22664c7892cee55dda65f0dbf1780da30c747#diff-0aa34e847338db235914455015bc5573R8) so that I get all the logs in journalctl for the desktop environment. I also moved mako to run as a user service in systemd.
     - Connected my bluetooth headphones with almost no issue.

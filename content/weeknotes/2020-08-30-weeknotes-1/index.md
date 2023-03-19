@@ -15,7 +15,7 @@ aliases:
 - Last weekend someone tried to snatch my phone so I bought a cheaper backup iPhone 5SE. I was really impressed by the nearby device [quick start feature](https://support.apple.com/en-gb/HT210216). I also bought what is effectively a [£14 keyring](https://www.quadlockcase.co.uk/collections/accessories/products/phone-ring-stand?variant=31349703573619) for my Quad Lock case.
 - Back at work, the video calling arms race continues and I got sucked into it this week after [someone](https://twitter.com/_jsfuentes?s=21) sent me a link to a £6 capture card on eBay...
 
-![Screenshot_from_2020-08-31_18-11-35.png](Screenshot_from_2020-08-31_18-11-35.png)
+  ![Screenshot_from_2020-08-31_18-11-35.png](Screenshot_from_2020-08-31_18-11-35.png)
 
 - I’ve booked my trains home for Christmas. Booked to visit my granny for the first time this year. And tried to book a trip to Edinburgh but LNER said not yet.
 - We’ve been playing Sea of Thieves. We all find the controls infinitely frustrating and still can’t seem to beat any other ships with real players in them. That said, we still seem to enjoy it, firing people out of canons and drinking grog is fun too.

@@ -13,5 +13,4 @@ aliases:
 - I was rather painfully reminded that Monzo doesn't yet support international transfers. Use TransferWise...
 - At work I've been trying to find a way to make our system fast enough to process the data we need it to. Still looking for bright ideas on that one.
 - Been playing quite a bit of Warzone this week, perhaps a little too much. Some good, mostly very bad. *Deep Rock Galactic* was a nice break, a chance to relax as a mercenary miner and dance... only a 2GB download too...
-
-![ezgif.com-video-to-gif.gif](Records/Weeknotes/2020-11-08-week-notes-11/ezgif.com-video-to-gif.gif)
+  ![ezgif.com-video-to-gif.gif](ezgif.com-video-to-gif.gif)

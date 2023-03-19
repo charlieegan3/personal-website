@@ -14,8 +14,7 @@ aliases:
 - Had the strange experience of cycling around London on Zwift. If there were no cars on the road, why would I cycle in a tube tunnel? [Leith Hill is grim, can we have Elephant and Castle back?](https://zwiftinsider.com/route/greatest-london-loop/)
 - On Monday night I finally decided that I'd rather consume Twitter as a daily digest. I built something in GitHub Actions to generate a feed with an entry containing the tweets for just that day. So far it's been a big improvement - not sure why I didn't do this ages ago. No adverts, no confusing reorderings etc.
 - This week's gaming highlight was grinding on the pipelines in [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/), trumps even a Warzone win!
-
-![ezgif.com-video-to-gif.gif](Records/Weeknotes/2020-11-29-week-notes-14/ezgif.com-video-to-gif.gif)
+  ![ezgif.com-video-to-gif.gif](ezgif.com-video-to-gif.gif)
 
 - New music for me this week has been [Peggy Gou](https://open.spotify.com/track/1GZJu6ciZ55S8Kp1s8Z5ex?si=H4ceEGxVQf-gdiadK7jULQ) & [Bicep](https://open.spotify.com/track/73X9X7kDgsm4YeHpc8prf6?si=qKX_btR5QTq2l5m9QzSaIQ). New but familiar has been more... [Pendulum](https://open.spotify.com/track/7eJqLdEQ96D5Xzc406xkeZ?si=QKrOhvEoSMKAnzAF54DhgQ)! Also, my shameless kitchen-cooking-dancing-song has been [this banger](https://open.spotify.com/track/75rGONmoi48LLYBFaGiYsv?si=6bg1yRqISK-ig2qQ5hJRSQ). 🕺
 - I’m still doing my best to stop looking at Slack and read my book over lunch. I’m reading [Designing Data Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) and have just completed the section on graph databases. When I’m finished I need to play more with Datalog. This is particularly interesting to me since it’s what OPA’s Rego is based on (and we use OPA extensively at work).
