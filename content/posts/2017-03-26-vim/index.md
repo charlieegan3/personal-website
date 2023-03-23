@@ -2,7 +2,7 @@
 aliases:
 - /blog/2017/03/26/vim
 title: Fixing up my vimrc
-date: 2017-03-26 00:48:53 +0000
+date: "2017-03-26 00:48:53 +0000"
 ---
 
 After working closely with a proficient vim user on a summer internship; I
@@ -115,7 +115,7 @@ set tabstop=8 softtabstop=8 shiftwidth=2 " indentation quantities
 set backspace=indent,eol,start " backspace behavior
 ```
 
----
+<hr>
 
 Those are just the vim ones; I've also changed i3 around and dropped some
 things on macOS in the year long task of adopting a developer environment that's

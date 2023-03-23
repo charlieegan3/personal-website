@@ -1,6 +1,6 @@
 ---
 title: "toolbelt - Building a personal side project platform"
-date: 2022-10-10 07:47:55 +0100
+date: "2022-10-10 07:47:55 +0100"
 ---
 
 ![image showing the logs of a running toolbelt server](./toolbelt-logs.png)

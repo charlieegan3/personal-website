@@ -143,7 +143,7 @@ My two ‘flagship’ (lol) projects are my [Instagram-driven & enhanced photo l
 
 I was hoping that this final example would show that GitHub Actions can be the glue to tie together git, object storage, external services and static sites into something that looks like an ‘application’.
 
----
+<hr>
 
 So that’s how I’m using GitHub actions, as of today.
 

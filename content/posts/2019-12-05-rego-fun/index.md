@@ -141,7 +141,7 @@ expected_y := gradient * point[0] + y_intercept
 expected_y == point[1]
 ```
 
----
+<hr>
 
 So there you have it. Some things I did in Rego in the name of festive fun.
 
