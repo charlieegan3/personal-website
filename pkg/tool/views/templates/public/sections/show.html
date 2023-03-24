@@ -14,26 +14,15 @@
         <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
         {{ end }}
     </h2>
-    <p class="mt0 dn db-ns">
+    <p class="mt0">
         {{ if ne $page.PublishedAt.Year 0001 }}
             <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
         {{ end }}
         {{ if ne $page.ExternalURL "" }}
           <strong class="muted">(External Post)</strong>
-          {{ blurb $page.Content 50 }}
+          {{ blurb $page.Content 25 }}
         {{ else }}
-        {{ blurb $page.Content 50 }}
-        {{ end }}
-    </p>
-    <p class="mt0 db dn-ns f6">
-        {{ if ne $page.PublishedAt.Year 0001 }}
-        <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
-        {{ end }}
-        {{ if ne $page.ExternalURL "" }}
-        <strong class="muted">(External Post)</strong>
-        {{ blurb $page.Content 20 }}
-        {{ else }}
-        {{ blurb $page.Content 20 }}
+        {{ blurb $page.Content 25 }}
         {{ end }}
     </p>
 </div>

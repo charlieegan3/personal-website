@@ -87,6 +87,12 @@ func init() {
 		Funcs: template.FuncMap{
 			"markdown": MDFunc,
 			"blurb": func(s string, count int) template.HTML {
+				lines := strings.Split(s, "\n")
+				if len(lines) > 5 {
+					lines = lines[:5]
+				}
+				s = strings.Join(lines, "\n")
+
 				raw := string(MDFunc(s))
 
 				doc, err := goquery.NewDocumentFromReader(strings.NewReader(raw))
