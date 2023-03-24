@@ -1,0 +1,139 @@
+{{define "title"}}{{.page.Title }}{{end}}
+{{define "page_title"}}{{.page.Title }}{{end}}
+{{define "header"}}
+{{ include "partials/admin/menu" }}
+{{end}}
+{{ define "head" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{{ end }}
+{{ define "max_width" }}mw9{{end}}
+
+{{define "content"}}
+
+<p>
+    <a href="/{{ .pageSection.Slug }}/{{ .page.Slug }}">View Page</a>
+</p>
+
+<div class="flex flex-wrap">
+    <div class="w-100 w-75-l pa2">
+        <form method="POST" action="/admin/pages/{{ .page.ID }}">
+            <input class="w-100 db ba bw2 b--dark-green bg-green white pv3 mb3 pointer" type="submit" value="Update">
+
+            <div class="mb2 mw6">
+                <label for="title">Title</label>
+                <br>
+                <input id="title" class="w-100" type="text" name="title" placeholder="Title" value="{{ .page.Title }}"/>
+            </div>
+
+            <div class="mb2 mw6">
+                <label for="slug">Slug</label>
+                <br>
+                <input id="slug" class="w-100" type="text" name="slug" placeholder="Slug" value="{{ .page.Slug }}"/>
+            </div>
+
+            <div class="mb2">
+                <label for="section_id">Section</label>
+                <select id="section_id" name="section_id">
+                    {{ range $s := .sections }}
+                    <option value="{{$s.ID}}" {{if eq $s.ID $.page.SectionID}}selected{{end}}>{{ $s.Name }}</option>
+                    {{ end }}
+                </select>
+            </div>
+
+            <div class="mb2">
+                <label for="is_draft">Is Draft</label>
+                <input type="checkbox" id="is_draft" name="is_draft" value="true" {{ if .page.IsDraft }}checked{{end}}/>
+            </div>
+
+            <div class="mb2">
+                <label for="is_protected">Is Protected</label>
+                <input type="checkbox" id="is_protected" name="is_protected" value="true" {{ if .page.IsProtected
+                       }}checked{{end}}/>
+            </div>
+
+            <div class="mb2">
+                <label for="is_deleted">Is Deleted</label>
+                <input type="checkbox" id="is_deleted" name="is_deleted" value="true" {{ if .page.IsDeleted }}checked{{end}}/>
+            </div>
+
+            <div class="mb2">
+                <label for="published_at">Published At</label>
+                <input id="published_at" type="datetime-local" name="published_at" value="{{ .page.PublishedAt.Format "2006-01-02T15:04:05" }}"/>
+            </div>
+
+            <div class="mb2">
+                <br>
+                <textarea id="content" class="code f7 w-100" rows="20" name="content"
+                          placeholder="Content">{{ .page.Content }}</textarea>
+            </div>
+
+            <div class="mb2">
+                <label for="data">Data</label>
+                <br>
+                <textarea id="data" class="code f7 w-100" rows="20" name="data"
+                          placeholder="yaml: value">{{ .page.DataYAML }}</textarea>
+            </div>
+        </form>
+    </div>
+    <div class="w-100 w-25-l pa2">
+        <div class="flex flex-wrap">
+            <div class="w-50">
+                <form action="/admin/pages/{{ .page.ID }}/attachments" enctype="multipart/form-data" method="POST">
+                    <div class="mb2">
+                        <label for="file">File</label>
+                        <input id="file" type="file" name="file">
+                    </div>
+                    <div class="mb2">
+                        <label for="filename">Filename</label>
+                        <input id="filename" type="text" name="filename" placeholder="Filename">
+                    </div>
+                    <div class="mb2">
+                        <label for="content_type">Content Type</label>
+                        <select id="content_type" name="content_type">
+                            <option value="image/jpeg">JPEG</option>
+                            <option value="image/x-png">PNG</option>
+                            <option value="image/gif">GIF</option>
+                            <option value="application/pdf">PDF</option>
+                            <option value="application/zip">ZIP</option>
+                            <option value="text/csv">CSV</option>
+                        </select>
+                    </div>
+                    <input class="w-100 db ba bw2 b--dark-green bg-green white pv3 pointer" type="submit" value="Add Attachment">
+                </form>
+            </div>
+            <div class="w-50">
+                <ul>
+                    {{ range $a := .attachments }}
+                    <li class="mt1">
+                        {{ $a.Filename }} {{ $a.ContentType }}
+                        <form class="dib" method="post" action="/admin/pages/{{ $.page.ID }}/attachments/{{ $a.ID }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input class="w-100 db ba bw2 b--dark-red bg-red white" type="submit" value="Delete">
+                        </form>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+
+        {{ if not .page.IsProtected }}
+        <form class="mt3" method="post" action="/admin/pages/{{ .page.ID }}">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="is_deleted" value="{{ .page.IsDeleted }}">
+            <input class="w-100 db ba bw2 b--dark-red bg-red white pv3" type="submit" value="Delete">
+        </form>
+        {{end}}
+    </div>
+</div>
+
+<!--this needs to be at the end to work when using htmx-->
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+    ready(function () {
+        new SimpleMDE({
+            element: document.getElementById("content"),
+            forceSync: true
+        });
+    });
+</script>
+{{end}}

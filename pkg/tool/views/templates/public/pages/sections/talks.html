@@ -1,0 +1,97 @@
+{{define "title"}}{{.page.Title }}{{end}}
+{{define "page_title"}}{{.page.Title }}{{end}}
+{{define "content"}}
+{{ if .page.IsDraft }}
+<p class="pa3 ba b--dark-red bw1 mt1 br2 dark-red">
+    This is a draft
+</p>
+{{ end }}
+
+<div class="flex justify-between mw5">
+    {{ if .page.GetDataValue "slides" }}
+    <div>
+        <p class="mt0 mb1">
+            <strong>Slides</strong>
+        </p>
+        <p class="mv0">
+            <a href="{{ .url }}/slides.pdf" target="_blank" rel="noopener noreferrer nofollow">Link (PDF)</a>
+        </p>
+    </div>
+    {{ end }}
+    {{ if .page.GetDataValue "repo_url" }}
+    <div>
+        <p class="mt0 mb1">
+            <strong>Repo</strong>
+        </p>
+        <p class="mv0">
+            <a href="{{ .page.GetDataValue "repo_url" }}">Link</a>
+        </p>
+    </div>
+    {{ end }}
+    {{ if .page.GetDataValue "blog_url" }}
+    <div>
+        <p class="mt0 mb1">
+            <strong>Blog</strong>
+        </p>
+        <p class="mv0">
+            <a href="{{ .page.GetDataValue "blog_url" }}">Link</a>
+        </p>
+    </div>
+    {{ end }}
+</div>
+
+{{ if .page.GetDataValue "events" }}
+<div class="mt3 flex justify-between">
+    {{ range .page.GetDataValue "events" }}
+    <details>
+        <summary>{{ .name }}</summary>
+        <p class="mv0 f6">
+            <span>
+                {{ .date }} - {{ .location }}
+            </span>
+            <br>
+            <strong>Links:</strong>
+            {{ if .url }}
+            <a href="{{ .url }}">Event Page</a>
+            {{ end }}
+            {{ if .video_url }}
+            <a href="{{ .video_url }}">Video</a>
+            {{ end }}
+            {{ if .copresenters }}
+            <br>
+            <strong>Copresenters:</strong>
+            {{ range .copresenters }}
+            <a href="{{ .url }}">{{ .name }}</a>
+            {{ end }}
+            {{ end }}
+        </p>
+    </details>
+    <div>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
+
+
+<div class="page-content section-{{ .section }}">{{ markdown .content }}</div>
+
+{{ if .page.IsDraft }}
+<p class="pa3 ba b--dark-red bw1 mt1 br2 dark-red">
+    This is a draft
+</p>
+{{ end }}
+
+<div class="mt3 flex justify-between">
+    {{ if ne .prev.ID 0 }}
+    <a href="/{{ .section }}/{{ .prev.Slug }}">Prev</a>
+    {{else}}
+    <span></span>
+    {{end}}
+    {{ if ne .next.ID 0 }}
+    <a href="/{{ .section }}/{{ .next.Slug }}">Next</a>
+    {{else}}
+    <span></span>
+    {{end}}
+</div>
+
+{{end}}

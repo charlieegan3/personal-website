@@ -1,0 +1,19 @@
+{{define "title"}}RSS{{end}}
+{{define "page_title"}}RSS{{end}}
+{{define "head"}}{{end}}
+
+{{define "content"}}
+<p>If you would like to follow this site using an RSS reader, please see the following feeds:</p>
+
+<ul>
+    {{ range .sections }}
+    <li class="mb2">
+        <a rel="noopener noreferrer nofollow" target="_blank" href="/{{ .Slug }}.rss">{{ .Name }}</a>
+        <br>
+        <code class="f6">
+            https://{{ $.baseURL }}/{{ .Slug }}.rss
+        </code>
+    </li>
+    {{ end }}
+</ul>
+{{end}}

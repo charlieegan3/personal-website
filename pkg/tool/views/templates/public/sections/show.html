@@ -1,0 +1,41 @@
+{{define "title"}}{{ .section.Name }}{{end}}
+{{define "page_title"}}{{.section.Name }}{{end}}
+{{define "content"}}
+
+{{ range $page := .pages }}
+<div>
+    <h2 class="mb2 f4 f3-ns">
+        {{ if ne $page.ExternalURL "" }}
+        <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
+        <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
+            <img class="external-link" src="/static/icons/external.png"/>
+        </a>
+        {{ else }}
+        <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
+        {{ end }}
+    </h2>
+    <p class="mt0 dn db-ns">
+        {{ if ne $page.PublishedAt.Year 0001 }}
+            <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
+        {{ end }}
+        {{ if ne $page.ExternalURL "" }}
+          <strong class="muted">(External Post)</strong>
+          {{ blurb $page.Content 50 }}
+        {{ else }}
+        {{ blurb $page.Content 50 }}
+        {{ end }}
+    </p>
+    <p class="mt0 db dn-ns f6">
+        {{ if ne $page.PublishedAt.Year 0001 }}
+        <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
+        {{ end }}
+        {{ if ne $page.ExternalURL "" }}
+        <strong class="muted">(External Post)</strong>
+        {{ blurb $page.Content 20 }}
+        {{ else }}
+        {{ blurb $page.Content 20 }}
+        {{ end }}
+    </p>
+</div>
+{{ end }}
+{{end}}

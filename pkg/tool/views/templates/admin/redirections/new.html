@@ -1,0 +1,37 @@
+{{define "title"}}New Redirection{{end}}
+{{define "page_title"}}New Redirection{{end}}
+{{define "header"}}
+{{ include "partials/admin/menu" }}
+{{end}}
+
+{{define "content"}}
+<form method="POST" action="/admin/redirections">
+
+    <div class="mb2">
+        <label for="source">Source</label>
+        <br>
+        <input id="source" class="w-100" type="text" name="source" placeholder="Source"/>
+    </div>
+
+    <div class="mb2">
+        <label for="destination">Destination</label>
+        <br>
+        <input id="destination" class="w-100" type="text" name="destination" placeholder="Destination"/>
+    </div>
+
+    <div class="mb2">
+        <label for="destination_page_id">Page</label>
+        <select id="destination_page_id" name="destination_page_id">
+            <option value="">None</option>
+            {{ range $p := .pages }}
+            <option value="{{$p.ID}}">{{ $p.Slug }}</option>
+            {{ end }}
+        </select>
+    </div>
+
+    <div class="">
+        <input type="submit" value="Create">
+    </div>
+
+</form>
+{{end}}

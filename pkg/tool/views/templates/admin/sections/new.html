@@ -1,0 +1,27 @@
+{{define "title"}}New Section{{end}}
+{{define "page_title"}}New Section{{end}}
+{{define "header"}}
+  {{ include "partials/admin/menu" }}
+{{end}}
+
+{{define "content"}}
+<form method="POST" action="/admin/sections">
+
+    <div class="mb2">
+        <label for="slug">Slug</label>
+        <br>
+        <input id="slug" class="w-100" type="text" name="slug" placeholder="Slug"/>
+    </div>
+
+    <div class="mb2">
+        <label for="name">Name</label>
+        <br>
+        <input id="name" class="w-100" type="text" name="name" placeholder="Name"/>
+    </div>
+
+    <div class="">
+        <input type="submit" value="Create">
+    </div>
+
+</form>
+{{end}}

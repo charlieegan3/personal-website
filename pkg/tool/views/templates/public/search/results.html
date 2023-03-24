@@ -1,0 +1,30 @@
+{{define "title"}}Search Results{{end}}
+{{define "page_title"}}Search Results{{end}}
+{{define "head"}}{{end}}
+
+{{define "content"}}
+<p>Showing results for: <code>{{ .query }}</code></p>
+
+{{ range $page := .pages }}
+<div>
+    <h2 class="mb2 f4 f3-ns">
+        <a href="/{{ (index $.sections $page.SectionID).Slug }}/{{ $page.Slug }}">
+            {{ highlight $page.Title $.query }}
+        </a>
+    </h2>
+    <p class="mt0 dn db-ns">
+        {{ if ne $page.PublishedAt.Year 0001 }}
+        <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
+        {{ end }}
+        {{ highlight (blurb $page.Content 50) $.query }}
+    </p>
+    <p class="mt0 db dn-ns f6">
+        {{ if ne $page.PublishedAt.Year 0001 }}
+        <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
+        {{ end }}
+        {{ highlight (blurb $page.Content 20) $.query }}
+    </p>
+</div>
+{{ end }}
+
+{{end}}

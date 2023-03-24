@@ -1,0 +1,24 @@
+{{define "title"}}Sections{{end}}
+{{define "page_title"}}Sections{{end}}
+{{define "head"}}{{end}}
+{{define "header"}}
+  {{ include "partials/admin/menu" }}
+{{end}}
+
+{{define "content"}}
+<div class="mb2">
+    <a class="mr2" href="/admin/sections/new">New Section</a>
+</div>
+
+{{ range $s := .sections }}
+<div class="bb b--light-gray pb2 mb2">
+    <p><code>{{ $s.Slug }}</code> - {{ $s.Name }}</p>
+    <div>
+        <form method="post" action="/admin/sections/{{ $s.ID }}">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+</div>
+{{ end }}
+{{end}}

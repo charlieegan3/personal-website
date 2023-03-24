@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>charliegan3 - {{ template "title" . }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js"></script>
+    {{ template "head" . }}
+    {{define "head"}}{{end}}
+</head>
+
+<body hx-boost="true" hx-ext="preload" preload="mouseover">
+<div class="{{ template "max_width" . }}{{ define "max_width" }}mw7{{end}} w-100 center ph2 ph0-l mb4">
+    <div id="error" class="dn pa3 ba b--dark-red bw1 mt1 br2 dark-red"> </div>
+    {{ template "header" . }}
+    {{define "header"}}
+    {{ include "partials/public/menu" }}
+    {{end}}
+    <h1 class="f3 f2-ns">{{ template "page_title" . }}</h1>
+
+    {{ template "content" . }}
+    {{define "content"}}{{end}}
+</div>
+</body>
+</html>

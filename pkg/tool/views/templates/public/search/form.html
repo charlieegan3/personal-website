@@ -1,0 +1,13 @@
+{{define "title"}}Search{{end}}
+{{define "page_title"}}Search{{end}}
+{{define "head"}}{{end}}
+
+{{define "content"}}
+<form method="get" action="/search">
+    <div class="mw6 center">
+        <input class="w-100 mb3 pa3" type="text" name="q" placeholder="Things you are looking for..." value="">
+        <input class="b pv2 w-100 center db mw4 input-reset ba bw1 b--dark-green pointer bg-green white"
+               type="submit" value="search">
+    </div>
+</form>
+{{end}}

@@ -1,0 +1,40 @@
+{{define "title"}}Pages{{end}}
+{{define "page_title"}}Pages{{end}}
+{{define "header"}}
+  {{ include "partials/admin/menu" }}
+{{end}}
+
+{{define "content"}}
+<div class="mb3">
+    <a class="mr2" href="/admin/pages/new">New Page</a>
+    <a class="mr2" href="/admin/pages">All</a>
+    <a class="mr2" href="/admin/pages?deleted=true">Deleted</a>
+    <a class="mr2" href="/admin/pages?draft=true">Drafts</a>
+</div>
+<div class="mb3">
+    {{ range $s := .sections }}
+    <a class="mr2" href="/admin/pages?section={{ $s.Slug }}">{{ $s.Name }}</a>
+    {{ end }}
+</div>
+
+{{ range $p := .pages }}
+<div class="bb b--light-gray pb2 mb2">
+    {{ if $p.IsDraft }}
+    <strong class="orange">DRAFT</strong>
+    {{ else }}
+    <span class="muted">{{ $p.PublishedAt.Format "2006-01-02" }}</span>
+    {{ end }}
+    <span>{{ if eq $p.Title "" }}Missing Title{{else}}{{ $p.Title }}{{end}}</span>
+    <span class="muted">({{ (index $.sections $p.SectionID).Name }})</span>
+    <a href="/admin/pages/{{ $p.ID }}"> View </a>
+    {{ if not $p.IsProtected }}
+    <form method="post" action="/admin/pages/{{ $p.ID }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="is_deleted" value="{{ $p.IsDeleted }}">
+        <input type="submit" value="Delete">
+    </form>
+    {{ end }}
+</div>
+
+{{ end }}
+{{end}}

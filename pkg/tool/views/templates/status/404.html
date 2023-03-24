@@ -1,0 +1,24 @@
+{{define "title"}}404 - Not Found{{end}}
+{{define "page_title"}}404 - Not Found{{end}}
+
+{{define "content"}}
+
+<p>You followed a link to something that doesn't exist...</p>
+
+<p>Perhaps you'd like to send me a message to explain what you were looking for?</p>
+
+<div class="mt4">
+    <form action="https://formspree.io/me@charlieegan3.com" method="post">
+    <textarea id="message" style="resize:none"
+              rows="5"
+              class="pa2 w-100 mw6 db center mb3 input-reset ba b--silver"
+              name="message"
+              placeholder="message"></textarea>
+        <input class="pa2 w-100 mb3 mw6 db center input-reset ba b--silver" type="email" name="_replyto"
+               placeholder="your email">
+        <input class="b pv2 w-100 center db mw4 input-reset ba bw1 b--dark-green pointer bg-green white"
+               type="submit" value="send">
+    </form>
+</div>
+
+{{end}}

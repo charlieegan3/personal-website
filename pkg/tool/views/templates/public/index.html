@@ -1,0 +1,34 @@
+{{define "title"}}Index{{end}}
+{{define "page_title"}}
+<span id="hello">
+<span>hello</span><span class="orange">,</span>
+<span class="silver">i<span class="blue">'</span>m</span>
+charlieegan<span class="gold">3</span>
+</span>
+{{end}}
+{{define "head"}}{{end}}
+
+{{define "content"}}
+<h2>{{ markdown (.page.GetDataValue "subtitle") }}</h2>
+
+{{ markdown .page.Content }}
+<details class="mt4 pointer">
+    <summary>Contact</summary>
+    <div class="mv3">
+        {{ range (.page.GetDataValue "accounts") }}
+        <a class="mr3" href="{{ .link }}">{{ .name }}</a>
+        {{ end }}
+    </div>
+    <form class="center mw6" action="https://formspree.io/me@charlieegan3.com" method="post">
+            <textarea id="message" style="resize:none"
+                      rows="5"
+                      class="pa2 w-100 mw6 db center mb3 input-reset ba b--silver"
+                      name="message"
+                      placeholder="message"></textarea>
+        <input class="pa2 w-100 mb3 mw6 db center input-reset ba b--silver" type="email" name="_replyto"
+               placeholder="your email">
+        <input class="b pv2 w-100 center db mw4 input-reset ba bw1 b--dark-green pointer bg-green white"
+               type="submit" value="send">
+    </form>
+</details>
+{{end}}
