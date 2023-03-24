@@ -96,6 +96,10 @@ func (b *Import) Run(ctx context.Context) error {
 			return fmt.Errorf("failed to read directory: %s", err)
 		}
 
+		if len(files) == 0 {
+			continue
+		}
+
 		// load the contents and attachments
 		var rawContent string
 		var attachments []types.PageAttachment
@@ -146,7 +150,7 @@ func (b *Import) Run(ctx context.Context) error {
 			content = strings.TrimSpace(strings.Replace(rawContent, match, "", 1))
 		}
 		if pageData == "" {
-			return fmt.Errorf("failed to find page data")
+			return fmt.Errorf("failed to find page data: %s", pageDir.Name())
 		}
 
 		hg := struct {

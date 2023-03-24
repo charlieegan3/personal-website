@@ -48,8 +48,6 @@ func BuildCountsMiddleware(db *sql.DB) func(http.Handler) http.Handler {
 			if err != nil {
 				fmt.Println("counts", err)
 			}
-
-			fmt.Println("counts", r.URL.String())
 		})
 	}
 }

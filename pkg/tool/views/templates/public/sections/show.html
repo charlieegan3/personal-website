@@ -38,4 +38,18 @@
     </p>
 </div>
 {{ end }}
+
+<div class="mt3 flex justify-between">
+    {{ if .prevPage }}
+    <a href="/{{ .section.Slug }}/?page={{ .prevPage }}">Prev</a>
+    {{else}}
+    <span></span>
+    {{end}}
+    {{ if .nextPage }}
+    <a href="/{{ .section.Slug }}/?page={{ .nextPage }}">Next</a>
+    {{else}}
+    <span></span>
+    {{end}}
+</div>
+
 {{end}}

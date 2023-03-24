@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/foolin/goview"
@@ -15,6 +16,8 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
+
+const pageSize = int(10)
 
 func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 
@@ -56,6 +59,54 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			return
 		}
 
+		rawPage := r.URL.Query().Get("page")
+		var page int
+		if rawPage := r.URL.Query().Get("page"); rawPage != "" {
+			page, err = strconv.Atoi(rawPage)
+			if err != nil {
+				w.WriteHeader(http.StatusBadRequest)
+				w.Write([]byte("invalid page param"))
+				return
+			}
+			page -= 1
+		}
+		if page < 0 {
+			page = 0
+		}
+
+		if page == 0 && rawPage != "" {
+			http.Redirect(w, r, fmt.Sprintf("/%s", sectionSlug), http.StatusFound)
+			return
+		}
+
+		var totalPages int
+		_, err = goquDB.From("personal_website.pages").As("pages").
+			Join(
+				goqu.S("personal_website").Table("sections").As("sections"),
+				goqu.On(goqu.Ex{
+					"sections.id": goqu.I("pages.section_id"),
+				}),
+			).
+			Where(
+				goqu.Ex{
+					"sections.slug":    sectionSlug,
+					"pages.is_draft":   false,
+					"pages.is_deleted": false,
+				},
+			).
+			Select(goqu.L("count(pages.id)")).
+			ScanVal(&totalPages)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
+		if page*pageSize > totalPages {
+			http.Redirect(w, r, fmt.Sprintf("/%s?page=%d", sectionSlug, (totalPages/pageSize)+1), http.StatusFound)
+			return
+		}
+
 		var pages []types.Page
 		err = goquDB.From("personal_website.pages").As("pages").
 			Join(
@@ -72,6 +123,8 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 				},
 			).
 			Order(goqu.I("pages.published_at").Desc(), goqu.I("pages.created_at").Desc()).
+			Offset(uint(page * pageSize)).
+			Limit(uint(pageSize)).
 			Select("pages.*").
 			ScanStructs(&pages)
 		if err != nil {
@@ -85,14 +138,24 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			return
 		}
 
+		pageData := goview.M{
+			"section": &section,
+			"pages":   &pages,
+		}
+
+		if page > 0 {
+			pageData["prevPage"] = page
+		}
+
+		if (page+1)*pageSize < totalPages {
+			pageData["nextPage"] = page + 2
+		}
+
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,
 			"public/sections/show",
-			goview.M{
-				"section": &section,
-				"pages":   &pages,
-			},
+			pageData,
 		)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
