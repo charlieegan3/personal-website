@@ -47,8 +47,7 @@
 
             <div class="mb2">
                 <label for="is_protected">Is Protected</label>
-                <input type="checkbox" id="is_protected" name="is_protected" value="true" {{ if .page.IsProtected
-                       }}checked{{end}}/>
+                <input type="checkbox" id="is_protected" name="is_protected" value="true" {{ if .page.IsProtected }}checked{{end}}/>
             </div>
 
             <div class="mb2">
@@ -77,7 +76,7 @@
     </div>
     <div class="w-100 w-25-l pa2">
         <div class="flex flex-wrap">
-            <div class="w-50">
+            <div class="w-100">
                 <form action="/admin/pages/{{ .page.ID }}/attachments" enctype="multipart/form-data" method="POST">
                     <div class="mb2">
                         <label for="file">File</label>
@@ -98,10 +97,10 @@
                             <option value="text/csv">CSV</option>
                         </select>
                     </div>
-                    <input class="w-100 db ba bw2 b--dark-green bg-green white pv3 pointer" type="submit" value="Add Attachment">
+                    <input class="ba bw2 b--dark-green bg-green white pv3 pointer" type="submit" value="Add Attachment">
                 </form>
             </div>
-            <div class="w-50">
+            <div class="">
                 <ul>
                     {{ range $a := .attachments }}
                     <li class="mt1">

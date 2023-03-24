@@ -5,4 +5,5 @@ type PageAttachment struct {
 	PageID      int    `db:"page_id"`
 	Filename    string `db:"filename"`
 	ContentType string `db:"content_type"`
+	Etag        string `db:"etag"`
 }

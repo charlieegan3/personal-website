@@ -8,6 +8,7 @@ import (
 
 	"github.com/Jeffail/gabs/v2"
 	"github.com/charlieegan3/toolbelt/pkg/apis"
+	gorillaHandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	_ "gocloud.dev/blob/fileblob"
 	_ "gocloud.dev/blob/gcsblob"
@@ -29,6 +30,7 @@ type Website struct {
 
 	bucketName string
 	googleJSON string
+	adminPath  string
 }
 
 func (w *Website) Name() string {
@@ -65,6 +67,12 @@ func (w *Website) SetConfig(config map[string]any) error {
 
 	path = "google.json"
 	w.googleJSON, ok = w.config.Path(path).Data().(string)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	path = "web.admin_path"
+	w.adminPath, ok = w.config.Path(path).Data().(string)
 	if !ok {
 		return fmt.Errorf("config value %s not set", path)
 	}
@@ -126,6 +134,11 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	adminRouter.HandleFunc("/", admin.BuildIndexHandler())
 
 	// public routes ------------------------------------
+	// redirect /favicon.ico
+	router.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/static/favicon.ico", http.StatusMovedPermanently)
+	})
+
 	cssHandler, err := handlers.BuildCSSHandler()
 	if err != nil {
 		return err
@@ -145,8 +158,6 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 
 	router.HandleFunc("/search", public.BuildSearchHandler(w.db)).
 		Methods("GET")
-	router.HandleFunc("/rss", public.BuildRSSHandler(w.db)).
-		Methods("GET")
 	router.HandleFunc("/{sectionSlug}.rss", public.BuildSectionRSSHandler(w.db)).
 		Methods("GET")
 	router.HandleFunc("/{sectionSlug}", public.BuildSectionShowHandler(w.db)).
@@ -160,6 +171,7 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 
 	router.Use(middlewares.BuildRedirectMiddleware(w.db))
 	router.Use(middlewares.BuildCountsMiddleware(w.db))
+	router.Use(gorillaHandlers.CompressHandler)
 	router.NotFoundHandler = http.HandlerFunc(status.NotFound)
 
 	return nil

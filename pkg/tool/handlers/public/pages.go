@@ -223,6 +223,12 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 		}
 		r.Header.Set("Content-Type", attachment.ContentType)
 
+		if r.Header.Get("If-None-Match") == attachment.Etag && attachment.Etag != "" {
+			w.WriteHeader(http.StatusNotModified)
+			w.Header().Set("ETag", attachment.Etag)
+			return
+		}
+
 		bkt := storageClient.Bucket(bucketName)
 		obj := bkt.Object(fmt.Sprintf(
 			"personal-website/pages/%d/attachments/%d/%s",
@@ -238,6 +244,20 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 			return
 		}
 
+		if attrs.Etag != attachment.Etag {
+			_, err = goquDB.Update("personal_website.page_attachments").Where(goqu.Ex{
+				"page_attachments.page_id":  page.ID,
+				"page_attachments.filename": attachmentFilename,
+			}).Set(goqu.Record{
+				"etag": attrs.Etag,
+			}).Executor().Exec()
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
+		}
+
 		if r.Header.Get("If-None-Match") == attrs.Etag {
 			w.WriteHeader(http.StatusNotModified)
 			return
@@ -245,7 +265,6 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 
 		if attrs.Etag != "" {
 			w.Header().Set("ETag", attrs.Etag)
-			w.Header().Set("Cache-Control", "public, max-age=60")
 		}
 
 		br, err := obj.NewReader(r.Context())

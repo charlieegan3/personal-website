@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/foolin/goview"
@@ -25,7 +24,6 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
 		var err error
 
 		sectionSlug, ok := mux.Vars(r)["sectionSlug"]
@@ -163,7 +161,6 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
 		}
-		fmt.Println("time: ", time.Now().Sub(start))
 	}
 }
 

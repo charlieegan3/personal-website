@@ -327,6 +327,11 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 		err = goquDB.From("personal_website.page_attachments").Where(
 			goqu.C("page_id").Eq(page.ID),
 		).ScanStructs(&attachments)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
 
 		err = views.Engine.Render(
 			w,
@@ -335,8 +340,8 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			goview.M{
 				"page":        &page,
 				"pageSection": &pageSection,
-				"sections":    sections,
-				"attachments": attachments,
+				"sections":    &sections,
+				"attachments": &attachments,
 			},
 		)
 		if err != nil {

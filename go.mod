@@ -11,6 +11,7 @@ require (
 	github.com/doug-martin/goqu/v9 v9.18.0
 	github.com/foolin/goview v0.3.0
 	github.com/gorilla/feeds v1.1.1
+	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
 	github.com/gosimple/slug v1.13.1
 	github.com/spf13/viper v1.15.0
@@ -30,6 +31,7 @@ require (
 	cloud.google.com/go/iam v0.12.0 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/dlclark/regexp2 v1.8.1 // indirect
+	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.2 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
