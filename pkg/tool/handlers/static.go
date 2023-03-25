@@ -19,6 +19,26 @@ import (
 //go:embed static/*
 var staticContent embed.FS
 
+func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
+	bytes, err := staticContent.ReadFile("static/favicon.ico")
+	if err != nil {
+		panic(err)
+	}
+
+	etag := utils.CRC32Hash(bytes)
+
+	return func(w http.ResponseWriter, req *http.Request) {
+		if req.Header.Get("If-None-Match") == etag {
+			w.WriteHeader(http.StatusNotModified)
+			return
+		}
+
+		w.Header().Set("ETag", etag)
+
+		w.Write(bytes)
+	}
+}
+
 func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Cache-Control", "public, max-age=3600")

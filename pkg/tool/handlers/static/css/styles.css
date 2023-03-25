@@ -1,20 +1,13 @@
-/* fonts */
-@font-face {
-    font-family: "Big Caslon";
-    src: local("Big Caslon"), url("/static/fonts/big-calson.woff");
-}
-
-
 /* base styles */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 a {
-    color: dodgerblue;
+    color: #1e82e3;
 }
 a:visited {
-    color: DarkSlateBlue;
+    color: #3649db;
 }
 
 a.anchor {
@@ -41,9 +34,16 @@ ul, ol {
     padding-left: 1.5rem;
 }
 
+/* colors */
+.tfl-blue { color: rgb(0, 15, 159); }
+.tfl-red { color: rgb(225, 37, 27); }
+.tfl-yellow { color: rgb(255, 205, 0); }
+.tfl-green { color: rgb(0, 121, 52); }
+
 /* header styles */
 h1, h2, h3, h4, h5, h6 {
-    font-family: Big Caslon, Bodoni, Bookman Old Style, Goudy Old Style, Georgia, serif;
+    font-family: 'Linux Libertine','Georgia','Times',serif;
+    font-weight: normal;
 }
 
 /* helper classes */
@@ -213,6 +213,20 @@ h1, h2, h3, h4, h5, h6 {
     body {
         background-color: #fafafa;
         color: #222222;
+    }
+
+    /* menu styles */
+    .menu {
+        border-color: #dddddd;
+    }
+    .menu a {
+        background-color: #fafafa;
+    }
+    .menu a:not(.selected) {
+        background-color: #dddddd;
+    }
+    .menu a:hover {
+        background-color: #fafafa;
     }
 
     :target, .highlight {
@@ -636,6 +650,20 @@ h1, h2, h3, h4, h5, h6 {
         color: #eeeeee;
     }
 
+    /* menu styles */
+    .menu {
+        border-color: #333333;
+    }
+    .menu a {
+        background-color: #272822;
+    }
+    .menu a:not(.selected) {
+        background-color: #333333;
+    }
+    .menu a:hover {
+        background-color: #272822;
+    }
+
     .light-mode {
         display: none;
     }
@@ -644,9 +672,17 @@ h1, h2, h3, h4, h5, h6 {
         display: block;
     }
 
-    input[type="email"], textarea {
+    input[type="email"], input[type="text"], textarea {
         background-color: #272822;
         color: #eeeeee;
+    }
+
+    a {
+        color: #5ca4ff;
+    }
+
+    a:visited {
+        color: #9069ff;
     }
 
     /* Background */

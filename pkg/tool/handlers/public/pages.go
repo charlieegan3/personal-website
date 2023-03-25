@@ -126,12 +126,13 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			http.StatusOK,
 			templatePath,
 			goview.M{
-				"page":    &page,
-				"url":     r.URL.Path,
-				"prev":    &prevPage,
-				"next":    &nextPage,
-				"section": sectionSlug,
-				"content": formatContent(page.Content, sectionSlug, pageSlug),
+				"page":         &page,
+				"url":          r.URL.Path,
+				"prev":         &prevPage,
+				"next":         &nextPage,
+				"section":      sectionSlug,
+				"menu_section": sectionSlug,
+				"content":      formatContent(page.Content, sectionSlug, pageSlug),
 			},
 		)
 		if err != nil {

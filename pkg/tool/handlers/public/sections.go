@@ -17,7 +17,7 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
-const pageSize = int(10)
+const pageSize = int(7)
 
 func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 
@@ -139,8 +139,9 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 		}
 
 		pageData := goview.M{
-			"section": &section,
-			"pages":   &pages,
+			"section":      &section,
+			"pages":        &pages,
+			"menu_section": sectionSlug,
 		}
 
 		if page > 0 {

@@ -10,8 +10,8 @@
     {{define "head"}}{{end}}
 </head>
 
-<body hx-boost="true" hx-ext="preload" preload="mouseover">
-<div class="{{ template "max_width" . }}{{ define "max_width" }}mw7{{end}} w-100 center ph2 mb4">
+<body>
+<div hx-boost="true" hx-ext="preload" preload="preload:init" class="{{ template "max_width" . }}{{ define "max_width" }}mw7{{end}} w-100 center ph2 mb4">
     <div id="error" class="dn pa3 ba b--dark-red bw1 mt1 br2 dark-red"> </div>
     {{ template "header" . }}
     {{define "header"}}

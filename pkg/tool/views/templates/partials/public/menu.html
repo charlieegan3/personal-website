@@ -1,6 +1,9 @@
-<div class="flex justify-between pt3">
-    <a href="/">Home</a>
-    <a href="/posts">Blog</a>
-    <a href="/weeknotes">Weeknotes</a>
-    <a href="/search">Search</a>
+<div class="menu flex justify-between pt0 bb br bl f6 f5-ns">
+    <a class="{{ if eq .menu_section "home" }}selected{{ end }} w-25 tc pv2" href="/">Home</a>
+
+    <a class="{{ if eq .menu_section "posts" }}selected{{ end }} w-25 tc pv2" href="/posts">Blog</a>
+
+    <a class="{{ if eq .menu_section "weeknotes" }}selected{{ end }} w-25 tc pv2" href="/weeknotes">Weeknotes</a>
+
+    <a class="{{ if eq .menu_section "search" }}selected{{ end }} w-25 tc pv2" href="/search">Search</a>
 </div>

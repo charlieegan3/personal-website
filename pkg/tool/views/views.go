@@ -13,6 +13,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	chromaHTML "github.com/alecthomas/chroma/v2/formatters/html"
 	"github.com/foolin/goview"
+	fences "github.com/stefanfritsch/goldmark-fences"
 	"github.com/yuin/goldmark"
 	highlighting "github.com/yuin/goldmark-highlighting/v2"
 	"github.com/yuin/goldmark/ast"
@@ -58,6 +59,7 @@ func init() {
 			&anchor.Extender{
 				Texter: anchor.Text("#"),
 			},
+			&fences.Extender{},
 		),
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),

@@ -24,7 +24,9 @@ func BuildSearchHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 				w,
 				http.StatusOK,
 				"public/search/form",
-				goview.M{},
+				goview.M{
+					"menu_section": "search",
+				},
 			)
 			if err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
@@ -92,9 +94,10 @@ func BuildSearchHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			http.StatusOK,
 			"public/search/results",
 			goview.M{
-				"query":    cleanedQuery,
-				"pages":    &pages,
-				"sections": &sectionMap,
+				"menu_section": "search",
+				"query":        cleanedQuery,
+				"pages":        &pages,
+				"sections":     &sectionMap,
 			},
 		)
 		if err != nil {

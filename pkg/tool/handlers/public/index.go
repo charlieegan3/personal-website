@@ -48,7 +48,8 @@ func BuildIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			http.StatusOK,
 			"public/index",
 			goview.M{
-				"page": &page,
+				"menu_section": "home",
+				"page":         &page,
 			},
 		)
 		if err != nil {

@@ -134,10 +134,7 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	adminRouter.HandleFunc("/", admin.BuildIndexHandler())
 
 	// public routes ------------------------------------
-	// redirect /favicon.ico
-	router.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/static/favicon.ico", http.StatusMovedPermanently)
-	})
+	router.HandleFunc("/favicon.ico", handlers.BuildFaviconHandler())
 
 	cssHandler, err := handlers.BuildCSSHandler()
 	if err != nil {
