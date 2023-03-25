@@ -19,7 +19,7 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
-func BuildPageIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildPageIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -82,8 +82,9 @@ func BuildPageIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) 
 			http.StatusOK,
 			"admin/pages/index",
 			goview.M{
-				"pages":    pages,
-				"sections": sectionMap,
+				"pages":      pages,
+				"sections":   sectionMap,
+				"admin_path": adminPath,
 			},
 		)
 		if err != nil {
@@ -93,7 +94,7 @@ func BuildPageIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) 
 	}
 }
 
-func BuildPageNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildPageNewHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -115,6 +116,7 @@ func BuildPageNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			goview.M{
 				"sections":     sections,
 				"default_time": time.Now().Format("2006-01-02T15:04"),
+				"admin_path":   adminPath,
 			},
 		)
 		if err != nil {
@@ -124,7 +126,7 @@ func BuildPageNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-func BuildPageCreateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildPageCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -176,11 +178,11 @@ func BuildPageCreateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 			return
 		}
 
-		http.Redirect(w, r, fmt.Sprintf("/admin/pages/%d", id), http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/pages/%d", adminPath, id), http.StatusFound)
 	}
 }
 
-func BuildPageUpdateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -222,7 +224,7 @@ func BuildPageUpdateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 				}
 			}
 
-			http.Redirect(w, r, "/admin/pages", http.StatusFound)
+			http.Redirect(w, r, fmt.Sprintf("%s/pages", adminPath), http.StatusFound)
 			return
 		}
 
@@ -273,11 +275,11 @@ func BuildPageUpdateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 			return
 		}
 
-		http.Redirect(w, r, fmt.Sprintf("/admin/pages/%d", id), http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/pages/%d", adminPath, id), http.StatusFound)
 	}
 }
 
-func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildPageShowHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -342,6 +344,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 				"pageSection": &pageSection,
 				"sections":    &sections,
 				"attachments": &attachments,
+				"admin_path":  adminPath,
 			},
 		)
 		if err != nil {

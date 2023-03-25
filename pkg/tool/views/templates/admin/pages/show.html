@@ -16,7 +16,7 @@
 
 <div class="flex flex-wrap">
     <div class="w-100 w-75-l pa2">
-        <form method="POST" action="/admin/pages/{{ .page.ID }}">
+        <form method="POST" action="{{ .admin_path }}/pages/{{ .page.ID }}">
             <input class="w-100 db ba bw2 b--dark-green bg-green white pv3 mb3 pointer" type="submit" value="Update">
 
             <div class="mb2 mw6">
@@ -77,7 +77,7 @@
     <div class="w-100 w-25-l pa2">
         <div class="flex flex-wrap">
             <div class="w-100">
-                <form action="/admin/pages/{{ .page.ID }}/attachments" enctype="multipart/form-data" method="POST">
+                <form action="{{ .admin_path }}/pages/{{ .page.ID }}/attachments" enctype="multipart/form-data" method="POST">
                     <div class="mb2">
                         <label for="file">File</label>
                         <input id="file" type="file" name="file">
@@ -105,7 +105,7 @@
                     {{ range $a := .attachments }}
                     <li class="mt1">
                         {{ $a.Filename }} {{ $a.ContentType }}
-                        <form class="dib" method="post" action="/admin/pages/{{ $.page.ID }}/attachments/{{ $a.ID }}">
+                        <form class="dib" method="post" action="{{ $.admin_path }}/pages/{{ $.page.ID }}/attachments/{{ $a.ID }}">
                             <input type="hidden" name="_method" value="DELETE">
                             <input class="w-100 db ba bw2 b--dark-red bg-red white" type="submit" value="Delete">
                         </form>
@@ -116,12 +116,40 @@
         </div>
 
         {{ if not .page.IsProtected }}
-        <form class="mt3" method="post" action="/admin/pages/{{ .page.ID }}">
+        <form class="mt3" method="post" action="{{ $.admin_path }}/pages/{{ .page.ID }}">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="is_deleted" value="{{ .page.IsDeleted }}">
             <input class="w-100 db ba bw2 b--dark-red bg-red white pv3" type="submit" value="Delete">
         </form>
         {{end}}
+
+        <details class="mt3 pointer">
+            <summary>Markup Examples</summary>
+            <pre>
+:::{.flex .flex-wrap}
+:::{.w-50-ns .w-100 .pr2-ns}
+COL 1
+:::
+
+:::{.w-50-ns .w-100 .pl2-ns}
+COL 2
+:::
+:::
+            </pre>
+            <pre>
+:::{.warning}
+this is a warning
+:::
+
+:::{.info}
+this is info
+:::
+
+:::{.error}
+this is a error
+:::
+            </pre>
+        </details>
     </div>
 </div>
 

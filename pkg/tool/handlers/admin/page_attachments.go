@@ -15,7 +15,7 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
 )
 
-func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON string) func(http.ResponseWriter, *http.Request) {
+func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON string, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -102,11 +102,11 @@ func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON 
 			}
 		}
 
-		http.Redirect(w, r, fmt.Sprintf("/admin/pages/%d", pageID), http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/pages/%d", adminPath, pageID), http.StatusFound)
 	}
 }
 
-func BuildPageAttachmentDeleteHandler(db *sql.DB, bucketName string, googleJSON string) func(http.ResponseWriter, *http.Request) {
+func BuildPageAttachmentDeleteHandler(db *sql.DB, bucketName string, googleJSON string, adminPath string) func(http.ResponseWriter, *http.Request) {
 
 	goquDB := goqu.New("postgres", db)
 
@@ -188,6 +188,6 @@ func BuildPageAttachmentDeleteHandler(db *sql.DB, bucketName string, googleJSON 
 			return
 		}
 
-		http.Redirect(w, r, fmt.Sprintf("/admin/pages/%d", pageID), http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/pages/%d", adminPath, pageID), http.StatusFound)
 	}
 }

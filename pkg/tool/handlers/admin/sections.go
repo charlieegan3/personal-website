@@ -2,6 +2,7 @@ package admin
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -14,7 +15,7 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
-func BuildSectionIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildSectionIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -34,7 +35,8 @@ func BuildSectionIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Reques
 			http.StatusOK,
 			"admin/sections/index",
 			goview.M{
-				"sections": sections,
+				"sections":   sections,
+				"admin_path": adminPath,
 			},
 		)
 		if err != nil {
@@ -44,7 +46,7 @@ func BuildSectionIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Reques
 	}
 }
 
-func BuildSectionNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildSectionNewHandler(adminPath string) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var err error
 
@@ -52,7 +54,9 @@ func BuildSectionNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 			w,
 			http.StatusOK,
 			"admin/sections/new",
-			goview.M{},
+			goview.M{
+				"admin_path": adminPath,
+			},
 		)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -61,7 +65,7 @@ func BuildSectionNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 	}
 }
 
-func BuildSectionCreateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildSectionCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -80,11 +84,11 @@ func BuildSectionCreateHandler(db *sql.DB) func(http.ResponseWriter, *http.Reque
 			return
 		}
 
-		http.Redirect(w, r, "/admin/sections", http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/sections", adminPath), http.StatusFound)
 	}
 }
 
-func BuildSectionUpdateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildSectionUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -115,6 +119,6 @@ func BuildSectionUpdateHandler(db *sql.DB) func(http.ResponseWriter, *http.Reque
 			}
 		}
 
-		http.Redirect(w, r, "/admin/sections", http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/sections", adminPath), http.StatusFound)
 	}
 }

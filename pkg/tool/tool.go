@@ -97,41 +97,41 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	}
 
 	router.StrictSlash(true)
-	adminRouter := router.PathPrefix("/admin").Subrouter()
+	adminRouter := router.PathPrefix(w.adminPath).Subrouter()
 	adminRouter.StrictSlash(true) // since not inherited
 	adminRouter.Use(middlewares.InitMiddlewareAuth(username, password))
 
 	// admin routes -------------------------------------
 
-	adminRouter.HandleFunc("/sections/new", admin.BuildSectionNewHandler(w.db))
-	adminRouter.HandleFunc("/sections/{sectionID}", admin.BuildSectionUpdateHandler(w.db)).
+	adminRouter.HandleFunc("/sections/new", admin.BuildSectionNewHandler(w.adminPath))
+	adminRouter.HandleFunc("/sections/{sectionID}", admin.BuildSectionUpdateHandler(w.db, w.adminPath)).
 		Methods("POST")
-	adminRouter.HandleFunc("/sections", admin.BuildSectionCreateHandler(w.db)).
+	adminRouter.HandleFunc("/sections", admin.BuildSectionCreateHandler(w.db, w.adminPath)).
 		Methods("POST")
-	adminRouter.HandleFunc("/sections", admin.BuildSectionIndexHandler(w.db))
-	adminRouter.HandleFunc("/redirections", admin.BuildRedirectionIndexHandler(w.db)).
+	adminRouter.HandleFunc("/sections", admin.BuildSectionIndexHandler(w.db, w.adminPath))
+	adminRouter.HandleFunc("/redirections", admin.BuildRedirectionIndexHandler(w.db, w.adminPath)).
 		Methods("GET")
-	adminRouter.HandleFunc("/redirections", admin.BuildRedirectionCreateHandler(w.db)).
+	adminRouter.HandleFunc("/redirections", admin.BuildRedirectionCreateHandler(w.db, w.adminPath)).
 		Methods("POST")
-	adminRouter.HandleFunc("/redirections/new", admin.BuildRedirectionNewHandler(w.db))
-	adminRouter.HandleFunc("/redirections/{redirectionID}", admin.BuildRedirectionDeleteHandler(w.db)).
+	adminRouter.HandleFunc("/redirections/new", admin.BuildRedirectionNewHandler(w.db, w.adminPath))
+	adminRouter.HandleFunc("/redirections/{redirectionID}", admin.BuildRedirectionDeleteHandler(w.db, w.adminPath)).
 		Methods("POST")
 
-	adminRouter.HandleFunc("/pages/new", admin.BuildPageNewHandler(w.db))
-	adminRouter.HandleFunc("/pages/{pageID}", admin.BuildPageShowHandler(w.db)).
+	adminRouter.HandleFunc("/pages/new", admin.BuildPageNewHandler(w.db, w.adminPath))
+	adminRouter.HandleFunc("/pages/{pageID}", admin.BuildPageShowHandler(w.db, w.adminPath)).
 		Methods("GET")
-	adminRouter.HandleFunc("/pages/{pageID}", admin.BuildPageUpdateHandler(w.db)).
+	adminRouter.HandleFunc("/pages/{pageID}", admin.BuildPageUpdateHandler(w.db, w.adminPath)).
 		Methods("POST")
-	adminRouter.HandleFunc("/pages/{pageID}/attachments", admin.BuildPageAttachmentCreateHandler(w.db, w.bucketName, w.googleJSON)).
+	adminRouter.HandleFunc("/pages/{pageID}/attachments", admin.BuildPageAttachmentCreateHandler(w.db, w.bucketName, w.googleJSON, w.adminPath)).
 		Methods("POST")
-	adminRouter.HandleFunc("/pages/{pageID}/attachments/{attachmentID}", admin.BuildPageAttachmentDeleteHandler(w.db, w.bucketName, w.googleJSON)).
+	adminRouter.HandleFunc("/pages/{pageID}/attachments/{attachmentID}", admin.BuildPageAttachmentDeleteHandler(w.db, w.bucketName, w.googleJSON, w.adminPath)).
 		Methods("POST")
-	adminRouter.HandleFunc("/pages", admin.BuildPageIndexHandler(w.db)).
+	adminRouter.HandleFunc("/pages", admin.BuildPageIndexHandler(w.db, w.adminPath)).
 		Methods("GET")
-	adminRouter.HandleFunc("/pages", admin.BuildPageCreateHandler(w.db)).
+	adminRouter.HandleFunc("/pages", admin.BuildPageCreateHandler(w.db, w.adminPath)).
 		Methods("POST")
 
-	adminRouter.HandleFunc("/", admin.BuildIndexHandler())
+	adminRouter.HandleFunc("/", admin.BuildIndexHandler(w.adminPath))
 
 	// public routes ------------------------------------
 	router.HandleFunc("/favicon.ico", handlers.BuildFaviconHandler())

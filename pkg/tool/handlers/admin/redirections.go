@@ -2,6 +2,7 @@ package admin
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 
 	"github.com/doug-martin/goqu/v9"
@@ -12,7 +13,7 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
-func BuildRedirectionIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildRedirectionIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -32,6 +33,7 @@ func BuildRedirectionIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Re
 			"admin/redirections/index",
 			goview.M{
 				"redirections": redirections,
+				"admin_path":   adminPath,
 			},
 		)
 		if err != nil {
@@ -41,7 +43,7 @@ func BuildRedirectionIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Re
 	}
 }
 
-func BuildRedirectionNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildRedirectionNewHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -60,7 +62,8 @@ func BuildRedirectionNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Requ
 			http.StatusOK,
 			"admin/redirections/new",
 			goview.M{
-				"pages": pages,
+				"pages":      pages,
+				"admin_path": adminPath,
 			},
 		)
 		if err != nil {
@@ -70,7 +73,7 @@ func BuildRedirectionNewHandler(db *sql.DB) func(http.ResponseWriter, *http.Requ
 	}
 }
 
-func BuildRedirectionCreateHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildRedirectionCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -93,11 +96,11 @@ func BuildRedirectionCreateHandler(db *sql.DB) func(http.ResponseWriter, *http.R
 			return
 		}
 
-		http.Redirect(w, r, "/admin/redirections", http.StatusFound)
+		http.Redirect(w, r, fmt.Sprintf("%s/redirections", adminPath), http.StatusFound)
 	}
 }
 
-func BuildRedirectionDeleteHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+func BuildRedirectionDeleteHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -118,6 +121,6 @@ func BuildRedirectionDeleteHandler(db *sql.DB) func(http.ResponseWriter, *http.R
 			return
 		}
 
-		http.Redirect(w, r, "/admin/redirections", http.StatusSeeOther)
+		http.Redirect(w, r, fmt.Sprintf("%s/redirections", adminPath), http.StatusSeeOther)
 	}
 }
