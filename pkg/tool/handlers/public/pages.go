@@ -86,6 +86,8 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			Where(
 				goqu.Ex{
 					"pages.section_id": page.SectionID,
+					"pages.is_deleted": false,
+					"pages.is_draft":   false,
 				},
 				goqu.I("pages.published_at").Lt(page.PublishedAt),
 			).
@@ -104,6 +106,9 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			Where(
 				goqu.Ex{
 					"pages.section_id": page.SectionID,
+
+					"pages.is_deleted": false,
+					"pages.is_draft":   false,
 				},
 				goqu.I("pages.published_at").Gt(page.PublishedAt),
 			).
