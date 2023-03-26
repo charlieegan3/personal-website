@@ -19,13 +19,6 @@
         <th></th>
     </tr>
     {{ range $r := .redirections }}
-    <tr>
-        <td></td>
-        <td></td>
-        <td>
-        </td>
-    </tr>
-
     {{ if ne $r.DestinationPageID nil }}
     <td><code>{{ $r.Source }}</code></td>
     <td> <a href="{{ $.admin_path }}/pages/{{ $r.DestinationPageID }}">View</a> </td>

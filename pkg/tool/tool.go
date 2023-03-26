@@ -116,6 +116,8 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	adminRouter.HandleFunc("/redirections/new", admin.BuildRedirectionNewHandler(w.db, w.adminPath))
 	adminRouter.HandleFunc("/redirections/{redirectionID}", admin.BuildRedirectionDeleteHandler(w.db, w.adminPath)).
 		Methods("POST")
+	adminRouter.HandleFunc("/counts", admin.BuildCountsIndexHandler(w.db, w.adminPath)).
+		Methods("GET")
 
 	adminRouter.HandleFunc("/pages/new", admin.BuildPageNewHandler(w.db, w.adminPath))
 	adminRouter.HandleFunc("/pages/{pageID}", admin.BuildPageShowHandler(w.db, w.adminPath)).

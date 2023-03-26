@@ -9,10 +9,12 @@ charlieegan<span class="tfl-green">3</span>
 {{define "head"}}{{end}}
 
 {{define "content"}}
-<h2>{{ markdown (.page.GetDataValue "subtitle") }}</h2>
+<h2 class="f5 f4-ns">{{ markdown (.page.GetDataValue "subtitle") }}</h2>
 
-{{ markdown .page.Content }}
-<details class="mt4 pointer">
+<div class="f6 f5-ns">
+    {{ markdown .page.Content }}
+</div>
+<details class="mt4 pointer f6 f5-ns">
     <summary>Contact</summary>
     <div class="mv3">
         {{ range (.page.GetDataValue "accounts") }}

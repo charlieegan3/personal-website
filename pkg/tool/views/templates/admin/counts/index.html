@@ -1,0 +1,18 @@
+{{define "title"}}Counts{{end}}
+{{define "page_title"}}Counts{{end}}
+{{define "head"}}{{end}}
+{{define "header"}}
+{{ include "partials/admin/menu" }}
+{{end}}
+{{ define "max_width" }}mw9{{end}}
+
+{{define "content"}}
+<table>
+    {{ range $c := .counts }}
+    <tr>
+        <td><a href="{{ .Key }}">{{ .Key }}</a></td>
+        <td> {{ .Count }} </td>
+    </tr>
+    {{ end }}
+</table>
+{{end}}
