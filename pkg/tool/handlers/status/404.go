@@ -1,12 +1,20 @@
 package status
 
 import (
+	"database/sql"
 	"net/http"
 
 	"github.com/foolin/goview"
 
+	"github.com/charlieegan3/personal-website/pkg/tool/middlewares"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
+
+func BuildNotFoundHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+	return middlewares.BuildRedirectionHandler(db, func(w http.ResponseWriter, r *http.Request) {
+		NotFound(w, r)
+	})
+}
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
 
