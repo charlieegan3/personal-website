@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/doug-martin/goqu/v9"
 )
 
-func BuildCountsMiddleware(db *sql.DB) func(http.Handler) http.Handler {
+func BuildCountsMiddleware(db *sql.DB, adminPath string) func(http.Handler) http.Handler {
 	goquDB := goqu.New("postgres", db)
 
 	ignorePattern := regexp.MustCompile(`\.(ico|css|js|jpeg|jpg|png)$`)
@@ -20,6 +21,10 @@ func BuildCountsMiddleware(db *sql.DB) func(http.Handler) http.Handler {
 			defer h.ServeHTTP(w, r)
 
 			if r.Header.Get("HX-Preload") == "true" {
+				return
+			}
+
+			if strings.HasPrefix(r.URL.Path, adminPath) {
 				return
 			}
 

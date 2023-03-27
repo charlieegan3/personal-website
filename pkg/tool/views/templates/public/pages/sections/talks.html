@@ -43,7 +43,7 @@
 {{ if .page.GetDataValue "events" }}
 <div class="mt3 flex justify-between">
     {{ range .page.GetDataValue "events" }}
-    <details>
+    <details class="pointer">
         <summary>{{ .name }}</summary>
         <p class="mv0 f6">
             <span>

@@ -169,7 +169,7 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 		Methods("GET")
 
 	router.Use(middlewares.BuildRedirectMiddleware(w.db))
-	router.Use(middlewares.BuildCountsMiddleware(w.db))
+	router.Use(middlewares.BuildCountsMiddleware(w.db, w.adminPath))
 	router.Use(gorillaHandlers.CompressHandler)
 	router.NotFoundHandler = http.HandlerFunc(status.BuildNotFoundHandler(w.db))
 
