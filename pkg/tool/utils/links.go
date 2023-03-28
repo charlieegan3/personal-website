@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var linkRegex = regexp.MustCompile(`(!\[[^\]]*]\()(\.\/)([^:\)]+)\)`)
+var linkRegex = regexp.MustCompile(`(!\[[^\]]*\]\()(\.\/)([^:\)]+)\)`)
 
 func ExpandLinks(scheme, host, content, section, page string) string {
 	if strings.HasPrefix(scheme, "https") {
@@ -15,9 +15,9 @@ func ExpandLinks(scheme, host, content, section, page string) string {
 		scheme = "http://"
 	}
 
-	res := strings.Replace(linkRegex.ReplaceAllString(
+	res := strings.ReplaceAll(linkRegex.ReplaceAllString(
 		content,
 		fmt.Sprintf(`$1@HOST/%s/%s/$3)`, section, page),
-	), "@HOST", scheme+host, 1)
+	), "@HOST", scheme+host)
 	return res
 }
