@@ -11,7 +11,11 @@
 {{define "content"}}
 
 <p>
+    {{ if ne .page.ExternalURL "" }}
+    <a href="{{ .page.ExternalURL }}" target="_blank">View External URL</a>
+    {{ else }}
     <a href="/{{ .pageSection.Slug }}/{{ .page.Slug }}">View Page</a>
+    {{ end }}
 </p>
 
 <div class="flex flex-wrap">

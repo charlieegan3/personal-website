@@ -39,6 +39,27 @@ func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	}
 }
 
+func BuildRobotsHandler() (handler func(http.ResponseWriter, *http.Request)) {
+	bytes, err := staticContent.ReadFile("static/robots.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	etag := utils.CRC32Hash(bytes)
+
+	return func(w http.ResponseWriter, req *http.Request) {
+		if req.Header.Get("If-None-Match") == etag {
+			w.WriteHeader(http.StatusNotModified)
+			return
+		}
+
+		w.Header().Set("ETag", etag)
+		w.Header().Set("Content-Type", "text/plain")
+
+		w.Write(bytes)
+	}
+}
+
 func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Cache-Control", "public, max-age=3600")

@@ -14,6 +14,7 @@ import (
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers/status"
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
+	"github.com/charlieegan3/personal-website/pkg/tool/utils"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
@@ -242,11 +243,17 @@ func BuildSectionRSSHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 			pageURL := fmt.Sprintf("https://%s/%s/%s", r.Host, sectionSlug, p.Slug)
 			feedItems = append(feedItems,
 				&feeds.Item{
-					Id:          pageURL,
-					Title:       p.Title,
-					Link:        &feeds.Link{Href: pageURL},
-					Description: string(views.MDFunc(p.Content)),
-					Created:     p.PublishedAt,
+					Id:    pageURL,
+					Title: p.Title,
+					Link:  &feeds.Link{Href: pageURL},
+					Description: string(views.MDFunc(utils.ExpandLinks(
+						r.URL.Scheme,
+						r.Host,
+						p.Content,
+						sectionSlug,
+						fmt.Sprintf("%d", p.ID),
+					))),
+					Created: p.PublishedAt,
 				})
 		}
 

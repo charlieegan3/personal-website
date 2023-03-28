@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"regexp"
 
 	"cloud.google.com/go/storage"
 	"github.com/doug-martin/goqu/v9"
@@ -15,6 +14,7 @@ import (
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers/status"
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
+	"github.com/charlieegan3/personal-website/pkg/tool/utils"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
@@ -80,6 +80,11 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
+		if page.ExternalURL() != "" {
+			http.Redirect(w, r, page.ExternalURL(), http.StatusMovedPermanently)
+			return
+		}
+
 		var prevPage types.Page
 		_, err = goquDB.From("personal_website.pages").As("pages").
 			Select("pages.*").
@@ -137,7 +142,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 				"next":         &nextPage,
 				"section":      sectionSlug,
 				"menu_section": sectionSlug,
-				"content":      formatContent(page.Content, sectionSlug, pageSlug),
+				"content":      utils.ExpandLinks(r.URL.Scheme, r.Host, page.Content, sectionSlug, pageSlug),
 			},
 		)
 		if err != nil {
@@ -290,13 +295,4 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 
 		br.Close()
 	}
-}
-
-var linkRegex = regexp.MustCompile(`(!\[[^\]]*]\()([^:\)]+)\)`)
-
-func formatContent(content, section, page string) string {
-	return linkRegex.ReplaceAllString(
-		content,
-		fmt.Sprintf(`$1/%s/%s/$2)`, section, page),
-	)
 }

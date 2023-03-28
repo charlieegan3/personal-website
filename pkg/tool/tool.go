@@ -137,6 +137,28 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 
 	// public routes ------------------------------------
 	router.HandleFunc("/favicon.ico", handlers.BuildFaviconHandler())
+	router.HandleFunc("/robots.txt", handlers.BuildRobotsHandler())
+	router.HandleFunc("/index.xml", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/posts.rss", http.StatusMovedPermanently)
+	})
+	router.HandleFunc("/index.rss", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/posts.rss", http.StatusMovedPermanently)
+	})
+	router.HandleFunc("/feed.rss", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/posts.rss", http.StatusMovedPermanently)
+	})
+	router.HandleFunc("/feed.xml", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/posts.rss", http.StatusMovedPermanently)
+	})
+	router.HandleFunc("/rss", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/posts.rss", http.StatusMovedPermanently)
+	})
+	router.HandleFunc("/wp-login.php", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", http.StatusMovedPermanently)
+	})
+	router.HandleFunc("/.git/config", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", http.StatusMovedPermanently)
+	})
 
 	cssHandler, err := handlers.BuildCSSHandler()
 	if err != nil {
