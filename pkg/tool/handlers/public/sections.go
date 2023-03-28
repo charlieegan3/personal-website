@@ -247,11 +247,10 @@ func BuildSectionRSSHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 					Title: p.Title,
 					Link:  &feeds.Link{Href: pageURL},
 					Description: string(views.MDFunc(utils.ExpandLinks(
-						r.URL.Scheme,
 						r.Host,
 						p.Content,
 						sectionSlug,
-						fmt.Sprintf("%d", p.ID),
+						p.Slug,
 					))),
 					Created: p.PublishedAt,
 				})
@@ -270,7 +269,7 @@ func BuildSectionRSSHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 		w.Write([]byte(`<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 `))
-		w.Write([]byte(output))
+		w.Write(output)
 
 		w.Write([]byte("\n</rss>"))
 	}

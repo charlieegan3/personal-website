@@ -142,7 +142,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 				"next":         &nextPage,
 				"section":      sectionSlug,
 				"menu_section": sectionSlug,
-				"content":      utils.ExpandLinks(r.URL.Scheme, r.Host, page.Content, sectionSlug, pageSlug),
+				"content":      utils.ExpandLinks(r.Host, page.Content, sectionSlug, pageSlug),
 			},
 		)
 		if err != nil {

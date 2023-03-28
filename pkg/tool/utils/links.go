@@ -8,11 +8,12 @@ import (
 
 var linkRegex = regexp.MustCompile(`(!\[[^\]]*\]\()(\.\/)([^:\)]+)\)`)
 
-func ExpandLinks(scheme, host, content, section, page string) string {
-	if strings.HasPrefix(scheme, "https") {
-		scheme = "https://"
-	} else {
+func ExpandLinks(host, content, section, page string) string {
+	var scheme string
+	if strings.Contains(host, "localhost") {
 		scheme = "http://"
+	} else {
+		scheme = "https://"
 	}
 
 	res := strings.ReplaceAll(linkRegex.ReplaceAllString(
