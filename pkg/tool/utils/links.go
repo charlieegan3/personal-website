@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var linkRegex = regexp.MustCompile(`(!\[[^\]]*\]\()(\.\/)([^:\)]+)\)`)
+var linkRegex = regexp.MustCompile(`(!\[[^\]]*\]\()(\.\/)?([^:\)]+)\)`)
 
 func ExpandLinks(host, content, section, page string) string {
 	var scheme string
