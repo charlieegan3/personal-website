@@ -94,6 +94,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 					"pages.is_deleted": false,
 					"pages.is_draft":   false,
 				},
+				goqu.L("pages.data->>'external_url'").IsNull(),
 				goqu.I("pages.published_at").Lt(page.PublishedAt),
 			).
 			Order(goqu.I("pages.published_at").Desc()).
@@ -115,6 +116,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 					"pages.is_deleted": false,
 					"pages.is_draft":   false,
 				},
+				goqu.L("pages.data->>'external_url'").IsNull(),
 				goqu.I("pages.published_at").Gt(page.PublishedAt),
 			).
 			Order(goqu.I("pages.published_at").Asc()).

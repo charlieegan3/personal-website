@@ -128,8 +128,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page-content pre {
-    border-left-style: solid;
-    border-left-width: 20px;
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
     padding: 1rem 0.25rem;
