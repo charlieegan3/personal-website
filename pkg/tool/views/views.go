@@ -66,6 +66,7 @@ func init() {
 			parser.WithParagraphTransformers(util.Prioritized(&paragraphIdTransformer{}, 100)),
 		),
 		goldmark.WithRendererOptions(
+			html.WithUnsafe(), // allows pre-templating of MD
 			html.WithXHTML(),
 		),
 	)

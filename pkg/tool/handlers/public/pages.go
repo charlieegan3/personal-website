@@ -144,7 +144,12 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 				"next":         &nextPage,
 				"section":      sectionSlug,
 				"menu_section": sectionSlug,
-				"content":      utils.ExpandLinks(r.Host, page.Content, sectionSlug, pageSlug),
+				"content": utils.ExpandLinks(
+					r.Host,
+					utils.TemplateMD(page.Content, r.URL.Path),
+					sectionSlug,
+					pageSlug,
+				),
 			},
 		)
 		if err != nil {
@@ -234,12 +239,24 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 			w.Write([]byte("attachment not found"))
 			return
 		}
+
+		w.Header().Set("HX-Redirect", r.URL.Path)
 		r.Header.Set("Content-Type", attachment.ContentType)
 
-		if r.Header.Get("If-None-Match") == attachment.Etag && attachment.Etag != "" {
-			w.WriteHeader(http.StatusNotModified)
-			w.Header().Set("ETag", attachment.Etag)
-			return
+		isImage := false
+		for _, imageType := range []string{"image/png", "image/jpeg", "image/gif"} {
+			if attachment.ContentType == imageType {
+				isImage = true
+				break
+			}
+		}
+
+		if isImage {
+			if r.Header.Get("If-None-Match") == attachment.Etag && attachment.Etag != "" {
+				w.WriteHeader(http.StatusNotModified)
+				w.Header().Set("ETag", attachment.Etag)
+				return
+			}
 		}
 
 		bkt := storageClient.Bucket(bucketName)
