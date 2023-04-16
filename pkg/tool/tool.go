@@ -153,12 +153,6 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	router.HandleFunc("/rss", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/posts.rss", http.StatusMovedPermanently)
 	})
-	router.HandleFunc("/wp-login.php", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", http.StatusMovedPermanently)
-	})
-	router.HandleFunc("/.git/config", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", http.StatusMovedPermanently)
-	})
 
 	cssHandler, err := handlers.BuildCSSHandler()
 	if err != nil {
@@ -190,6 +184,7 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	router.HandleFunc("/", public.BuildIndexHandler(w.db)).
 		Methods("GET")
 
+	router.Use(middlewares.BuildGoAwayMiddleware())
 	router.Use(middlewares.BuildRedirectMiddleware(w.db))
 	router.Use(middlewares.BuildCountsMiddleware(w.db, w.adminPath))
 	router.Use(gorillaHandlers.CompressHandler)
