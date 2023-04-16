@@ -8,9 +8,9 @@ import (
 	"text/template"
 )
 
-var linkRegex = regexp.MustCompile(`(!?\[[^\]]*\]\()(\.\/)?([^:\)]+)\)`)
+var linkRegex = regexp.MustCompile(`(!\[[^\]]*\]\()(\.\/)?([^:\)]+)\)`)
 
-func ExpandLinks(host, content, section, page string) string {
+func ExpandImageSrcs(host, content, section, page string) string {
 	var scheme string
 	if strings.Contains(host, "localhost") {
 		scheme = "http://"

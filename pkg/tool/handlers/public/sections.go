@@ -246,7 +246,7 @@ func BuildSectionRSSHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 					Id:    pageURL,
 					Title: p.Title,
 					Link:  &feeds.Link{Href: pageURL},
-					Description: string(views.MDFunc(utils.ExpandLinks(
+					Description: string(views.MDFunc(utils.ExpandImageSrcs(
 						r.Host,
 						p.Content,
 						sectionSlug,

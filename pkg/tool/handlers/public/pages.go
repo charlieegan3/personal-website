@@ -144,7 +144,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 				"next":         &nextPage,
 				"section":      sectionSlug,
 				"menu_section": sectionSlug,
-				"content": utils.ExpandLinks(
+				"content": utils.ExpandImageSrcs(
 					r.Host,
 					utils.TemplateMD(page.Content, r.URL.Path),
 					sectionSlug,
