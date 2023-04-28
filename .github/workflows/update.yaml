@@ -7,13 +7,13 @@ env:
   PACKAGE: github.com/charlieegan3/personal-website
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
 
     steps:
       - run: |
-          curl -X POST https://api.github.com/repos/charlieegan3/${{ secrets.TOOLBELT_REPO }}/dispatches \
+          curl --fail -X POST https://api.github.com/repos/charlieegan3/${{ secrets.TOOLBELT_REPO }}/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.GITHUB_TOKEN }} \
+          -u ${{ secrets.TOOLBELT_UPDATE_TOKEN }} \
           --data '{"event_type": "Trigger Workflow", "client_payload": { "package": "${{env.PACKAGE}}", "commit": "${{github.sha}}" }}'
       - uses: actions/checkout@v3
