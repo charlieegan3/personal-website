@@ -1,5 +1,8 @@
 {{define "title"}}{{.page.Title }}{{end}}
 {{define "page_title"}}{{.page.Title }}{{end}}
+{{define "description"}}
+{{ blurb .page.Content 25 }}
+{{end}}
 {{define "content"}}
 
 {{ if .page.IsDraft }}

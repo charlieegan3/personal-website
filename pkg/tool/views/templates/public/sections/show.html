@@ -1,5 +1,8 @@
 {{define "title"}}{{ .section.Name }}{{end}}
 {{define "page_title"}}{{.section.Name }}{{end}}
+{{define "description"}}
+List of pages for the {{.section.Name }} section
+{{end}}
 {{define "content"}}
 
 {{ range $page := .pages }}
