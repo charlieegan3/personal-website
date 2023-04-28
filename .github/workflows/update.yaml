@@ -13,7 +13,8 @@ jobs:
     steps:
       - run: |
           curl --fail -X POST https://api.github.com/repos/charlieegan3/${{ secrets.TOOLBELT_REPO }}/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.TOOLBELT_UPDATE_TOKEN }}"
+          -H "X-GitHub-Api-Version: 2022-11-28" \
           --data '{"event_type": "Trigger Workflow", "client_payload": { "package": "${{env.PACKAGE}}", "commit": "${{github.sha}}" }}'
       - uses: actions/checkout@v3
