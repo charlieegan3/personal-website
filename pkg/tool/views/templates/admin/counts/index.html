@@ -9,6 +9,7 @@
 <table>
     {{ range $c := .counts }}
     <tr>
+        <td>{{ .Bucket }}</a></td>
         <td><a href="{{ .Key }}">{{ .Key }}</a></td>
         <td> {{ .Count }} </td>
     </tr>
