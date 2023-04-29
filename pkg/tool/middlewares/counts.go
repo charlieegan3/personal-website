@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"os"
 	"regexp"
 	"strings"
 	"time"
@@ -19,6 +20,10 @@ func BuildCountsMiddleware(db *sql.DB, adminPath string) func(http.Handler) http
 	return func(h http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			defer h.ServeHTTP(w, r)
+
+			if os.Getenv("GO_ENV") == "dev" {
+				return
+			}
 
 			if r.Header.Get("HX-Preload") == "true" {
 				return
