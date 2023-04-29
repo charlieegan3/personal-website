@@ -23,7 +23,7 @@ Personal website of Charlie Egan
         <a class="mr3" href="{{ .link }}">{{ .name }}</a>
         {{ end }}
     </div>
-    <form class="center mw6" action="https://formspree.io/me@charlieegan3.com" method="post">
+    <form hx-boost="false" class="center mw6" action="https://formspree.io/me@charlieegan3.com" method="post">
             <textarea id="message" style="resize:none"
                       rows="5"
                       class="pa2 w-100 mw6 db center mb3 input-reset ba b--silver"
