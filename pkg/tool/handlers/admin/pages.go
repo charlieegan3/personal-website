@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/doug-martin/goqu/v9"
@@ -154,13 +155,24 @@ func BuildPageCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 			return
 		}
 
+		slugValue := r.FormValue("slug")
+		if r.FormValue("is_draft") == "true" {
+			if !strings.HasSuffix(slugValue, "-todo") {
+				slugValue += "-todo"
+			}
+		} else {
+			if strings.HasSuffix(slugValue, "-todo") {
+				slugValue = strings.TrimSuffix(slugValue, "-todo")
+			}
+		}
+
 		var id int
 		_, err = goquDB.Insert("personal_website.pages").Rows(
 			goqu.Record{
 				"section_id": r.FormValue("section_id"),
 
 				"title":   r.FormValue("title"),
-				"slug":    slug.Make(r.FormValue("slug")),
+				"slug":    slug.Make(slugValue),
 				"content": r.FormValue("content"),
 
 				"is_draft":     r.FormValue("is_draft") == "true",
@@ -249,6 +261,17 @@ func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 			return
 		}
 
+		slugValue := r.FormValue("slug")
+		if r.FormValue("is_draft") == "true" {
+			if !strings.HasSuffix(slugValue, "-todo") {
+				slugValue += "-todo"
+			}
+		} else {
+			if strings.HasSuffix(slugValue, "-todo") {
+				slugValue = strings.TrimSuffix(slugValue, "-todo")
+			}
+		}
+
 		_, err = goquDB.Update("personal_website.pages").
 			Where(goqu.C("id").Eq(id)).
 			Set(
@@ -257,7 +280,7 @@ func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 					"section_id": r.FormValue("section_id"),
 
 					"title":   r.FormValue("title"),
-					"slug":    slug.Make(r.FormValue("slug")),
+					"slug":    slug.Make(slugValue),
 					"content": r.FormValue("content"),
 
 					"is_draft":     r.FormValue("is_draft") == "true",
