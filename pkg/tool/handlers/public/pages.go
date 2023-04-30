@@ -20,7 +20,7 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
-var sectionTemplates = map[string]string{
+var pageSectionTemplates = map[string]string{
 	"talks": "public/pages/sections/talks",
 }
 
@@ -130,7 +130,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
-		templatePath, ok := sectionTemplates[sectionSlug]
+		templatePath, ok := pageSectionTemplates[sectionSlug]
 		if !ok {
 			templatePath = "public/pages/show"
 		}

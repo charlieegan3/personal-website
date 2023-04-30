@@ -18,6 +18,10 @@ import (
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
+var sectionTemplates = map[string]string{
+	"talks": "public/sections/talks",
+}
+
 const pageSize = int(7)
 
 func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
@@ -153,10 +157,15 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			pageData["nextPage"] = page + 2
 		}
 
+		templatePath, ok := sectionTemplates[sectionSlug]
+		if !ok {
+			templatePath = "public/sections/show"
+		}
+
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,
-			"public/sections/show",
+			templatePath,
 			pageData,
 		)
 		if err != nil {
