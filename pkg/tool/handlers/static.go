@@ -20,12 +20,12 @@ import (
 var staticContent embed.FS
 
 func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
-	bytes, err := staticContent.ReadFile("static/favicon.ico")
+	bs, err := staticContent.ReadFile("static/favicon.ico")
 	if err != nil {
 		panic(err)
 	}
 
-	etag := utils.CRC32Hash(bytes)
+	etag := utils.CRC32Hash(bs)
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		if req.Header.Get("If-None-Match") == etag {
@@ -35,17 +35,17 @@ func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
 
 		w.Header().Set("ETag", etag)
 
-		w.Write(bytes)
+		w.Write(bs)
 	}
 }
 
 func BuildRobotsHandler() (handler func(http.ResponseWriter, *http.Request)) {
-	bytes, err := staticContent.ReadFile("static/robots.txt")
+	bs, err := staticContent.ReadFile("static/robots.txt")
 	if err != nil {
 		panic(err)
 	}
 
-	etag := utils.CRC32Hash(bytes)
+	etag := utils.CRC32Hash(bs)
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		if req.Header.Get("If-None-Match") == etag {
@@ -56,7 +56,7 @@ func BuildRobotsHandler() (handler func(http.ResponseWriter, *http.Request)) {
 		w.Header().Set("ETag", etag)
 		w.Header().Set("Content-Type", "text/plain")
 
-		w.Write(bytes)
+		w.Write(bs)
 	}
 }
 
