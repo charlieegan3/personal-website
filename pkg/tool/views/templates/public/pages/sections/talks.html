@@ -44,7 +44,7 @@
 <div class="mt3 flex justify-between">
     {{ range .page.GetDataValue "events" }}
     <details class="pointer">
-        <summary>{{ .name }}</summary>
+        <summary class="pointer">{{ .name }}</summary>
         <p class="mv0 f6">
             <span>
                 {{ .date }} - {{ .location }}
@@ -78,7 +78,7 @@
 <div>
     <hr>
     <details>
-        <summary>QR Code</summary>
+        <summary class="pointer">QR Code</summary>
 
         <a href="{{ .url }}/qr.png">
             <img src="{{ .url }}/qr.png" alt="QR Code for {{ .page.Title }}"/>

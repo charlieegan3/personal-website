@@ -16,8 +16,8 @@ Personal website of Charlie Egan
 <div class="f6 f5-ns">
     {{ markdown .page.Content }}
 </div>
-<details class="mt4 pointer f6 f5-ns">
-    <summary>Contact</summary>
+<details class="mt4 f6 f5-ns">
+    <summary class="pointer">Contact</summary>
     <div class="mv3">
         {{ range (.page.GetDataValue "accounts") }}
         <a class="mr3" href="{{ .link }}">{{ .name }}</a>
