@@ -1,6 +1,7 @@
 package public
 
 import (
+	"bytes"
 	"database/sql"
 	"fmt"
 	"io"
@@ -10,6 +11,7 @@ import (
 	"github.com/doug-martin/goqu/v9"
 	"github.com/foolin/goview"
 	"github.com/gorilla/mux"
+	"github.com/skip2/go-qrcode"
 	"google.golang.org/api/option"
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers/status"
@@ -313,5 +315,78 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 		}
 
 		br.Close()
+	}
+}
+
+func BuildPageQRHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
+	goquDB := goqu.New("postgres", db)
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		var err error
+
+		pageSlug, ok := mux.Vars(r)["pageSlug"]
+		if !ok {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("missing page"))
+			return
+		}
+
+		sectionSlug, ok := mux.Vars(r)["sectionSlug"]
+		if !ok {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("missing section"))
+			return
+		}
+
+		var page types.Page
+		found, err := goquDB.From("personal_website.pages").As("pages").
+			Join(
+				goqu.S("personal_website").Table("sections").As("sections"),
+				goqu.On(goqu.Ex{
+					"sections.id": goqu.I("pages.section_id"),
+				}),
+			).
+			Where(
+				goqu.Ex{
+					"pages.slug":    pageSlug,
+					"sections.slug": sectionSlug,
+				},
+			).
+			Select("pages.*").
+			ScanStruct(&page)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
+		if !found {
+			status.NotFound(w, r)
+			return
+		}
+
+		r.Header.Set("Content-Type", "image/png")
+		r.Header.Set("Cache-Control", "public, max-age=31536000, immutable")
+
+		scheme := r.URL.Scheme
+		if scheme == "" {
+			scheme = "https"
+		}
+
+		permalink := fmt.Sprintf("%s://%s/%s/%s", scheme, r.Host, sectionSlug, pageSlug)
+
+		bs, err := qrcode.Encode(permalink, qrcode.Medium, 256)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
+		_, err = io.Copy(w, bytes.NewReader(bs))
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
 	}
 }

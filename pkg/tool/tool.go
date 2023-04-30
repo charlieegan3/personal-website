@@ -179,6 +179,8 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 		Methods("GET")
 	router.HandleFunc("/{sectionSlug}/{pageSlug}", public.BuildPageShowHandler(w.db)).
 		Methods("GET")
+	router.HandleFunc("/{sectionSlug}/{pageSlug}/qr.png", public.BuildPageQRHandler(w.db)).
+		Methods("GET")
 	router.HandleFunc("/{sectionSlug}/{pageSlug}/{attachmentFilename}", public.BuildPageAttachmentHandler(w.db, w.bucketName, w.googleJSON)).
 		Methods("GET")
 	router.HandleFunc("/", public.BuildIndexHandler(w.db)).
