@@ -29,6 +29,10 @@ func BuildCountsMiddleware(db *sql.DB, adminPath string) func(http.Handler) http
 				return
 			}
 
+			if strings.HasSuffix(r.URL.Path, "-todo") {
+				return
+			}
+
 			if strings.HasPrefix(r.URL.Path, adminPath) {
 				return
 			}
