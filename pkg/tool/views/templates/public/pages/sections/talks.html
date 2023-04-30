@@ -75,23 +75,21 @@
 
 <div class="page-content section-{{ .section }}">{{ markdown .content }}</div>
 
+<div>
+    <hr>
+    <details>
+        <summary>QR Code</summary>
+
+        <a href="{{ .url }}/qr.png">
+            <img src="{{ .url }}/qr.png" alt="QR Code for {{ .page.Title }}"/>
+        </a>
+    </details>
+</div>
+
 {{ if .page.IsDraft }}
 <p class="pa3 ba b--dark-red bw1 mt1 br2 dark-red">
     This is a draft
 </p>
 {{ end }}
-
-<div class="mt3 flex justify-between">
-    {{ if ne .prev.ID 0 }}
-    <a href="/{{ .section }}/{{ .prev.Slug }}">Prev</a>
-    {{else}}
-    <span></span>
-    {{end}}
-    {{ if ne .next.ID 0 }}
-    <a href="/{{ .section }}/{{ .next.Slug }}">Next</a>
-    {{else}}
-    <span></span>
-    {{end}}
-</div>
 
 {{end}}
