@@ -249,20 +249,6 @@ h1, h2, h3, h4, h5, h6 {
         background-color: #dddddd;
     }
 
-    /* menu styles */
-    .menu {
-        border-color: #dddddd;
-    }
-    .menu a {
-        background-color: #fafafa;
-    }
-    .menu a:not(.selected) {
-        background-color: #F4F4F4;
-    }
-    .menu a:hover {
-        background-color: #fafafa;
-    }
-
     .round img {
         border: 1px solid #cccccc;
     }
@@ -690,20 +676,6 @@ h1, h2, h3, h4, h5, h6 {
 
     hr {
         background-color: #555555;
-    }
-
-    /* menu styles */
-    .menu {
-        border-color: #333333;
-    }
-    .menu a {
-        background-color: #272822;
-    }
-    .menu a:not(.selected) {
-        background-color: #333333;
-    }
-    .menu a:hover {
-        background-color: #272822;
     }
 
     .light-mode {

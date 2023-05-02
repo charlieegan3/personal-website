@@ -270,6 +270,11 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 		))
 
 		attrs, err := obj.Attrs(r.Context())
+		if err == storage.ErrObjectNotExist {
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte("attachment not found"))
+			return
+		}
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
@@ -313,8 +318,6 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 			w.Write([]byte(err.Error()))
 			return
 		}
-
-		br.Close()
 	}
 }
 

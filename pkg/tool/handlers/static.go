@@ -6,11 +6,12 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 
+	"github.com/bep/godartsass"
 	"github.com/gorilla/mux"
-	"github.com/tdewolff/minify/v2/css"
-
 	"github.com/tdewolff/minify/v2"
+	"github.com/tdewolff/minify/v2/css"
 	"github.com/tdewolff/minify/v2/js"
 
 	"github.com/charlieegan3/personal-website/pkg/tool/utils"
@@ -74,6 +75,7 @@ func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 }
 
 func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
+	// process the raw css files
 	sourceFileOrder := []string{"tachyons.css", "styles.css"}
 
 	var bs []byte
@@ -88,6 +90,38 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 		bs = append(bs, []byte("\n")...)
 	}
 
+	// process the scss file
+	dartSassEmbeddedFilename := "dart-sass-embedded"
+	if os.Getenv("DART_SASS_EMBEDDED_PATH") != "" {
+		dartSassEmbeddedFilename = os.Getenv("DART_SASS_EMBEDDED_PATH")
+	}
+
+	opts := godartsass.Options{
+		DartSassEmbeddedFilename: dartSassEmbeddedFilename,
+	}
+
+	t, err := godartsass.Start(opts)
+	if err != nil {
+		return nil, fmt.Errorf("failed to start scss: %s", err)
+	}
+
+	scssString, err := staticContent.ReadFile("static/css/styles.scss")
+	if err != nil {
+		return nil, fmt.Errorf("failed to read scss: %s", err)
+	}
+
+	args := godartsass.Args{
+		Source:      string(scssString),
+		OutputStyle: godartsass.OutputStyleExpanded,
+	}
+
+	result, err := t.Execute(args)
+	if err != nil {
+		return nil, fmt.Errorf("failed to execute sass: %s", err)
+	}
+	bs = append(bs, result.CSS...)
+
+	// minify the css
 	in := bytes.NewBuffer(bs)
 	out := bytes.NewBuffer([]byte{})
 
