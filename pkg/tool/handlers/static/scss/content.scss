@@ -1,0 +1,182 @@
+.page-content {
+  h1, h2, h3, h4, h5 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    vertical-align: bottom;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  h4, h5 {
+    font-size: 1rem;
+  }
+
+  p, li {
+    text-align: justify;
+    margin-bottom: 0.7rem;
+    line-height: 1.5em;
+    font-size: 1rem;
+  }
+
+  p code {
+    font-size: 1rem;
+    padding: 1px 3px;
+  }
+
+  ul {
+    code {
+      font-size: 1rem;
+      padding: 1px 3px;
+    }
+
+    margin-bottom: 0.5rem;
+  }
+
+  ol {
+    margin-bottom: 0.5rem;
+    list-style-type: decimal;
+  }
+
+  li {
+    margin-bottom: 0.3rem;
+
+    img {
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+  }
+
+  &.listicle li {
+    margin-bottom: 2rem;
+  }
+
+  li {
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    p:first-child {
+      display: inline;
+    }
+  }
+
+  pre {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem 0.25rem;
+  }
+
+  .info {
+    border: 2px solid cornflowerblue;
+  }
+
+  .warning {
+    border: 2px solid orange;
+  }
+
+  .error {
+    border: 2px solid orangered;
+  }
+
+  .info, .warning, .error {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.7rem;
+    margin-top: 0.7rem;
+  }
+
+  .warning :first-child, .error :first-child, .info :first-child {
+    margin-top: 0;
+  }
+
+  .warning :last-child, .error :last-child, .info :last-child {
+    margin-bottom: 0;
+  }
+
+  em {
+    font-style: italic;
+    text-justify: none;
+  }
+
+  img + em {
+    vertical-align: top;
+    font-size: 0.75rem;
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  img {
+    border-style: solid;
+    border-width: 1px;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    /* this is needed for inline images in li tags, other images are in p tags from md processor */
+    display: block;
+  }
+
+  blockquote {
+    font-size: 0.9em;
+    font-style: italic;
+    padding-left: 2rem;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.8rem;
+    border-collapse: collapse;
+  }
+
+  th:first-child {
+    border-left: none;
+  }
+
+  td {
+    border: 1px solid;
+    padding: 0.3rem;
+  }
+
+  th {
+    padding: 0.3rem;
+  }
+
+  pre.chroma {
+    border: 1px solid #444444;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 30em) {
+  .page-content {
+    h1, h2, h3, h4, h5 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    li {
+      font-size: 0.9rem;
+
+      code {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

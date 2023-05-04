@@ -75,8 +75,9 @@ func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 }
 
 func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
-	// process the raw css files
-	sourceFileOrder := []string{"tachyons.css", "styles.css"}
+	sourceFileOrder := []string{
+		"tachyons.css",
+	}
 
 	var bs []byte
 
@@ -90,7 +91,7 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 		bs = append(bs, []byte("\n")...)
 	}
 
-	// process the scss file
+	// process scss files
 	dartSassEmbeddedFilename := "dart-sass-embedded"
 	if os.Getenv("DART_SASS_EMBEDDED_PATH") != "" {
 		dartSassEmbeddedFilename = os.Getenv("DART_SASS_EMBEDDED_PATH")
@@ -105,20 +106,42 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 		return nil, fmt.Errorf("failed to start scss: %s", err)
 	}
 
-	scssString, err := staticContent.ReadFile("static/css/styles.scss")
+	files, err := staticContent.ReadDir("static/scss")
 	if err != nil {
-		return nil, fmt.Errorf("failed to read scss: %s", err)
+		return nil, fmt.Errorf("failed to read scss dir: %s", err)
 	}
 
+	sourceFileOrder = []string{
+		"variables.scss",
+	}
+
+	for _, f := range files {
+		if f.IsDir() || f.Name() == "variables.scss" {
+			continue
+		}
+		sourceFileOrder = append(sourceFileOrder, f.Name())
+	}
+
+	var scssBs []byte
+	for _, f := range sourceFileOrder {
+		scssContent, err := staticContent.ReadFile("static/scss/" + f)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read scss file %s: %s", f, err)
+		}
+
+		scssBs = append(scssBs, scssContent...)
+
+	}
 	args := godartsass.Args{
-		Source:      string(scssString),
+		Source:      string(scssBs),
 		OutputStyle: godartsass.OutputStyleExpanded,
 	}
 
 	result, err := t.Execute(args)
 	if err != nil {
-		return nil, fmt.Errorf("failed to execute sass: %s", err)
+		return nil, fmt.Errorf("failed to execute sass for file: %s", err)
 	}
+
 	bs = append(bs, result.CSS...)
 
 	// minify the css

@@ -1,0 +1,89 @@
+a.anchor {
+    text-decoration: none;
+}
+
+:target .anchor {
+    display: none;
+}
+
+ul, ol {
+    padding-left: 1.5rem;
+}
+
+pre.chroma {
+    border: 1px solid $border-color;
+}
+.round img {
+    border: 1px solid $border-color;
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: $light-body-background-color;
+        color: $light-font-color;
+    }
+
+    hr {
+        background-color: $light-muted-element;
+    }
+
+    :target, .highlight {
+        background-color: $light-highlight-color;
+    }
+
+    .light-mode {
+        display: block;
+    }
+
+    .dark-mode {
+        display: none;
+    }
+
+    a {
+        color: $light-link;
+    }
+    a:visited {
+        color: $light-link-visited;
+    }
+    a.anchor {
+        color: $light-muted-element;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: $dark-body-background-color;
+        color: $dark-font-color;
+    }
+
+    :target, .highlight {
+        background-color: $dark-highlight-color;
+    }
+
+    hr {
+        background-color: $dark-muted-element;
+    }
+
+    .light-mode {
+        display: none;
+    }
+
+    .dark-mode {
+        display: block;
+    }
+
+    input[type="email"], input[type="text"], textarea {
+        background-color: $dark-body-background-color;
+        color: $dark-font-color;
+    }
+
+    a {
+        color: $dark-link;
+    }
+    a:visited {
+        color: $dark-link-visited;
+    }
+    a.anchor {
+        color: $dark-muted-element;
+    }
+}

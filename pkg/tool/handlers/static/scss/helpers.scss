@@ -1,0 +1,20 @@
+.muted {
+    color: $muted-text-color;
+}
+
+.round img {
+    border-radius: 100%;
+    border: 1px solid $border-color;
+}
+
+img.external-link {
+    display: inline;
+    width: 20px;
+    vertical-align: bottom;
+    margin-bottom: 3px;
+}
+
+.tfl-blue { color: $tfl-blue }
+.tfl-red { color: $tfl-red }
+.tfl-yellow { color: $tfl-yellow }
+.tfl-green { color: $tfl-green }
