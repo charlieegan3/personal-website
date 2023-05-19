@@ -43,6 +43,12 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			return
 		}
 
+		var includeExternal bool
+		includeExternalValue, ok := r.URL.Query()["include_external"]
+		if ok && len(includeExternalValue) > 0 && includeExternalValue[0] == "true" {
+			includeExternal = true
+		}
+
 		// find the section
 		var section types.Section
 		found, err := goquDB.From("personal_website.sections").As("sections").
@@ -84,6 +90,18 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			return
 		}
 
+		whereArgs := []goqu.Expression{
+			goqu.Ex{
+				"sections.slug":    sectionSlug,
+				"pages.is_draft":   false,
+				"pages.is_deleted": false,
+			},
+		}
+		if !includeExternal {
+			whereArgs = append(whereArgs, goqu.L("pages.data->>'external_url'").IsNull())
+		}
+
+		// count the total number of pages
 		var totalPages int
 		_, err = goquDB.From("personal_website.pages").As("pages").
 			Join(
@@ -92,13 +110,7 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 					"sections.id": goqu.I("pages.section_id"),
 				}),
 			).
-			Where(
-				goqu.Ex{
-					"sections.slug":    sectionSlug,
-					"pages.is_draft":   false,
-					"pages.is_deleted": false,
-				},
-			).
+			Where(whereArgs...).
 			Select(goqu.L("count(pages.id)")).
 			ScanVal(&totalPages)
 		if err != nil {
@@ -112,6 +124,7 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			return
 		}
 
+		// load the pages for this page of data
 		var pages []types.Page
 		err = goquDB.From("personal_website.pages").As("pages").
 			Join(
@@ -120,13 +133,7 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 					"sections.id": goqu.I("pages.section_id"),
 				}),
 			).
-			Where(
-				goqu.Ex{
-					"sections.slug":    sectionSlug,
-					"pages.is_draft":   false,
-					"pages.is_deleted": false,
-				},
-			).
+			Where(whereArgs...).
 			Order(goqu.I("pages.published_at").Desc()).
 			Offset(uint(page * pageSize)).
 			Limit(uint(pageSize)).
@@ -144,9 +151,10 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 		}
 
 		pageData := goview.M{
-			"section":      &section,
-			"pages":        &pages,
-			"menu_section": sectionSlug,
+			"section":          &section,
+			"pages":            &pages,
+			"menu_section":     sectionSlug,
+			"include_external": includeExternal,
 		}
 
 		if page > 0 {

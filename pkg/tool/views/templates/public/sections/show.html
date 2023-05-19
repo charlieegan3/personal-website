@@ -5,18 +5,21 @@ List of pages for the {{.section.Name }} section
 {{end}}
 {{define "content"}}
 
+
 {{ range $page := .pages }}
 <div>
+    {{ if ne $page.ExternalURL "" }}
     <h2 class="mb2 f4 f3-ns">
-        {{ if ne $page.ExternalURL "" }}
         <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
         <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
             <img class="external-link" src="/static/icons/external.png"/>
         </a>
-        {{ else }}
-        <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
-        {{ end }}
     </h2>
+    {{ else }}
+    <h2 class="mb2 f4 f3-ns">
+        <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
+    </h2>
+    {{ end }}
     <p class="mt0">
         {{ if ne $page.PublishedAt.Year 0001 }}
             <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
@@ -29,6 +32,16 @@ List of pages for the {{.section.Name }} section
         {{ end }}
     </p>
 </div>
+{{ end }}
+
+{{ if eq .section.Slug "posts" }}
+<p class="tc">
+{{ if .include_external }}
+    <a href="/posts">Hide posts from employer blogs</a>
+{{ else }}
+    <a href="/posts/?include_external=true">Include posts from employer blogs</a>
+{{ end }}
+</p>
 {{ end }}
 
 <div class="mt3 flex justify-between">

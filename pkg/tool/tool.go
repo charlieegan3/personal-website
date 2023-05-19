@@ -167,6 +167,10 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	router.HandleFunc("/script.js", jsHandler).Methods("GET")
 
 	router.HandleFunc(
+		"/fonts/{path:.*}",
+		handlers.BuildFontHandler(),
+	).Methods("GET")
+	router.HandleFunc(
 		"/static/{path:.*}",
 		handlers.BuildStaticHandler(),
 	).Methods("GET")

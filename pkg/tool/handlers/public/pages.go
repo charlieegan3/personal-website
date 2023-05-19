@@ -114,7 +114,6 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			Where(
 				goqu.Ex{
 					"pages.section_id": page.SectionID,
-
 					"pages.is_deleted": false,
 					"pages.is_draft":   false,
 				},

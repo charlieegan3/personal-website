@@ -61,6 +61,54 @@ func BuildRobotsHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	}
 }
 
+type fontFile struct {
+	ETag  string
+	Bytes []byte
+}
+
+func BuildFontHandler() (handler func(http.ResponseWriter, *http.Request)) {
+	files, err := staticContent.ReadDir("static/fonts")
+	if err != nil {
+		panic(err)
+	}
+
+	fontFiles := make(map[string]fontFile)
+	for _, f := range files {
+		if f.IsDir() {
+			continue
+		}
+
+		bs, err := staticContent.ReadFile("static/fonts/" + f.Name())
+		if err != nil {
+			panic(err)
+		}
+
+		etag := utils.CRC32Hash(bs)
+
+		fontFiles[f.Name()] = fontFile{
+			ETag:  etag,
+			Bytes: bs,
+		}
+	}
+
+	return func(w http.ResponseWriter, req *http.Request) {
+		ff, ok := fontFiles[mux.Vars(req)["path"]]
+		if !ok {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+
+		if req.Header.Get("If-None-Match") == ff.ETag {
+			w.WriteHeader(http.StatusNotModified)
+			return
+		}
+
+		w.Header().Set("ETag", ff.ETag)
+
+		w.Write(ff.Bytes)
+	}
+}
+
 func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Cache-Control", "public, max-age=3600")
