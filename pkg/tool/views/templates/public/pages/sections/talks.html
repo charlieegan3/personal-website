@@ -38,42 +38,55 @@
         </p>
     </div>
     {{ end }}
-</div>
-
-{{ if .page.GetDataValue "events" }}
-<div class="mt3 flex justify-between">
-    {{ range .page.GetDataValue "events" }}
-    <details class="pointer">
-        <summary class="pointer">{{ .name }}</summary>
-        <p class="mv0 f6">
-            <span>
-                {{ .date }} - {{ .location }}
-            </span>
-            <br>
-            <strong>Links:</strong>
-            {{ if .url }}
-            <a href="{{ .url }}">Event Page</a>
-            {{ end }}
-            {{ if .video_url }}
-            <a href="{{ .video_url }}">Video</a>
-            {{ end }}
-            {{ if .copresenters }}
-            <br>
-            <strong>Copresenters:</strong>
-            {{ range .copresenters }}
-            <a href="{{ .url }}">{{ .name }}</a>
-            {{ end }}
-            {{ end }}
-        </p>
-    </details>
+    {{ if .page.GetDataValue "video_url" }}
     <div>
+        <p class="mt0 mb1">
+            <strong>Video</strong>
+        </p>
+        <p class="mv0">
+            <a href="{{ .page.GetDataValue "video_url" }}">Link</a>
+        </p>
     </div>
     {{ end }}
 </div>
-{{ end }}
 
 
-<div class="page-content section-{{ .section }}">{{ markdown .content }}</div>
+<div class="page-content section-{{ .section }}">
+    {{ markdown .content }}
+
+    <h1 id="events">Events</h1>
+    {{ if .page.GetDataValue "events" }}
+    <div class="mt3">
+        {{ range .page.GetDataValue "events" }}
+        <details class="pointer">
+            <summary class="pointer"><span class="muted">{{ .date }}</span> {{ .name }}</summary>
+            <p class="mv0 f6">
+            <span>
+                {{ .date }} - {{ .location }}
+            </span>
+                <br>
+                <strong>Links:</strong>
+                {{ if .url }}
+                <a href="{{ .url }}">Event Page</a>
+                {{ end }}
+                {{ if .video_url }}
+                <a href="{{ .video_url }}">Video</a>
+                {{ end }}
+                {{ if .copresenters }}
+                <br>
+                <strong>Copresenters:</strong>
+                {{ range .copresenters }}
+                <a href="{{ .url }}">{{ .name }}</a>
+                {{ end }}
+                {{ end }}
+            </p>
+        </details>
+        <div>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
 
 <div>
     <hr>

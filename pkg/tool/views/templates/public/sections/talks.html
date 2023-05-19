@@ -8,22 +8,10 @@ List of pages for the {{.section.Name }} section
 {{ range $page := .pages }}
 <div>
     <h2 class="mb2 f4 f3-ns">
-        {{ if ne $page.ExternalURL "" }}
-        <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
-        <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
-            <img class="external-link" src="/static/icons/external.png"/>
-        </a>
-        {{ else }}
         <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
-        {{ end }}
     </h2>
     <p class="mt0">
-        {{ if ne $page.ExternalURL "" }}
-          <strong class="muted">(External Post)</strong>
-          {{ blurb $page.Content 25 }}
-        {{ else }}
         {{ blurb $page.Content 25 }}
-        {{ end }}
     </p>
 </div>
 {{ end }}
@@ -34,8 +22,6 @@ List of pages for the {{.section.Name }} section
     {{else}}
     <span></span>
     {{end}}
-
-    <a rel="noopener noreferrer nofollow" target="_blank" href="/{{ .section.Slug }}.rss">RSS</a>
 
     {{ if .nextPage }}
     <a href="/{{ .section.Slug }}/?page={{ .nextPage }}">Next</a>

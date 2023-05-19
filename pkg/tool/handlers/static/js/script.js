@@ -28,4 +28,7 @@ ready(function() {
     document.body.addEventListener("htmx:afterRequest", function(e) {
         document.getElementById("loader").classList.add("dn");
     });
+    document.body.addEventListener("htmx:historyRestore", function(e) {
+        document.getElementById("loader").classList.add("dn");
+    });
 })

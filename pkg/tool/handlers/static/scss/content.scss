@@ -160,6 +160,18 @@
     font-size: 0.9rem;
   }
 }
+.page-content.section-talks {
+  img {
+    max-width: 30rem;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  img+em {
+    display: block;
+    text-align: center;
+  }
+}
 
 @media screen and (max-width: 30em) {
   .page-content {
