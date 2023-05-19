@@ -46,7 +46,7 @@ List of pages for the {{.section.Name }} section
 
 <div class="mt3 flex justify-between">
     {{ if .prevPage }}
-    <a href="/{{ .section.Slug }}/?page={{ .prevPage }}">Prev</a>
+    <a href="/{{ .section.Slug }}/?page={{ .prevPage }}">Page {{ .prevPage }}</a>
     {{else}}
     <span></span>
     {{end}}
@@ -54,7 +54,7 @@ List of pages for the {{.section.Name }} section
     <a rel="noopener noreferrer nofollow" target="_blank" href="/{{ .section.Slug }}.rss">RSS</a>
 
     {{ if .nextPage }}
-    <a href="/{{ .section.Slug }}/?page={{ .nextPage }}">Next</a>
+    <a href="/{{ .section.Slug }}/?page={{ .nextPage }}">Page {{ .nextPage }}</a>
     {{else}}
     <span></span>
     {{end}}
