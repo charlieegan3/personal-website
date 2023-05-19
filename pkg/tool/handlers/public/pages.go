@@ -25,7 +25,6 @@ var pageSectionTemplates = map[string]string{
 }
 
 func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -134,6 +133,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			templatePath = "public/pages/show"
 		}
 
+		w.Header().Set("Cache-Control", "public, max-age=60")
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,
@@ -242,7 +242,8 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 		}
 
 		w.Header().Set("HX-Redirect", r.URL.Path)
-		r.Header.Set("Content-Type", attachment.ContentType)
+		w.Header().Set("Content-Type", attachment.ContentType)
+		w.Header().Set("Cache-Control", "public, max-age=600")
 
 		isImage := false
 		for _, imageType := range []string{"image/png", "image/jpeg", "image/gif"} {
@@ -367,8 +368,8 @@ func BuildPageQRHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
-		r.Header.Set("Content-Type", "image/png")
-		r.Header.Set("Cache-Control", "public, max-age=31536000, immutable")
+		w.Header().Set("Content-Type", "image/png")
+		w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
 
 		scheme := r.URL.Scheme
 		if scheme == "" {

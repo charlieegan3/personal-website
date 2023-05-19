@@ -43,6 +43,7 @@ func BuildIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
+		w.Header().Set("Cache-Control", "public, max-age=60")
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,

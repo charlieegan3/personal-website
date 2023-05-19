@@ -58,12 +58,20 @@ htmx.defineExtension("preload", {
                 // node.preloadState = TRUE so that requests are not duplicated
                 // in the future.
                 if (node.getAttribute("href")) {
-                    // TODO: this is custom to support skipping of external links
-                    if (node.getAttribute("href").indexOf("http") === 0) {
+                    const href = node.getAttribute("href");
+                    // TODO: this is custom to support skipping of external links and unbrowsable links
+                    if (href.startsWith("http") ||
+                        href.startsWith("mailto") ||
+                        href.startsWith("tel") ||
+                        href.endsWith("rss") ||
+                        href.endsWith("pdf") ||
+                        href.endsWith("zip") ||
+                        href.endsWith("csv")
+                    ) {
                         return;
                     }
                     var r = new XMLHttpRequest();
-                    r.open("GET", node.getAttribute("href"));
+                    r.open("GET", href);
                     r.onload = function() {done(r.responseText);};
                     // TODO: the setting of these headers is custom
                     r.setRequestHeader("Hx-Preload", "true");

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/bep/godartsass"
 	"github.com/gorilla/mux"
@@ -35,6 +36,7 @@ func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
 		}
 
 		w.Header().Set("ETag", etag)
+		w.Header().Set("Cache-Control", "public, max-age=3600")
 
 		w.Write(bs)
 	}
@@ -56,12 +58,14 @@ func BuildRobotsHandler() (handler func(http.ResponseWriter, *http.Request)) {
 
 		w.Header().Set("ETag", etag)
 		w.Header().Set("Content-Type", "text/plain")
+		w.Header().Set("Cache-Control", "public, max-age=3600")
 
 		w.Write(bs)
 	}
 }
 
 type fontFile struct {
+	Name  string
 	ETag  string
 	Bytes []byte
 }
@@ -86,6 +90,7 @@ func BuildFontHandler() (handler func(http.ResponseWriter, *http.Request)) {
 		etag := utils.CRC32Hash(bs)
 
 		fontFiles[f.Name()] = fontFile{
+			Name:  f.Name(),
 			ETag:  etag,
 			Bytes: bs,
 		}
@@ -103,7 +108,14 @@ func BuildFontHandler() (handler func(http.ResponseWriter, *http.Request)) {
 			return
 		}
 
+		if strings.HasSuffix(ff.Name, ".woff2") {
+			w.Header().Set("Content-Type", "application/font-woff2")
+		} else if strings.HasSuffix(ff.Name, ".woff") {
+			w.Header().Set("Content-Type", "application/font-woff")
+		}
+
 		w.Header().Set("ETag", ff.ETag)
+		w.Header().Set("Cache-Control", "public, max-age=3600")
 
 		w.Write(ff.Bytes)
 	}
@@ -213,6 +225,7 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 		w.Header().Set("Content-Type", "text/css")
 		w.Header().Set("ETag", etag)
+		w.Header().Set("Cache-Control", "public, max-age=3600")
 
 		w.Write(out.Bytes())
 	}, nil
@@ -253,6 +266,7 @@ func BuildJSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 		w.Header().Set("Content-Type", "application/javascript")
 		w.Header().Set("ETag", etag)
+		w.Header().Set("Cache-Control", "public, max-age=3600")
 
 		w.Write(out.Bytes())
 	}, nil
