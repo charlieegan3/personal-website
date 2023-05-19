@@ -19,4 +19,13 @@ ready(function() {
             document.getElementById(errorDivId).classList.add("dn");
         }
     });
+    document.body.addEventListener("htmx:sendError", function(e) {
+        window.location = window.location.protocol + "//" + window.location.host + e.detail.pathInfo.requestPath;
+    });
+    document.body.addEventListener("htmx:beforeRequest", function(e) {
+        document.getElementById("loader").classList.remove("dn");
+    });
+    document.body.addEventListener("htmx:afterRequest", function(e) {
+        document.getElementById("loader").classList.add("dn");
+    });
 })

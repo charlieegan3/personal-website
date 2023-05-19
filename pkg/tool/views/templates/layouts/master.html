@@ -12,10 +12,13 @@
 </head>
 
 <body>
+<span id="loader" class="mt0 loader dn"></span>
 
 <div hx-boost="true" hx-ext="preload"
      preload="{{ template "preload" . }}" {{define "preload"}}preload:init{{end}}
      class="w-100 center ph2 mb4 {{ template "max_width" . }}{{ define "max_width" }}mw7{{end}} section-{{ .menu_section }}">
+
+
     <div id="error" class="dn pa3 ba b--dark-red bw1 mt1 br2 dark-red"> </div>
     {{ template "header" . }}
     {{define "header"}}
