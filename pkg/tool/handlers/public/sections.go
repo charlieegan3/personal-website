@@ -170,7 +170,7 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			templatePath = "public/sections/show"
 		}
 
-		w.Header().Set("Cache-Control", "public, max-age=60")
+		utils.SetCacheControl(w, "public, max-age=60")
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,

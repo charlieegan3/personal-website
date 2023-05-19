@@ -10,6 +10,7 @@ import (
 	"github.com/gosimple/slug"
 
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
+	"github.com/charlieegan3/personal-website/pkg/tool/utils"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
@@ -20,7 +21,7 @@ func BuildSearchHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 
 		query, ok := r.URL.Query()["q"]
 		if !ok || len(query[0]) < 1 {
-			w.Header().Set("Cache-Control", "public, max-age=60")
+			utils.SetCacheControl(w, "public, max-age=60")
 			err = views.Engine.Render(
 				w,
 				http.StatusOK,

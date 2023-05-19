@@ -1,41 +1,16 @@
 .page-content {
-  h1, h2, h3, h4, h5 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    vertical-align: bottom;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-  }
-
-  h4, h5 {
-    font-size: 1rem;
-  }
-
   p, li {
     text-align: justify;
     margin-bottom: 0.7rem;
     line-height: 1.5em;
-    font-size: 1rem;
   }
 
   p code {
-    font-size: 1rem;
     padding: 1px 3px;
   }
 
   ul {
     code {
-      font-size: 1rem;
       padding: 1px 3px;
     }
 
@@ -56,10 +31,6 @@
     }
   }
 
-  &.listicle li {
-    margin-bottom: 2rem;
-  }
-
   li {
     ul {
       padding-left: 1.5rem;
@@ -71,9 +42,9 @@
   }
 
   pre {
-    font-size: 0.9rem;
     margin-bottom: 0.5rem;
-    padding: 1rem 0.25rem;
+    border: 1px solid #444444;
+    padding: 0.4rem 0.6rem;
   }
 
   .info {
@@ -106,10 +77,12 @@
     font-style: italic;
     text-justify: none;
   }
-
+  blockquote {
+    font-style: italic;
+    padding-left: 2rem;
+  }
   img + em {
     vertical-align: top;
-    font-size: 0.75rem;
   }
 
   hr {
@@ -129,15 +102,8 @@
     display: block;
   }
 
-  blockquote {
-    font-size: 0.9em;
-    font-style: italic;
-    padding-left: 2rem;
-  }
-
   table {
     width: 100%;
-    font-size: 0.8rem;
     border-collapse: collapse;
   }
 
@@ -153,13 +119,8 @@
   th {
     padding: 0.3rem;
   }
-
-  pre.chroma {
-    border: 1px solid #444444;
-    padding: 0.4rem 0.6rem;
-    font-size: 0.9rem;
-  }
 }
+
 .page-content.section-talks {
   img {
     max-width: 30rem;
@@ -170,25 +131,5 @@
   img+em {
     display: block;
     text-align: center;
-  }
-}
-
-@media screen and (max-width: 30em) {
-  .page-content {
-    h1, h2, h3, h4, h5 {
-      font-size: 1.1rem;
-    }
-
-    p {
-      font-size: 0.9rem;
-    }
-
-    li {
-      font-size: 0.9rem;
-
-      code {
-        font-size: 0.9rem;
-      }
-    }
   }
 }

@@ -9,6 +9,7 @@ import (
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers/status"
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
+	"github.com/charlieegan3/personal-website/pkg/tool/utils"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
@@ -43,7 +44,7 @@ func BuildIndexHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
-		w.Header().Set("Cache-Control", "public, max-age=60")
+		utils.SetCacheControl(w, "public, max-age=60")
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,

@@ -1,3 +1,15 @@
+// https://typescale.com/ to set values
+$font-scale-factor: 0.8;
+$font-scale-factor-mobile: 0.9; // 0.9 * $font-scale-factor = 0.72
+
+$font-size-1: calc(2.488rem * $font-scale-factor);
+$font-size-2: calc(2.074rem * $font-scale-factor);
+$font-size-3: calc(1.728rem * $font-scale-factor);
+$font-size-4: calc(1.44rem * $font-scale-factor);
+$font-size-5: calc(1.25rem * $font-scale-factor);
+$font-size-6: calc(1.2rem * $font-scale-factor);
+$font-size-7: calc(1.1rem * $font-scale-factor);
+
 $tfl-blue:        rgb(0, 15, 159);
 $tfl-blue-light:  rgb(71, 158, 218);
 $tfl-red:         rgb(225, 37, 27);

@@ -7,7 +7,7 @@
 
 {{ range $page := .pages }}
 <div>
-    <h2 class="mb2 f4 f3-ns">
+    <h2 class="mb2">
         <a href="/{{ (index $.sections $page.SectionID).Slug }}/{{ $page.Slug }}">
             {{ highlight $page.Title $.query }}
         </a>
@@ -18,7 +18,7 @@
         {{ end }}
         {{ highlight (blurb $page.Content 50) $.query }}
     </p>
-    <p class="mt0 db dn-ns f6">
+    <p class="mt0 db dn-ns">
         {{ if ne $page.PublishedAt.Year 0001 }}
         <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
         {{ end }}

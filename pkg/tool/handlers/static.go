@@ -36,7 +36,7 @@ func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
 		}
 
 		w.Header().Set("ETag", etag)
-		w.Header().Set("Cache-Control", "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=3600")
 
 		w.Write(bs)
 	}
@@ -58,7 +58,7 @@ func BuildRobotsHandler() (handler func(http.ResponseWriter, *http.Request)) {
 
 		w.Header().Set("ETag", etag)
 		w.Header().Set("Content-Type", "text/plain")
-		w.Header().Set("Cache-Control", "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=3600")
 
 		w.Write(bs)
 	}
@@ -115,7 +115,7 @@ func BuildFontHandler() (handler func(http.ResponseWriter, *http.Request)) {
 		}
 
 		w.Header().Set("ETag", ff.ETag)
-		w.Header().Set("Cache-Control", "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=3600")
 
 		w.Write(ff.Bytes)
 	}
@@ -123,7 +123,7 @@ func BuildFontHandler() (handler func(http.ResponseWriter, *http.Request)) {
 
 func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	return func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Set("Cache-Control", "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=3600")
 
 		rootedReq := http.Request{
 			URL: &url.URL{
@@ -225,7 +225,7 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 		w.Header().Set("Content-Type", "text/css")
 		w.Header().Set("ETag", etag)
-		w.Header().Set("Cache-Control", "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=3600")
 
 		w.Write(out.Bytes())
 	}, nil
@@ -266,7 +266,7 @@ func BuildJSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 		w.Header().Set("Content-Type", "application/javascript")
 		w.Header().Set("ETag", etag)
-		w.Header().Set("Cache-Control", "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=3600")
 
 		w.Write(out.Bytes())
 	}, nil

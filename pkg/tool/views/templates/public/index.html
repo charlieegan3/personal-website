@@ -11,12 +11,12 @@ Personal website of Charlie Egan
 {{end}}
 
 {{define "content"}}
-<h2 class="f5 f4-ns">{{ markdown (.page.GetDataValue "subtitle") }}</h2>
+<p class="f3">{{ markdown_inline (.page.GetDataValue "subtitle") }}</p>
 
-<div class="f6 f5-ns">
+<div>
     {{ markdown .page.Content }}
 </div>
-<details class="mt4 f6 f5-ns">
+<details class="mt4">
     <summary class="pointer">Contact</summary>
     <div class="mv3">
         {{ range (.page.GetDataValue "accounts") }}

@@ -82,13 +82,25 @@ func init() {
 		return template.HTML(buf.String())
 	}
 
+	var re = regexp.MustCompile(`(?mU)<p [^>]+>(.*)<\/p>`)
+	inlineMDFunc := func(s string) template.HTML {
+		var buf bytes.Buffer
+		if err := md.Convert([]byte(strings.TrimSpace(s)), &buf); err != nil {
+			return template.HTML(
+				fmt.Sprintf("Error converting markdown: %s", err),
+			)
+		}
+		return template.HTML(re.ReplaceAllString(buf.String(), "$1"))
+	}
+
 	cnfg := goview.Config{
 		Root:      "templates",
 		Extension: ".html",
 		Master:    "layouts/master",
 		Partials:  []string{"partials/admin/menu"},
 		Funcs: template.FuncMap{
-			"markdown": MDFunc,
+			"markdown":        MDFunc,
+			"markdown_inline": inlineMDFunc,
 			"blurb": func(s string, count int) template.HTML {
 				lines := strings.Split(s, "\n")
 				if len(lines) > 5 {

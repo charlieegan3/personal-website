@@ -133,7 +133,7 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			templatePath = "public/pages/show"
 		}
 
-		w.Header().Set("Cache-Control", "public, max-age=60")
+		utils.SetCacheControl(w, "public, max-age=60")
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,
@@ -243,7 +243,7 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 
 		w.Header().Set("HX-Redirect", r.URL.Path)
 		w.Header().Set("Content-Type", attachment.ContentType)
-		w.Header().Set("Cache-Control", "public, max-age=600")
+		utils.SetCacheControl(w, "public, max-age=600")
 
 		isImage := false
 		for _, imageType := range []string{"image/png", "image/jpeg", "image/gif"} {
@@ -369,7 +369,7 @@ func BuildPageQRHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 		}
 
 		w.Header().Set("Content-Type", "image/png")
-		w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+		utils.SetCacheControl(w, "public, max-age=31536000, immutable")
 
 		scheme := r.URL.Scheme
 		if scheme == "" {

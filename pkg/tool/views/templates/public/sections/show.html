@@ -9,14 +9,14 @@ List of pages for the {{.section.Name }} section
 {{ range $page := .pages }}
 <div>
     {{ if ne $page.ExternalURL "" }}
-    <h2 class="mb2 f4 f3-ns">
+    <h2 class="mb2 f4">
         <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
         <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
             <img class="external-link" src="/static/icons/external.png"/>
         </a>
     </h2>
     {{ else }}
-    <h2 class="mb2 f4 f3-ns">
+    <h2 class="mb2">
         <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
     </h2>
     {{ end }}
