@@ -133,7 +133,12 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			templatePath = "public/pages/show"
 		}
 
-		utils.SetCacheControl(w, "public, max-age=60")
+		// only allow caching if the page is being loaded for real
+		if r.Header.Get("HX-Preload") == "" {
+			utils.SetCacheControl(w, "public, max-age=60")
+		} else {
+			utils.SetCacheControl(w, "public, max-age=0")
+		}
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,
