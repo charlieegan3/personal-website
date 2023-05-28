@@ -15,7 +15,7 @@ import (
 func BuildCountsMiddleware(db *sql.DB, adminPath string) func(http.Handler) http.Handler {
 	goquDB := goqu.New("postgres", db)
 
-	ignorePattern := regexp.MustCompile(`\.(ico|css|js|jpeg|jpg|png)$`)
+	ignorePattern := regexp.MustCompile(`\.(ico|css|js|jpeg|jpg|png|woff|woff2)$`)
 
 	return func(h http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
