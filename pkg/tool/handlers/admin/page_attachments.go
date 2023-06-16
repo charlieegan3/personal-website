@@ -131,6 +131,25 @@ func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON 
 				w.Write([]byte("failed to close connection to attachment storage"))
 				return
 			}
+
+			// update the etag
+			attrs, err := obj.Attrs(r.Context())
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
+			_, err = goquDB.Update("personal_website.page_attachments").Where(goqu.Ex{
+				"page_attachments.page_id":  pageID,
+				"page_attachments.filename": filename,
+			}).Set(goqu.Record{
+				"etag": attrs.Etag,
+			}).Executor().Exec()
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
 		}
 
 		http.Redirect(w, r, fmt.Sprintf("%s/pages/%d", adminPath, pageID), http.StatusFound)
