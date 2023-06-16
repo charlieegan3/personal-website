@@ -246,9 +246,25 @@ func BuildPageAttachmentHandler(db *sql.DB, bucketName string, googleJSON string
 			return
 		}
 
-		w.Header().Set("HX-Redirect", r.URL.Path)
+		requestedVersion := r.URL.Query().Get("etag")
+		if requestedVersion == "" {
+			http.Redirect(
+				w, r,
+				fmt.Sprintf(
+					"/%s/%s/%s?etag=%s",
+					sectionSlug,
+					pageSlug,
+					attachmentFilename,
+					utils.CRC32Hash([]byte(attachment.Etag)),
+				),
+				http.StatusMovedPermanently,
+			)
+			return
+		}
+
+		w.Header().Set("HX-Redirect", r.URL.String())
 		w.Header().Set("Content-Type", attachment.ContentType)
-		utils.SetCacheControl(w, "public, max-age=600")
+		utils.SetCacheControl(w, "public, max-age=31622400")
 
 		isImage := false
 		for _, imageType := range []string{"image/png", "image/jpeg", "image/gif"} {

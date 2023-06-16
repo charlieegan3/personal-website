@@ -17,6 +17,7 @@ import (
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers/status"
 	"github.com/charlieegan3/personal-website/pkg/tool/types"
+	"github.com/charlieegan3/personal-website/pkg/tool/utils/mutate"
 	"github.com/charlieegan3/personal-website/pkg/tool/views"
 )
 
@@ -272,6 +273,18 @@ func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 			}
 		}
 
+		var attachments []types.PageAttachment
+		err = goquDB.From("personal_website.page_attachments").Where(
+			goqu.C("page_id").Eq(id),
+		).ScanStructs(&attachments)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
+		content := mutate.ImageEtag(r.FormValue("content"), attachments)
+
 		_, err = goquDB.Update("personal_website.pages").
 			Where(goqu.C("id").Eq(id)).
 			Set(
@@ -281,7 +294,7 @@ func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 
 					"title":   r.FormValue("title"),
 					"slug":    slug.Make(slugValue),
-					"content": r.FormValue("content"),
+					"content": content,
 
 					"is_draft":     r.FormValue("is_draft") == "true",
 					"is_protected": r.FormValue("is_protected") == "true",
