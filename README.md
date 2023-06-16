@@ -1,12 +1,14 @@
 # Personal Website
 
-This is the repo for my personal website.
-Take a look at [charlieegan3.com](https://charlieegan3.com).
-The site is a semi-professional online space which I enjoy having complete control over.
+This repo contains the source code used to run my personal website at 
+[charlieegan3.com](https://charlieegan3.com).
 
-Currently, the site consists of a custom [Go](https://go.dev) CMS and is hosted on
+My website is a personal online space which I enjoy having creative control over.
+
+Currently, the site consists of a custom-built [Go](https://go.dev) CMS and is hosted on
 [Northflank](https://northflank.com) as part of a
-[toolbelt](https://github.com/charlieegan3/toolbelt) deployment.
+[toolbelt](https://github.com/charlieegan3/toolbelt) deployment. This repo also contains
+the historic implementations of all the previous versions of the site.
 
 ---
 
