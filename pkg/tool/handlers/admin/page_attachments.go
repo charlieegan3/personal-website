@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"cloud.google.com/go/storage"
 	"github.com/doug-martin/goqu/v9"
@@ -44,25 +45,55 @@ func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON 
 			return
 		}
 
+		contentType := r.FormValue("content_type")
+		if contentType == "" {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("content_type is required"))
+			return
+		}
 		filename := r.FormValue("filename")
 		if filename == "" {
 			w.WriteHeader(http.StatusBadRequest)
 			w.Write([]byte("filename is required"))
 			return
 		}
-		if r.FormValue("content_type") == "" {
-			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte("content_type is required"))
-			return
+
+		switch contentType {
+		case "image/jpeg":
+			if strings.HasSuffix(filename, ".jpeg") {
+				filename = strings.TrimSuffix(filename, ".jpeg")
+			}
+			if !strings.HasSuffix(filename, ".jpg") {
+				filename = fmt.Sprintf("%s.jpg", filename)
+			}
+		case "image/x-png":
+			if !strings.HasSuffix(filename, ".png") {
+				filename = fmt.Sprintf("%s.png", filename)
+			}
+		case "image/gif":
+			if !strings.HasSuffix(filename, ".gif") {
+				filename = fmt.Sprintf("%s.gif", filename)
+			}
+		case "application/pdf":
+			if !strings.HasSuffix(filename, ".pdf") {
+				filename = fmt.Sprintf("%s.pdf", filename)
+			}
+		case "application/zip":
+			if !strings.HasSuffix(filename, ".zip") {
+				filename = fmt.Sprintf("%s.zip", filename)
+			}
+		case "text/csv":
+			if !strings.HasSuffix(filename, ".csv") {
+				filename = fmt.Sprintf("%s.csv", filename)
+			}
 		}
 
 		var attachmentID int
 		_, err = goquDB.Insert("personal_website.page_attachments").Rows(
 			goqu.Record{
-				"page_id": pageID,
-
-				"filename":     r.FormValue("filename"),
-				"content_type": r.FormValue("content_type"),
+				"page_id":      pageID,
+				"filename":     filename,
+				"content_type": contentType,
 			},
 		).Returning("id").Executor().ScanVal(&attachmentID)
 		if err != nil {

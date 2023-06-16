@@ -3,15 +3,16 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/charlieegan3/toolbelt/pkg/database"
-	"github.com/spf13/viper"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	websiteTool "github.com/charlieegan3/personal-website/pkg/tool"
+	"github.com/charlieegan3/toolbelt/pkg/database"
 	"github.com/charlieegan3/toolbelt/pkg/tool"
+	"github.com/spf13/viper"
+
+	websiteTool "github.com/charlieegan3/personal-website/pkg/tool"
 )
 
 func main() {
@@ -45,6 +46,11 @@ func main() {
 	// load the database configuration
 	params := viper.GetStringMapString("database.params")
 	connectionString := viper.GetString("database.connectionString")
+
+	if connectionString == "" {
+		log.Fatalf("database.connectionString is required")
+	}
+
 	db, err := database.Init(connectionString, params, params["dbname"], false)
 	if err != nil {
 		log.Fatalf("failed to init DB: %s", err)
@@ -63,6 +69,8 @@ func main() {
 		log.Fatalf("failed to add tool: %v", err)
 	}
 
-	fmt.Println("starting server")
-	tb.RunServer(ctx, "0.0.0.0", "3000")
+	port := 3000
+	address := "localhost"
+	fmt.Printf("Starting server on http://%s:%d\n", address, port)
+	tb.RunServer(ctx, address, fmt.Sprintf("%d", port))
 }
