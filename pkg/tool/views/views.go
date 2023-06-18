@@ -23,6 +23,8 @@ import (
 	"github.com/yuin/goldmark/text"
 	"github.com/yuin/goldmark/util"
 	"go.abhg.dev/goldmark/anchor"
+
+	"github.com/charlieegan3/personal-website/pkg/tool/handlers"
 )
 
 //go:embed templates/*
@@ -144,6 +146,12 @@ func init() {
 				}
 
 				return template.HTML(s)
+			},
+			"stylesETag": func() template.HTML {
+				return template.HTML(handlers.StylesETag)
+			},
+			"scriptETag": func() template.HTML {
+				return template.HTML(handlers.ScriptEtag)
 			},
 		},
 	}

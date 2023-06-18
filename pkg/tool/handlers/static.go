@@ -21,6 +21,12 @@ import (
 //go:embed static/*
 var staticContent embed.FS
 
+// StylesETag is used in views to cache bust styles
+var StylesETag = ""
+
+// ScriptETag is used in views to cache bust scripts
+var ScriptEtag = ""
+
 func BuildFaviconHandler() (handler func(http.ResponseWriter, *http.Request)) {
 	bs, err := staticContent.ReadFile("static/favicon.ico")
 	if err != nil {
@@ -217,6 +223,8 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 	etag := utils.CRC32Hash(out.Bytes())
 
+	StylesETag = etag
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get("If-None-Match") == etag {
 			w.WriteHeader(http.StatusNotModified)
@@ -225,7 +233,7 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 		w.Header().Set("Content-Type", "text/css")
 		w.Header().Set("ETag", etag)
-		utils.SetCacheControl(w, "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=31622400")
 
 		w.Write(out.Bytes())
 	}, nil
@@ -258,6 +266,8 @@ func BuildJSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 	etag := utils.CRC32Hash(out.Bytes())
 
+	ScriptEtag = etag
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get("If-None-Match") == etag {
 			w.WriteHeader(http.StatusNotModified)
@@ -266,7 +276,7 @@ func BuildJSHandler() (func(http.ResponseWriter, *http.Request), error) {
 
 		w.Header().Set("Content-Type", "application/javascript")
 		w.Header().Set("ETag", etag)
-		utils.SetCacheControl(w, "public, max-age=3600")
+		utils.SetCacheControl(w, "public, max-age=31622400")
 
 		w.Write(out.Bytes())
 	}, nil
