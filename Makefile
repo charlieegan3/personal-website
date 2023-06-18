@@ -1,4 +1,4 @@
-FILE_PATTERN := 'yaml\|html\|go\|sql\|Makefile\|js\|css'
+FILE_PATTERN := 'yaml\|html\|go\|sql\|Makefile\|js\|css\|scss'
 dev_server:
 	find . | grep $(FILE_PATTERN) | GO_ENV=dev entr -c -r go run cmd/tool.go
 
