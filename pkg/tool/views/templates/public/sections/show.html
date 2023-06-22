@@ -1,5 +1,7 @@
 {{define "title"}}{{ .section.Name }}{{end}}
-{{define "page_title"}}{{.section.Name }}{{end}}
+{{define "page_title"}}
+<span class="display f0">{{.section.Name }}</span>
+{{end}}
 {{define "description"}}
 List of pages for the {{.section.Name }} section
 {{end}}

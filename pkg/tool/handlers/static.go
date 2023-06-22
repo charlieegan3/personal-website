@@ -118,6 +118,8 @@ func BuildFontHandler() (handler func(http.ResponseWriter, *http.Request)) {
 			w.Header().Set("Content-Type", "application/font-woff2")
 		} else if strings.HasSuffix(ff.Name, ".woff") {
 			w.Header().Set("Content-Type", "application/font-woff")
+		} else if strings.HasSuffix(ff.Name, ".ttf") {
+			w.Header().Set("Content-Type", "font/ttf")
 		}
 
 		w.Header().Set("ETag", ff.ETag)

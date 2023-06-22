@@ -1,6 +1,7 @@
 // https://typescale.com/ to set values
 $font-scale-factor: 0.8;
 $font-scale-factor-mobile: 0.9; // 0.9 * $font-scale-factor = 0.72
+$font-scale-factor-display: 1.6;
 
 $font-size-1: calc(2.488rem * $font-scale-factor);
 $font-size-2: calc(2.074rem * $font-scale-factor);
