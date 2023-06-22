@@ -1,20 +1,21 @@
 {{define "title"}}{{ .section.Name }}{{end}}
+
 {{define "page_title"}}
 <span class="display f0">{{.section.Name }}</span>
 {{end}}
-{{define "description"}}
-List of pages for the {{.section.Name }} section
-{{end}}
+
+{{define "description" -}}
+List of pages in '{{.section.Name }}'
+{{- end}}
+
 {{define "content"}}
-
-
 {{ range $page := .pages }}
 <div>
     {{ if ne $page.ExternalURL "" }}
     <h2 class="mb2 f4">
         <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
         <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
-            <img class="external-link" src="/static/icons/external.png"/>
+            <img alt="external link icon" class="external-link" src="/static/icons/external.png"/>
         </a>
     </h2>
     {{ else }}

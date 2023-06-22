@@ -68,3 +68,12 @@ func (p *Page) ExternalURL() string {
 
 	return fmt.Sprintf("%v", u)
 }
+
+func (p *Page) OGImage() string {
+	i, err := p.GetDataValue("ogimage")
+	if err != nil || i == nil {
+		return ""
+	}
+
+	return fmt.Sprintf("%v", i)
+}

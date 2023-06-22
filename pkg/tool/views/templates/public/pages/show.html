@@ -1,8 +1,17 @@
 {{define "title"}}{{.page.Title }}{{end}}
+
 {{define "page_title"}}{{.page.Title }}{{end}}
-{{define "description"}}
-{{ blurb .page.Content 25 }}
-{{end}}
+
+{{define "description" -}}{{ blurb .page.Content 25 }}{{- end}}
+
+{{define "ogimage" -}}
+{{ if ne .page.OGImage "" }}
+{{ .section }}/{{ .page.Slug }}/{{ .page.OGImage }}
+{{ else -}}
+unlisted/index/banner.jpg
+{{- end }}
+{{- end}}
+
 {{define "content"}}
 
 {{ if .page.IsDraft }}

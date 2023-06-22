@@ -128,7 +128,7 @@ func init() {
 					words = words[:count]
 					trailer = "..."
 				}
-				return template.HTML(strings.Join(words, " ") + trailer)
+				return template.HTML(strings.TrimSpace(strings.Join(words, " ") + trailer))
 			},
 			"highlight": func(raw interface{}, reRaw string) template.HTML {
 

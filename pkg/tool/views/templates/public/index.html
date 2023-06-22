@@ -1,4 +1,4 @@
-{{define "title"}}Home{{end}}
+{{define "title"}}Homepage{{end}}
 {{define "page_title"}}
 <span class="display f0">
 <span>hello</span><span class="tfl-red">,</span>
@@ -6,9 +6,9 @@
 -->charlieegan<span class="tfl-green">3</span>
 </span>
 {{end}}
-{{define "description"}}
+{{define "description" -}}
 Personal website of Charlie Egan
-{{end}}
+{{- end}}
 
 {{define "content"}}
 <p class="f3">{{ markdown_inline (.page.GetDataValue "subtitle") }}</p>
