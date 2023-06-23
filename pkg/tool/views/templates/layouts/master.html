@@ -21,21 +21,32 @@
 
 <body>
 <span id="loader" class="mt0 loader dn"></span>
+<div class="container" hx-boost="true" hx-ext="preload" preload="{{ template "preload" . }}"{{define "preload"}}preload:init{{end}}>
 
-<div hx-boost="true" hx-ext="preload"
-     preload="{{ template "preload" . }}" {{define "preload"}}preload:init{{end}}
-     class="w-100 center ph2 mb4 {{ template "max_width" . }}{{ define "max_width" }}mw7{{end}} section-{{ .menu_section }}">
+  <div class="content">
 
+    <div class="w-100 center ph2 mb4 {{ template "max_width" . }}{{ define "max_width" }}mw7{{end}} section-{{ .menu_section }}">
 
-    <div id="error" class="dn pa3 ba b--dark-red bw1 mt1 br2 dark-red"> </div>
-    {{ template "header" . }}
-    {{define "header"}}
-    {{ include "partials/public/menu" }}
-    {{end}}
-    <h1>{{ template "page_title" . }}</h1>
+      <div id="error" class="dn pa3 ba b--dark-red bw1 mt1 br2 dark-red"></div>
+      {{ template "header" . }}
+      {{define "header"}}
+      {{ include "partials/public/menu" }}
+      {{end}}
+      <h1>{{ template "page_title" . }}</h1>
 
-    {{ template "content" . }}
-    {{define "content"}}{{end}}
+      {{ template "content" . }}
+      {{define "content"}}{{end}}
+
+    </div>
+
+  </div>
+
+  <div>
+    <div class="w-100 f7 bt b--light-gray tc center ph2 mb1 {{ template "max_width" . }} section-{{ .menu_section }}">
+      <a href="/acknowledgements">Acknowledgements</a>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>

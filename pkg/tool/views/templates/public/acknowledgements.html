@@ -1,0 +1,15 @@
+{{define "title"}}Acknowledgements{{end}}
+{{define "page_title"}}
+<span class="display f0">Acknowledgements</span>
+{{end}}
+{{define "description" -}}
+Acknowledgements page for charlieegan3.com
+{{- end}}
+
+{{define "content"}}
+<p class="f3">{{ markdown_inline (.page.GetDataValue "subtitle") }}</p>
+
+<div>
+    {{ markdown .page.Content }}
+</div>
+{{end}}

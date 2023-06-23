@@ -175,6 +175,8 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 		handlers.BuildStaticHandler(),
 	).Methods("GET")
 
+	router.HandleFunc("/acknowledgements", public.BuildAcknowledgementsHandler(w.db)).
+		Methods("GET")
 	router.HandleFunc("/search", public.BuildSearchHandler(w.db)).
 		Methods("GET")
 	router.HandleFunc("/{sectionSlug}.rss", public.BuildSectionRSSHandler(w.db)).
