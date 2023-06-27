@@ -9,6 +9,7 @@ require (
 	github.com/alecthomas/chroma/v2 v2.5.0
 	github.com/bep/godartsass v0.16.0
 	github.com/charlieegan3/toolbelt v0.0.0-20221204170703-2a0420bbcdcd
+	github.com/disintegration/imaging v1.6.2
 	github.com/doug-martin/goqu/v9 v9.18.0
 	github.com/foolin/goview v0.3.0
 	github.com/gorilla/feeds v1.1.1
@@ -64,10 +65,11 @@ require (
 	github.com/tdewolff/parse/v2 v2.6.5 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
+	golang.org/x/image v0.8.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/oauth2 v0.6.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
-	golang.org/x/text v0.8.0 // indirect
+	golang.org/x/text v0.10.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect

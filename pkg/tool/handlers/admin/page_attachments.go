@@ -1,14 +1,18 @@
 package admin
 
 import (
+	"bytes"
 	"database/sql"
 	"fmt"
+	"image"
+	"image/jpeg"
 	"io"
 	"net/http"
 	"strconv"
 	"strings"
 
 	"cloud.google.com/go/storage"
+	"github.com/disintegration/imaging"
 	"github.com/doug-martin/goqu/v9"
 	"github.com/gorilla/mux"
 	"google.golang.org/api/option"
@@ -118,7 +122,39 @@ func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON 
 				return
 			}
 
-			_, err = io.Copy(bw, f)
+			buf := new(bytes.Buffer)
+
+			if contentType == "image/jpeg" {
+				img, _, err := image.Decode(f)
+				if err != nil {
+					w.WriteHeader(http.StatusInternalServerError)
+					w.Write([]byte("failed to decode image"))
+					return
+				}
+
+				bnds := img.Bounds()
+				var resizedImg *image.NRGBA
+				if bnds.Max.X > bnds.Max.Y {
+					resizedImg = imaging.Resize(img, 2000, 0, imaging.Lanczos)
+				} else {
+					resizedImg = imaging.Resize(img, 0, 2000, imaging.Lanczos)
+				}
+				err = jpeg.Encode(buf, resizedImg, nil)
+				if err != nil {
+					w.WriteHeader(http.StatusInternalServerError)
+					w.Write([]byte("failed to encode image"))
+					return
+				}
+			} else {
+				_, err = io.Copy(buf, f)
+				if err != nil {
+					w.WriteHeader(http.StatusInternalServerError)
+					w.Write([]byte("failed to read attachment"))
+					return
+				}
+			}
+
+			_, err = io.Copy(bw, buf)
 			if err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("failed to save attachment"))
