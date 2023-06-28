@@ -5,6 +5,7 @@ import (
 	"hash/crc32"
 )
 
-func CRC32Hash(input []byte) string {
-	return fmt.Sprintf("%d", crc32.ChecksumIEEE(input))
+func CRC32Hash(input any) string {
+	str := fmt.Sprintf("%v", input)
+	return fmt.Sprintf("%d", crc32.ChecksumIEEE([]byte(str)))
 }

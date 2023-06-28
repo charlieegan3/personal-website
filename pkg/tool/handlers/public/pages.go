@@ -128,6 +128,17 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			return
 		}
 
+		var blocks []types.PageBlock
+		err = goquDB.From("personal_website.page_blocks").
+			Where(goqu.C("page_id").Eq(page.ID)).
+			Order(goqu.C("rank").Asc()).
+			ScanStructs(&blocks)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
 		templatePath, ok := pageSectionTemplates[sectionSlug]
 		if !ok {
 			templatePath = "public/pages/show"
@@ -145,11 +156,13 @@ func BuildPageShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request) {
 			templatePath,
 			goview.M{
 				"page":         &page,
+				"blocks":       &blocks,
 				"url":          r.URL.Path,
 				"prev":         &prevPage,
 				"next":         &nextPage,
 				"section":      sectionSlug,
 				"menu_section": sectionSlug,
+				"path":         r.URL.Path,
 				"content": utils.ExpandImageSrcs(
 					r.Host,
 					utils.TemplateMD(page.Content, r.URL.Path),

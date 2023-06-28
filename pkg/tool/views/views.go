@@ -25,6 +25,7 @@ import (
 	"go.abhg.dev/goldmark/anchor"
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers"
+	"github.com/charlieegan3/personal-website/pkg/tool/utils"
 )
 
 //go:embed templates/*
@@ -101,8 +102,11 @@ func init() {
 		Master:    "layouts/master",
 		Partials:  []string{"partials/admin/menu"},
 		Funcs: template.FuncMap{
-			"markdown":        MDFunc,
-			"markdown_inline": inlineMDFunc,
+			"markdown":          MDFunc,
+			"markdown_inline":   inlineMDFunc,
+			"template_markdown": utils.TemplateMD,
+			"hash":              utils.CRC32Hash,
+			"has_prefix":        strings.HasPrefix,
 			"blurb": func(s string, count int) template.HTML {
 				lines := strings.Split(s, "\n")
 				if len(lines) > 5 {
