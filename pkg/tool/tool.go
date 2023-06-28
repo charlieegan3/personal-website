@@ -128,6 +128,12 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 		Methods("POST")
 	adminRouter.HandleFunc("/pages/{pageID}/attachments/{attachmentID}", admin.BuildPageAttachmentDeleteHandler(w.db, w.bucketName, w.googleJSON, w.adminPath)).
 		Methods("POST")
+	adminRouter.HandleFunc("/pages/{pageID}/blocks", admin.BuildPageBlockCreateHandler(w.db, w.adminPath)).
+		Methods("POST")
+	adminRouter.HandleFunc("/pages/{pageID}/blocks/{blockID}", admin.BuildPageBlockUpdateHandler(w.db, w.adminPath)).
+		Methods("POST")
+	adminRouter.HandleFunc("/pages/{pageID}/blocks/{blockID}", admin.BuildPageBlockUpdateHandler(w.db, w.adminPath)).
+		Methods("POST")
 	adminRouter.HandleFunc("/pages", admin.BuildPageIndexHandler(w.db, w.adminPath)).
 		Methods("GET")
 	adminRouter.HandleFunc("/pages", admin.BuildPageCreateHandler(w.db, w.adminPath)).

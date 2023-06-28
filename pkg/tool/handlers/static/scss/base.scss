@@ -3,6 +3,14 @@
     figcaption {
         font-size: 0.8em;
         text-align: center;
+        font-style: italic;
+
+        img {
+            margin-bottom: -0.05rem;
+            display: inline;
+            height: 0.8em;
+            border: none;
+        }
     }
 }
 .block-intro, .block-outro {
@@ -12,8 +20,12 @@
         margin: 0 auto;
     }
 }
-.block-outro figure {
+.block-outro {
     margin-top: 1rem;
+    .note {
+        text-align: right;
+        font-size: 0.8em;
+    }
 }
 .block-content {
     text-align: justify;
@@ -36,19 +48,19 @@
         }
     }
     &.dual-figure {
-        figure {
-            width: 50%;
-            max-width: 100%;
+        .dual-figure-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-            &.left {
-                float: left;
-                padding-right: 1rem;
-                margin-right: 0;
+            figure {
+                display: block;
+                max-width: 49%;
             }
-            &.right {
-                float: right;
-                padding-left: 1rem;
-                margin-left: 0;
+        }
+        figure {
+            &.left, &.right {
+                display: none;
             }
         }
     }
@@ -103,6 +115,9 @@
             }
         }
         &.dual-figure {
+            .dual-figure-wrapper {
+                display: none;
+            }
             figure {
                 padding: 0.5rem 0 0;
                 margin: 0;
@@ -110,11 +125,13 @@
                 max-width: 20rem;
 
                 &.left {
+                    display: block;
                     float: left;
                     margin-left: -22rem;
                     padding-right: 0;
                 }
                 &.right {
+                    display: block;
                     float: right;
                     margin-right: -22rem;
                     padding-left: 0;

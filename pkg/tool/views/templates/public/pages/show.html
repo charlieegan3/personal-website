@@ -33,164 +33,163 @@ unlisted/index/banner.jpg
   </div>
 {{ else }}
   <div class="page-content section-{{ .section }}">
+    {{ markdown .content }}
 
+    {{ range $b := .blocks }}
     <div class="block">
-      <div class="block-content two-col">
-        <figure class="right">
-          <img src="https://charlieegan3.com/weeknotes/2023-06-25-gently-roasted/wine.jpg?etag=1465564234"/>
-          <figcaption>The Orange Wine</figcaption>
+      {{ if $b.IntroImageName }}
+      <div class="block-intro">
+        <figure class="banner">
+          <img alt="{{ if $b.IntroImageAlt }}{{ $b.IntroImageAlt }}{{else}}{{ $b.IntroImageCaption }}{{end}}"
+               src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.IntroImageName }}"/>
+          <figcaption>
+            {{ markdown_inline $b.IntroImageCaption }}
+
+            <a target="_blank" href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.IntroImageName }}">
+              <img src="/static/icons/external.png" alt="View"/>
+            </a>
+          </figcaption>
         </figure>
+      </div>
+      {{ end }}
+
+      {{ if ne $b.Col2 "" }}
+      <div class="block-content two-col">
+        {{ if ne $b.RightImageName "" }}
+          <figure class="right">
+            <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                 src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+            <figcaption>
+              {{ markdown_inline $b.RightImageName }}
+
+              <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                <img src="/static/icons/external.png" alt="View"/>
+              </a>
+            </figcaption>
+          </figure>
+        {{ else if ne $b.LeftImageName "" }}
+          <figure class="left">
+            <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                 src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+            <figcaption>
+              {{ markdown_inline $b.LeftImageCaption }}
+
+              <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                <img src="/static/icons/external.png" alt="View"/>
+              </a>
+            </figcaption>
+          </figure>
+        {{ end }}
         <div class="cols">
           <div class="col">
-            <p><strong>Home from Home Safe</strong>. I arrived home from my <a href="https://en.wikipedia.org/wiki/Black_Isle">Black Isle</a> &amp; <a href="http://www.highlandcross.co.uk">Highland Cross</a> trip on Wednesday morning and enjoyed spending the rest of the week not really going anywhere. Other than a short, air conditioned <a href="https://en.wikipedia.org/wiki/London_Overground">Overground</a> trip out for lunch on Friday, I've managed to avoid public transport altogether in this hot weather. One impossible to avoid is <a href="/weeknotes/2023-06-25-gently-roasted/cat.jpg" target="_blank">this missing cat ad</a> everywhere in <a href="https://en.wikipedia.org/wiki/Highgate">Highgate</a>.</p>
-            <p>
-              'The Plant Wall'™ is a wall in our bedroom featuring various plant-themed artworks. It's had some new additions this week, but isn't quite ready for the prime time on charlieegan3.com yet. We also have some new mugs.
-            </p>
+            {{ markdown (template_markdown $b.Col1 $.path) }}
           </div>
           <div class="col">
-            <p><strong>Wining and Dining</strong>. We hosted some family and friends for meals in the flat this week and enjoyed sitting outside in the cooler evenings. I even cracked open a bottle of orange wine I'd brought back from Seville in November. It's very nice with ice on a hot day. We also went to <a href="https://www.eatcitro.com">Citro</a> which was excellent as usual.</p>
+            {{ markdown (template_markdown $b.Col2 $.path) }}
           </div>
         </div>
       </div>
-    </div>
+      {{ else if and (ne $b.RightImageName "") (ne $b.LeftImageName "") }}
+        <div class="block-content dual-figure">
+          <div class="dual-figure-wrapper">
+            <figure class="">
+              <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                   src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+              <figcaption>
+                {{ markdown_inline $b.LeftImageCaption }}
 
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+                <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                  <img src="/static/icons/external.png" alt="View"/>
+                </a>
+              </figcaption>
+            </figure>
+            <figure class="">
+              <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                   src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+              <figcaption>
+                {{ markdown_inline $b.RightImageCaption }}
 
-    <div class="block">
-      <div class="block-content">
-        <figure class="right">
-          <img src="https://charlieegan3.com/weeknotes/2023-06-25-gently-roasted/wine.jpg?etag=1465564234"/>
-          <figcaption>The Orange Wine</figcaption>
-        </figure>
-        <p><strong>Home from Home Safe</strong>. I arrived home from my <a href="https://en.wikipedia.org/wiki/Black_Isle">Black Isle</a> &amp; <a href="http://www.highlandcross.co.uk">Highland Cross</a> trip on Wednesday morning and enjoyed spending the rest of the week not really going anywhere. Other than a short, air conditioned <a href="https://en.wikipedia.org/wiki/London_Overground">Overground</a> trip out for lunch on Friday, I've managed to avoid public transport altogether in this hot weather. One impossible to avoid is <a href="/weeknotes/2023-06-25-gently-roasted/cat.jpg" target="_blank">this missing cat ad</a> everywhere in <a href="https://en.wikipedia.org/wiki/Highgate">Highgate</a>.</p>
-        <p>
-          'The Plant Wall'™ is a wall in our bedroom featuring various plant-themed artworks. It's had some new additions this week, but isn't quite ready for the prime time on charlieegan3.com yet. We also have some new mugs.
-        </p>
-        <p><strong>Wining and Dining</strong>. We hosted some family and friends for meals in the flat this week and enjoyed sitting outside in the cooler evenings. I even cracked open a bottle of orange wine I'd brought back from Seville in November. It's very nice with ice on a hot day. We also went to <a href="https://www.eatcitro.com">Citro</a> which was excellent as usual.</p>
-      </div>
-    </div>
+                <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                  <img src="/static/icons/external.png" alt="View"/>
+                </a>
+              </figcaption>
+            </figure>
+          </div>
+          <figure class="left">
+            <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                 src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+            <figcaption>
+              {{ markdown_inline $b.LeftImageCaption }}
 
-    <div class="block">
-      <div class="block-content">
-        <figure class="left">
-          <img src="https://charlieegan3.com/weeknotes/2023-06-18-hot-cross-fun/jazz.jpg?etag=3979375695"/>
-          <figcaption>Pete, Nick and myself at the start </figcaption>
-        </figure>
-        <p id="p-efbf6614"><strong>10th 'Crossing'</strong>. Given the amount of planning, prep and stress involved, it'd be misleading to start this week's update with anything other than the <a href="http://www.highlandcross.co.uk">Highland Cross</a>. This year was my 10th time completing the coast-to-coast duathlon. It was a hot one. While my time suffered to the tune of about <a href="https://www.strava.com/activities/9283186568">25</a> <a href="https://www.strava.com/activities/9283965031">minutes</a> on <a href="https://www.strava.com/activities/7329826666">last</a> <a href="https://www.strava.com/activities/9283965031">year</a> (when we had perfect conditions), I've little doubt I'll be anywhere else on the third Saturday of next June.</p>
-        <p id="p-efbf6614">The event is completed for <a href="https://www.justgiving.com/page/charlie-egan-1686639112434">charity</a> in fundraising teams of three. Big shoutout to Kerr and Nick for their efforts on the fundraising as well as on race day, tremendous.</p>
-        <p id="p-efbf6614">Being physically able to take part, and having the flexibility and support from those around me to take part in this local spectacle is a huge privilege.</p>
-      </div>
-    </div>
+              <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                <img src="/static/icons/external.png" alt="View"/>
+              </a>
+            </figcaption>
+          </figure>
+          <figure class="right">
+            <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                 src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+            <figcaption>
+              {{ markdown_inline $b.RightImageCaption }}
 
-    <div class="block">
-      <div class="block-intro">
-        <figure class="banner">
-          <img src="https://charlieegan3.com/weeknotes/2023-06-04-whitsun-on-rails/trees.jpg?etag=3147328925"/>
-          <figcaption>View from Stac Pollaidh</figcaption>
-        </figure>
-      </div>
-      <div class="block-content">
-        <figure class="right">
-          <img src="https://charlieegan3.com/weeknotes/2023-06-04-whitsun-on-rails/aan.jpg?etag=2769421878"/>
-          <figcaption>Loch A'an for lunch</figcaption>
-        </figure>
-        <p id="p-685818cd"><strong>Willow Walking</strong>. On Friday, Anna, Mum and I (assisted by chauffeur Dad) participated in the 2023 edition of the Cairngorms Connect <a href="https://cairngormsconnect.org.uk/news/7/37/Montane-rescue-forCairngormwillows-on-the-edge">'Willow Walk'</a>. As part of a group of 50, we helped transport over 4000 <a href="https://en.wikipedia.org/wiki/Salix_arbuscula">montane willow</a> saplings and cuttings to <a href="https://en.wikipedia.org/wiki/Loch_A%27an">Loch A'an</a>.</p>
-      </div>
-    </div>
+              <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                <img src="/static/icons/external.png" alt="View"/>
+              </a>
+            </figcaption>
+          </figure>
+          {{ markdown (template_markdown $b.Col1 $.path) }}
+        </div>
+      {{ else }}
+        <div class="block">
+          <div class="block-content">
+            {{ if ne $b.RightImageName "" }}
+              <figure class="right">
+                <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+                <figcaption>
+                  {{ markdown_inline $b.RightImageCaption }}
 
-    <div class="block">
-      <div class="block-intro">
-        <figure class="banner">
-          <img src="https://charlieegan3.com/weeknotes/2023-05-28-theres-an-app-for-that/Gails.jpg"/>
-          <figcaption>imagecaption</figcaption>
-        </figure>
-      </div>
-      <div class="block-content dual-figure">
-        <figure class="left">
-          <img src="https://charlieegan3.com/weeknotes/2023-05-21-the-neighbourhood/park.jpg?etag=2354800328"/>
-          <figcaption>imagecaption</figcaption>
-        </figure>
-        <figure class="right">
-          <img src="https://charlieegan3.com/weeknotes/2023-05-21-the-neighbourhood/park.jpg?etag=2354800328"/>
-          <figcaption>imagecaption</figcaption>
-        </figure>
-        <p id="p-0bf12243"><strong>Home from Home Safe</strong>. I arrived home from my <a href="https://en.wikipedia.org/wiki/Black_Isle">Black Isle</a> &amp; <a href="http://www.highlandcross.co.uk">Highland Cross</a> trip on Wednesday morning and enjoyed spending the rest of the week not really going anywhere. Other than a short, air conditioned <a href="https://en.wikipedia.org/wiki/London_Overground">Overground</a> trip out for lunch on Friday, I've managed to avoid public transport altogether in this hot weather. One impossible to avoid is <a href="/weeknotes/2023-06-25-gently-roasted/cat.jpg" target="_blank">this missing cat ad</a> everywhere in <a href="https://en.wikipedia.org/wiki/Highgate">Highgate</a>.</p>
-      </div>
+                  <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                    <img src="/static/icons/external.png" alt="View"/>
+                  </a>
+                </figcaption>
+              </figure>
+            {{ end }}
+            {{ if ne $b.LeftImageName "" }}
+              <figure class="left">
+                <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+                <figcaption>
+                  {{ markdown_inline $b.LeftImageCaption }}
+
+                  <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                    <img src="/static/icons/external.png" alt="View"/>
+                  </a>
+                </figcaption>
+              </figure>
+            {{ end }}
+            {{ markdown (template_markdown $b.Col1 $.path) }}
+          </div>
+        </div>
+      {{ end }}
+
+      {{ if $b.OutroImageName }}
       <div class="block-outro">
         <figure class="banner">
-          <img src="https://charlieegan3.com/weeknotes/2023-05-28-theres-an-app-for-that/Gails.jpg"/>
-          <figcaption>imagecaption</figcaption>
+          <img alt="{{ if $b.OutroImageAlt }}{{ $b.OutroImageAlt }}{{else}}{{ $b.OutroImageCaption }}{{end}}"
+               src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.OutroImageName }}"/>
+          <figcaption>
+            {{ markdown_inline $b.OutroImageCaption }}
+
+            <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.OutroImageName }}">
+              <img src="/static/icons/external.png" alt="View"/>
+            </a>
+          </figcaption>
         </figure>
       </div>
+      {{ end }}
     </div>
-
-    <div class="block">
-      <div class="block-intro">
-        <figure class="banner">
-          <img src="https://charlieegan3.com/weeknotes/2023-05-28-theres-an-app-for-that/Gails.jpg"/>
-          <figcaption>imagecaption</figcaption>
-        </figure>
-      </div>
-      <div class="block-content">
-        <figure class="right">
-          <img src="https://charlieegan3.com/weeknotes/2023-05-21-the-neighbourhood/park.jpg?etag=2354800328"/>
-          <figcaption>imagecaption</figcaption>
-        </figure>
-        <p>
-          <strong>This week has</strong> been spent entirely in London, and mostly at home. This has been great. I have enjoyed going to a meet-up, trips to my local coffee shop and park, and attending Parkrun after some time off. Most of all though I have enjoyed having lunch or meals out with friends. I've been thinking a lot about the value of living near friends this week. Sitting outside on the garden chairs which we (very) optimistically bought back in March was also great.  iamgecaption more This week has been spent entirely in London, and mostly at home. This has been great. I have enjoyed going to a meet-up, trips to my local coffee shop and park, and attending Parkrun after some time off. Most of all though I have enjoyed having lunch or meals out with friends. I've been thinking a lot about the value of living near friends this week. Sitting outside on the garden chairs which we (very) optimistically bought back in March was also great.
-        </p>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <hr>
-    {{ markdown .content }}
+    {{ end }}
   </div>
 {{ end }}
 

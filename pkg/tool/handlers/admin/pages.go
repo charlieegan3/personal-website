@@ -371,6 +371,17 @@ func BuildPageShowHandler(db *sql.DB, adminPath string) func(http.ResponseWriter
 			return
 		}
 
+		var blocks []types.PageBlock
+		err = goquDB.From("personal_website.page_blocks").
+			Where(goqu.C("page_id").Eq(page.ID)).
+			Order(goqu.C("rank").Asc()).
+			ScanStructs(&blocks)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
 		err = views.Engine.Render(
 			w,
 			http.StatusOK,
@@ -380,6 +391,7 @@ func BuildPageShowHandler(db *sql.DB, adminPath string) func(http.ResponseWriter
 				"pageSection": &pageSection,
 				"sections":    &sections,
 				"attachments": &attachments,
+				"blocks":      &blocks,
 				"admin_path":  adminPath,
 			},
 		)

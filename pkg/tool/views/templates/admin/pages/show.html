@@ -67,17 +67,129 @@
 
             <div class="mb2">
                 <br>
-                <textarea id="content" class="code w-100" rows="20" name="content"
+                <textarea id="content" class="code w-100" rows="10" name="content"
                           placeholder="Content">{{ .page.Content }}</textarea>
             </div>
 
             <div class="mb2">
                 <label for="data">Data</label>
                 <br>
-                <textarea id="data" class="code w-100" rows="20" name="data"
+                <textarea id="data" class="code w-100" rows="10" name="data"
                           placeholder="yaml: value">{{ .page.DataYAML }}</textarea>
             </div>
         </form>
+
+        <h2>Blocks</h2>
+        <div class="mb2">
+            {{ range $i, $b := .blocks }}
+            <div class="mb4 ba pa1">
+                <h3>Block {{ $i }}</h3>
+                <form method="POST" action="{{ $.admin_path }}/pages/{{ $.page.ID }}/blocks/{{ $b.ID }}">
+                    <div class="mb2 mw6">
+                        <label for="rank">Rank</label>
+                        <input id="rank" type="number" name="rank" value="{{ $b.Rank }}">
+                    </div>
+
+                    <div class="flex flex-wrap">
+                        <div class="w-100 w-25-l pa2">
+                            <div class="">
+                                <div class="mb2">
+                                    <label for="intro_image_name">Intro Image</label>
+                                    <select id="intro_image_name" name="intro_image_name">
+                                        <option value="" {{if eq $b.IntroImageName ""}}selected{{end}}>None</option>
+                                        {{ range $a := $.attachments }}
+                                        <option value="{{$a.Filename}}?etag={{hash $a.Etag}}" {{if has_prefix $b.IntroImageName $a.Filename }}selected{{end}}>{{ $a.Filename }}</option>
+                                        {{ end }}
+                                    </select>
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="intro_image_caption" type="text" name="intro_image_caption" placeholder="intro_image_caption" value="{{ $b.IntroImageCaption }}"/>
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="intro_image_alt" type="text" name="intro_image_alt" placeholder="intro_image_alt" value="{{ $b.IntroImageAlt }}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 w-25-l pa2">
+                            <div class="">
+                                <div class="mb2">
+                                    <label for="left_image_name">Left Image</label>
+                                    <select id="left_image_name" name="left_image_name">
+                                        <option value="" {{if eq $b.LeftImageName ""}}selected{{end}}>None</option>
+                                        {{ range $a := $.attachments }}
+                                        <option value="{{$a.Filename}}?etag={{hash $a.Etag}}" {{if has_prefix $b.LeftImageName $a.Filename }}selected{{end}}>{{ $a.Filename }}</option>
+                                        {{ end }}
+                                    </select>
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="left_image_caption" type="text" name="left_image_caption" placeholder="left_image_caption" value="{{ $b.LeftImageCaption }}"/>
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="left_image_alt" type="text" name="left_image_alt" placeholder="left_image_alt" value="{{ $b.LeftImageAlt }}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 w-25-l pa2">
+                            <div class="">
+                                <div class="mb2">
+                                    <label for="right_image_name">Right Image</label>
+                                    <select id="right_image_name" name="right_image_name">
+                                        <option value="" {{if eq $b.RightImageName ""}}selected{{end}}>None</option>
+                                        {{ range $a := $.attachments }}
+                                        <option value="{{$a.Filename}}?etag={{hash $a.Etag}}" {{if has_prefix $b.RightImageName $a.Filename }}selected{{end}}>{{ $a.Filename }}</option>
+                                        {{ end }}
+                                    </select>
+                                </div>
+
+                                <div class="mb2 mw6">
+                                    <input id="right_image_caption" type="text" name="right_image_caption" placeholder="right_image_caption" value="{{ $b.RightImageCaption }}"/>
+
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="right_image_alt" type="text" name="right_image_alt" placeholder="right_image_alt" value="{{ $b.RightImageAlt }}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 w-25-l pa2">
+                            <div class="">
+                                <div class="mb2">
+                                    <label for="outro_image_name">Outro Image</label>
+                                    <select id="outro_image_name" name="outro_image_name">
+                                        <option value="" {{if eq $b.OutroImageName ""}}selected{{end}}>None</option>
+                                        {{ range $a := $.attachments }}
+                                        <option value="{{$a.Filename}}?etag={{hash $a.Etag}}" {{if has_prefix $b.OutroImageName $a.Filename }}selected{{end}}>{{ $a.Filename }}</option>
+                                        {{ end }}
+                                    </select>
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="outro_image_caption" type="text" name="outro_image_caption" placeholder="outro_image_caption" value="{{ $b.OutroImageCaption }}"/>
+                                </div>
+                                <div class="mb2 mw6">
+                                    <input id="outro_image_alt" type="text" name="outro_image_alt" placeholder="outro_image_alt" value="{{ $b.OutroImageAlt }}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb2">
+                        <textarea class="code w-100" rows="10" name="col1" placeholder="Content">{{ $b.Col1 }}</textarea>
+                    </div>
+                    <details class="mb2">
+                        <summary>Col2</summary>
+                        <div class="mb2">
+                            <textarea class="code w-100" rows="10" name="col2" placeholder="Content">{{ $b.Col2 }}</textarea>
+                        </div>
+                    </details>
+                    <input class="w-100 db ba bw2 b--dark-green bg-green white pv3 mb3 pointer" type="submit" value="Update">
+                </form>
+                <form class="dib" method="post" action="{{ $.admin_path }}/pages/{{ $.page.ID }}/blocks/{{ $b.ID }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input class="w-100 db ba bw2 b--dark-red bg-red white" type="submit" value="Delete">
+                </form>
+            </div>
+            {{ end }}
+        </div>
+
     </div>
     <div class="w-100 w-25-l pa2">
         <div class="flex flex-wrap">
@@ -119,6 +231,10 @@
                 </ul>
             </div>
         </div>
+
+        <form class="mt3" method="post" action="{{ $.admin_path }}/pages/{{ .page.ID }}/blocks">
+            <input class="w-100 db ba bw2 b--dark-green bg-green white pv3 mb3 pointer" type="submit" value="Add Block">
+        </form>
 
         {{ if not .page.IsProtected }}
         <form class="mt3" method="post" action="{{ $.admin_path }}/pages/{{ .page.ID }}">
