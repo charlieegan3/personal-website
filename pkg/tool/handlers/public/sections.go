@@ -136,7 +136,7 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 				}),
 			).
 			FullOuterJoin(
-				goqu.S("personal_website").Table("page_blocks").As("blocks"),
+				goqu.L("blocks"),
 				goqu.On(goqu.Ex{
 					"blocks.page_id": goqu.I("pages.id"),
 				}),
@@ -152,6 +152,7 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 					From("personal_website.page_blocks").
 					Order(goqu.I("page_id").Asc(), goqu.I("rank").Asc()),
 			)
+		fmt.Println(q.ToSQL())
 		err = q.Executor().ScanStructs(&pages)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
