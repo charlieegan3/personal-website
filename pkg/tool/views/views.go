@@ -32,6 +32,7 @@ import (
 var views embed.FS
 
 var Engine *goview.ViewEngine
+var RSSEngine *goview.ViewEngine
 
 // paragraphIdTransformer is a goldmark transformer that adds an id attribute to
 // each paragraph, based on the content of the paragraph.
@@ -100,7 +101,6 @@ func init() {
 		Root:      "templates",
 		Extension: ".html",
 		Master:    "layouts/master",
-		Partials:  []string{"partials/admin/menu"},
 		Funcs: template.FuncMap{
 			"markdown":          MDFunc,
 			"markdown_inline":   inlineMDFunc,
@@ -162,6 +162,16 @@ func init() {
 
 	Engine = goview.New(cnfg)
 	Engine.SetFileHandler(func(config goview.Config, tmpl string) (string, error) {
+		path := filepath.Join(config.Root, tmpl)
+		bs, err := views.ReadFile(path + config.Extension)
+		return string(bs), err
+	})
+
+	rssCnfg := cnfg
+	rssCnfg.Master = "layouts/rss"
+
+	RSSEngine = goview.New(rssCnfg)
+	RSSEngine.SetFileHandler(func(config goview.Config, tmpl string) (string, error) {
 		path := filepath.Join(config.Root, tmpl)
 		bs, err := views.ReadFile(path + config.Extension)
 		return string(bs), err

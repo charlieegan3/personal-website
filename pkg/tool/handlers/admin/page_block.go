@@ -41,8 +41,6 @@ func BuildPageBlockCreateHandler(db *sql.DB, adminPath string) func(http.Respons
 			return
 		}
 
-		fmt.Println("\ncount\n", count)
-
 		_, err = goquDB.Insert("personal_website.page_blocks").Rows(
 			goqu.Record{
 				"page_id": pageID,

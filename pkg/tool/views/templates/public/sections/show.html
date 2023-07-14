@@ -9,32 +9,36 @@ List of pages in '{{.section.Name }}'
 {{- end}}
 
 {{define "content"}}
-{{ range $page := .pages }}
-<div>
-    {{ if ne $page.ExternalURL "" }}
-    <h2 class="mb2 f4">
-        <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
-        <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
-            <img alt="external link icon" class="external-link" src="/static/icons/external.png"/>
-        </a>
-    </h2>
-    {{ else }}
-    <h2 class="mb2">
-        <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
-    </h2>
+    {{ range $page := .pages }}
+    {{ $content := $page.Content }}
+    {{ if eq $content "" }}
+      {{ $content = $page.BlockContent }}
     {{ end }}
-    <p class="mt0">
-        {{ if ne $page.PublishedAt.Year 0001 }}
-            <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
-        {{ end }}
+    <div>
         {{ if ne $page.ExternalURL "" }}
-          <strong class="muted">(External Post)</strong>
-          {{ blurb $page.Content 25 }}
+        <h2 class="mb2 f4">
+            <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">{{ $page.Title }}</a>
+            <a href="{{ $page.ExternalURL }}" rel="noopener noreferrer nofollow" target="_blank">
+                <img alt="external link icon" class="external-link" src="/static/icons/external.png"/>
+            </a>
+        </h2>
         {{ else }}
-        {{ blurb $page.Content 25 }}
+        <h2 class="mb2">
+            <a href="/{{ $.section.Slug }}/{{ $page.Slug }}">{{ $page.Title }}</a>
+        </h2>
         {{ end }}
-    </p>
-</div>
+        <p class="mt0">
+            {{ if ne $page.PublishedAt.Year 0001 }}
+                <strong>{{ $page.PublishedAt.Format "January 2, 2006" }}</strong>
+            {{ end }}
+            {{ if ne $page.ExternalURL "" }}
+              <strong class="muted">(External Post)</strong>
+              {{ blurb $content 25 }}
+            {{ else }}
+            {{ blurb $content 25 }}
+            {{ end }}
+        </p>
+    </div>
 {{ end }}
 
 {{ if eq .section.Slug "posts" }}

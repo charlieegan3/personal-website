@@ -1,0 +1,159 @@
+<div class="page-content section-{{ .section }}">
+    {{ markdown .content }}
+
+    {{ range $b := .blocks }}
+    <div class="block">
+        {{ if $b.IntroImageName }}
+        <div class="block-intro">
+            <figure class="banner">
+                <img alt="{{ if $b.IntroImageAlt }}{{ $b.IntroImageAlt }}{{else}}{{ $b.IntroImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.IntroImageName }}"/>
+                <figcaption>
+                    {{ markdown_inline $b.IntroImageCaption }}
+
+                    <a target="_blank" href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.IntroImageName }}">
+                        <img src="/static/icons/external.png" alt="View"/>
+                    </a>
+                </figcaption>
+            </figure>
+        </div>
+        {{ end }}
+
+        {{ if ne $b.Col2 "" }}
+        <div class="block-content two-col">
+            {{ if ne $b.RightImageName "" }}
+            <figure class="right">
+                <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+                <figcaption>
+                    {{ markdown_inline $b.RightImageCaption }}
+
+                    <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                        <img src="/static/icons/external.png" alt="View"/>
+                    </a>
+                </figcaption>
+            </figure>
+            {{ else if ne $b.LeftImageName "" }}
+            <figure class="left">
+                <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+                <figcaption>
+                    {{ markdown_inline $b.LeftImageCaption }}
+
+                    <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                        <img src="/static/icons/external.png" alt="View"/>
+                    </a>
+                </figcaption>
+            </figure>
+            {{ end }}
+            <div class="cols">
+                <div class="col">
+                    {{ markdown (template_markdown $b.Col1 $.path) }}
+                </div>
+                <div class="col">
+                    {{ markdown (template_markdown $b.Col2 $.path) }}
+                </div>
+            </div>
+        </div>
+        {{ else if and (ne $b.RightImageName "") (ne $b.LeftImageName "") }}
+        <div class="block-content dual-figure">
+            <div class="dual-figure-wrapper">
+                <figure class="">
+                    <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                         src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+                    <figcaption>
+                        {{ markdown_inline $b.LeftImageCaption }}
+
+                        <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                            <img src="/static/icons/external.png" alt="View"/>
+                        </a>
+                    </figcaption>
+                </figure>
+                <figure class="">
+                    <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                         src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+                    <figcaption>
+                        {{ markdown_inline $b.RightImageCaption }}
+
+                        <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                            <img src="/static/icons/external.png" alt="View"/>
+                        </a>
+                    </figcaption>
+                </figure>
+            </div>
+            <figure class="left">
+                <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+                <figcaption>
+                    {{ markdown_inline $b.LeftImageCaption }}
+
+                    <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                        <img src="/static/icons/external.png" alt="View"/>
+                    </a>
+                </figcaption>
+            </figure>
+            <figure class="right">
+                <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+                <figcaption>
+                    {{ markdown_inline $b.RightImageCaption }}
+
+                    <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                        <img src="/static/icons/external.png" alt="View"/>
+                    </a>
+                </figcaption>
+            </figure>
+            {{ markdown (template_markdown $b.Col1 $.path) }}
+        </div>
+        {{ else }}
+        <div class="block">
+            <div class="block-content">
+                {{ if ne $b.RightImageName "" }}
+                <figure class="right">
+                    <img alt="{{ if $b.RightImageAlt }}{{ $b.RightImageAlt }}{{else}}{{ $b.RightImageCaption }}{{end}}"
+                         src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}"/>
+                    <figcaption>
+                        {{ markdown_inline $b.RightImageCaption }}
+
+                        <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.RightImageName }}">
+                            <img src="/static/icons/external.png" alt="View"/>
+                        </a>
+                    </figcaption>
+                </figure>
+                {{ end }}
+                {{ if ne $b.LeftImageName "" }}
+                <figure class="left">
+                    <img alt="{{ if $b.LeftImageAlt }}{{ $b.LeftImageAlt }}{{else}}{{ $b.LeftImageCaption }}{{end}}"
+                         src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}"/>
+                    <figcaption>
+                        {{ markdown_inline $b.LeftImageCaption }}
+
+                        <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.LeftImageName }}">
+                            <img src="/static/icons/external.png" alt="View"/>
+                        </a>
+                    </figcaption>
+                </figure>
+                {{ end }}
+                {{ markdown (template_markdown $b.Col1 $.path) }}
+            </div>
+        </div>
+        {{ end }}
+
+        {{ if $b.OutroImageName }}
+        <div class="block-outro">
+            <figure class="banner">
+                <img alt="{{ if $b.OutroImageAlt }}{{ $b.OutroImageAlt }}{{else}}{{ $b.OutroImageCaption }}{{end}}"
+                     src="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.OutroImageName }}"/>
+                <figcaption>
+                    {{ markdown_inline $b.OutroImageCaption }}
+
+                    <a href="/{{ $.section }}/{{ $.page.Slug }}/{{ $b.OutroImageName }}">
+                        <img src="/static/icons/external.png" alt="View"/>
+                    </a>
+                </figcaption>
+            </figure>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>

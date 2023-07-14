@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"regexp"
@@ -60,7 +60,7 @@ func BuildCountsMiddleware(db *sql.DB, adminPath string) func(http.Handler) http
 				).Executor().Exec()
 
 			if err != nil {
-				fmt.Println("counts", err)
+				log.Println("counts error:", err)
 			}
 		})
 	}

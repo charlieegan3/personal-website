@@ -1,6 +1,7 @@
 package public
 
 import (
+	"bytes"
 	"database/sql"
 	"encoding/xml"
 	"fmt"
@@ -124,21 +125,34 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 			return
 		}
 
-		// load the pages for this page of data
+		// load the pages for the section, loading block data where needed
 		var pages []types.Page
-		err = goquDB.From("personal_website.pages").As("pages").
+		q := goquDB.Select("pages.*", goqu.L("array_to_string(ARRAY_AGG(array_to_string(ARRAY[blocks.col1, blocks.col2], E'\n')), E'\n') as block_content")).
+			From("personal_website.pages").As("pages").
 			Join(
 				goqu.S("personal_website").Table("sections").As("sections"),
 				goqu.On(goqu.Ex{
 					"sections.id": goqu.I("pages.section_id"),
 				}),
 			).
+			FullOuterJoin(
+				goqu.S("personal_website").Table("page_blocks").As("blocks"),
+				goqu.On(goqu.Ex{
+					"blocks.page_id": goqu.I("pages.id"),
+				}),
+			).
 			Where(whereArgs...).
+			GroupBy(goqu.I("pages.id")).
 			Order(goqu.I("pages.published_at").Desc()).
-			Offset(uint(page * pageSize)).
+			Offset(uint(page*pageSize)).
 			Limit(uint(pageSize)).
-			Select("pages.*").
-			ScanStructs(&pages)
+			With(
+				"blocks",
+				goquDB.Select("*").
+					From("personal_website.page_blocks").
+					Order(goqu.I("page_id").Asc(), goqu.I("rank").Asc()),
+			)
+		err = q.Executor().ScanStructs(&pages)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
@@ -249,6 +263,39 @@ func BuildSectionRSSHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 			return
 		}
 
+		var pageIDs []int
+		for _, p := range pages {
+			pageIDs = append(pageIDs, p.ID)
+		}
+
+		var blocks []types.PageBlock
+		q := goquDB.Select("page_blocks.*").
+			From("personal_website.page_blocks").
+			Where(
+				goqu.Ex{
+					"page_blocks.page_id": pageIDs,
+				},
+			)
+		err = q.ScanStructs(&blocks)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+
+		allocatedBlocks := make(map[int]bool)
+		for i, p := range pages {
+			for _, b := range blocks {
+				if _, ok := allocatedBlocks[b.ID]; ok {
+					continue
+				}
+				if b.PageID == p.ID {
+					pages[i].Blocks = append(pages[i].Blocks, b)
+					allocatedBlocks[b.ID] = true
+				}
+			}
+		}
+
 		feed := &feeds.Feed{
 			Title:       fmt.Sprintf("charlieegan3.com - %s", section.Name),
 			Link:        &feeds.Link{Href: r.URL.String()},
@@ -259,18 +306,39 @@ func BuildSectionRSSHandler(db *sql.DB) func(http.ResponseWriter, *http.Request)
 		var feedItems []*feeds.Item
 		for _, p := range pages {
 			pageURL := fmt.Sprintf("https://%s/%s/%s", r.Host, sectionSlug, p.Slug)
-			feedItems = append(feedItems,
-				&feeds.Item{
-					Id:    pageURL,
-					Title: p.Title,
-					Link:  &feeds.Link{Href: pageURL},
-					Description: string(views.MDFunc(utils.ExpandImageSrcs(
+
+			var buf bytes.Buffer
+
+			err = views.RSSEngine.RenderWriter(
+				&buf,
+				"public/pages/show-rss",
+				goview.M{
+					"page":    &p,
+					"blocks":  &p.Blocks,
+					"url":     r.URL.Path,
+					"section": sectionSlug,
+					"path":    r.URL.Path,
+					"content": utils.ExpandImageSrcs(
 						r.Host,
-						p.Content,
+						utils.TemplateMD(p.Content, r.URL.Path),
 						sectionSlug,
 						p.Slug,
-					))),
-					Created: p.PublishedAt,
+					),
+				},
+			)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
+
+			feedItems = append(feedItems,
+				&feeds.Item{
+					Id:          pageURL,
+					Title:       p.Title,
+					Link:        &feeds.Link{Href: pageURL},
+					Description: buf.String(),
+					Created:     p.PublishedAt,
 				})
 		}
 

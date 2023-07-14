@@ -15,8 +15,9 @@ type Page struct {
 	SectionID int    `db:"section_id"`
 	Slug      string `db:"slug"`
 
-	Title   string `db:"title"`
-	Content string `db:"content"`
+	Title        string `db:"title"`
+	Content      string `db:"content"`
+	BlockContent string `db:"block_content,omitempty"`
 
 	IsDraft     bool `db:"is_draft"`
 	IsProtected bool `db:"is_protected"`
@@ -27,6 +28,8 @@ type Page struct {
 
 	PublishedAt time.Time `db:"published_at"`
 	CreatedAt   time.Time `db:"created_at"`
+
+	Blocks []PageBlock
 }
 
 func (p *Page) DataYAML() string {

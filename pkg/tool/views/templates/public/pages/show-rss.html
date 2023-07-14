@@ -1,0 +1,7 @@
+{{define "content"}}
+  {{ if ne .page.ExternalURL "" }}
+    {{ include "partials/public/page-external" }}
+  {{ else }}
+    {{ include "partials/public/page" }}
+  {{ end }}
+{{end}}

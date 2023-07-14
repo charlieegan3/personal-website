@@ -28,8 +28,6 @@ func BuildPageIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWrite
 	return func(w http.ResponseWriter, r *http.Request) {
 		var err error
 
-		var pages []types.Page
-
 		var sections []types.Section
 		err = goquDB.From("personal_website.sections").ScanStructs(&sections)
 		if err != nil {
@@ -69,6 +67,7 @@ func BuildPageIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWrite
 			q = q.Where(goqu.C("is_draft").IsFalse())
 		}
 
+		var pages []types.Page
 		err = q.Order(
 			goqu.I("is_draft").Desc(),
 			goqu.I("published_at").Desc(),
@@ -338,7 +337,7 @@ func BuildPageShowHandler(db *sql.DB, adminPath string) func(http.ResponseWriter
 		}
 
 		var page types.Page
-		found, err := goquDB.From("personal_website.pages").Where(
+		found, err := goquDB.Select("pages.*").From("personal_website.pages").Where(
 			goqu.C("id").Eq(id),
 		).ScanStruct(&page)
 		if err != nil {
@@ -352,7 +351,7 @@ func BuildPageShowHandler(db *sql.DB, adminPath string) func(http.ResponseWriter
 		}
 
 		var pageSection types.Section
-		found, err = goquDB.From("personal_website.sections").Where(
+		_, err = goquDB.From("personal_website.sections").Where(
 			goqu.C("id").Eq(page.SectionID),
 		).ScanStruct(&pageSection)
 		if err != nil {
