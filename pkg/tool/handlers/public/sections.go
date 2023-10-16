@@ -152,7 +152,6 @@ func BuildSectionShowHandler(db *sql.DB) func(http.ResponseWriter, *http.Request
 					From("personal_website.page_blocks").
 					Order(goqu.I("page_id").Asc(), goqu.I("rank").Asc()),
 			)
-		fmt.Println(q.ToSQL())
 		err = q.Executor().ScanStructs(&pages)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
