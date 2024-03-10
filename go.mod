@@ -7,7 +7,6 @@ require (
 	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/alecthomas/chroma/v2 v2.5.0
-	github.com/bep/godartsass v0.16.0
 	github.com/charlieegan3/toolbelt v0.0.0-20221204170703-2a0420bbcdcd
 	github.com/disintegration/imaging v1.6.2
 	github.com/doug-martin/goqu/v9 v9.18.0
@@ -34,7 +33,6 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/iam v0.13.0 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
-	github.com/cli/safeexec v1.0.1 // indirect
 	github.com/dlclark/regexp2 v1.8.1 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect

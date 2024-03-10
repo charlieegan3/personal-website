@@ -1,0 +1,113 @@
+.page-content p:first-child, .page-content div p:last-child {
+  margin-top: 0;
+}
+.page-content p:last-child, .page-content div p:last-child {
+  margin-bottom: 0;
+}
+.page-content div.flex:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.page-content p, .page-content li {
+  text-align: justify;
+  line-height: 1.5em;
+}
+.page-content p code {
+  padding: 1px 3px;
+}
+.page-content ul {
+  margin-bottom: 0.5rem;
+}
+.page-content ul code {
+  padding: 1px 3px;
+}
+.page-content ol {
+  margin-bottom: 0.5rem;
+  list-style-type: decimal;
+}
+.page-content li {
+  margin-bottom: 0.3rem;
+}
+.page-content li img {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+.page-content li ul {
+  padding-left: 1.5rem;
+}
+.page-content li p:first-child {
+  display: inline;
+}
+.page-content pre {
+  margin-bottom: 0.5rem;
+  border: 1px solid #444444;
+  padding: 0.4rem 0.6rem;
+}
+.page-content .info {
+  border: 2px solid cornflowerblue;
+}
+.page-content .warning {
+  border: 2px solid orange;
+}
+.page-content .error {
+  border: 2px solid orangered;
+}
+.page-content .info, .page-content .warning, .page-content .error {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+}
+.page-content .warning :first-child, .page-content .error :first-child, .page-content .info :first-child {
+  margin-top: 0;
+}
+.page-content .warning :last-child, .page-content .error :last-child, .page-content .info :last-child {
+  margin-bottom: 0;
+}
+.page-content em {
+  font-style: italic;
+  text-justify: none;
+}
+.page-content blockquote {
+  font-style: italic;
+  padding-left: 2rem;
+}
+.page-content img + em {
+  vertical-align: top;
+}
+.page-content hr {
+  border: 0;
+  height: 1px;
+  margin-left: 0;
+  max-width: 100%;
+}
+.page-content img {
+  border-style: solid;
+  border-width: 1px;
+  max-width: 100%;
+  box-sizing: border-box;
+  /* this is needed for inline images in li tags, other images are in p tags from md processor */
+  display: block;
+}
+.page-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.page-content th:first-child {
+  border-left: none;
+}
+.page-content td {
+  border: 1px solid;
+  padding: 0.3rem;
+}
+.page-content th {
+  padding: 0.3rem;
+}
+.page-content.section-talks img {
+  max-width: 30rem;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.page-content.section-talks img + em {
+  display: block;
+  text-align: center;
+}

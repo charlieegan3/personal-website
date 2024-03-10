@@ -1,0 +1,8 @@
+.acknowledgements {
+    border-top: 1px solid var(--border-color);
+}
+@media (prefers-color-scheme: dark) {
+    .acknowledgements {
+        border-top: 1px solid var(--border-color-dark);
+    }
+}

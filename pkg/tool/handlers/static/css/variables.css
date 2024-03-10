@@ -1,0 +1,68 @@
+:root {
+    /*https://typescale.com/ to set values*/
+
+    --font-scale-factor: 0.8;
+    --font-scale-factor-mobile: 0.9;
+    --font-scale-factor-display: 1.6;
+
+    --font-size-1: calc(2.488rem * var(--font-scale-factor));
+    --font-size-2: calc(2.074rem * var(--font-scale-factor));
+    --font-size-3: calc(1.728rem * var(--font-scale-factor));
+    --font-size-4: calc(1.44rem * var(--font-scale-factor));
+    --font-size-5: calc(1.25rem * var(--font-scale-factor));
+    --font-size-6: calc(1.2rem * var(--font-scale-factor));
+    --font-size-7: calc(1.1rem * var(--font-scale-factor));
+
+    --tfl-blue-hue: 234.34;
+    --tfl-blue-sat: 100%;
+    --tfl-blue-lgt: 31.18%;
+    --tfl-blue:     hsl(var(--tfl-blue-hue), var(--tfl-blue-sat), var(--tfl-blue-lgt));
+
+    --tfl-blue-light-hue: 204.49;
+    --tfl-blue-light-sat: 66.52%;
+    --tfl-blue-light-lgt: 56.67%;
+    --tfl-blue-light: hsl(var(--tfl-blue-light-hue), var(--tfl-blue-light-sat), var(--tfl-blue-light-lgt));
+
+    --tfl-red-hue:     3.03;
+    --tfl-red-sat:     78.57%;
+    --tfl-red-lgt:   49.41%;
+    --tfl-red:        hsl(var(--tfl-red-hue), var(--tfl-red-sat), var(--tfl-red-lgt));
+
+    --tfl-yellow-hue:  48.24;
+    --tfl-yellow-sat:  100%;
+    --tfl-yellow-lgt: 50%;
+    --tfl-yellow:     hsl(var(--tfl-yellow-hue), var(--tfl-yellow-sat), var(--tfl-yellow-lgt));
+
+    --tfl-orange-hue: 27.72;
+    --tfl-orange-sat: 72.77%;
+    --tfl-orange-lgt: 53.92%;
+    --tfl-orange:     hsl(var(--tfl-orange-hue), var(--tfl-orange-sat), var(--tfl-orange-lgt));
+
+    --tfl-green-hue: 145.79;
+    --tfl-green-sat: 100%;
+    --tfl-green-lgt: 23.73%;
+    --tfl-green:       hsl(var(--tfl-green-hue), var(--tfl-green-sat), var(--tfl-green-lgt));
+
+    --tfl-green-light-hue: 86.72;
+    --tfl-green-light-sat: 47.41%;
+    --tfl-green-light-lgt: 49.22%;
+    --tfl-green-light: hsl(var(--tfl-green-light-hue), var(--tfl-green-light-sat), var(--tfl-green-light-lgt));
+
+    --border-color:      hsla(0, 0%, 80%, 1);
+    --border-color-dark: hsla(0, 0%, 20%, 1);
+    --muted-text-color: hsla(0, 0%, 46.67%, 1);
+
+    --light-body-background-color: hsla(0, 0%, 98.04%, 1);
+    --light-font-color:            hsla(0, 0%, 13.33%, 1);
+    --light-highlight-color:       hsla(60, 100%, 50%, 0.5);
+    --light-link-visited:          hsla(233.09, 69.62%, 53.53%, 1);
+    --light-link:                  hsla(233.09, 69.62%, 53.53%, 1);
+    --light-muted-element:         hsla(0, 0%, 66.67%, 1);
+
+    --dark-body-background-color: hsla(70, 8.11%, 14.51%, 1);
+    --dark-font-color:            hsla(0, 0%, 93.33%, 1);
+    --dark-highlight-color:       hsla(60, 100%, 50%, 0.2);
+    --dark-link-visited:          hsla(255.6, 100%, 70.59%, 1);
+    --dark-link:                  hsla(213.5, 100%, 68.04%, 1);
+    --dark-muted-element:         hsla(0, 0%, 33.33%, 1);
+}

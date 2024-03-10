@@ -6,10 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 
-	"github.com/bep/godartsass"
 	"github.com/gorilla/mux"
 	"github.com/tdewolff/minify/v2"
 	"github.com/tdewolff/minify/v2/css"
@@ -145,6 +143,14 @@ func BuildStaticHandler() (handler func(http.ResponseWriter, *http.Request)) {
 func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 	sourceFileOrder := []string{
 		"tachyons.css",
+		"variables.css",
+		"base.css",
+		"typography.css",
+		"content.css",
+		"helpers.css",
+		"menu.css",
+		"syntax.css",
+		"acknowledgements.css",
 	}
 
 	var bs []byte
@@ -158,59 +164,6 @@ func BuildCSSHandler() (func(http.ResponseWriter, *http.Request), error) {
 		bs = append(bs, fileBytes...)
 		bs = append(bs, []byte("\n")...)
 	}
-
-	// process scss files
-	dartSassEmbeddedFilename := "dart-sass-embedded"
-	if os.Getenv("DART_SASS_EMBEDDED_PATH") != "" {
-		dartSassEmbeddedFilename = os.Getenv("DART_SASS_EMBEDDED_PATH")
-	}
-
-	opts := godartsass.Options{
-		DartSassEmbeddedFilename: dartSassEmbeddedFilename,
-	}
-
-	t, err := godartsass.Start(opts)
-	if err != nil {
-		return nil, fmt.Errorf("failed to start scss: %s", err)
-	}
-
-	files, err := staticContent.ReadDir("static/scss")
-	if err != nil {
-		return nil, fmt.Errorf("failed to read scss dir: %s", err)
-	}
-
-	sourceFileOrder = []string{
-		"variables.scss",
-	}
-
-	for _, f := range files {
-		if f.IsDir() || f.Name() == "variables.scss" {
-			continue
-		}
-		sourceFileOrder = append(sourceFileOrder, f.Name())
-	}
-
-	var scssBs []byte
-	for _, f := range sourceFileOrder {
-		scssContent, err := staticContent.ReadFile("static/scss/" + f)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read scss file %s: %s", f, err)
-		}
-
-		scssBs = append(scssBs, scssContent...)
-
-	}
-	args := godartsass.Args{
-		Source:      string(scssBs),
-		OutputStyle: godartsass.OutputStyleExpanded,
-	}
-
-	result, err := t.Execute(args)
-	if err != nil {
-		return nil, fmt.Errorf("failed to execute sass for file: %s", err)
-	}
-
-	bs = append(bs, result.CSS...)
 
 	// minify the css
 	in := bytes.NewBuffer(bs)
