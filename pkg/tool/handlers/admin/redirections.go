@@ -50,10 +50,12 @@ func BuildRedirectionNewHandler(db *sql.DB, adminPath string) func(http.Response
 		var err error
 
 		var pages []types.Page
-		err = goquDB.From("personal_website.pages").ScanStructs(&pages)
+		err = goquDB.From("personal_website.pages").
+			Select("id", "slug").
+			ScanStructs(&pages)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(err.Error()))
+			w.Write([]byte(fmt.Sprintf("error fetching pages: %s", err.Error())))
 			return
 		}
 
