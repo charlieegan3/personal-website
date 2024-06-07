@@ -123,6 +123,11 @@ func verifyIDToken(r *http.Request, idTokenVerifier *oidc.IDTokenVerifier, token
 }
 
 func handleAuthCallback(w http.ResponseWriter, r *http.Request, oauth2Config *oauth2.Config, idTokenVerifier *oidc.IDTokenVerifier, adminPath, permittedEmailSuffix string) {
+	if r.URL.Query().Get("state") == "" {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
 	stateBs, err := base64.RawURLEncoding.DecodeString(r.URL.Query().Get("state"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
