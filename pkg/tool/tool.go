@@ -1,17 +1,21 @@
 package tool
 
 import (
+	"context"
 	"database/sql"
 	"embed"
 	"fmt"
 	"net/http"
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/charlieegan3/toolbelt/pkg/apis"
+	"github.com/coreos/go-oidc"
 	gorillaHandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	_ "gocloud.dev/blob/fileblob"
 	_ "gocloud.dev/blob/gcsblob"
+	"golang.org/x/oauth2"
+
+	"github.com/charlieegan3/toolbelt/pkg/apis"
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers"
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers/admin"
@@ -30,7 +34,17 @@ type Website struct {
 
 	bucketName string
 	googleJSON string
-	adminPath  string
+
+	host   string
+	scheme string
+
+	adminPath            string
+	adminParam           string
+	permittedEmailSuffix string
+
+	oauth2Config    *oauth2.Config
+	oidcProvider    *oidc.Provider
+	idTokenVerifier *oidc.IDTokenVerifier
 }
 
 func (w *Website) Name() string {
@@ -55,9 +69,28 @@ func (w *Website) DatabaseSet(db *sql.DB) {
 }
 
 func (w *Website) SetConfig(config map[string]any) error {
+	w.adminPath = "/admin/"
+
 	var ok bool
 	var path string
 	w.config = gabs.Wrap(config)
+
+	path = "web.host"
+	w.host, ok = w.config.Path(path).Data().(string)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	path = "web.https"
+	isHttps, ok := w.config.Path(path).Data().(bool)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	w.scheme = "https://"
+	if !isHttps {
+		w.scheme = "http://"
+	}
 
 	path = "storage.bucket_name"
 	w.bucketName, ok = w.config.Path(path).Data().(string)
@@ -71,8 +104,49 @@ func (w *Website) SetConfig(config map[string]any) error {
 		return fmt.Errorf("config value %s not set", path)
 	}
 
-	path = "web.admin_path"
-	w.adminPath, ok = w.config.Path(path).Data().(string)
+	path = "web.admin_param"
+	w.adminParam, ok = w.config.Path(path).Data().(string)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	path = "web.auth.provider_url"
+	providerURL, ok := w.config.Path(path).Data().(string)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	var err error
+	w.oidcProvider, err = oidc.NewProvider(context.TODO(), providerURL)
+	if err != nil {
+		return fmt.Errorf("failed to create oidc provider: %w", err)
+	}
+
+	w.oauth2Config = &oauth2.Config{
+		Endpoint: w.oidcProvider.Endpoint(),
+	}
+
+	path = "web.auth.client_id"
+	w.oauth2Config.ClientID, ok = w.config.Path(path).Data().(string)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	path = "web.auth.client_secret"
+	w.oauth2Config.ClientSecret, ok = w.config.Path(path).Data().(string)
+	if !ok {
+		return fmt.Errorf("config value %s not set", path)
+	}
+
+	w.oauth2Config.RedirectURL = w.scheme + w.host + "/admin/auth/callback"
+
+	// offline_access is required for refresh tokens
+	w.oauth2Config.Scopes = []string{oidc.ScopeOpenID, "profile", "email", "offline_access"}
+
+	w.idTokenVerifier = w.oidcProvider.Verifier(&oidc.Config{ClientID: w.oauth2Config.ClientID})
+
+	path = "web.auth.permitted_email_suffix"
+	w.permittedEmailSuffix, ok = w.config.Path(path).Data().(string)
 	if !ok {
 		return fmt.Errorf("config value %s not set", path)
 	}
@@ -83,23 +157,17 @@ func (w *Website) SetConfig(config map[string]any) error {
 func (w *Website) Jobs() ([]apis.Job, error) { return []apis.Job{}, nil }
 
 func (w *Website) HTTPAttach(router *mux.Router) error {
-
-	path := "web.auth.username"
-	username, ok := w.config.Path(path).Data().(string)
-	if !ok {
-		username = "example"
-	}
-
-	path = "web.auth.password"
-	password, ok := w.config.Path(path).Data().(string)
-	if !ok {
-		password = "example"
-	}
-
 	router.StrictSlash(true)
+
 	adminRouter := router.PathPrefix(w.adminPath).Subrouter()
 	adminRouter.StrictSlash(true) // since not inherited
-	adminRouter.Use(middlewares.InitMiddlewareAuth(username, password))
+	adminRouter.Use(middlewares.InitMiddlewareAuth(
+		w.oauth2Config,
+		w.idTokenVerifier,
+		w.adminPath,
+		w.adminParam,
+		w.permittedEmailSuffix,
+	))
 
 	// admin routes -------------------------------------
 
@@ -140,6 +208,9 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 		Methods("POST")
 
 	adminRouter.HandleFunc("/", admin.BuildIndexHandler(w.adminPath))
+	adminRouter.HandleFunc("/auth/callback", func(w http.ResponseWriter, r *http.Request) {
+		// should be handled by middleware, but here to avoid 404
+	})
 
 	// public routes ------------------------------------
 	router.HandleFunc("/favicon.ico", handlers.BuildFaviconHandler())
@@ -207,12 +278,7 @@ func (w *Website) HTTPAttach(router *mux.Router) error {
 	return nil
 }
 func (w *Website) HTTPHost() string {
-	path := "web.host"
-	host, ok := w.config.Path(path).Data().(string)
-	if !ok {
-		return "example.com"
-	}
-	return host
+	return w.host
 }
 func (w *Website) HTTPPath() string { return "" }
 
