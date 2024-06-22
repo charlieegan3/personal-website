@@ -5,7 +5,9 @@ import (
 	"database/sql"
 	"embed"
 	"fmt"
+	"log"
 	"net/http"
+	"strings"
 
 	"github.com/Jeffail/gabs/v2"
 	"github.com/coreos/go-oidc"
@@ -15,6 +17,7 @@ import (
 	_ "gocloud.dev/blob/gcsblob"
 	"golang.org/x/oauth2"
 
+	"github.com/charlieegan3/oauth-middleware/pkg/oauthmiddleware"
 	"github.com/charlieegan3/toolbelt/pkg/apis"
 
 	"github.com/charlieegan3/personal-website/pkg/tool/handlers"
@@ -159,15 +162,49 @@ func (w *Website) Jobs() ([]apis.Job, error) { return []apis.Job{}, nil }
 func (w *Website) HTTPAttach(router *mux.Router) error {
 	router.StrictSlash(true)
 
+	mw, err := oauthmiddleware.Init(&oauthmiddleware.Config{
+		OAuth2Connector: w.oauth2Config,
+		IDTokenVerifier: w.idTokenVerifier,
+		Validators: []oauthmiddleware.IDTokenValidator{
+			func(token *oidc.IDToken) (map[any]any, bool) {
+				c := struct {
+					Email string `json:"email"`
+				}{}
+
+				err := token.Claims(&c)
+				if err != nil {
+					return nil, false
+				}
+
+				if w.permittedEmailSuffix == "" {
+					log.Println("email suffix was blank and so no emails are allowed")
+					return nil, false
+				}
+
+				if !strings.HasSuffix(c.Email, w.permittedEmailSuffix) {
+					log.Printf("email %s does not have suffix %s", c.Email, w.permittedEmailSuffix)
+
+					return nil, false
+				}
+
+				return map[any]any{"email": c.Email}, true
+			},
+		},
+		AuthBasePath:     w.adminPath,
+		CallbackBasePath: w.adminPath,
+		BeginParam:       w.adminParam,
+	})
+	if err != nil {
+		return fmt.Errorf("failed to init oauth middleware: %w", err)
+	}
+
 	adminRouter := router.PathPrefix(w.adminPath).Subrouter()
 	adminRouter.StrictSlash(true) // since not inherited
-	adminRouter.Use(middlewares.InitMiddlewareAuth(
-		w.oauth2Config,
-		w.idTokenVerifier,
-		w.adminPath,
-		w.adminParam,
-		w.permittedEmailSuffix,
-	))
+	adminRouter.Use(mw)
+	adminRouter.HandleFunc("/auth/callback", func(w http.ResponseWriter, r *http.Request) {
+		// should be handled by middleware, but here to avoid 404 and the middleware not
+		// being run
+	})
 
 	// admin routes -------------------------------------
 
