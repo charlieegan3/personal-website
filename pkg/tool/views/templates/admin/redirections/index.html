@@ -9,40 +9,40 @@
 
 {{define "content"}}
 <div class="mb2">
-    <a class="mr2" href="{{ .admin_path }}/redirections/new">New Redirection</a>
+	<a class="mr2" href={{ path_join .admin_path "redirections/new" }}>New Redirection</a>
 </div>
 
 <table>
-    <tr>
-        <th>Source</th>
-        <th></th>
-        <th>Destination</th>
-        <th></th>
-    </tr>
-    {{ range $r := .redirections }}
-    <tr>
-    {{ if ne $r.DestinationPageID nil }}
-    <td><code>{{ $r.Source }}</code></td>
-    <td> <a href="{{ $.admin_path }}/pages/{{ $r.DestinationPageID }}">View</a> </td>
-    <td><code>page:{{ $r.DestinationPageID }}</code></td>
-    <td>
-        <form method="post" action="{{ $.admin_path }}/redirections/{{ $r.ID }}">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete">
-        </form>
-    </td>
-    {{ else }}
-    <td><code>{{ $r.Source }}</code></td>
-    <td> <a href="{{ $r.Destination }}">View</a> </td>
-    <td><code>page:{{ $r.Destination }}</code></td>
-    <td>
-        <form method="post" action="{{ $.admin_path }}/redirections/{{ $r.ID }}">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete">
-        </form>
-    </td>
-    {{ end }}
-    </tr>
-    {{ end }}
+	<tr>
+		<th>Source</th>
+		<th></th>
+		<th>Destination</th>
+		<th></th>
+	</tr>
+	{{ range $r := .redirections }}
+	<tr>
+		{{ if ne $r.DestinationPageID nil }}
+		<td><code>{{ $r.Source }}</code></td>
+		<td> <a href={{ path_join $.admin_path "pages" $r.DestinationPageID }}>View</a> </td>
+		<td><code>page:{{ $r.DestinationPageID }}</code></td>
+		<td>
+			<form method="post" action={{ path_join $.admin_path "redirections" $r.ID }}>
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="submit" value="Delete">
+			</form>
+		</td>
+		{{ else }}
+		<td><code>{{ $r.Source }}</code></td>
+		<td> <a href="{{ $r.Destination }}">View</a> </td>
+		<td><code>page:{{ $r.Destination }}</code></td>
+		<td>
+			<form method="post" action={{ path_join $.admin_path "redirections" $r.ID }}>
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="submit" value="Delete">
+			</form>
+		</td>
+		{{ end }}
+	</tr>
+	{{ end }}
 </table>
 {{end}}

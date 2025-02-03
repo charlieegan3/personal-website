@@ -21,7 +21,6 @@ import (
 )
 
 func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON string, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -193,7 +192,6 @@ func BuildPageAttachmentCreateHandler(db *sql.DB, bucketName string, googleJSON 
 }
 
 func BuildPageAttachmentDeleteHandler(db *sql.DB, bucketName string, googleJSON string, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {

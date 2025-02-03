@@ -1,8 +1,8 @@
 <div class="flex justify-between pt3">
-    <a href="/">Home</a>
-    <a href="{{ .admin_path }}">Admin</a>
-    <a href="{{ .admin_path }}/pages">Pages</a>
-    <a href="{{ .admin_path }}/sections">Sections</a>
-    <a href="{{ .admin_path }}/redirections">Redirections</a>
-    <a href="{{ .admin_path }}/counts">Counts</a>
+	<a href="/">Home</a>
+	<a href={{ .admin_path }}>Admin</a>
+	<a href={{ path_join .admin_path "pages" }}>Pages</a>
+	<a href={{ path_join .admin_path "sections" }}>Sections</a>
+	<a href={{ path_join .admin_path "redirections" }}>Redirections</a>
+	<a href={{ path_join .admin_path "counts" }}>Counts</a>
 </div>

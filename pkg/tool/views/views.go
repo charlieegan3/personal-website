@@ -6,6 +6,7 @@ import (
 	"embed"
 	"fmt"
 	"html/template"
+	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -31,8 +32,10 @@ import (
 //go:embed templates/*
 var views embed.FS
 
-var Engine *goview.ViewEngine
-var RSSEngine *goview.ViewEngine
+var (
+	Engine    *goview.ViewEngine
+	RSSEngine *goview.ViewEngine
+)
 
 // paragraphIdTransformer is a goldmark transformer that adds an id attribute to
 // each paragraph, based on the content of the paragraph.
@@ -86,7 +89,7 @@ func init() {
 		return template.HTML(buf.String())
 	}
 
-	var re = regexp.MustCompile(`(?mU)<p [^>]+>(.*)<\/p>`)
+	re := regexp.MustCompile(`(?mU)<p [^>]+>(.*)<\/p>`)
 	inlineMDFunc := func(s string) template.HTML {
 		var buf bytes.Buffer
 		if err := md.Convert([]byte(strings.TrimSpace(s)), &buf); err != nil {
@@ -135,7 +138,6 @@ func init() {
 				return template.HTML(strings.TrimSpace(strings.Join(words, " ") + trailer))
 			},
 			"highlight": func(raw interface{}, reRaw string) template.HTML {
-
 				s := fmt.Sprintf("%v", raw)
 
 				var regexps []*regexp.Regexp
@@ -156,6 +158,17 @@ func init() {
 			},
 			"scriptETag": func() template.HTML {
 				return template.HTML(handlers.ScriptEtag)
+			},
+			"path_join": func(elem ...any) template.HTML {
+				strElems := make([]string, len(elem))
+				for i, e := range elem {
+					strElems[i] = fmt.Sprintf("%v", e)
+				}
+
+				return template.HTML(path.Join(strElems...))
+			},
+			"sprintf": func(format string, elems ...any) template.HTML {
+				return template.HTML(fmt.Sprint(format, elems))
 			},
 		},
 	}

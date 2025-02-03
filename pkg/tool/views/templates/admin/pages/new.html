@@ -1,63 +1,63 @@
 {{define "title"}}New Page{{end}}
 {{define "page_title"}}New Page{{end}}
 {{define "header"}}
-  {{ include "partials/admin/menu" }}
+{{ include "partials/admin/menu" }}
 {{end}}
 
 {{define "content"}}
-<form method="POST" action="{{ .admin_path }}/pages">
+<form method="POST" action={{ path_join .admin_path "pages" }}>
 
-    <div class="mb2">
-        <label for="section_id">Section</label>
-        <select id="section_id" name="section_id">
-            {{ range $s := .sections }}
-            <option value="{{$s.ID}}">{{ $s.Name }}</option>
-            {{ end }}
-        </select>
-    </div>
+	<div class="mb2">
+		<label for="section_id">Section</label>
+		<select id="section_id" name="section_id">
+			{{ range $s := .sections }}
+			<option value="{{$s.ID}}">{{ $s.Name }}</option>
+			{{ end }}
+		</select>
+	</div>
 
-    <div class="mb2">
-        <label for="slug">Slug</label>
-        <br>
-        <input id="slug" class="w-100" type="text" name="slug" placeholder="Slug"/>
-    </div>
+	<div class="mb2">
+		<label for="slug">Slug</label>
+		<br>
+		<input id="slug" class="w-100" type="text" name="slug" placeholder="Slug" />
+	</div>
 
-    <div class="mb2">
-        <label for="title">Title</label>
-        <br>
-        <input id="title" class="w-100" type="text" name="title" placeholder="Title"/>
-    </div>
+	<div class="mb2">
+		<label for="title">Title</label>
+		<br>
+		<input id="title" class="w-100" type="text" name="title" placeholder="Title" />
+	</div>
 
-    <div class="mb2">
-        <label for="is_draft">Is Draft</label>
-        <input type="checkbox" id="is_draft" name="is_draft" value="true"/>
-    </div>
+	<div class="mb2">
+		<label for="is_draft">Is Draft</label>
+		<input type="checkbox" id="is_draft" name="is_draft" value="true" />
+	</div>
 
-    <div class="mb2">
-        <label for="is_protected">Is Protected</label>
-        <input type="checkbox" id="is_protected" name="is_protected" value="true"/>
-    </div>
+	<div class="mb2">
+		<label for="is_protected">Is Protected</label>
+		<input type="checkbox" id="is_protected" name="is_protected" value="true" />
+	</div>
 
-    <div class="mb2">
-        <label for="published_at">Published At</label>
-        <input id="published_at" type="datetime-local" name="published_at" value="{{ .default_time }}"/>
-    </div>
+	<div class="mb2">
+		<label for="published_at">Published At</label>
+		<input id="published_at" type="datetime-local" name="published_at" value="{{ .default_time }}" />
+	</div>
 
-    <div class="mb2">
-        <label for="content">Content</label>
-        <br>
-        <textarea id="content" class="code w-100" rows="20" name="content" placeholder="Content"></textarea>
-    </div>
+	<div class="mb2">
+		<label for="content">Content</label>
+		<br>
+		<textarea id="content" class="code w-100" rows="20" name="content" placeholder="Content"></textarea>
+	</div>
 
-    <div class="mb2">
-        <label for="data">Data</label>
-        <br>
-        <textarea id="data" class="code w-100" rows="20" name="data" placeholder="yaml: value"></textarea>
-    </div>
+	<div class="mb2">
+		<label for="data">Data</label>
+		<br>
+		<textarea id="data" class="code w-100" rows="20" name="data" placeholder="yaml: value"></textarea>
+	</div>
 
-    <div class="">
-        <input type="submit" value="Create">
-    </div>
+	<div class="">
+		<input type="submit" value="Create">
+	</div>
 
 </form>
 {{end}}

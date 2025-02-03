@@ -22,7 +22,6 @@ import (
 )
 
 func BuildPageIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -55,7 +54,7 @@ func BuildPageIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWrite
 			q = q.Where(goqu.C("is_deleted").IsFalse())
 		}
 
-		//handle section param
+		// handle section param
 		if section := r.URL.Query().Get("section"); section != "" {
 			q = q.Where(goqu.L("sections.slug").Eq(section))
 		}
@@ -96,7 +95,6 @@ func BuildPageIndexHandler(db *sql.DB, adminPath string) func(http.ResponseWrite
 }
 
 func BuildPageNewHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -128,7 +126,6 @@ func BuildPageNewHandler(db *sql.DB, adminPath string) func(http.ResponseWriter,
 }
 
 func BuildPageCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -161,9 +158,7 @@ func BuildPageCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 				slugValue += "-todo"
 			}
 		} else {
-			if strings.HasSuffix(slugValue, "-todo") {
-				slugValue = strings.TrimSuffix(slugValue, "-todo")
-			}
+			slugValue = strings.TrimSuffix(slugValue, "-todo")
 		}
 
 		var id int
@@ -195,7 +190,6 @@ func BuildPageCreateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 }
 
 func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -315,7 +309,6 @@ func BuildPageUpdateHandler(db *sql.DB, adminPath string) func(http.ResponseWrit
 }
 
 func BuildPageShowHandler(db *sql.DB, adminPath string) func(http.ResponseWriter, *http.Request) {
-
 	goquDB := goqu.New("postgres", db)
 
 	return func(w http.ResponseWriter, r *http.Request) {

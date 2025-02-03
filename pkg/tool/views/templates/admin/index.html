@@ -1,12 +1,12 @@
 {{define "title"}}Admin{{end}}
 {{define "page_title"}}Admin{{end}}
 {{define "header"}}
-  {{ include "partials/admin/menu" }}
+{{ include "partials/admin/menu" }}
 {{end}}
 
 {{define "content"}}
 <ul>
-    <li><a href="{{ .admin_path }}/sections">Sections</a></li>
-    <li><a href="{{ .admin_path }}/pages">Pages</a></li>
+	<li><a href={{ path_join .admin_path "sections" }}>Sections</a></li>
+	<li><a href={{ path_join .admin_path "pages" }}>Pages</a></li>
 </ul>
 {{end}}
